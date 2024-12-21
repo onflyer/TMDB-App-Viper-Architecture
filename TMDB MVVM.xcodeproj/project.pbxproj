@@ -169,10 +169,10 @@
 			isa = PBXGroup;
 			children = (
 				30AF500F2D16DF5F00DB54AF /* TMDB_MVVMApp.swift */,
-				30AF4FF82D16DF5F00DB54AF /* Models */,
 				30AF500C2D16DF5F00DB54AF /* Services */,
 				30AF50082D16DF5F00DB54AF /* NetworkLayer */,
 				30AF500A2D16DF5F00DB54AF /* Preview Content */,
+				30AF4FF82D16DF5F00DB54AF /* Models */,
 				30AF500D2D16DF5F00DB54AF /* Assets.xcassets */,
 				30AF500E2D16DF5F00DB54AF /* ContentView.swift */,
 			);
