@@ -9,12 +9,14 @@ import Foundation
 
 struct MovieServiceMock: MovieService {
     
-    let avatars: [Movie]
+    let movies: [Movie]?
+    let singleMovie: SingleMovie?
     let delay: Double
     let showError: Bool
     
-    init(avatars: [Movie] = Movie.mocks(), delay: Double = 1, showError: Bool = false) {
-        self.avatars = avatars
+    init(movies: [Movie]? = nil,singleMovie: SingleMovie? = nil, delay: Double = 1, showError: Bool = false) {
+        self.movies = movies
+        self.singleMovie = singleMovie
         self.delay = delay
         self.showError = showError
     }
@@ -22,7 +24,13 @@ struct MovieServiceMock: MovieService {
     func getNowPlayingMovies(page: Int) async throws -> [Movie] {
         try await Task.sleep(for: .seconds(delay))
         try tryShowError()
-        return avatars
+        return Movie.mocks()
+    }
+    
+    func getSingleMovie(id: Int) async throws -> SingleMovie? {
+        try await Task.sleep(for: .seconds(delay))
+        try tryShowError()
+        return SingleMovie.mock()
     }
     
     private func tryShowError() throws {

@@ -207,7 +207,7 @@ extension SingleMovie {
             originalTitle: "Mock Original Title",
             overview: "This is a mock overview of the movie.",
             popularity: 75.5,
-            posterPath: "/path/to/poster.jpg",
+            posterPath: "\(path)t5zCBSB5xMDKcDqe91qahCOUYVV.jpg",
             releaseDate: "2024-03-14",
             revenue: 500000000,
             runtime: 120,
