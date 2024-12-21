@@ -18,10 +18,7 @@ struct MovieServiceProd: MovieService {
     func getNowPlayingMovies(page: Int) async throws -> [Movie] {
         let request = MoviesRequest.getNowPlayingMovies(page: page)
         let response: MovieList = try await networkService.makeRequest(with: request)
-        guard let unwrappedResponse = response.results else {
-            throw NetworkError.badRequest
-        }
-        return unwrappedResponse
+        return response.results
     }
     
     func getSingleMovie(id: Int) async throws -> SingleMovie {

@@ -10,7 +10,7 @@ import Foundation
 struct MovieList: Codable {
     
     let page: Int
-    let results: [Movie]?
+    let results: [Movie]
     let totalPages: Int
     let totalResults: Int
     
