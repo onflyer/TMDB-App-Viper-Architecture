@@ -7,6 +7,7 @@
 
 import Foundation
 
+@Observable
 class DependencyContainer {
     private var services: [String: Any] = [:]
     

@@ -5,7 +5,7 @@
 //  Created by Aleksandar Milidrag on 21. 12. 2024..
 //
 
-import Foundation
+import SwiftUI
 
 struct Dependencies {
     let container: DependencyContainer
@@ -20,6 +20,7 @@ struct Dependencies {
     }
 }
 
+
 class DevPreview {
     static let shared = DevPreview()
     
@@ -33,5 +34,12 @@ class DevPreview {
         let container = DependencyContainer()
         container.register(MovieManager.self, service: movieManager)
         return container
+    }
+}
+
+extension View {
+    func previewEnvironment() -> some View {
+        self
+            .environment(DevPreview.shared.container)
     }
 }
