@@ -9,6 +9,7 @@ import SwiftUI
 
 @main
 struct TMDB_MVVMApp: App {
+    
     var body: some Scene {
         WindowGroup {
             ContentView()
