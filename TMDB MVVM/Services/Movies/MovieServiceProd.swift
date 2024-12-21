@@ -23,4 +23,10 @@ struct MovieServiceProd: MovieService {
         }
         return unwrappedResponse
     }
+    
+    func getSingleMovie(id: Int) async throws -> SingleMovie {
+        let request = MoviesRequest.getMovieById(movieId: id)
+        let response: SingleMovie = try await networkService.makeRequest(with: request)
+        return response
+    }
 }

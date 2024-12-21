@@ -9,4 +9,5 @@ import Foundation
 
 protocol MovieService {
     func getNowPlayingMovies(page: Int) async throws -> [Movie]
+    func getSingleMovie(id: Int) async throws -> SingleMovie
 }
