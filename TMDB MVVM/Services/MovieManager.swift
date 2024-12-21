@@ -10,7 +10,6 @@ import Foundation
 class MovieManager: MovieService {
     
     let service: MovieService
-    let page: Int = 1
     
     init(service: MovieService) {
         self.service = service
