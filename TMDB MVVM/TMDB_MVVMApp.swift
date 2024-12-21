@@ -14,7 +14,7 @@ struct TMDB_MVVMApp: App {
     
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            AppRootView(viewModel: AppRootViewModel(interactor: CoreInteractor(container: container)))
         }
     }
 }
@@ -29,6 +29,19 @@ extension CoreInteractor: AppRootViewInteractor { }
 
 class AppRootViewModel {
     
+   private let interactor: AppRootViewInteractor
+    
+    init(interactor: AppRootViewInteractor) {
+        self.interactor = interactor
+    }
+}
+
+struct AppRootView: View {
+    @State var viewModel: AppRootViewModel
+    
+    var body: some View {
+        ContentView()
+    }
 }
 
 
