@@ -24,9 +24,12 @@
 		30AF501F2D16DF5F00DB54AF /* HTTPMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30AF50032D16DF5F00DB54AF /* HTTPMethod.swift */; };
 		30AF50202D16DF5F00DB54AF /* URLComponentsProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30AF50042D16DF5F00DB54AF /* URLComponentsProtocol.swift */; };
 		30AF50212D16DF5F00DB54AF /* URLSessionProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30AF50062D16DF5F00DB54AF /* URLSessionProtocol.swift */; };
-		30AF50222D16DF5F00DB54AF /* MoviesService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30AF500B2D16DF5F00DB54AF /* MoviesService.swift */; };
+		30AF50222D16DF5F00DB54AF /* MovieServiceProd.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30AF500B2D16DF5F00DB54AF /* MovieServiceProd.swift */; };
 		30AF50232D16DF5F00DB54AF /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30AF500E2D16DF5F00DB54AF /* ContentView.swift */; };
 		30AF50242D16DF5F00DB54AF /* TMDB_MVVMApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30AF500F2D16DF5F00DB54AF /* TMDB_MVVMApp.swift */; };
+		30AF51BC2D16E7FB00DB54AF /* MovieService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30AF51BB2D16E7FB00DB54AF /* MovieService.swift */; };
+		30AF51BE2D16E97000DB54AF /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30AF51BD2D16E97000DB54AF /* NetworkManager.swift */; };
+		30AF51C02D16EAA900DB54AF /* MovieServiceMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30AF51BF2D16EAA900DB54AF /* MovieServiceMock.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -47,10 +50,13 @@
 		30AF50042D16DF5F00DB54AF /* URLComponentsProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLComponentsProtocol.swift; sourceTree = "<group>"; };
 		30AF50062D16DF5F00DB54AF /* URLSessionProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSessionProtocol.swift; sourceTree = "<group>"; };
 		30AF50092D16DF5F00DB54AF /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		30AF500B2D16DF5F00DB54AF /* MoviesService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesService.swift; sourceTree = "<group>"; };
+		30AF500B2D16DF5F00DB54AF /* MovieServiceProd.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieServiceProd.swift; sourceTree = "<group>"; };
 		30AF500D2D16DF5F00DB54AF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		30AF500E2D16DF5F00DB54AF /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		30AF500F2D16DF5F00DB54AF /* TMDB_MVVMApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TMDB_MVVMApp.swift; sourceTree = "<group>"; };
+		30AF51BB2D16E7FB00DB54AF /* MovieService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieService.swift; sourceTree = "<group>"; };
+		30AF51BD2D16E97000DB54AF /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
+		30AF51BF2D16EAA900DB54AF /* MovieServiceMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieServiceMock.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -137,7 +143,7 @@
 			path = URLSessionService;
 			sourceTree = "<group>";
 		};
-		30AF50082D16DF5F00DB54AF /* NetworkLayer */ = {
+		30AF50082D16DF5F00DB54AF /* Network */ = {
 			isa = PBXGroup;
 			children = (
 				30AF4FFC2D16DF5F00DB54AF /* Individual HTTP Requests */,
@@ -146,7 +152,7 @@
 				30AF50052D16DF5F00DB54AF /* URLComponentsService */,
 				30AF50072D16DF5F00DB54AF /* URLSessionService */,
 			);
-			path = NetworkLayer;
+			path = Network;
 			sourceTree = "<group>";
 		};
 		30AF500A2D16DF5F00DB54AF /* Preview Content */ = {
@@ -160,7 +166,9 @@
 		30AF500C2D16DF5F00DB54AF /* Services */ = {
 			isa = PBXGroup;
 			children = (
-				30AF500B2D16DF5F00DB54AF /* MoviesService.swift */,
+				30AF50082D16DF5F00DB54AF /* Network */,
+				30AF51BD2D16E97000DB54AF /* NetworkManager.swift */,
+				30AF51BA2D16E7C800DB54AF /* Movies */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -170,13 +178,22 @@
 			children = (
 				30AF500F2D16DF5F00DB54AF /* TMDB_MVVMApp.swift */,
 				30AF500C2D16DF5F00DB54AF /* Services */,
-				30AF50082D16DF5F00DB54AF /* NetworkLayer */,
-				30AF500A2D16DF5F00DB54AF /* Preview Content */,
 				30AF4FF82D16DF5F00DB54AF /* Models */,
+				30AF500A2D16DF5F00DB54AF /* Preview Content */,
 				30AF500D2D16DF5F00DB54AF /* Assets.xcassets */,
 				30AF500E2D16DF5F00DB54AF /* ContentView.swift */,
 			);
 			path = "TMDB MVVM";
+			sourceTree = "<group>";
+		};
+		30AF51BA2D16E7C800DB54AF /* Movies */ = {
+			isa = PBXGroup;
+			children = (
+				30AF51BB2D16E7FB00DB54AF /* MovieService.swift */,
+				30AF500B2D16DF5F00DB54AF /* MovieServiceProd.swift */,
+				30AF51BF2D16EAA900DB54AF /* MovieServiceMock.swift */,
+			);
+			path = Movies;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -257,17 +274,20 @@
 				30AF50152D16DF5F00DB54AF /* PostMovieToFavoritesRequest.swift in Sources */,
 				30AF50162D16DF5F00DB54AF /* PostMovieToFavoritesResponse.swift in Sources */,
 				30AF50172D16DF5F00DB54AF /* SingleMovie.swift in Sources */,
+				30AF51C02D16EAA900DB54AF /* MovieServiceMock.swift in Sources */,
 				30AF50182D16DF5F00DB54AF /* Example 1.swift in Sources */,
 				30AF50192D16DF5F00DB54AF /* Example 2.swift in Sources */,
 				30AF501A2D16DF5F00DB54AF /* Example 3.swift in Sources */,
 				30AF501B2D16DF5F00DB54AF /* NetworkError.swift in Sources */,
 				30AF501C2D16DF5F00DB54AF /* NetworkService.swift in Sources */,
+				30AF51BC2D16E7FB00DB54AF /* MovieService.swift in Sources */,
 				30AF501D2D16DF5F00DB54AF /* DataEncoder.swift in Sources */,
+				30AF51BE2D16E97000DB54AF /* NetworkManager.swift in Sources */,
 				30AF501E2D16DF5F00DB54AF /* DataParserProtocol.swift in Sources */,
 				30AF501F2D16DF5F00DB54AF /* HTTPMethod.swift in Sources */,
 				30AF50202D16DF5F00DB54AF /* URLComponentsProtocol.swift in Sources */,
 				30AF50212D16DF5F00DB54AF /* URLSessionProtocol.swift in Sources */,
-				30AF50222D16DF5F00DB54AF /* MoviesService.swift in Sources */,
+				30AF50222D16DF5F00DB54AF /* MovieServiceProd.swift in Sources */,
 				30AF50232D16DF5F00DB54AF /* ContentView.swift in Sources */,
 				30AF50242D16DF5F00DB54AF /* TMDB_MVVMApp.swift in Sources */,
 			);

@@ -191,3 +191,46 @@ struct MovieVideo: Identifiable, Codable {
         return URL(string: "https://youtube.com/watch?v=\(unwrappedKey)")
     }
 }
+
+extension SingleMovie {
+    static func mock() -> SingleMovie {
+        let path = "https://image.tmdb.org/t/p/w500/"
+        return SingleMovie(
+            adult: false,
+            backdropPath: "\(path)t5zCBSB5xMDKcDqe91qahCOUYVV.jpg",
+            budget: 150000000,
+            genres: [Genre(id: 28, name: "Action"), Genre(id: 12, name: "Adventure")],
+            homepage: "https://example.com",
+            id: 12345,
+            imdbID: "tt1234567",
+            originalLanguage: "en",
+            originalTitle: "Mock Original Title",
+            overview: "This is a mock overview of the movie.",
+            popularity: 75.5,
+            posterPath: "/path/to/poster.jpg",
+            releaseDate: "2024-03-14",
+            revenue: 500000000,
+            runtime: 120,
+            status: "Released",
+            tagline: "Mock tagline here.",
+            title: "Mock Movie Title",
+            video: false,
+            voteAverage: 8.5,
+            voteCount: 1024,
+            videos: MovieVideoResponse(results: [
+                MovieVideo(name: "Trailer 1", key: "abc123", site: "YouTube", id: "1"),
+                MovieVideo(name: "Trailer 2", key: "xyz456", site: "YouTube", id: "2")
+            ]),
+            credits: Credits(
+                cast: [
+                    Cast(adult: false, gender: 1, id: 101, knownForDepartment: "Acting", name: "Actor One", originalName: "Actor One", popularity: 10.0, profilePath: "/path/to/profile1.jpg", castID: 1, character: "Main Character", creditID: "cr1", order: 1, department: nil, job: nil),
+                    Cast(adult: false, gender: 2, id: 102, knownForDepartment: "Acting", name: "Actor Two", originalName: "Actor Two", popularity: 8.5, profilePath: "/path/to/profile2.jpg", castID: 2, character: "Supporting Character", creditID: "cr2", order: 2, department: nil, job: nil)
+                ],
+                crew: [
+                    Cast(adult: false, gender: 2, id: 201, knownForDepartment: "Directing", name: "Director One", originalName: "Director One", popularity: 9.0, profilePath: "/path/to/profile3.jpg", castID: nil, character: nil, creditID: "cr3", order: nil, department: "Directing", job: "Director")
+                ]
+            )
+        )
+    }
+}
+

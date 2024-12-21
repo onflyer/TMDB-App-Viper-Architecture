@@ -96,3 +96,72 @@ extension Movie: Hashable {
         hasher.combine(id)
     }
 }
+
+
+extension Movie {
+    static func mocks() -> [Movie] {
+        let path = "https://image.tmdb.org/t/p/w500/"
+        return [
+            Movie(
+                adult: false,
+                backdropPath: "\(path)t5zCBSB5xMDKcDqe91qahCOUYVV.jpg",
+                genreIDS: [28, 12, 16],
+                id: 1,
+                originalTitle: "Original Title 1",
+                overview: "This is the overview for movie 1.",
+                popularity: 123.45,
+                posterPath: "\(path)t5zCBSB5xMDKcDqe91qahCOUYVV.jpg",
+                releaseDate: "2024-03-14",
+                title: "Mock Movie 1",
+                video: false,
+                voteAverage: 8.5,
+                voteCount: 1200
+            ),
+            Movie(
+                adult: false,
+                backdropPath: "\(path)t5zCBSB5xMDKcDqe91qahCOUYVV.jpg",
+                genreIDS: [18, 10749],
+                id: 2,
+                originalTitle: "Original Title 2",
+                overview: "This is the overview for movie 2.",
+                popularity: 234.56,
+                posterPath: "\(path)t5zCBSB5xMDKcDqe91qahCOUYVV.jpg",
+                releaseDate: "2023-11-10",
+                title: "Mock Movie 2",
+                video: false,
+                voteAverage: 7.2,
+                voteCount: 850
+            ),
+            Movie(
+                adult: true,
+                backdropPath: "\(path)t5zCBSB5xMDKcDqe91qahCOUYVV.jpg",
+                genreIDS: [27, 53],
+                id: 3,
+                originalTitle: "Original Title 3",
+                overview: "This is the overview for movie 3.",
+                popularity: 87.65,
+                posterPath: "\(path)t5zCBSB5xMDKcDqe91qahCOUYVV.jpg",
+                releaseDate: "2022-05-20",
+                title: "Mock Movie 3",
+                video: false,
+                voteAverage: 6.9,
+                voteCount: 560
+            ),
+            Movie(
+                adult: true,
+                backdropPath: "\(path)t5zCBSB5xMDKcDqe91qahCOUYVV.jpg",
+                genreIDS: [27, 53],
+                id: 3,
+                originalTitle: "Original Title 4",
+                overview: "This is the overview for movie 3.",
+                popularity: 87.65,
+                posterPath: "\(path)t5zCBSB5xMDKcDqe91qahCOUYVV.jpg",
+                releaseDate: "2022-05-20",
+                title: "Mock Movie 3",
+                video: false,
+                voteAverage: 6.9,
+                voteCount: 560
+            )
+        ]
+    }
+}

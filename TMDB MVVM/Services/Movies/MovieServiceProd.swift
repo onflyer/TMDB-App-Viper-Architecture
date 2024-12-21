@@ -1,5 +1,5 @@
 //
-//  MoviesService.swift
+//  MovieServiceProd.swift
 //  TMDB MVVM
 //
 //  Created by Aleksandar Milidrag on 21. 12. 2024.
@@ -7,7 +7,7 @@
 
 import Foundation
 
-class MoviesService {
+struct MovieServiceProd: MovieService {
     
     let networkService: NetworkServiceProtocol
     

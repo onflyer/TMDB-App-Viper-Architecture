@@ -1,22 +1,14 @@
 //
-//  NetworkService.swift
-//  TMDB App
+//  NetworkManager.swift
+//  TMDB MVVM
 //
-//  Created by Aleksandar Milidrag on 3/13/24.
+//  Created by Aleksandar Milidrag on 21. 12. 2024..
 //
 
 import Foundation
 
-// MARK: - Request Manager Protocol -
-
-public protocol NetworkServiceProtocol {
-    var urlSession: URLSessionProtocol { get }
-    var parser: DataParserProtocol { get }
-    func makeRequest<T: Decodable>(with urlComponents: URLComponentsProtocol) async throws -> T
-}
-
 // MARK: - Default Request Manager
-public class DefaultNetworkService: NetworkServiceProtocol {
+public class NetworkManager: NetworkServiceProtocol {
     public let urlSession: URLSessionProtocol
 
     init(urlSession: URLSessionProtocol = DefaultURLSessionService()) {
@@ -36,13 +28,5 @@ public class DefaultNetworkService: NetworkServiceProtocol {
         let data = try await urlSession.makeRequest(with: urlComponents)
         let decoded: T = try parser.parse(data: data)
         return decoded
-    }
-}
-
-// MARK: - Returns Data Parser -
-
-public extension NetworkServiceProtocol {
-    var parser: DataParserProtocol {
-        return DefaultDataParser()
     }
 }
