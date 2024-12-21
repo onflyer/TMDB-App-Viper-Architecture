@@ -33,6 +33,7 @@
 		30AF51C22D16FD6100DB54AF /* MovieManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30AF51C12D16FD6100DB54AF /* MovieManager.swift */; };
 		30AF51C52D17007800DB54AF /* DependancyContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30AF51C42D17007800DB54AF /* DependancyContainer.swift */; };
 		30AF51C72D1700BB00DB54AF /* Dependencies.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30AF51C62D1700BB00DB54AF /* Dependencies.swift */; };
+		30AF51C92D1707C000DB54AF /* CoreInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30AF51C82D1707C000DB54AF /* CoreInteractor.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -63,6 +64,7 @@
 		30AF51C12D16FD6100DB54AF /* MovieManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieManager.swift; sourceTree = "<group>"; };
 		30AF51C42D17007800DB54AF /* DependancyContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DependancyContainer.swift; sourceTree = "<group>"; };
 		30AF51C62D1700BB00DB54AF /* Dependencies.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dependencies.swift; sourceTree = "<group>"; };
+		30AF51C82D1707C000DB54AF /* CoreInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreInteractor.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -207,6 +209,7 @@
 		30AF51C32D17005900DB54AF /* Root */ = {
 			isa = PBXGroup;
 			children = (
+				30AF51C82D1707C000DB54AF /* CoreInteractor.swift */,
 				30AF51C42D17007800DB54AF /* DependancyContainer.swift */,
 				30AF51C62D1700BB00DB54AF /* Dependencies.swift */,
 			);
@@ -291,6 +294,7 @@
 				30AF50132D16DF5F00DB54AF /* Movie.swift in Sources */,
 				30AF50142D16DF5F00DB54AF /* MovieList.swift in Sources */,
 				30AF50152D16DF5F00DB54AF /* PostMovieToFavoritesRequest.swift in Sources */,
+				30AF51C92D1707C000DB54AF /* CoreInteractor.swift in Sources */,
 				30AF50162D16DF5F00DB54AF /* PostMovieToFavoritesResponse.swift in Sources */,
 				30AF50172D16DF5F00DB54AF /* SingleMovie.swift in Sources */,
 				30AF51C02D16EAA900DB54AF /* MovieServiceMock.swift in Sources */,
