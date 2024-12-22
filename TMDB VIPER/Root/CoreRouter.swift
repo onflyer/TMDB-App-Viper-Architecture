@@ -10,5 +10,5 @@ import Foundation
 struct CoreRouter {
     
     let router: Router
-    let buolder: CoreBuilder
+    let builder: CoreBuilder
 }

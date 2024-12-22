@@ -11,6 +11,13 @@ struct CoreBuilder {
     let interactor: CoreInteractor
     
     func homeView() -> some View {
-        HomeView(presenter: HomePresenter(interactor: interactor))
+        RouterView { router in
+            HomeView(
+                presenter: HomePresenter(
+                    interactor: interactor,
+                    router: CoreRouter(router: router,builder: self)
+                )
+            )
+        }
     }
 }

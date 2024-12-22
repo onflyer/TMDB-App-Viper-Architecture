@@ -11,8 +11,10 @@ import Foundation
 class HomePresenter {
     
     let interactor: HomeInteractor
+    let router: HomeRouter
     
-    init(interactor: HomeInteractor) {
+    init(interactor: HomeInteractor, router: HomeRouter) {
         self.interactor = interactor
+        self.router = router
     }
 }
