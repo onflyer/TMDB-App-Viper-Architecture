@@ -5,7 +5,7 @@
 //  Created by Aleksandar Milidrag on 21. 12. 2024..
 //
 
-import Foundation
+import SwiftUI
 
 @Observable
 class DependencyContainer {
