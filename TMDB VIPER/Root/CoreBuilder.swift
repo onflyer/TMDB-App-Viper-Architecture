@@ -11,6 +11,6 @@ struct CoreBuilder {
     let interactor: CoreInteractor
     
     func homeView() -> some View {
-        HomeView()
+        HomeView(presenter: HomePresenter(interactor: interactor))
     }
 }

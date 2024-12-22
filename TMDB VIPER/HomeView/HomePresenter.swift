@@ -10,5 +10,9 @@ import Foundation
 @Observable
 class HomePresenter {
     
+    let interactor: HomeInteractor
     
+    init(interactor: HomeInteractor) {
+        self.interactor = interactor
+    }
 }

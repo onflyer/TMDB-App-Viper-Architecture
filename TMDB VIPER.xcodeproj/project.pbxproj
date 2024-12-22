@@ -55,6 +55,8 @@
 		30C2EDCE2D18B8700058DA88 /* AnyDestination.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30C2EDC02D18B8700058DA88 /* AnyDestination.swift */; };
 		30C2EDCF2D18B8700058DA88 /* SegueOption.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30C2EDC12D18B8700058DA88 /* SegueOption.swift */; };
 		30C2EDD12D18B9270058DA88 /* CoreRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30C2EDD02D18B9270058DA88 /* CoreRouter.swift */; };
+		30C2EDD32D18BCD00058DA88 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30C2EDD22D18BCD00058DA88 /* AppDelegate.swift */; };
+		30C2EDD52D18C1E50058DA88 /* ButtonViewModifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30C2EDD42D18C1E50058DA88 /* ButtonViewModifiers.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -107,6 +109,8 @@
 		30C2EDC02D18B8700058DA88 /* AnyDestination.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnyDestination.swift; sourceTree = "<group>"; };
 		30C2EDC12D18B8700058DA88 /* SegueOption.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SegueOption.swift; sourceTree = "<group>"; };
 		30C2EDD02D18B9270058DA88 /* CoreRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreRouter.swift; sourceTree = "<group>"; };
+		30C2EDD22D18BCD00058DA88 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		30C2EDD42D18C1E50058DA88 /* ButtonViewModifiers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonViewModifiers.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -123,7 +127,6 @@
 		30AF4F972D16D68600DB54AF = {
 			isa = PBXGroup;
 			children = (
-				30C2EADB2D18A2C50058DA88 /* TMDB_VIPERApp.swift */,
 				30C2EADC2D18A2C50058DA88 /* TMDB VIPER */,
 				30AF4FA12D16D68600DB54AF /* Products */,
 			);
@@ -160,11 +163,13 @@
 		30C2EAC12D18A2C50058DA88 /* Root */ = {
 			isa = PBXGroup;
 			children = (
+				30C2EADB2D18A2C50058DA88 /* TMDB_VIPERApp.swift */,
+				30C2EDD22D18BCD00058DA88 /* AppDelegate.swift */,
 				30C2ECCC2D18AD910058DA88 /* CoreBuilder.swift */,
 				30C2EABE2D18A2C50058DA88 /* CoreInteractor.swift */,
+				30C2EDD02D18B9270058DA88 /* CoreRouter.swift */,
 				30C2EAC02D18A2C50058DA88 /* Dependencies.swift */,
 				30C2EABF2D18A2C50058DA88 /* DependancyContainer.swift */,
-				30C2EDD02D18B9270058DA88 /* CoreRouter.swift */,
 			);
 			path = Root;
 			sourceTree = "<group>";
@@ -286,6 +291,7 @@
 		30C2ECD42D18AF860058DA88 /* ViewModifiers */ = {
 			isa = PBXGroup;
 			children = (
+				30C2EDD42D18C1E50058DA88 /* ButtonViewModifiers.swift */,
 				30C2ECD72D18AFC40058DA88 /* AnyNotificationListenerViewModifier.swift */,
 				30C2ECD52D18AF980058DA88 /* OnFirstAppearViewModifier.swift */,
 			);
@@ -436,6 +442,7 @@
 				30C2EDC52D18B8700058DA88 /* ModalViewModifier.swift in Sources */,
 				30C2EDC62D18B8700058DA88 /* NavigationStackIfNeeded.swift in Sources */,
 				30C2EDC72D18B8700058DA88 /* SheetViewModifier.swift in Sources */,
+				30C2EDD32D18BCD00058DA88 /* AppDelegate.swift in Sources */,
 				30C2EDC82D18B8700058DA88 /* Router.swift in Sources */,
 				30C2EDC92D18B8700058DA88 /* RouterView.swift in Sources */,
 				30C2EDCA2D18B8700058DA88 /* Binding+EXT.swift in Sources */,
@@ -465,6 +472,7 @@
 				30C2EAF12D18A2C50058DA88 /* CoreInteractor.swift in Sources */,
 				30C2EAF22D18A2C50058DA88 /* MovieManager.swift in Sources */,
 				30C2ECD62D18AF980058DA88 /* OnFirstAppearViewModifier.swift in Sources */,
+				30C2EDD52D18C1E50058DA88 /* ButtonViewModifiers.swift in Sources */,
 				30C2EAF32D18A2C50058DA88 /* MovieServiceProd.swift in Sources */,
 				30C2EAF42D18A2C50058DA88 /* NetworkService.swift in Sources */,
 				30C2EAF52D18A2C50058DA88 /* DependancyContainer.swift in Sources */,

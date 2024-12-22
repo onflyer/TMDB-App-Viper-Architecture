@@ -10,9 +10,11 @@ import SwiftUI
 @main
 struct TMDB_VIPERApp: App {
     
+    @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
+    
     var body: some Scene {
         WindowGroup {
-            HomeView()
+            delegate.builder.homeView()
         }
         
     }

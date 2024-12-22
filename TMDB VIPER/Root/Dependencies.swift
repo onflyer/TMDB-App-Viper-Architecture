@@ -11,12 +11,13 @@ struct Dependencies {
     let container: DependencyContainer
     let movieManager: MovieManager
     
-    init(container: DependencyContainer, movieManager: MovieManager) {
-        self.container = container
-        self.movieManager = movieManager
+    init() {
+        let networkManager = NetworkManager()
+        movieManager = MovieManager(service: MovieServiceProd(networkService: networkManager))
         
         let container = DependencyContainer()
-        container.register(MovieManager.self, service: MovieManager(service: MovieServiceProd(networkService: NetworkManager())))
+        container.register(MovieManager.self, service: MovieManager(service: MovieServiceProd(networkService: networkManager)))
+        self.container = container
     }
 }
 
@@ -24,19 +25,17 @@ struct Dependencies {
 class DevPreview {
     static let shared = DevPreview()
     
-    var container: DependencyContainer {
-        let container = DependencyContainer()
-        container.register(MovieManager.self, service: movieManager)
-        return container
-    }
-    
     let movieManager: MovieManager
     
     init() {
         self.movieManager = MovieManager(service: MovieServiceMock())
     }
     
-   
+    var container: DependencyContainer {
+        let container = DependencyContainer()
+        container.register(MovieManager.self, service: movieManager)
+        return container
+    }
 }
 
 extension View {
