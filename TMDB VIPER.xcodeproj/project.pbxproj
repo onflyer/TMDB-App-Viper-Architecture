@@ -54,6 +54,7 @@
 		30C2EDCD2D18B8700058DA88 /* AnyAppAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30C2EDBF2D18B8700058DA88 /* AnyAppAlert.swift */; };
 		30C2EDCE2D18B8700058DA88 /* AnyDestination.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30C2EDC02D18B8700058DA88 /* AnyDestination.swift */; };
 		30C2EDCF2D18B8700058DA88 /* SegueOption.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30C2EDC12D18B8700058DA88 /* SegueOption.swift */; };
+		30C2EDD12D18B9270058DA88 /* CoreRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30C2EDD02D18B9270058DA88 /* CoreRouter.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -105,6 +106,7 @@
 		30C2EDBF2D18B8700058DA88 /* AnyAppAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnyAppAlert.swift; sourceTree = "<group>"; };
 		30C2EDC02D18B8700058DA88 /* AnyDestination.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnyDestination.swift; sourceTree = "<group>"; };
 		30C2EDC12D18B8700058DA88 /* SegueOption.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SegueOption.swift; sourceTree = "<group>"; };
+		30C2EDD02D18B9270058DA88 /* CoreRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreRouter.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -162,6 +164,7 @@
 				30C2EABE2D18A2C50058DA88 /* CoreInteractor.swift */,
 				30C2EAC02D18A2C50058DA88 /* Dependencies.swift */,
 				30C2EABF2D18A2C50058DA88 /* DependancyContainer.swift */,
+				30C2EDD02D18B9270058DA88 /* CoreRouter.swift */,
 			);
 			path = Root;
 			sourceTree = "<group>";
@@ -253,8 +256,8 @@
 				30C2ECCE2D18AE010058DA88 /* HomeView */,
 				30C2EABB2D18A2C50058DA88 /* Models */,
 				30C2EAC12D18A2C50058DA88 /* Root */,
-				30C2EDC32D18B8700058DA88 /* Routing */,
 				30C2EAD82D18A2C50058DA88 /* Services */,
+				30C2EDC32D18B8700058DA88 /* Routing */,
 				30C2EABD2D18A2C50058DA88 /* Preview Content */,
 				30C2EAD92D18A2C50058DA88 /* Assets.xcassets */,
 			);
@@ -438,6 +441,7 @@
 				30C2EDCA2D18B8700058DA88 /* Binding+EXT.swift in Sources */,
 				30C2EDCB2D18B8700058DA88 /* View+EXT.swift in Sources */,
 				30C2EDCC2D18B8700058DA88 /* AlertType.swift in Sources */,
+				30C2EDD12D18B9270058DA88 /* CoreRouter.swift in Sources */,
 				30C2EDCD2D18B8700058DA88 /* AnyAppAlert.swift in Sources */,
 				30C2EDCE2D18B8700058DA88 /* AnyDestination.swift in Sources */,
 				30C2EDCF2D18B8700058DA88 /* SegueOption.swift in Sources */,
