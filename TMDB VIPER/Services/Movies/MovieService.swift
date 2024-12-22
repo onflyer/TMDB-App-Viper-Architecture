@@ -1,6 +1,6 @@
 //
 //  MovieService.swift
-//  TMDB MVVM
+//  TMDB_VIPER
 //
 //  Created by Aleksandar Milidrag on 21. 12. 2024..
 //

@@ -1,8 +1,8 @@
 //
 //  Dependencies.swift
-//  TMDB MVVM
+//  TMDB_VIPER
 //
-//  Created by Aleksandar Milidrag on 21. 12. 2024..
+//  Created by Aleksandar Milidrag on 21. 12. 2024.
 //
 
 import SwiftUI
@@ -24,17 +24,19 @@ struct Dependencies {
 class DevPreview {
     static let shared = DevPreview()
     
+    var container: DependencyContainer {
+        let container = DependencyContainer()
+        container.register(MovieManager.self, service: movieManager)
+        return container
+    }
+    
     let movieManager: MovieManager
     
     init() {
         self.movieManager = MovieManager(service: MovieServiceMock())
     }
     
-    var container: DependencyContainer {
-        let container = DependencyContainer()
-        container.register(MovieManager.self, service: movieManager)
-        return container
-    }
+   
 }
 
 extension View {

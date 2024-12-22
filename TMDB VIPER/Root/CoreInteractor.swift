@@ -1,6 +1,6 @@
 //
 //  CoreInteractor.swift
-//  TMDB MVVM
+//  TMDB_VIPER
 //
 //  Created by Aleksandar Milidrag on 21. 12. 2024..
 //
@@ -20,10 +20,5 @@ struct CoreInteractor {
     
     func getSingleMovie(id: Int) async throws -> SingleMovie {
         try await movieManager.getSingleMovie(id: id)
-    }
-    
-    //MARK: EXAMPLE: YOU JUST NEED ONE FUNCTION FROM VIEWMODEL JUST CONFORM TO INTERACTOR IN EXTENSION (LOOK IN
-    func logIn() {
-        
     }
 }

@@ -12,7 +12,7 @@ struct TMDB_VIPERApp: App {
     
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            HomeView()
         }
         
     }
