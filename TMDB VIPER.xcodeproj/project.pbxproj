@@ -38,6 +38,9 @@
 		30C2ECD32D18AF3C0058DA88 /* RootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30C2ECD22D18AF3C0058DA88 /* RootView.swift */; };
 		30C2ECD62D18AF980058DA88 /* OnFirstAppearViewModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30C2ECD52D18AF980058DA88 /* OnFirstAppearViewModifier.swift */; };
 		30C2ECD82D18AFC40058DA88 /* AnyNotificationListenerViewModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30C2ECD72D18AFC40058DA88 /* AnyNotificationListenerViewModifier.swift */; };
+		30C2ECDA2D18B0F60058DA88 /* HomePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30C2ECD92D18B0F60058DA88 /* HomePresenter.swift */; };
+		30C2ECDC2D18B1350058DA88 /* HomeInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30C2ECDB2D18B1350058DA88 /* HomeInteractor.swift */; };
+		30C2ECDF2D18B2460058DA88 /* View+EXT.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30C2ECDE2D18B2460058DA88 /* View+EXT.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -73,6 +76,9 @@
 		30C2ECD22D18AF3C0058DA88 /* RootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootView.swift; sourceTree = "<group>"; };
 		30C2ECD52D18AF980058DA88 /* OnFirstAppearViewModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnFirstAppearViewModifier.swift; sourceTree = "<group>"; };
 		30C2ECD72D18AFC40058DA88 /* AnyNotificationListenerViewModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnyNotificationListenerViewModifier.swift; sourceTree = "<group>"; };
+		30C2ECD92D18B0F60058DA88 /* HomePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePresenter.swift; sourceTree = "<group>"; };
+		30C2ECDB2D18B1350058DA88 /* HomeInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeInteractor.swift; sourceTree = "<group>"; };
+		30C2ECDE2D18B2460058DA88 /* View+EXT.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+EXT.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -215,6 +221,7 @@
 		30C2EADC2D18A2C50058DA88 /* TMDB VIPER */ = {
 			isa = PBXGroup;
 			children = (
+				30C2ECDD2D18B23D0058DA88 /* Extensions */,
 				30C2ECD42D18AF860058DA88 /* ViewModifiers */,
 				30C2ECD12D18AF2C0058DA88 /* RootView */,
 				30C2ECCE2D18AE010058DA88 /* HomeView */,
@@ -231,6 +238,8 @@
 			isa = PBXGroup;
 			children = (
 				30C2ECCF2D18AE150058DA88 /* HomeView.swift */,
+				30C2ECD92D18B0F60058DA88 /* HomePresenter.swift */,
+				30C2ECDB2D18B1350058DA88 /* HomeInteractor.swift */,
 			);
 			path = HomeView;
 			sourceTree = "<group>";
@@ -250,6 +259,14 @@
 				30C2ECD52D18AF980058DA88 /* OnFirstAppearViewModifier.swift */,
 			);
 			path = ViewModifiers;
+			sourceTree = "<group>";
+		};
+		30C2ECDD2D18B23D0058DA88 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				30C2ECDE2D18B2460058DA88 /* View+EXT.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -328,12 +345,15 @@
 				30C2EADF2D18A2C50058DA88 /* MovieService.swift in Sources */,
 				30C2EAE02D18A2C50058DA88 /* NetworkManager.swift in Sources */,
 				30C2EAE12D18A2C50058DA88 /* SingleMovie.swift in Sources */,
+				30C2ECDA2D18B0F60058DA88 /* HomePresenter.swift in Sources */,
 				30C2EAE22D18A2C50058DA88 /* DataParserProtocol.swift in Sources */,
+				30C2ECDF2D18B2460058DA88 /* View+EXT.swift in Sources */,
 				30C2EAE32D18A2C50058DA88 /* Movie.swift in Sources */,
 				30C2EAE42D18A2C50058DA88 /* URLSessionProtocol.swift in Sources */,
 				30C2ECD82D18AFC40058DA88 /* AnyNotificationListenerViewModifier.swift in Sources */,
 				30C2EAE52D18A2C50058DA88 /* PostMovieToFavoritesRequest.swift in Sources */,
 				30C2EAE62D18A2C50058DA88 /* Example 2.swift in Sources */,
+				30C2ECDC2D18B1350058DA88 /* HomeInteractor.swift in Sources */,
 				30C2EAE82D18A2C50058DA88 /* DataEncoder.swift in Sources */,
 				30C2EAE92D18A2C50058DA88 /* MovieList.swift in Sources */,
 				30C2EAEA2D18A2C50058DA88 /* TMDB_VIPERApp.swift in Sources */,
