@@ -40,7 +40,20 @@
 		30C2ECD82D18AFC40058DA88 /* AnyNotificationListenerViewModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30C2ECD72D18AFC40058DA88 /* AnyNotificationListenerViewModifier.swift */; };
 		30C2ECDA2D18B0F60058DA88 /* HomePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30C2ECD92D18B0F60058DA88 /* HomePresenter.swift */; };
 		30C2ECDC2D18B1350058DA88 /* HomeInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30C2ECDB2D18B1350058DA88 /* HomeInteractor.swift */; };
-		30C2ECDF2D18B2460058DA88 /* View+EXT.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30C2ECDE2D18B2460058DA88 /* View+EXT.swift */; };
+		30C2ECDF2D18B2460058DA88 /* View+EXT Custom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30C2ECDE2D18B2460058DA88 /* View+EXT Custom.swift */; };
+		30C2ECE12D18B3EB0058DA88 /* HomeRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30C2ECE02D18B3EB0058DA88 /* HomeRouter.swift */; };
+		30C2EDC42D18B8700058DA88 /* AlertViewModifer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30C2EDB32D18B8700058DA88 /* AlertViewModifer.swift */; };
+		30C2EDC52D18B8700058DA88 /* ModalViewModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30C2EDB42D18B8700058DA88 /* ModalViewModifier.swift */; };
+		30C2EDC62D18B8700058DA88 /* NavigationStackIfNeeded.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30C2EDB52D18B8700058DA88 /* NavigationStackIfNeeded.swift */; };
+		30C2EDC72D18B8700058DA88 /* SheetViewModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30C2EDB62D18B8700058DA88 /* SheetViewModifier.swift */; };
+		30C2EDC82D18B8700058DA88 /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30C2EDB82D18B8700058DA88 /* Router.swift */; };
+		30C2EDC92D18B8700058DA88 /* RouterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30C2EDB92D18B8700058DA88 /* RouterView.swift */; };
+		30C2EDCA2D18B8700058DA88 /* Binding+EXT.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30C2EDBB2D18B8700058DA88 /* Binding+EXT.swift */; };
+		30C2EDCB2D18B8700058DA88 /* View+EXT.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30C2EDBC2D18B8700058DA88 /* View+EXT.swift */; };
+		30C2EDCC2D18B8700058DA88 /* AlertType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30C2EDBE2D18B8700058DA88 /* AlertType.swift */; };
+		30C2EDCD2D18B8700058DA88 /* AnyAppAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30C2EDBF2D18B8700058DA88 /* AnyAppAlert.swift */; };
+		30C2EDCE2D18B8700058DA88 /* AnyDestination.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30C2EDC02D18B8700058DA88 /* AnyDestination.swift */; };
+		30C2EDCF2D18B8700058DA88 /* SegueOption.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30C2EDC12D18B8700058DA88 /* SegueOption.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -78,7 +91,20 @@
 		30C2ECD72D18AFC40058DA88 /* AnyNotificationListenerViewModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnyNotificationListenerViewModifier.swift; sourceTree = "<group>"; };
 		30C2ECD92D18B0F60058DA88 /* HomePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePresenter.swift; sourceTree = "<group>"; };
 		30C2ECDB2D18B1350058DA88 /* HomeInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeInteractor.swift; sourceTree = "<group>"; };
-		30C2ECDE2D18B2460058DA88 /* View+EXT.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+EXT.swift"; sourceTree = "<group>"; };
+		30C2ECDE2D18B2460058DA88 /* View+EXT Custom.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+EXT Custom.swift"; sourceTree = "<group>"; };
+		30C2ECE02D18B3EB0058DA88 /* HomeRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeRouter.swift; sourceTree = "<group>"; };
+		30C2EDB32D18B8700058DA88 /* AlertViewModifer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertViewModifer.swift; sourceTree = "<group>"; };
+		30C2EDB42D18B8700058DA88 /* ModalViewModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModalViewModifier.swift; sourceTree = "<group>"; };
+		30C2EDB52D18B8700058DA88 /* NavigationStackIfNeeded.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationStackIfNeeded.swift; sourceTree = "<group>"; };
+		30C2EDB62D18B8700058DA88 /* SheetViewModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SheetViewModifier.swift; sourceTree = "<group>"; };
+		30C2EDB82D18B8700058DA88 /* Router.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
+		30C2EDB92D18B8700058DA88 /* RouterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouterView.swift; sourceTree = "<group>"; };
+		30C2EDBB2D18B8700058DA88 /* Binding+EXT.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Binding+EXT.swift"; sourceTree = "<group>"; };
+		30C2EDBC2D18B8700058DA88 /* View+EXT.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+EXT.swift"; sourceTree = "<group>"; };
+		30C2EDBE2D18B8700058DA88 /* AlertType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertType.swift; sourceTree = "<group>"; };
+		30C2EDBF2D18B8700058DA88 /* AnyAppAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnyAppAlert.swift; sourceTree = "<group>"; };
+		30C2EDC02D18B8700058DA88 /* AnyDestination.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnyDestination.swift; sourceTree = "<group>"; };
+		30C2EDC12D18B8700058DA88 /* SegueOption.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SegueOption.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -227,6 +253,7 @@
 				30C2ECCE2D18AE010058DA88 /* HomeView */,
 				30C2EABB2D18A2C50058DA88 /* Models */,
 				30C2EAC12D18A2C50058DA88 /* Root */,
+				30C2EDC32D18B8700058DA88 /* Routing */,
 				30C2EAD82D18A2C50058DA88 /* Services */,
 				30C2EABD2D18A2C50058DA88 /* Preview Content */,
 				30C2EAD92D18A2C50058DA88 /* Assets.xcassets */,
@@ -237,9 +264,10 @@
 		30C2ECCE2D18AE010058DA88 /* HomeView */ = {
 			isa = PBXGroup;
 			children = (
-				30C2ECCF2D18AE150058DA88 /* HomeView.swift */,
-				30C2ECD92D18B0F60058DA88 /* HomePresenter.swift */,
 				30C2ECDB2D18B1350058DA88 /* HomeInteractor.swift */,
+				30C2ECD92D18B0F60058DA88 /* HomePresenter.swift */,
+				30C2ECE02D18B3EB0058DA88 /* HomeRouter.swift */,
+				30C2ECCF2D18AE150058DA88 /* HomeView.swift */,
 			);
 			path = HomeView;
 			sourceTree = "<group>";
@@ -264,9 +292,60 @@
 		30C2ECDD2D18B23D0058DA88 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
-				30C2ECDE2D18B2460058DA88 /* View+EXT.swift */,
+				30C2ECDE2D18B2460058DA88 /* View+EXT Custom.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		30C2EDB72D18B8700058DA88 /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				30C2EDB32D18B8700058DA88 /* AlertViewModifer.swift */,
+				30C2EDB42D18B8700058DA88 /* ModalViewModifier.swift */,
+				30C2EDB52D18B8700058DA88 /* NavigationStackIfNeeded.swift */,
+				30C2EDB62D18B8700058DA88 /* SheetViewModifier.swift */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
+		30C2EDBA2D18B8700058DA88 /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				30C2EDB82D18B8700058DA88 /* Router.swift */,
+				30C2EDB92D18B8700058DA88 /* RouterView.swift */,
+			);
+			path = Core;
+			sourceTree = "<group>";
+		};
+		30C2EDBD2D18B8700058DA88 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				30C2EDBB2D18B8700058DA88 /* Binding+EXT.swift */,
+				30C2EDBC2D18B8700058DA88 /* View+EXT.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		30C2EDC22D18B8700058DA88 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				30C2EDBE2D18B8700058DA88 /* AlertType.swift */,
+				30C2EDBF2D18B8700058DA88 /* AnyAppAlert.swift */,
+				30C2EDC02D18B8700058DA88 /* AnyDestination.swift */,
+				30C2EDC12D18B8700058DA88 /* SegueOption.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		30C2EDC32D18B8700058DA88 /* Routing */ = {
+			isa = PBXGroup;
+			children = (
+				30C2EDB72D18B8700058DA88 /* Components */,
+				30C2EDBA2D18B8700058DA88 /* Core */,
+				30C2EDBD2D18B8700058DA88 /* Extensions */,
+				30C2EDC22D18B8700058DA88 /* Models */,
+			);
+			path = Routing;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -347,11 +426,24 @@
 				30C2EAE12D18A2C50058DA88 /* SingleMovie.swift in Sources */,
 				30C2ECDA2D18B0F60058DA88 /* HomePresenter.swift in Sources */,
 				30C2EAE22D18A2C50058DA88 /* DataParserProtocol.swift in Sources */,
-				30C2ECDF2D18B2460058DA88 /* View+EXT.swift in Sources */,
+				30C2ECDF2D18B2460058DA88 /* View+EXT Custom.swift in Sources */,
 				30C2EAE32D18A2C50058DA88 /* Movie.swift in Sources */,
 				30C2EAE42D18A2C50058DA88 /* URLSessionProtocol.swift in Sources */,
+				30C2EDC42D18B8700058DA88 /* AlertViewModifer.swift in Sources */,
+				30C2EDC52D18B8700058DA88 /* ModalViewModifier.swift in Sources */,
+				30C2EDC62D18B8700058DA88 /* NavigationStackIfNeeded.swift in Sources */,
+				30C2EDC72D18B8700058DA88 /* SheetViewModifier.swift in Sources */,
+				30C2EDC82D18B8700058DA88 /* Router.swift in Sources */,
+				30C2EDC92D18B8700058DA88 /* RouterView.swift in Sources */,
+				30C2EDCA2D18B8700058DA88 /* Binding+EXT.swift in Sources */,
+				30C2EDCB2D18B8700058DA88 /* View+EXT.swift in Sources */,
+				30C2EDCC2D18B8700058DA88 /* AlertType.swift in Sources */,
+				30C2EDCD2D18B8700058DA88 /* AnyAppAlert.swift in Sources */,
+				30C2EDCE2D18B8700058DA88 /* AnyDestination.swift in Sources */,
+				30C2EDCF2D18B8700058DA88 /* SegueOption.swift in Sources */,
 				30C2ECD82D18AFC40058DA88 /* AnyNotificationListenerViewModifier.swift in Sources */,
 				30C2EAE52D18A2C50058DA88 /* PostMovieToFavoritesRequest.swift in Sources */,
+				30C2ECE12D18B3EB0058DA88 /* HomeRouter.swift in Sources */,
 				30C2EAE62D18A2C50058DA88 /* Example 2.swift in Sources */,
 				30C2ECDC2D18B1350058DA88 /* HomeInteractor.swift in Sources */,
 				30C2EAE82D18A2C50058DA88 /* DataEncoder.swift in Sources */,

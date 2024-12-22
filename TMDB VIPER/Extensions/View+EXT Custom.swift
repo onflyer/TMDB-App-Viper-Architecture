@@ -59,9 +59,3 @@ extension View {
     }
 
 }
-
-extension View {
-    func any() -> AnyView {
-        AnyView(self)
-    }
-}
