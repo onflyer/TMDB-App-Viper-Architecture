@@ -13,6 +13,10 @@
 		300B97CF2D1975B70073CDF9 /* ImageLoaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 300B97CE2D1975B70073CDF9 /* ImageLoaderView.swift */; };
 		300B97D22D1975F40073CDF9 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 300B97D12D1975F40073CDF9 /* Constants.swift */; };
 		300B97D52D1979D90073CDF9 /* MovieCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 300B97D42D1979D90073CDF9 /* MovieCellView.swift */; };
+		306F5EF22D19E163002E1583 /* DetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 306F5EF12D19E163002E1583 /* DetailView.swift */; };
+		306F5EF62D19E1E9002E1583 /* DetailPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 306F5EF52D19E1E9002E1583 /* DetailPresenter.swift */; };
+		306F5EF82D19E276002E1583 /* DetailInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 306F5EF72D19E276002E1583 /* DetailInteractor.swift */; };
+		306F5EFA2D19E2DE002E1583 /* DetailRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 306F5EF92D19E2DE002E1583 /* DetailRouter.swift */; };
 		30C2EADD2D18A2C50058DA88 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 30C2EABC2D18A2C50058DA88 /* Preview Assets.xcassets */; };
 		30C2EADE2D18A2C50058DA88 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 30C2EAD92D18A2C50058DA88 /* Assets.xcassets */; };
 		30C2EADF2D18A2C50058DA88 /* MovieService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30C2EAC22D18A2C50058DA88 /* MovieService.swift */; };
@@ -71,6 +75,10 @@
 		300B97CE2D1975B70073CDF9 /* ImageLoaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageLoaderView.swift; sourceTree = "<group>"; };
 		300B97D12D1975F40073CDF9 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		300B97D42D1979D90073CDF9 /* MovieCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieCellView.swift; sourceTree = "<group>"; };
+		306F5EF12D19E163002E1583 /* DetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailView.swift; sourceTree = "<group>"; };
+		306F5EF52D19E1E9002E1583 /* DetailPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailPresenter.swift; sourceTree = "<group>"; };
+		306F5EF72D19E276002E1583 /* DetailInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailInteractor.swift; sourceTree = "<group>"; };
+		306F5EF92D19E2DE002E1583 /* DetailRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailRouter.swift; sourceTree = "<group>"; };
 		30AF4FA02D16D68600DB54AF /* TMDB VIPER.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "TMDB VIPER.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		30C2EAB62D18A2C50058DA88 /* Movie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Movie.swift; sourceTree = "<group>"; };
 		30C2EAB72D18A2C50058DA88 /* MovieList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieList.swift; sourceTree = "<group>"; };
@@ -168,6 +176,17 @@
 				300B97D42D1979D90073CDF9 /* MovieCellView.swift */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		306F5EF02D19E14B002E1583 /* DetailView */ = {
+			isa = PBXGroup;
+			children = (
+				306F5EF72D19E276002E1583 /* DetailInteractor.swift */,
+				306F5EF52D19E1E9002E1583 /* DetailPresenter.swift */,
+				306F5EF92D19E2DE002E1583 /* DetailRouter.swift */,
+				306F5EF12D19E163002E1583 /* DetailView.swift */,
+			);
+			path = DetailView;
 			sourceTree = "<group>";
 		};
 		30AF4F972D16D68600DB54AF = {
@@ -308,6 +327,7 @@
 				30C2ECD42D18AF860058DA88 /* ViewModifiers */,
 				30C2ECD12D18AF2C0058DA88 /* RootView */,
 				30C2ECCE2D18AE010058DA88 /* HomeView */,
+				306F5EF02D19E14B002E1583 /* DetailView */,
 				30C2EABB2D18A2C50058DA88 /* Models */,
 				30C2EAC12D18A2C50058DA88 /* Root */,
 				30C2EAD82D18A2C50058DA88 /* Services */,
@@ -486,6 +506,7 @@
 				30C2EADF2D18A2C50058DA88 /* MovieService.swift in Sources */,
 				30C2EAE02D18A2C50058DA88 /* NetworkManager.swift in Sources */,
 				30C2EAE12D18A2C50058DA88 /* SingleMovie.swift in Sources */,
+				306F5EFA2D19E2DE002E1583 /* DetailRouter.swift in Sources */,
 				30C2ECDA2D18B0F60058DA88 /* HomePresenter.swift in Sources */,
 				30C2EAE22D18A2C50058DA88 /* DataParserProtocol.swift in Sources */,
 				30C2ECDF2D18B2460058DA88 /* View+EXT Custom.swift in Sources */,
@@ -502,6 +523,8 @@
 				300B97CF2D1975B70073CDF9 /* ImageLoaderView.swift in Sources */,
 				30C2EDC92D18B8700058DA88 /* RouterView.swift in Sources */,
 				30C2EDCA2D18B8700058DA88 /* Binding+EXT.swift in Sources */,
+				306F5EF62D19E1E9002E1583 /* DetailPresenter.swift in Sources */,
+				306F5EF22D19E163002E1583 /* DetailView.swift in Sources */,
 				30C2EDCB2D18B8700058DA88 /* View+EXT.swift in Sources */,
 				30C2EDCC2D18B8700058DA88 /* AlertType.swift in Sources */,
 				30C2EDD12D18B9270058DA88 /* CoreRouter.swift in Sources */,
@@ -520,6 +543,7 @@
 				30C2ECCD2D18AD910058DA88 /* CoreBuilder.swift in Sources */,
 				30C2EAEB2D18A2C50058DA88 /* MovieServiceMock.swift in Sources */,
 				30C2EAEC2D18A2C50058DA88 /* NetworkError.swift in Sources */,
+				306F5EF82D19E276002E1583 /* DetailInteractor.swift in Sources */,
 				30C2ECD32D18AF3C0058DA88 /* RootView.swift in Sources */,
 				30C2EAED2D18A2C50058DA88 /* HTTPMethod.swift in Sources */,
 				30C2ECD02D18AE150058DA88 /* HomeView.swift in Sources */,

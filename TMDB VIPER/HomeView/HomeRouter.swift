@@ -8,9 +8,7 @@
 import Foundation
 
 protocol HomeRouter {
-    
+    func showDetailView(delegate: DetailViewDelegate)
 }
 
-extension CoreRouter: HomeRouter {
-    
-}
+extension CoreRouter: HomeRouter { }

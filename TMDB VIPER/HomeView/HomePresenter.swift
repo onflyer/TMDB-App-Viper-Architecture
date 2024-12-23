@@ -67,4 +67,8 @@ class HomePresenter {
             print(error)
         }
     }
+    
+    func onMoviePressed(movie: Movie) {
+        
+    }
 }

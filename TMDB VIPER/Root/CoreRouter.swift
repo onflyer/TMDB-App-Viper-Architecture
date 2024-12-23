@@ -11,4 +11,11 @@ struct CoreRouter {
     
     let router: Router
     let builder: CoreBuilder
+    
+    func showDetailView(delegate: DetailViewDelegate) {
+        router.showScreen(.push) { router in
+            builder.detailView(router: router)
+        }
+    }
+
 }
