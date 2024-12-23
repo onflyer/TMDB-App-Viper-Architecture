@@ -11,13 +11,13 @@ import SDWebImageSwiftUI
 
 struct ImageLoaderView: View {
     
-    var urlString: String = Constants.randomImage
+    var urlString: String = "ss"
     var resizingMode: ContentMode = .fill
     var forceTransitionAnimation: Bool = false
     
     var body: some View {
         Rectangle()
-            .opacity(0.5)
+            .opacity(0.13)
             .overlay(
                 WebImage(url: URL(string: urlString))
                     .resizable()
