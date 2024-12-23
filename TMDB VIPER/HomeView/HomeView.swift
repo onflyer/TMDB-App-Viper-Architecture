@@ -14,34 +14,41 @@ struct HomeView: View {
     
     var body: some View {
         List {
-            Section {
-                ZStack {
-                    ScrollView(.horizontal) {
-                        LazyHStack (spacing: 15) {
-                            ForEach(0..<10) { movie in
-                                MovieCellView(title: "")
-                                    .anyButton {
-                                        
-                                    }
-                                    .shadow(color: .secondary, radius: 3)
-                                    .frame(width: 170, height: 240)
-                            }
-                        }
-                        .padding(.horizontal)
-                        .padding(.vertical, 5)
-                    }
-                    .scrollIndicators(.hidden)
-                }
-                .listSectionSeparator(.hidden)
-                .removeListRowFormatting()
-            }
-            header: {
-                Text("Now playing")
-            }
+            nowPlayingSection
         }
-        .background(Color(uiColor: .secondarySystemBackground))
         .listStyle(.plain)
+        .background(Color(uiColor: .secondarySystemBackground))
         .navigationTitle("Welcome to TMDB")
+    }
+}
+
+extension HomeView {
+    var nowPlayingSection: some View {
+        Section {
+            ZStack {
+                ScrollView(.horizontal) {
+                    LazyHStack (spacing: 15) {
+                        ForEach(0..<10) { movie in
+                            MovieCellView(title: "")
+                                .anyButton {
+                                    
+                                }
+                                .shadow(color: .secondary, radius: 3)
+                                .frame(width: 170, height: 240)
+                        }
+                    }
+                    .padding(.horizontal)
+                    .padding(.vertical, 5)
+                }
+                .scrollIndicators(.hidden)
+            }
+            .listSectionSeparator(.hidden)
+            .removeListRowFormatting()
+        }
+        header: {
+            Text("Now playing")
+        }
+
     }
 }
 
