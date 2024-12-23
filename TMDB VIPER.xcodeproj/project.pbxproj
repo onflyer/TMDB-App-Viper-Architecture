@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		300B95F42D1970430073CDF9 /* FeedDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 300B95F32D1970430073CDF9 /* FeedDelegate.swift */; };
+		300B95F62D19707F0073CDF9 /* FeedPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 300B95F52D19707F0073CDF9 /* FeedPresenter.swift */; };
 		30C2EADD2D18A2C50058DA88 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 30C2EABC2D18A2C50058DA88 /* Preview Assets.xcassets */; };
 		30C2EADE2D18A2C50058DA88 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 30C2EAD92D18A2C50058DA88 /* Assets.xcassets */; };
 		30C2EADF2D18A2C50058DA88 /* MovieService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30C2EAC22D18A2C50058DA88 /* MovieService.swift */; };
@@ -60,6 +62,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		300B95F32D1970430073CDF9 /* FeedDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedDelegate.swift; sourceTree = "<group>"; };
+		300B95F52D19707F0073CDF9 /* FeedPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedPresenter.swift; sourceTree = "<group>"; };
 		30AF4FA02D16D68600DB54AF /* TMDB VIPER.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "TMDB VIPER.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		30C2EAB62D18A2C50058DA88 /* Movie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Movie.swift; sourceTree = "<group>"; };
 		30C2EAB72D18A2C50058DA88 /* MovieList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieList.swift; sourceTree = "<group>"; };
@@ -124,6 +128,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		300B95F22D19703B0073CDF9 /* Analytics example */ = {
+			isa = PBXGroup;
+			children = (
+				300B95F52D19707F0073CDF9 /* FeedPresenter.swift */,
+				300B95F32D1970430073CDF9 /* FeedDelegate.swift */,
+			);
+			path = "Analytics example";
+			sourceTree = "<group>";
+		};
 		30AF4F972D16D68600DB54AF = {
 			isa = PBXGroup;
 			children = (
@@ -255,6 +268,7 @@
 		30C2EADC2D18A2C50058DA88 /* TMDB VIPER */ = {
 			isa = PBXGroup;
 			children = (
+				300B95F22D19703B0073CDF9 /* Analytics example */,
 				30C2ECDD2D18B23D0058DA88 /* Extensions */,
 				30C2ECD42D18AF860058DA88 /* ViewModifiers */,
 				30C2ECD12D18AF2C0058DA88 /* RootView */,
@@ -440,6 +454,7 @@
 				30C2EAE42D18A2C50058DA88 /* URLSessionProtocol.swift in Sources */,
 				30C2EDC42D18B8700058DA88 /* AlertViewModifer.swift in Sources */,
 				30C2EDC52D18B8700058DA88 /* ModalViewModifier.swift in Sources */,
+				300B95F62D19707F0073CDF9 /* FeedPresenter.swift in Sources */,
 				30C2EDC62D18B8700058DA88 /* NavigationStackIfNeeded.swift in Sources */,
 				30C2EDC72D18B8700058DA88 /* SheetViewModifier.swift in Sources */,
 				30C2EDD32D18BCD00058DA88 /* AppDelegate.swift in Sources */,
@@ -453,6 +468,7 @@
 				30C2EDCE2D18B8700058DA88 /* AnyDestination.swift in Sources */,
 				30C2EDCF2D18B8700058DA88 /* SegueOption.swift in Sources */,
 				30C2ECD82D18AFC40058DA88 /* AnyNotificationListenerViewModifier.swift in Sources */,
+				300B95F42D1970430073CDF9 /* FeedDelegate.swift in Sources */,
 				30C2EAE52D18A2C50058DA88 /* PostMovieToFavoritesRequest.swift in Sources */,
 				30C2ECE12D18B3EB0058DA88 /* HomeRouter.swift in Sources */,
 				30C2EAE62D18A2C50058DA88 /* Example 2.swift in Sources */,
