@@ -41,12 +41,13 @@ extension HomeView {
                                     
                                 }
                                 .shadow(color: .secondary, radius: 3)
-                                .frame(width: 170, height: 240)
+                                .frame(width: 170)
                         }
                     }
                     .padding(.horizontal)
                     .padding(.vertical, 5)
                 }
+                .frame(height: 240)
                 .scrollIndicators(.hidden)
             }
             .listSectionSeparator(.hidden)
@@ -69,12 +70,13 @@ extension HomeView {
                                     
                                 }
                                 .shadow(color: .secondary, radius: 3)
-                                .frame(width: 300, height: 150)
+                                .frame(width: 300)
                         }
                     }
                     .padding(.horizontal)
                     .padding(.vertical, 5)
                 }
+                .frame(height: 150)
                 .scrollIndicators(.hidden)
             }
             .listSectionSeparator(.hidden)
