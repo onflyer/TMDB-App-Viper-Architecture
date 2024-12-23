@@ -33,12 +33,10 @@ struct MovieCellView: View {
 
 #Preview("Poster") {
     MovieCellView()
-//        .aspectRatio(9/16, contentMode: .fit)
         .frame(width: 180, height: 280)
 }
 
 #Preview("Backdrop") {
     MovieCellView()
-//        .aspectRatio(16/9, contentMode: .fit)
         .frame(height: 170)
 }

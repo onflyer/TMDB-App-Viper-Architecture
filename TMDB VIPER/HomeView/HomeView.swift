@@ -14,31 +14,7 @@ struct HomeView: View {
     var body: some View {
         List {
             nowPlayingSection
-            
-            Section {
-                ZStack {
-                    ScrollView(.horizontal) {
-                        LazyHStack (spacing: 15) {
-                            ForEach(presenter.upcomingMovies) { movie in
-                                MovieCellView(imageName: movie.posterURLString)
-                                    .anyButton {
-                                        
-                                    }
-                                    .shadow(color: .secondary, radius: 3)
-                                    .frame(width: 300, height: 150)
-                            }
-                        }
-                        .padding(.horizontal)
-                        .padding(.vertical, 5)
-                    }
-                    .scrollIndicators(.hidden)
-                }
-                .listSectionSeparator(.hidden)
-                .removeListRowFormatting()
-            }
-            header: {
-                Text("Upcoming")
-            }
+            upcomingSection
         }
         .listStyle(.plain)
         .background(Color(uiColor: .secondarySystemBackground))
@@ -80,6 +56,33 @@ extension HomeView {
             Text("Now playing")
         }
 
+    }
+    
+    var upcomingSection: some View {
+        Section {
+            ZStack {
+                ScrollView(.horizontal) {
+                    LazyHStack (spacing: 15) {
+                        ForEach(presenter.upcomingMovies) { movie in
+                            MovieCellView(imageName: movie.posterURLString)
+                                .anyButton {
+                                    
+                                }
+                                .shadow(color: .secondary, radius: 3)
+                                .frame(width: 300, height: 150)
+                        }
+                    }
+                    .padding(.horizontal)
+                    .padding(.vertical, 5)
+                }
+                .scrollIndicators(.hidden)
+            }
+            .listSectionSeparator(.hidden)
+            .removeListRowFormatting()
+        }
+        header: {
+            Text("Upcoming")
+        }
     }
 }
 
