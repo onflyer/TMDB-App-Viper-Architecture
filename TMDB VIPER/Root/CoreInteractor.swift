@@ -18,6 +18,20 @@ struct CoreInteractor {
         try await movieManager.getNowPlayingMovies(page: page)
     }
     
+    func getUpcomingMovies(page: Int) async throws -> [Movie] {
+        try await movieManager.getUpcomingMovies(page: page)
+
+    }
+    
+    func getTopRatedMovies(page: Int) async throws -> [Movie] {
+        try await movieManager.getTopRatedMovies(page: page)
+
+    }
+    
+    func getPopularMovies(page: Int) async throws -> [Movie] {
+        try await movieManager.getTopRatedMovies(page: page)
+    }
+    
     func getSingleMovie(id: Int) async throws -> SingleMovie {
         try await movieManager.getSingleMovie(id: id)
     }
