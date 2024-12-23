@@ -42,9 +42,7 @@ class HomePresenter {
         guard upcomingMovies.isEmpty else { return }
         
         do {
-            isLoading = true
             upcomingMovies = try await interactor.getUpcomingMovies(page: page)
-            isLoading = false
         } catch {
             print(error)
         }
@@ -54,9 +52,7 @@ class HomePresenter {
         guard topRatedMovies.isEmpty else { return }
         
         do {
-            isLoading = true
             topRatedMovies = try await interactor.getTopRatedMovies(page: page)
-            isLoading = false
         } catch {
             print(error)
         }
@@ -66,9 +62,7 @@ class HomePresenter {
         guard topRatedMovies.isEmpty else { return }
         
         do {
-            isLoading = true
             popularMovies = try await interactor.getPopularMovies(page: page)
-            isLoading = false
         } catch {
             print(error)
         }
