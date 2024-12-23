@@ -27,6 +27,24 @@ struct MovieServiceMock: MovieService {
         return Movie.mocks()
     }
     
+    func getUpcomingMovies(page: Int) async throws -> [Movie] {
+        try await Task.sleep(for: .seconds(delay))
+        try tryShowError()
+        return Movie.mocks()
+    }
+    
+    func getTopRatedMovies(page: Int) async throws -> [Movie] {
+        try await Task.sleep(for: .seconds(delay))
+        try tryShowError()
+        return Movie.mocks()
+    }
+    
+    func getPopularMovies(page: Int) async throws -> [Movie] {
+        try await Task.sleep(for: .seconds(delay))
+        try tryShowError()
+        return Movie.mocks()
+    }
+    
     func getSingleMovie(id: Int) async throws -> SingleMovie {
         try await Task.sleep(for: .seconds(delay))
         try tryShowError()

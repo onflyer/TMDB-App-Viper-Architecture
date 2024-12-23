@@ -8,7 +8,7 @@
 import Foundation
 
 class MovieManager: MovieService {
-    
+
     let service: MovieService
     
     init(service: MovieService) {
@@ -17,6 +17,20 @@ class MovieManager: MovieService {
     
     func getNowPlayingMovies(page: Int) async throws -> [Movie] {
         try await service.getNowPlayingMovies(page: page)
+    }
+    
+    func getUpcomingMovies(page: Int) async throws -> [Movie] {
+        try await service.getUpcomingMovies(page: page)
+
+    }
+    
+    func getTopRatedMovies(page: Int) async throws -> [Movie] {
+        try await service.getTopRatedMovies(page: page)
+
+    }
+    
+    func getPopularMovies(page: Int) async throws -> [Movie] {
+        try await service.getTopRatedMovies(page: page)
     }
     
     func getSingleMovie(id: Int) async throws -> SingleMovie {

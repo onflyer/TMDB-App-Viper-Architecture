@@ -31,7 +31,7 @@ extension HomeView {
                 ScrollView(.horizontal) {
                     LazyHStack (spacing: 15) {
                         ForEach(presenter.nowPlayingMovies) { movie in
-                            MovieCellView(imageName: movie.posterURLString!)
+                            MovieCellView(imageName: movie.posterURLString)
                                 .anyButton {
                                     
                                 }

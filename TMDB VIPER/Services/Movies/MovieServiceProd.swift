@@ -21,6 +21,24 @@ struct MovieServiceProd: MovieService {
         return response.results
     }
     
+    func getUpcomingMovies(page: Int) async throws -> [Movie] {
+        let request = MoviesRequest.getUpcomingMovies(page: page)
+        let response: MovieList = try await networkService.makeRequest(with: request)
+        return response.results
+    }
+    
+    func getTopRatedMovies(page: Int) async throws -> [Movie] {
+        let request = MoviesRequest.getTopRatedMovies(page: page)
+        let response: MovieList = try await networkService.makeRequest(with: request)
+        return response.results
+    }
+    
+    func getPopularMovies(page: Int) async throws -> [Movie] {
+        let request = MoviesRequest.getPopularMovies(page: page)
+        let response: MovieList = try await networkService.makeRequest(with: request)
+        return response.results
+    }
+    
     func getSingleMovie(id: Int) async throws -> SingleMovie {
         let request = MoviesRequest.getMovieById(movieId: id)
         let response: SingleMovie = try await networkService.makeRequest(with: request)
