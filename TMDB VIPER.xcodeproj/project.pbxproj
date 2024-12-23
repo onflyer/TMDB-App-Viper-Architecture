@@ -146,6 +146,7 @@
 		300B97CD2D1975B00073CDF9 /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				300B97D32D19786C0073CDF9 /* Views */,
 				300B97CE2D1975B70073CDF9 /* ImageLoaderView.swift */,
 			);
 			path = Components;
@@ -157,6 +158,13 @@
 				300B97D12D1975F40073CDF9 /* Constants.swift */,
 			);
 			path = Utilities;
+			sourceTree = "<group>";
+		};
+		300B97D32D19786C0073CDF9 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 		30AF4F972D16D68600DB54AF = {
