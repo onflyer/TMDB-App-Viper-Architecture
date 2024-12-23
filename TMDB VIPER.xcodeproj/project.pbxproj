@@ -164,8 +164,8 @@
 		300B97D32D19786C0073CDF9 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				300B97D42D1979D90073CDF9 /* MovieCellView.swift */,
 				300B97CE2D1975B70073CDF9 /* ImageLoaderView.swift */,
+				300B97D42D1979D90073CDF9 /* MovieCellView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";

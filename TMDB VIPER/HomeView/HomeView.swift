@@ -12,7 +12,21 @@ struct HomeView: View {
     @State var presenter: HomePresenter
     
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        List {
+            Section {
+                ZStack {
+                    ScrollView(.horizontal) {
+                        
+                    }
+                    .scrollIndicators(.hidden)
+                }
+                .removeListRowFormatting()
+            }
+            header: {
+                
+            }
+        }
+        .navigationTitle("Welcome to TMDB")
     }
 }
 

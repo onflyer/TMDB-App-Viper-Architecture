@@ -34,7 +34,7 @@ struct MovieCellView: View {
 #Preview("Poster") {
     MovieCellView()
 //        .aspectRatio(9/16, contentMode: .fit)
-        .frame(width: 200, height: 300)
+        .frame(width: 180, height: 280)
 }
 
 #Preview("Backdrop") {
