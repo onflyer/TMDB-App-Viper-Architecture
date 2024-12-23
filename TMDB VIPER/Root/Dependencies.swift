@@ -31,7 +31,7 @@ class DevPreview {
         self.movieManager = MovieManager(service: MovieServiceMock())
     }
     
-    var container: DependencyContainer {
+    func container() -> DependencyContainer {
         let container = DependencyContainer()
         container.register(MovieManager.self, service: movieManager)
         return container
@@ -41,6 +41,6 @@ class DevPreview {
 extension View {
     func previewEnvironment() -> some View {
         self
-            .environment(DevPreview.shared.container)
+            .environment(DevPreview.shared.container())
     }
 }
