@@ -9,6 +9,9 @@
 /* Begin PBXBuildFile section */
 		300B95F42D1970430073CDF9 /* FeedDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 300B95F32D1970430073CDF9 /* FeedDelegate.swift */; };
 		300B95F62D19707F0073CDF9 /* FeedPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 300B95F52D19707F0073CDF9 /* FeedPresenter.swift */; };
+		300B97CC2D1975680073CDF9 /* SDWebImageSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = 300B97CB2D1975680073CDF9 /* SDWebImageSwiftUI */; };
+		300B97CF2D1975B70073CDF9 /* ImageLoaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 300B97CE2D1975B70073CDF9 /* ImageLoaderView.swift */; };
+		300B97D22D1975F40073CDF9 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 300B97D12D1975F40073CDF9 /* Constants.swift */; };
 		30C2EADD2D18A2C50058DA88 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 30C2EABC2D18A2C50058DA88 /* Preview Assets.xcassets */; };
 		30C2EADE2D18A2C50058DA88 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 30C2EAD92D18A2C50058DA88 /* Assets.xcassets */; };
 		30C2EADF2D18A2C50058DA88 /* MovieService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30C2EAC22D18A2C50058DA88 /* MovieService.swift */; };
@@ -64,6 +67,8 @@
 /* Begin PBXFileReference section */
 		300B95F32D1970430073CDF9 /* FeedDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedDelegate.swift; sourceTree = "<group>"; };
 		300B95F52D19707F0073CDF9 /* FeedPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedPresenter.swift; sourceTree = "<group>"; };
+		300B97CE2D1975B70073CDF9 /* ImageLoaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageLoaderView.swift; sourceTree = "<group>"; };
+		300B97D12D1975F40073CDF9 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		30AF4FA02D16D68600DB54AF /* TMDB VIPER.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "TMDB VIPER.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		30C2EAB62D18A2C50058DA88 /* Movie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Movie.swift; sourceTree = "<group>"; };
 		30C2EAB72D18A2C50058DA88 /* MovieList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieList.swift; sourceTree = "<group>"; };
@@ -122,6 +127,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				300B97CC2D1975680073CDF9 /* SDWebImageSwiftUI in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -135,6 +141,22 @@
 				300B95F32D1970430073CDF9 /* FeedDelegate.swift */,
 			);
 			path = "Analytics example";
+			sourceTree = "<group>";
+		};
+		300B97CD2D1975B00073CDF9 /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				300B97CE2D1975B70073CDF9 /* ImageLoaderView.swift */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
+		300B97D02D1975F00073CDF9 /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				300B97D12D1975F40073CDF9 /* Constants.swift */,
+			);
+			path = Utilities;
 			sourceTree = "<group>";
 		};
 		30AF4F972D16D68600DB54AF = {
@@ -178,9 +200,9 @@
 			children = (
 				30C2EADB2D18A2C50058DA88 /* TMDB_VIPERApp.swift */,
 				30C2EDD22D18BCD00058DA88 /* AppDelegate.swift */,
+				30C2EDD02D18B9270058DA88 /* CoreRouter.swift */,
 				30C2ECCC2D18AD910058DA88 /* CoreBuilder.swift */,
 				30C2EABE2D18A2C50058DA88 /* CoreInteractor.swift */,
-				30C2EDD02D18B9270058DA88 /* CoreRouter.swift */,
 				30C2EAC02D18A2C50058DA88 /* Dependencies.swift */,
 				30C2EABF2D18A2C50058DA88 /* DependancyContainer.swift */,
 			);
@@ -268,6 +290,8 @@
 		30C2EADC2D18A2C50058DA88 /* TMDB VIPER */ = {
 			isa = PBXGroup;
 			children = (
+				300B97D02D1975F00073CDF9 /* Utilities */,
+				300B97CD2D1975B00073CDF9 /* Components */,
 				300B95F22D19703B0073CDF9 /* Analytics example */,
 				30C2ECDD2D18B23D0058DA88 /* Extensions */,
 				30C2ECD42D18AF860058DA88 /* ViewModifiers */,
@@ -388,6 +412,7 @@
 			);
 			name = "TMDB VIPER";
 			packageProductDependencies = (
+				300B97CB2D1975680073CDF9 /* SDWebImageSwiftUI */,
 			);
 			productName = "TMDB MVVM";
 			productReference = 30AF4FA02D16D68600DB54AF /* TMDB VIPER.app */;
@@ -417,6 +442,9 @@
 			);
 			mainGroup = 30AF4F972D16D68600DB54AF;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				300B97CA2D1975680073CDF9 /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 30AF4FA12D16D68600DB54AF /* Products */;
 			projectDirPath = "";
@@ -451,6 +479,7 @@
 				30C2EAE22D18A2C50058DA88 /* DataParserProtocol.swift in Sources */,
 				30C2ECDF2D18B2460058DA88 /* View+EXT Custom.swift in Sources */,
 				30C2EAE32D18A2C50058DA88 /* Movie.swift in Sources */,
+				300B97D22D1975F40073CDF9 /* Constants.swift in Sources */,
 				30C2EAE42D18A2C50058DA88 /* URLSessionProtocol.swift in Sources */,
 				30C2EDC42D18B8700058DA88 /* AlertViewModifer.swift in Sources */,
 				30C2EDC52D18B8700058DA88 /* ModalViewModifier.swift in Sources */,
@@ -459,6 +488,7 @@
 				30C2EDC72D18B8700058DA88 /* SheetViewModifier.swift in Sources */,
 				30C2EDD32D18BCD00058DA88 /* AppDelegate.swift in Sources */,
 				30C2EDC82D18B8700058DA88 /* Router.swift in Sources */,
+				300B97CF2D1975B70073CDF9 /* ImageLoaderView.swift in Sources */,
 				30C2EDC92D18B8700058DA88 /* RouterView.swift in Sources */,
 				30C2EDCA2D18B8700058DA88 /* Binding+EXT.swift in Sources */,
 				30C2EDCB2D18B8700058DA88 /* View+EXT.swift in Sources */,
@@ -699,6 +729,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		300B97CA2D1975680073CDF9 /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SDWebImage/SDWebImageSwiftUI";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 3.1.3;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		300B97CB2D1975680073CDF9 /* SDWebImageSwiftUI */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 300B97CA2D1975680073CDF9 /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */;
+			productName = SDWebImageSwiftUI;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 30AF4F982D16D68600DB54AF /* Project object */;
 }
