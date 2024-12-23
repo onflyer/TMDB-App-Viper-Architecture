@@ -16,16 +16,24 @@ struct HomeView: View {
             Section {
                 ZStack {
                     ScrollView(.horizontal) {
-                        
+                        LazyHStack (spacing: 15) {
+                            ForEach(0..<10) { movie in
+                                MovieCellView(title: "")
+                                    .frame(width: 170, height: 240)
+                            }
+                        }
+                        .padding(.horizontal)
                     }
                     .scrollIndicators(.hidden)
                 }
+                .listSectionSeparator(.hidden)
                 .removeListRowFormatting()
             }
             header: {
-                
+                Text("Now playing")
             }
         }
+        .listStyle(.plain)
         .navigationTitle("Welcome to TMDB")
     }
 }
