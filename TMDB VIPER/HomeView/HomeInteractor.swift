@@ -8,7 +8,8 @@
 import Foundation
 
 protocol HomeInteractor {
-    
+    func getNowPlayingMovies(page: Int) async throws -> [Movie] 
+
 }
 
 extension CoreInteractor: HomeInteractor { }

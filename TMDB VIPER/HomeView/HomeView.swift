@@ -18,6 +18,9 @@ struct HomeView: View {
         .listStyle(.plain)
         .background(Color(uiColor: .secondarySystemBackground))
         .navigationTitle("Welcome to TMDB")
+        .task {
+            await presenter.loadNowPlayingMovies()
+        }
     }
 }
 
@@ -27,8 +30,8 @@ extension HomeView {
             ZStack {
                 ScrollView(.horizontal) {
                     LazyHStack (spacing: 15) {
-                        ForEach(0..<10) { movie in
-                            MovieCellView(title: "")
+                        ForEach(presenter.nowPlayingMovies) { movie in
+                            MovieCellView(imageName: movie.posterURLString!)
                                 .anyButton {
                                     
                                 }
