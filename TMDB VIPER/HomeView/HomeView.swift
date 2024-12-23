@@ -10,6 +10,7 @@ import SwiftUI
 struct HomeView: View {
     
     @State var presenter: HomePresenter
+    @State var isLoading: Bool = false
     
     var body: some View {
         List {
@@ -19,10 +20,15 @@ struct HomeView: View {
                         LazyHStack (spacing: 15) {
                             ForEach(0..<10) { movie in
                                 MovieCellView(title: "")
+                                    .anyButton {
+                                        
+                                    }
+                                    .shadow(color: .secondary, radius: 3)
                                     .frame(width: 170, height: 240)
                             }
                         }
                         .padding(.horizontal)
+                        .padding(.vertical, 5)
                     }
                     .scrollIndicators(.hidden)
                 }
@@ -33,6 +39,7 @@ struct HomeView: View {
                 Text("Now playing")
             }
         }
+        .background(Color(uiColor: .secondarySystemBackground))
         .listStyle(.plain)
         .navigationTitle("Welcome to TMDB")
     }
