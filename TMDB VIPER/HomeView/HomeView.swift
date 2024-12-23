@@ -10,7 +10,6 @@ import SwiftUI
 struct HomeView: View {
     
     @State var presenter: HomePresenter
-    @State var isLoading: Bool = false
     
     var body: some View {
         List {
