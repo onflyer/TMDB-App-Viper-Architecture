@@ -15,6 +15,7 @@ struct HomeView: View {
         List {
             nowPlayingSection
             upcomingSection
+            topRatedSection
         }
         .listStyle(.plain)
         .background(Color(uiColor: .secondarySystemBackground))
@@ -25,6 +26,9 @@ struct HomeView: View {
         .task {
             await presenter.loadUpcomingMovies()
 
+        }
+        .task {
+            await presenter.loadTopRatedMovies()
         }
     }
 }
@@ -85,6 +89,35 @@ extension HomeView {
         header: {
             Text("Upcoming")
         }
+    }
+    
+    var topRatedSection: some View {
+        Section {
+            ZStack {
+                ScrollView(.horizontal) {
+                    LazyHStack (spacing: 15) {
+                        ForEach(presenter.topRatedMovies) { movie in
+                            MovieCellView(title: "", imageName: movie.posterURLString)
+                                .anyButton {
+                                    
+                                }
+                                .shadow(color: .secondary, radius: 3)
+                                .frame(width: 170)
+                        }
+                    }
+                    .padding(.horizontal)
+                    .padding(.vertical, 5)
+                }
+                .frame(height: 240)
+                .scrollIndicators(.hidden)
+            }
+            .listSectionSeparator(.hidden)
+            .removeListRowFormatting()
+        }
+        header: {
+            Text("Now playing")
+        }
+
     }
 }
 

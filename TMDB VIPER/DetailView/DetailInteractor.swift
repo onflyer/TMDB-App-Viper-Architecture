@@ -8,7 +8,7 @@
 import Foundation
 
 protocol DetailInteractor {
-    
+    func getSingleMovie(id: Int) async throws -> SingleMovie
 }
 
 extension CoreInteractor: DetailInteractor {}

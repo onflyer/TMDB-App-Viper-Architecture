@@ -8,7 +8,7 @@
 import Foundation
 
 protocol DetailRouter {
-    
+    func showDetailView(delegate: DetailViewDelegate)
 }
 
 extension CoreRouter: DetailRouter {}
