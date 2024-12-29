@@ -42,7 +42,7 @@ extension HomeView {
                         ForEach(presenter.nowPlayingMovies) { movie in
                             MovieCellView(title: "", imageName: movie.posterURLString)
                                 .anyButton {
-                                    
+                                    presenter.onMoviePressed(id: movie.id)
                                 }
                                 .shadow(color: .secondary, radius: 3)
                                 .frame(width: 170)
@@ -71,7 +71,7 @@ extension HomeView {
                         ForEach(presenter.upcomingMovies) { movie in
                             MovieCellView(title: movie.title ?? "N/A", imageName: movie.posterURLString)
                                 .anyButton {
-                                    
+                                    presenter.onMoviePressed(id: movie.id)
                                 }
                                 .shadow(color: .secondary, radius: 3)
                                 .frame(width: 300)
@@ -99,7 +99,7 @@ extension HomeView {
                         ForEach(presenter.topRatedMovies) { movie in
                             MovieCellView(title: "", imageName: movie.posterURLString)
                                 .anyButton {
-                                    
+                                    presenter.onMoviePressed(id: movie.id)
                                 }
                                 .shadow(color: .secondary, radius: 3)
                                 .frame(width: 170)
@@ -115,7 +115,7 @@ extension HomeView {
             .removeListRowFormatting()
         }
         header: {
-            Text("Now playing")
+            Text("Top rated")
         }
 
     }

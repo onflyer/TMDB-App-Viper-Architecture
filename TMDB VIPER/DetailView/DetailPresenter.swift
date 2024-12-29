@@ -27,9 +27,4 @@ class DetailPresenter {
         }
     }
     
-    func onMoviePressed(id: Int) {
-        let delegate = DetailViewDelegate(movieId: id)
-        router.showDetailView(delegate: delegate)
-    }
-    
 }
