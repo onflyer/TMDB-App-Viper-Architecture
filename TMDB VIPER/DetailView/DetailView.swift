@@ -17,11 +17,13 @@ struct DetailView: View {
     let delegate: DetailViewDelegate
 
     var body: some View {
-        Text(presenter.movie?.title ?? "No title")
-            .task {
-                await presenter.loadSingleMovie(id: delegate.movieId)
-            }
-            .navigationTitle(presenter.movie?.title ?? "No title")
+        VStack {
+            Text(presenter.movie?.title ?? "No title")
+                .navigationTitle(presenter.movie?.title ?? "No title")
+        }
+        .task {
+            await presenter.loadSingleMovie(id: delegate.movieId)
+        }
     }
 }
 
