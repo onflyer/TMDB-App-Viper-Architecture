@@ -26,6 +26,7 @@ class HomePresenter {
         self.router = router
     }
     
+    @MainActor
     func loadNowPlayingMovies() async {
         guard nowPlayingMovies.isEmpty else { return }
         
@@ -38,6 +39,7 @@ class HomePresenter {
         }
     }
     
+    @MainActor
     func loadUpcomingMovies() async {
         guard upcomingMovies.isEmpty else { return }
         
@@ -48,6 +50,7 @@ class HomePresenter {
         }
     }
     
+    @MainActor
     func loadTopRatedMovies() async {
         guard topRatedMovies.isEmpty else { return }
         
@@ -58,6 +61,7 @@ class HomePresenter {
         }
     }
     
+    @MainActor
     func loadPopularMovies() async {
         guard topRatedMovies.isEmpty else { return }
         

@@ -21,12 +21,13 @@ struct CoreBuilder {
         }
     }
     
-    func detailView(router: Router) -> some View {
+    func detailView(router: Router, delegate: DetailViewDelegate) -> some View {
         DetailView(
             presenter: DetailPresenter(
                 interactor: interactor,
                 router: CoreRouter( router: router, builder: self)
-            )
+            ),
+            delegate: delegate
         )
     }
 }

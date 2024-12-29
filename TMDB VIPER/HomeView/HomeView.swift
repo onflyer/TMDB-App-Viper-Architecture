@@ -25,7 +25,6 @@ struct HomeView: View {
         }
         .task {
             await presenter.loadUpcomingMovies()
-
         }
         .task {
             await presenter.loadTopRatedMovies()
@@ -60,7 +59,7 @@ extension HomeView {
         header: {
             Text("Now playing")
         }
-
+        
     }
     
     var upcomingSection: some View {
@@ -117,7 +116,7 @@ extension HomeView {
         header: {
             Text("Top rated")
         }
-
+        
     }
 }
 

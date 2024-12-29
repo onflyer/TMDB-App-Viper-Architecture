@@ -19,7 +19,7 @@ class DetailPresenter {
         self.router = router
     }
     
-    func loadSingleMovie(id: Int) async throws {
+    func loadSingleMovie(id: Int) async {
         do {
             movie = try await interactor.getSingleMovie(id: id)
         } catch {
