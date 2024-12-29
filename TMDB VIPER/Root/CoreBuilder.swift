@@ -21,7 +21,7 @@ struct CoreBuilder {
         }
     }
     
-    func detailView(router: Router, delegate: DetailViewDelegate) -> some View {
+    func detailView(router: Router, delegate: DetailViewDelegate = DetailViewDelegate()) -> some View {
         DetailView(
             presenter: DetailPresenter(
                 interactor: interactor,

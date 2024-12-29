@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct DetailViewDelegate {
-    var movieId: Int
+    var movieId: Int = SingleMovie.mock().id
 }
 
 struct DetailView: View {
@@ -30,6 +30,6 @@ struct DetailView: View {
 #Preview {
     let builder = CoreBuilder(interactor: CoreInteractor(container: DevPreview.shared.container()))
     RouterView { router in
-        builder.detailView(router: router, delegate: DetailViewDelegate(movieId: 12345))
+        builder.detailView(router: router)
     }
 }
