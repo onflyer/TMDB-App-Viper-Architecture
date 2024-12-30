@@ -18,6 +18,7 @@ struct HomeView: View {
             topRatedSection
         }
         .listStyle(.plain)
+        .scrollIndicators(.hidden)
         .background(Color(uiColor: .secondarySystemBackground))
         .navigationTitle("Welcome to TMDB")
         .task {
