@@ -16,8 +16,20 @@ struct SearchCellView: View {
     var body: some View {
         HStack(alignment: .top, spacing: 16) {
             ImageLoaderView(urlString: posterUrlString, resizingMode: .fit, forceTransitionAnimation: false)
-                .scaledToFit()
+                .frame(width: 61, height: 92)
+                .cornerRadius(8)
+                .shadow(radius: 3)
+            
+            VStack(alignment: .leading) {
+                Text(title)
+                .font(.headline)
                 
+                Text(releaseDate)
+                .font(.subheadline)
+                
+                Text(ratingText)
+                .foregroundColor(.yellow)
+            }
         }
         
     }
