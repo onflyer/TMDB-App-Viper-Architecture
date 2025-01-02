@@ -35,4 +35,9 @@ struct CoreInteractor {
     func getSingleMovie(id: Int) async throws -> SingleMovie {
         try await movieManager.getSingleMovie(id: id)
     }
+    
+    func searchMovies(query: String) async throws -> [Movie] {
+        try await movieManager.searchMovies(query: query)
+    }
+
 }
