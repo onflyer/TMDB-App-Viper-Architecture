@@ -15,12 +15,14 @@ class HomePresenter {
     
     var page: Int = 1
     var isLoading = false
+    var isSearching = false
     var query: String = ""
     
     private(set) var nowPlayingMovies: [Movie] = []
     private(set) var upcomingMovies: [Movie] = []
     private(set) var topRatedMovies: [Movie] = []
     private(set) var popularMovies: [Movie] = []
+    private(set) var searchedMovies: [Movie] = []
     
     init(interactor: HomeInteractor, router: HomeRouter) {
         self.interactor = interactor
@@ -68,6 +70,21 @@ class HomePresenter {
         
         do {
             popularMovies = try await interactor.getPopularMovies(page: page)
+        } catch {
+            print(error)
+        }
+    }
+    
+    func loadSearchedMovies() async {
+        let trimmedQuery = query.trimmingCharacters(in: .whitespacesAndNewlines)
+        
+        guard !query.isEmpty else {
+            searchedMovies.removeAll()
+            return
+        }
+        
+        do {
+            searchedMovies = try await interactor.searchMovies(query: trimmedQuery)
         } catch {
             print(error)
         }

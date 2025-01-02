@@ -31,6 +31,9 @@ struct HomeView: View {
         .task {
             await presenter.loadTopRatedMovies()
         }
+        .task(id: presenter.query) {
+            await presenter.loadSearchedMovies()
+        }
     }
 }
 

@@ -30,14 +30,4 @@ struct CoreBuilder {
             delegate: delegate
         )
     }
-    
-    func searchView(router: Router,delegate: SearchViewDelegate = SearchViewDelegate()) -> some View {
-        SearchView(
-            presenter: SearchPresenter(
-                interactor: interactor,
-                router: CoreRouter(router: router,builder: self)
-            ),
-            delegate: delegate
-        )
-    }
 }

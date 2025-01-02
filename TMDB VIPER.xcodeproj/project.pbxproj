@@ -17,10 +17,6 @@
 		306F5EF62D19E1E9002E1583 /* DetailPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 306F5EF52D19E1E9002E1583 /* DetailPresenter.swift */; };
 		306F5EF82D19E276002E1583 /* DetailInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 306F5EF72D19E276002E1583 /* DetailInteractor.swift */; };
 		306F5EFA2D19E2DE002E1583 /* DetailRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 306F5EF92D19E2DE002E1583 /* DetailRouter.swift */; };
-		30A259FE2D26AE5F00C2C094 /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30A259FD2D26AE5F00C2C094 /* SearchView.swift */; };
-		30A25A002D26AE7E00C2C094 /* SearchInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30A259FF2D26AE7E00C2C094 /* SearchInteractor.swift */; };
-		30A25A022D26AE9300C2C094 /* SearchPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30A25A012D26AE9300C2C094 /* SearchPresenter.swift */; };
-		30A25A042D26AEA400C2C094 /* SearchRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30A25A032D26AEA400C2C094 /* SearchRouter.swift */; };
 		30A25A062D26B83A00C2C094 /* SearchCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30A25A052D26B83A00C2C094 /* SearchCellView.swift */; };
 		30C2EADD2D18A2C50058DA88 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 30C2EABC2D18A2C50058DA88 /* Preview Assets.xcassets */; };
 		30C2EADE2D18A2C50058DA88 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 30C2EAD92D18A2C50058DA88 /* Assets.xcassets */; };
@@ -84,10 +80,6 @@
 		306F5EF52D19E1E9002E1583 /* DetailPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailPresenter.swift; sourceTree = "<group>"; };
 		306F5EF72D19E276002E1583 /* DetailInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailInteractor.swift; sourceTree = "<group>"; };
 		306F5EF92D19E2DE002E1583 /* DetailRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailRouter.swift; sourceTree = "<group>"; };
-		30A259FD2D26AE5F00C2C094 /* SearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchView.swift; sourceTree = "<group>"; };
-		30A259FF2D26AE7E00C2C094 /* SearchInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchInteractor.swift; sourceTree = "<group>"; };
-		30A25A012D26AE9300C2C094 /* SearchPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchPresenter.swift; sourceTree = "<group>"; };
-		30A25A032D26AEA400C2C094 /* SearchRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchRouter.swift; sourceTree = "<group>"; };
 		30A25A052D26B83A00C2C094 /* SearchCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchCellView.swift; sourceTree = "<group>"; };
 		30AF4FA02D16D68600DB54AF /* TMDB VIPER.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "TMDB VIPER.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		30C2EAB62D18A2C50058DA88 /* Movie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Movie.swift; sourceTree = "<group>"; };
@@ -184,6 +176,7 @@
 			children = (
 				300B97CE2D1975B70073CDF9 /* ImageLoaderView.swift */,
 				300B97D42D1979D90073CDF9 /* MovieCellView.swift */,
+				30A25A052D26B83A00C2C094 /* SearchCellView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -197,18 +190,6 @@
 				306F5EF12D19E163002E1583 /* DetailView.swift */,
 			);
 			path = DetailView;
-			sourceTree = "<group>";
-		};
-		30A259FC2D26AE1900C2C094 /* SearchView */ = {
-			isa = PBXGroup;
-			children = (
-				30A259FF2D26AE7E00C2C094 /* SearchInteractor.swift */,
-				30A25A012D26AE9300C2C094 /* SearchPresenter.swift */,
-				30A25A032D26AEA400C2C094 /* SearchRouter.swift */,
-				30A259FD2D26AE5F00C2C094 /* SearchView.swift */,
-				30A25A052D26B83A00C2C094 /* SearchCellView.swift */,
-			);
-			path = SearchView;
 			sourceTree = "<group>";
 		};
 		30AF4F972D16D68600DB54AF = {
@@ -349,7 +330,6 @@
 				30C2ECD42D18AF860058DA88 /* ViewModifiers */,
 				30C2ECD12D18AF2C0058DA88 /* RootView */,
 				30C2ECCE2D18AE010058DA88 /* HomeView */,
-				30A259FC2D26AE1900C2C094 /* SearchView */,
 				306F5EF02D19E14B002E1583 /* DetailView */,
 				30C2EABB2D18A2C50058DA88 /* Models */,
 				30C2EAC12D18A2C50058DA88 /* Root */,
@@ -528,12 +508,10 @@
 			files = (
 				30C2EADF2D18A2C50058DA88 /* MovieService.swift in Sources */,
 				30C2EAE02D18A2C50058DA88 /* NetworkManager.swift in Sources */,
-				30A25A022D26AE9300C2C094 /* SearchPresenter.swift in Sources */,
 				30C2EAE12D18A2C50058DA88 /* SingleMovie.swift in Sources */,
 				306F5EFA2D19E2DE002E1583 /* DetailRouter.swift in Sources */,
 				30C2ECDA2D18B0F60058DA88 /* HomePresenter.swift in Sources */,
 				30C2EAE22D18A2C50058DA88 /* DataParserProtocol.swift in Sources */,
-				30A25A002D26AE7E00C2C094 /* SearchInteractor.swift in Sources */,
 				30C2ECDF2D18B2460058DA88 /* View+EXT Custom.swift in Sources */,
 				30C2EAE32D18A2C50058DA88 /* Movie.swift in Sources */,
 				30A25A062D26B83A00C2C094 /* SearchCellView.swift in Sources */,
@@ -561,14 +539,12 @@
 				300B95F42D1970430073CDF9 /* FeedDelegate.swift in Sources */,
 				30C2EAE52D18A2C50058DA88 /* PostMovieToFavoritesRequest.swift in Sources */,
 				30C2ECE12D18B3EB0058DA88 /* HomeRouter.swift in Sources */,
-				30A259FE2D26AE5F00C2C094 /* SearchView.swift in Sources */,
 				30C2EAE62D18A2C50058DA88 /* GetMoviesRequest.swift in Sources */,
 				30C2ECDC2D18B1350058DA88 /* HomeInteractor.swift in Sources */,
 				30C2EAE82D18A2C50058DA88 /* DataEncoder.swift in Sources */,
 				30C2EAE92D18A2C50058DA88 /* MovieList.swift in Sources */,
 				30C2EAEA2D18A2C50058DA88 /* TMDB_VIPERApp.swift in Sources */,
 				30C2ECCD2D18AD910058DA88 /* CoreBuilder.swift in Sources */,
-				30A25A042D26AEA400C2C094 /* SearchRouter.swift in Sources */,
 				30C2EAEB2D18A2C50058DA88 /* MovieServiceMock.swift in Sources */,
 				30C2EAEC2D18A2C50058DA88 /* NetworkError.swift in Sources */,
 				306F5EF82D19E276002E1583 /* DetailInteractor.swift in Sources */,

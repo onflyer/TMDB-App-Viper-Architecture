@@ -12,8 +12,10 @@ struct TMDB_VIPERApp: App {
     
 //    static func main() async {
 //        let instance = MovieManager(service: MovieServiceProd(networkService: NetworkManager()))
-//        let movie = try? await instance.getSingleMovie(id: 6)
-//        print(movie!.title)
+//        let movies = try? await instance.searchMovies(query: "lord")
+//        print(movies)
+//        
+//       
 //    }
     
     @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
