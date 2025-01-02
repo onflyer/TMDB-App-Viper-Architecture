@@ -13,4 +13,5 @@ protocol MovieService {
     func getTopRatedMovies(page: Int) async throws -> [Movie]
     func getPopularMovies(page: Int) async throws -> [Movie]
     func getSingleMovie(id: Int) async throws -> SingleMovie
+    func searchMovies(query: String) async throws -> [Movie]
 }

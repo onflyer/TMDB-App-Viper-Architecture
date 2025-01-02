@@ -51,6 +51,12 @@ struct MovieServiceMock: MovieService {
         return SingleMovie.mock()
     }
     
+    func searchMovies(query: String) async throws -> [Movie] {
+        try await Task.sleep(for: .seconds(delay))
+        try tryShowError()
+        return Movie.mocks()
+    }
+    
     private func tryShowError() throws {
         if showError {
             throw URLError(.unknown)

@@ -44,4 +44,10 @@ struct MovieServiceProd: MovieService {
         let response: SingleMovie = try await networkService.makeRequest(with: request)
         return response
     }
+    
+    func searchMovies(query: String) async throws -> [Movie] {
+        let request = SearchMoviesRequest.searchMovies(query: query)
+        let response: MovieList = try await networkService.makeRequest(with: request)
+        return response.results
+    }
 }
