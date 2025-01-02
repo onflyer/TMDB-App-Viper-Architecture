@@ -21,6 +21,7 @@ struct HomeView: View {
         .scrollIndicators(.hidden)
         .background(Color(uiColor: .secondarySystemBackground))
         .navigationTitle("Welcome to TMDB")
+        .searchable(text: $presenter.query, prompt: "Search movies")
         .task {
             await presenter.loadNowPlayingMovies()
         }

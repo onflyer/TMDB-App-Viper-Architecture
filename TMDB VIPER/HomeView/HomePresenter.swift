@@ -15,6 +15,7 @@ class HomePresenter {
     
     var page: Int = 1
     var isLoading = false
+    var query: String = ""
     
     private(set) var nowPlayingMovies: [Movie] = []
     private(set) var upcomingMovies: [Movie] = []
