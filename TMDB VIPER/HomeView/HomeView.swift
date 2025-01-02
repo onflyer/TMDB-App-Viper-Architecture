@@ -24,6 +24,7 @@ struct HomeView: View {
                         SearchCellView(posterUrlString: movie.posterURLString, title: movie.title ?? "No title", releaseDate: movie.releaseDate ?? "No release date", ratingText: movie.ratingText ?? "No rating")
                     }
                 }
+                .listStyle(.plain)
                 .task(id: presenter.query) {
                     await presenter.loadSearchedMovies()
                 }

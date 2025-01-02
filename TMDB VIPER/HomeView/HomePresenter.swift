@@ -83,6 +83,8 @@ class HomePresenter {
             return
         }
         
+        isSearching = !query.isEmpty ? true : false
+        
         do {
             searchedMovies = try await interactor.searchMovies(query: trimmedQuery)
         } catch {
