@@ -7,7 +7,6 @@
 
 import Foundation
 
-@MainActor
 @Observable
 class SearchPresenter {
     let interactor: SearchInteractor

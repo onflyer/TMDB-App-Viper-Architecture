@@ -7,12 +7,19 @@
 
 import SwiftUI
 
+struct SearchViewDelegate {
+    
+}
+
 struct SearchView: View {
+    @State var presenter: SearchPresenter
+    var delegate: SearchViewDelegate
+    
     var body: some View {
         Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
     }
 }
 
 #Preview {
-    SearchView()
+    let builder = CoreBuilder(interactor: CoreInteractor(container: DevPreview.shared.container()))
 }
