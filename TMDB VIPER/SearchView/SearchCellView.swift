@@ -14,9 +14,9 @@ struct SearchCellView: View {
     var ratingText: String
     
     var body: some View {
-        HStack(alignment: .top, spacing: 16) {
+        HStack(alignment: .center, spacing: 16) {
             ImageLoaderView(urlString: posterUrlString, resizingMode: .fit, forceTransitionAnimation: false)
-                .frame(width: 61, height: 92)
+                .frame(width: 60, height: 90)
                 .cornerRadius(8)
                 .shadow(radius: 3)
             

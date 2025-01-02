@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct SearchViewDelegate {
-    
+    var query: String = ""
 }
 
 struct SearchView: View {
@@ -19,6 +19,9 @@ struct SearchView: View {
         List {
             ForEach(presenter.searchedMovies) { movie in
                 SearchCellView(posterUrlString: movie.posterURLString, title: movie.title ?? "No title", releaseDate: movie.releaseDateForrmated ?? "No release date", ratingText: movie.ratingText ?? "No rating")
+            }
+            .task {
+                await presenter.loadSearchedMovies()
             }
         }
     }

@@ -23,7 +23,7 @@ class SearchPresenter {
         self.router = router
     }
     
-    func loadSerchedMovies() async {
+    func loadSearchedMovies() async {
         let trimmedQuery = query.trimmingCharacters(in: .whitespacesAndNewlines)
         
         guard !query.isEmpty else {
