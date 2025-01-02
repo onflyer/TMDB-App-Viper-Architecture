@@ -24,7 +24,6 @@ struct HomeView: View {
         .searchable(text: $presenter.query,placement: .navigationBarDrawer(displayMode: .always), prompt: "Search movies") {
             searchableSection
         }
-
         .task {
             await presenter.loadNowPlayingMovies()
         }
@@ -35,6 +34,7 @@ struct HomeView: View {
             await presenter.loadTopRatedMovies()
         }
         .task(id: presenter.query) {
+            
             await presenter.loadSearchedMovies()
         }
     }
@@ -67,7 +67,6 @@ extension HomeView {
         header: {
             Text("Now playing")
         }
-        
     }
     
     var upcomingSection: some View {
@@ -130,12 +129,15 @@ extension HomeView {
     var searchableSection: some View {
         ForEach(presenter.searchedMovies) { movie in
             SearchCellView(posterUrlString: movie.posterURLString, title: movie.title ?? "No title", releaseDate: movie.releaseDate ?? "No release date", ratingText: movie.ratingText ?? "No rating")
+                .anyButton {
+                    presenter.onMoviePressed(id: movie.id)
+                }
         }
         .listStyle(.plain)
     }
 }
 
-#Preview {
+#Preview("Dev preview") {
     let builder = CoreBuilder(interactor: CoreInteractor(container: DevPreview.shared.container()))
     return builder.homeView()
 }
