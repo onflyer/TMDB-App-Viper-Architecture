@@ -11,7 +11,7 @@ import SDWebImageSwiftUI
 
 struct ImageLoaderView: View {
     
-    var urlString: String = "ss"
+    var urlString: String = Constants.randomImage
     var resizingMode: ContentMode = .fill
     var forceTransitionAnimation: Bool = false
     

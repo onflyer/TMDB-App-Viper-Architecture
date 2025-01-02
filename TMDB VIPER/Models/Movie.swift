@@ -47,7 +47,7 @@ struct Movie: Identifiable, Codable {
         return "https://image.tmdb.org/t/p/w500\(unwrappedUrl)"
     }
     
-    var yearText: String? {
+    var releaseDateForrmated: String? {
         guard let unwrappedReleaseDate = releaseDate else { return nil }
         guard let date = Movie.dateFormatter.date(from: unwrappedReleaseDate
         ) else {
@@ -109,7 +109,7 @@ extension Movie {
                 originalTitle: "Original Title 1",
                 overview: "This is the overview for movie 1.",
                 popularity: 123.45,
-                posterPath: "\(path)t5zCBSB5xMDKcDqe91qahCOUYVV.jpg",
+                posterPath: "\(path)A4j8S6moJS2zNtRR8oWF08gRnL5.jpg",
                 releaseDate: "2024-03-14",
                 title: "Mock Movie 1",
                 video: false,
@@ -124,7 +124,7 @@ extension Movie {
                 originalTitle: "Original Title 2",
                 overview: "This is the overview for movie 2.",
                 popularity: 234.56,
-                posterPath: "\(path)t5zCBSB5xMDKcDqe91qahCOUYVV.jpg",
+                posterPath: "\(path)A4j8S6moJS2zNtRR8oWF08gRnL5.jpg",
                 releaseDate: "2023-11-10",
                 title: "Mock Movie 2",
                 video: false,
@@ -139,7 +139,7 @@ extension Movie {
                 originalTitle: "Original Title 3",
                 overview: "This is the overview for movie 3.",
                 popularity: 87.65,
-                posterPath: "\(path)t5zCBSB5xMDKcDqe91qahCOUYVV.jpg",
+                posterPath: "\(path)A4j8S6moJS2zNtRR8oWF08gRnL5.jpg",
                 releaseDate: "2022-05-20",
                 title: "Mock Movie 3",
                 video: false,
