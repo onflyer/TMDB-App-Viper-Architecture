@@ -16,6 +16,7 @@ struct HomeView: View {
             nowPlayingSection
             upcomingSection
             topRatedSection
+            popularSection
         }
         .listStyle(.plain)
         .scrollIndicators(.hidden)
@@ -33,8 +34,10 @@ struct HomeView: View {
         .task {
             await presenter.loadTopRatedMovies()
         }
+        .task{
+            await presenter.loadPopularMovies()
+        }
         .task(id: presenter.query) {
-            
             await presenter.loadSearchedMovies()
         }
     }
@@ -53,6 +56,9 @@ extension HomeView {
                                 }
                                 .shadow(color: .secondary, radius: 3)
                                 .frame(width: 170)
+                                .task {
+                                    await presenter.loadMoreNowPlayingMovies(currentItem: movie)
+                                }
                         }
                     }
                     .padding(.horizontal)
@@ -81,6 +87,9 @@ extension HomeView {
                                 }
                                 .shadow(color: .secondary, radius: 3)
                                 .frame(width: 300)
+                                .task {
+                                    await presenter.loadMoreUpcomingMovies(currentItem: movie)
+                                }
                         }
                     }
                     .padding(.horizontal)
@@ -109,6 +118,9 @@ extension HomeView {
                                 }
                                 .shadow(color: .secondary, radius: 3)
                                 .frame(width: 170)
+                                .task {
+                                    await presenter.loadMoreTopRatedMovies(currentItem: movie)
+                                }
                         }
                     }
                     .padding(.horizontal)
@@ -125,6 +137,38 @@ extension HomeView {
         }
         
     }
+    
+    var popularSection: some View {
+        Section {
+            ZStack {
+                ScrollView(.horizontal) {
+                    LazyHStack (spacing: 15) {
+                        ForEach(presenter.popularMovies) { movie in
+                            MovieCellView(title: movie.title ?? "N/A", imageName: movie.posterURLString)
+                                .anyButton {
+                                    presenter.onMoviePressed(id: movie.id)
+                                }
+                                .shadow(color: .secondary, radius: 3)
+                                .frame(width: 300)
+                                .task {
+                                    await presenter.loadMorePopularMovies(currentItem: movie)
+                                }
+                        }
+                    }
+                    .padding(.horizontal)
+                    .padding(.vertical, 5)
+                }
+                .frame(height: 150)
+                .scrollIndicators(.hidden)
+            }
+            .listSectionSeparator(.hidden)
+            .removeListRowFormatting()
+        }
+        header: {
+            Text("Popular")
+        }
+    }
+
     
     var searchableSection: some View {
         ForEach(presenter.searchedMovies) { movie in

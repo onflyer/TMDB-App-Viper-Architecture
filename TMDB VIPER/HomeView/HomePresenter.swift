@@ -30,11 +30,11 @@ class HomePresenter {
     
     @MainActor
     func loadNowPlayingMovies() async {
-        guard nowPlayingMovies.isEmpty else { return }
         
         do {
             isLoading = true
-            nowPlayingMovies = try await interactor.getNowPlayingMovies(page: page)
+            let results = try await interactor.getNowPlayingMovies(page: page)
+            nowPlayingMovies.append(contentsOf: results)
             isLoading = false
         } catch {
             print(error)
@@ -43,10 +43,10 @@ class HomePresenter {
     
     @MainActor
     func loadUpcomingMovies() async {
-        guard upcomingMovies.isEmpty else { return }
         
         do {
-            upcomingMovies = try await interactor.getUpcomingMovies(page: page)
+            let results = try await interactor.getUpcomingMovies(page: page)
+            upcomingMovies.append(contentsOf: results)
         } catch {
             print(error)
         }
@@ -54,10 +54,10 @@ class HomePresenter {
     
     @MainActor
     func loadTopRatedMovies() async {
-        guard topRatedMovies.isEmpty else { return }
         
         do {
-            topRatedMovies = try await interactor.getTopRatedMovies(page: page)
+            let results = try await interactor.getTopRatedMovies(page: page)
+            topRatedMovies.append(contentsOf: results)
         } catch {
             print(error)
         }
@@ -65,10 +65,10 @@ class HomePresenter {
     
     @MainActor
     func loadPopularMovies() async {
-        guard topRatedMovies.isEmpty else { return }
         
         do {
-            popularMovies = try await interactor.getPopularMovies(page: page)
+            let results = try await interactor.getPopularMovies(page: page)
+            popularMovies.append(contentsOf: results)
         } catch {
             print(error)
         }
@@ -92,5 +92,29 @@ class HomePresenter {
     func onMoviePressed(id: Int) {
         let delegate = DetailViewDelegate(movieId: id)
         router.showDetailView(delegate: delegate)
+    }
+    
+    func loadMoreNowPlayingMovies(currentItem: Movie) async {
+        guard nowPlayingMovies.last?.id == currentItem.id else {return}
+        page += 1
+        await loadNowPlayingMovies()
+    }
+    
+    func loadMoreUpcomingMovies(currentItem: Movie) async {
+        guard upcomingMovies.last?.id == currentItem.id else {return}
+        page += 1
+        await loadUpcomingMovies()
+    }
+    
+    func loadMoreTopRatedMovies(currentItem: Movie) async {
+        guard topRatedMovies.last?.id == currentItem.id else {return}
+        page += 1
+        await loadTopRatedMovies()
+    }
+    
+    func loadMorePopularMovies(currentItem: Movie) async {
+        guard popularMovies.last?.id == currentItem.id else {return}
+        page += 1
+        await loadPopularMovies()
     }
 }
