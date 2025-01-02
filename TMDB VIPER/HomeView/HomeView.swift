@@ -17,6 +17,18 @@ struct HomeView: View {
             upcomingSection
             topRatedSection
         }
+        .overlay {
+            if presenter.isSearching {
+                List {
+                    ForEach(presenter.searchedMovies) { movie in
+                        SearchCellView(posterUrlString: movie.posterURLString, title: movie.title ?? "No title", releaseDate: movie.releaseDate ?? "No release date", ratingText: movie.ratingText ?? "No rating")
+                    }
+                }
+                .task(id: presenter.query) {
+                    await presenter.loadSearchedMovies()
+                }
+            }
+        }
         .listStyle(.plain)
         .scrollIndicators(.hidden)
         .background(Color(uiColor: .secondarySystemBackground))
