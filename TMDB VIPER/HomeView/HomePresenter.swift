@@ -7,7 +7,6 @@
 
 import Foundation
 
-@MainActor
 @Observable
 class HomePresenter {
     
@@ -16,21 +15,18 @@ class HomePresenter {
     
     var page: Int = 1
     var isLoading = false
-    var isSearching = false
-    var query: String = ""
     
     private(set) var nowPlayingMovies: [Movie] = []
     private(set) var upcomingMovies: [Movie] = []
     private(set) var topRatedMovies: [Movie] = []
     private(set) var popularMovies: [Movie] = []
-    private(set) var searchedMovies: [Movie] = []
-
     
     init(interactor: HomeInteractor, router: HomeRouter) {
         self.interactor = interactor
         self.router = router
     }
     
+    @MainActor
     func loadNowPlayingMovies() async {
         guard nowPlayingMovies.isEmpty else { return }
         
@@ -43,6 +39,7 @@ class HomePresenter {
         }
     }
     
+    @MainActor
     func loadUpcomingMovies() async {
         guard upcomingMovies.isEmpty else { return }
         
@@ -53,6 +50,7 @@ class HomePresenter {
         }
     }
     
+    @MainActor
     func loadTopRatedMovies() async {
         guard topRatedMovies.isEmpty else { return }
         
@@ -63,26 +61,12 @@ class HomePresenter {
         }
     }
     
+    @MainActor
     func loadPopularMovies() async {
         guard topRatedMovies.isEmpty else { return }
         
         do {
             popularMovies = try await interactor.getPopularMovies(page: page)
-        } catch {
-            print(error)
-        }
-    }
-    
-    func loadSerchedMovies() async {
-        let trimmedQuery = query.trimmingCharacters(in: .whitespacesAndNewlines)
-        
-        guard !query.isEmpty else {
-            searchedMovies.removeAll()
-            return
-        }
-        
-        do {
-            searchedMovies = try await interactor.searchMovies(query: trimmedQuery)
         } catch {
             print(error)
         }
