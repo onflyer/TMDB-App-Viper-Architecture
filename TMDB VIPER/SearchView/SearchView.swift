@@ -16,13 +16,19 @@ struct SearchView: View {
     var delegate: SearchViewDelegate
     
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        List {
+            ForEach(presenter.searchedMovies) { movie in
+                SearchCellView(posterUrlString: movie.posterURLString, title: movie.title ?? "No title", releaseDate: movie.releaseDateForrmated ?? "No release date", ratingText: movie.ratingText ?? "No rating")
+            }
+        }
     }
 }
 
 #Preview {
-    let builder = CoreBuilder(interactor: CoreInteractor(container: DevPreview.shared.container()))
-    RouterView { router in
+    let container = DevPreview.shared.container()
+    container.register(MovieManager.self, service: MovieManager(service: MovieServiceMock(delay: 1)))
+    let builder = CoreBuilder(interactor: CoreInteractor(container: container))
+    return RouterView { router in
         builder.searchView(router: router)
     }
 }
