@@ -17,24 +17,14 @@ struct HomeView: View {
             upcomingSection
             topRatedSection
         }
-        .overlay {
-            if presenter.isSearching {
-                List {
-                    ForEach(presenter.searchedMovies) { movie in
-                        SearchCellView(posterUrlString: movie.posterURLString, title: movie.title ?? "No title", releaseDate: movie.releaseDate ?? "No release date", ratingText: movie.ratingText ?? "No rating")
-                    }
-                }
-                .listStyle(.plain)
-                .task(id: presenter.query) {
-                    await presenter.loadSearchedMovies()
-                }
-            }
-        }
         .listStyle(.plain)
         .scrollIndicators(.hidden)
         .background(Color(uiColor: .secondarySystemBackground))
         .navigationTitle("Welcome to TMDB")
-        .searchable(text: $presenter.query, prompt: "Search movies")
+        .searchable(text: $presenter.query,placement: .navigationBarDrawer(displayMode: .always), prompt: "Search movies") {
+            searchableSection
+        }
+
         .task {
             await presenter.loadNowPlayingMovies()
         }
@@ -135,6 +125,13 @@ extension HomeView {
             Text("Top rated")
         }
         
+    }
+    
+    var searchableSection: some View {
+        ForEach(presenter.searchedMovies) { movie in
+            SearchCellView(posterUrlString: movie.posterURLString, title: movie.title ?? "No title", releaseDate: movie.releaseDate ?? "No release date", ratingText: movie.ratingText ?? "No rating")
+        }
+        .listStyle(.plain)
     }
 }
 

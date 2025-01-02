@@ -15,7 +15,6 @@ class HomePresenter {
     
     var page: Int = 1
     var isLoading = false
-    var isSearching = false
     var query: String = ""
     
     private(set) var nowPlayingMovies: [Movie] = []
@@ -82,9 +81,7 @@ class HomePresenter {
             searchedMovies.removeAll()
             return
         }
-        
-        isSearching = !query.isEmpty ? true : false
-        
+            
         do {
             searchedMovies = try await interactor.searchMovies(query: trimmedQuery)
         } catch {
