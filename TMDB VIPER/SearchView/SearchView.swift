@@ -22,4 +22,7 @@ struct SearchView: View {
 
 #Preview {
     let builder = CoreBuilder(interactor: CoreInteractor(container: DevPreview.shared.container()))
+    RouterView { router in
+        builder.searchView(router: router)
+    }
 }
