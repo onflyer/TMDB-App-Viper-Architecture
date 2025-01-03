@@ -15,7 +15,7 @@ struct DetailView: View {
     
     @State var presenter: DetailPresenter
     let delegate: DetailViewDelegate
-
+    
     var body: some View {
         VStack {
             ZStack {
@@ -34,20 +34,28 @@ struct DetailView: View {
                     }
                     .offset(x: 20, y: 90)
             }
-            ScrollView {
-                VStack {
-                    Text(presenter.movie?.title ?? "No title")
-                        .bold()
+            
+            VStack(alignment: .leading) {
+                Text(presenter.movie?.title ?? "No title")
+                    .bold()
+                HStack {
+                    ForEach(presenter.movie?.genres ?? [], content: { genre in
+                        Text(genre.name ?? "No genre")
+                            .font(.caption)
+                            .foregroundStyle(.secondary)
+                    })
                 }
-                .frame(maxWidth: .infinity)
-                .offset(x: 20)
-                .padding(.top, 30)
-                
             }
-            .frame(maxHeight: .infinity)
-            .task {
-                await presenter.loadSingleMovie(id: delegate.movieId)
-            }
+            .padding(.top, 20)
+            .offset(x: 20)
+        }
+        Spacer()
+        VStack {
+            
+        }
+        .frame(maxHeight: .infinity)
+        .task {
+            await presenter.loadSingleMovie(id: delegate.movieId)
         }
     }
 }
