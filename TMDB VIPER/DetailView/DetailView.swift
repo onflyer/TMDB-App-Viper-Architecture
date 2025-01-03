@@ -35,6 +35,13 @@ struct DetailView: View {
                     .offset(x: 20, y: 90)
             }
             ScrollView {
+                VStack {
+                    Text(presenter.movie?.title ?? "No title")
+                        .bold()
+                }
+                .frame(maxWidth: .infinity)
+                .offset(x: 20)
+                .padding(.top, 30)
                 
             }
             .frame(maxHeight: .infinity)
