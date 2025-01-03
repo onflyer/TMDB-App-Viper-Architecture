@@ -17,7 +17,7 @@ struct DetailView: View {
     let delegate: DetailViewDelegate
     
     var body: some View {
-        VStack {
+        VStack(spacing: 0) {
             ZStack {
                 ImageLoaderView(urlString: presenter.movie?.backdropURLString ?? "No image")
                     .aspectRatio(16/9, contentMode: .fit)
@@ -46,14 +46,16 @@ struct DetailView: View {
                     })
                 }
             }
-            .padding(.top, 20)
             .offset(x: 20)
+            .frame(maxWidth: .infinity, maxHeight: 100)
+            .background(.gray)
         }
-        Spacer()
-        VStack {
-            
+        VStack(alignment: .leading) {
+            Text("SSS")
         }
-        .frame(maxHeight: .infinity)
+        .frame(maxWidth: .infinity, alignment: .leading)
+        .padding(.horizontal, 20)
+        .background(.gray)
         .task {
             await presenter.loadSingleMovie(id: delegate.movieId)
         }
