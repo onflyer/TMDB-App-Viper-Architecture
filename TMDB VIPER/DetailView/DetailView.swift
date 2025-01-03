@@ -48,26 +48,33 @@ struct DetailView: View {
             }
             .offset(x: 20)
             .frame(maxWidth: .infinity, maxHeight: 100)
-            .background(.gray)
         }
-        VStack(alignment: .leading) {
-            Text("Release date")
-                .bold()
-            Text(presenter.movie?.releaseDate?.dateFormatter(style: .medium) ?? "No release date")
-                .font(.callout)
-                .foregroundStyle(.secondary)
+        Divider()
+        ScrollView {
+            VStack(alignment: .leading) {
+                Text("Release date")
+                    .bold()
+                Text(presenter.movie?.releaseDate?.dateFormatter(style: .medium) ?? "No release date")
+                    .font(.callout)
+                    .foregroundStyle(.secondary)
+            }
+            .frame(maxWidth: .infinity, alignment: .leading)
+            .padding(.horizontal, 20)
+            .padding(.bottom)
+           
+            VStack(alignment: .leading) {
+                Text("Overwiew")
+                    .bold()
+                Text(presenter.movie?.overview ?? "No desctription")
+                    .foregroundStyle(.secondary)
+            }
+            .frame(maxWidth: .infinity, alignment: .leading)
+            .padding(.horizontal, 20)
         }
-        .frame(maxWidth: .infinity, alignment: .leading)
-        .padding(.horizontal, 20)
-        .background(.gray)
-        VStack(alignment: .leading) {
-            Text("Overwiew")
-                .bold()
-            Text(presenter.movie?.overview ?? "No desctription")
-                .foregroundStyle(.secondary)
-        }
-        .frame(maxWidth: .infinity, alignment: .leading)
-        .padding(.horizontal, 20)
+
+        
+       
+        
         .task {
             await presenter.loadSingleMovie(id: delegate.movieId)
         }
