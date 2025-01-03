@@ -51,11 +51,23 @@ struct DetailView: View {
             .background(.gray)
         }
         VStack(alignment: .leading) {
-            Text("SSS")
+            Text("Release date")
+                .bold()
+            Text(presenter.movie?.releaseDate?.dateFormatter(style: .medium) ?? "No release date")
+                .font(.callout)
+                .foregroundStyle(.secondary)
         }
         .frame(maxWidth: .infinity, alignment: .leading)
         .padding(.horizontal, 20)
         .background(.gray)
+        VStack(alignment: .leading) {
+            Text("Overwiew")
+                .bold()
+            Text(presenter.movie?.overview ?? "No desctription")
+                .foregroundStyle(.secondary)
+        }
+        .frame(maxWidth: .infinity, alignment: .leading)
+        .padding(.horizontal, 20)
         .task {
             await presenter.loadSingleMovie(id: delegate.movieId)
         }
