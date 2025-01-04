@@ -17,5 +17,10 @@ struct CoreRouter {
             builder.detailView(router: router, delegate: delegate)
         }
     }
+    
+    func showTrailerModalView(delegate: TrailersModalDelegate) {
+        
+    }
+    
 
 }

@@ -8,7 +8,7 @@
 import Foundation
 
 protocol DetailRouter {
-    
+    func showTrailerModalView(delegate: TrailersModalDelegate)
 }
 
 extension CoreRouter: DetailRouter {}

@@ -68,6 +68,7 @@
 		30C2EDD12D18B9270058DA88 /* CoreRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30C2EDD02D18B9270058DA88 /* CoreRouter.swift */; };
 		30C2EDD32D18BCD00058DA88 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30C2EDD22D18BCD00058DA88 /* AppDelegate.swift */; };
 		30C2EDD52D18C1E50058DA88 /* ButtonViewModifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30C2EDD42D18C1E50058DA88 /* ButtonViewModifiers.swift */; };
+		30FD05EA2D2947650039A66D /* TrailersModalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30FD05E92D2947650039A66D /* TrailersModalView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -132,6 +133,7 @@
 		30C2EDD02D18B9270058DA88 /* CoreRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreRouter.swift; sourceTree = "<group>"; };
 		30C2EDD22D18BCD00058DA88 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		30C2EDD42D18C1E50058DA88 /* ButtonViewModifiers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonViewModifiers.swift; sourceTree = "<group>"; };
+		30FD05E92D2947650039A66D /* TrailersModalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrailersModalView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -331,6 +333,7 @@
 				30C2ECD12D18AF2C0058DA88 /* RootView */,
 				30C2ECCE2D18AE010058DA88 /* HomeView */,
 				306F5EF02D19E14B002E1583 /* DetailView */,
+				30FD05E82D2947030039A66D /* TrailersModalView */,
 				30C2EABB2D18A2C50058DA88 /* Models */,
 				30C2EAC12D18A2C50058DA88 /* Root */,
 				30C2EAD82D18A2C50058DA88 /* Services */,
@@ -429,6 +432,14 @@
 			path = Routing;
 			sourceTree = "<group>";
 		};
+		30FD05E82D2947030039A66D /* TrailersModalView */ = {
+			isa = PBXGroup;
+			children = (
+				30FD05E92D2947650039A66D /* TrailersModalView.swift */,
+			);
+			path = TrailersModalView;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -506,6 +517,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				30FD05EA2D2947650039A66D /* TrailersModalView.swift in Sources */,
 				30C2EADF2D18A2C50058DA88 /* MovieService.swift in Sources */,
 				30C2EAE02D18A2C50058DA88 /* NetworkManager.swift in Sources */,
 				30C2EAE12D18A2C50058DA88 /* SingleMovie.swift in Sources */,
