@@ -9,6 +9,7 @@ import SwiftUI
 
 struct TrailersModalDelegate {
     var movie: SingleMovie = .mock()
+    var onDismiss: () -> Void = {}
 }
 
 struct TrailersModalView: View {
