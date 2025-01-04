@@ -24,6 +24,23 @@ struct DetailView: View {
                     .navigationTitle(presenter.movie?.title ?? "No title")
                     .navigationBarTitleDisplayMode(.inline)
             }
+            .overlay(alignment: .bottomTrailing) {
+                HStack {
+                    Text("Watch trailer")
+                        
+                    Image(systemName: "play.fill")
+                }
+                .bold()
+                .foregroundStyle(.secondary)
+                .tappableBackground()
+                .padding()
+                .background(.regularMaterial)
+                .clipShape(RoundedRectangle(cornerRadius: 18))
+                .anyButton() {
+                    
+                }
+                .padding()
+            }
             .zIndex(1)
             .overlay(alignment: .bottomLeading) {
                 MovieCellView(title: "", imageName: presenter.movie?.posterURLString ?? "No image")
