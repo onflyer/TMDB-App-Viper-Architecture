@@ -32,9 +32,7 @@ struct CoreBuilder {
     }
     
     func trailerModalView(movie: SingleMovie, onDismiss: @escaping () -> Void) -> some View {
-        let delegate = TrailersModalDelegate(movie: movie) {
-            onDismiss()
-        }
+        let delegate = TrailersModalDelegate(movie: movie, onDismiss: onDismiss)
         return trailerModalView(delegate: delegate)
     }
     

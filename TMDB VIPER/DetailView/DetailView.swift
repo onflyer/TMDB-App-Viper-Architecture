@@ -36,8 +36,8 @@ struct DetailView: View {
                 .padding()
                 .background(.regularMaterial)
                 .clipShape(RoundedRectangle(cornerRadius: 18))
-                .anyButton() {
-                    
+                .anyButton {
+                    presenter.onWatchTrailerPressed()
                 }
                 .padding()
             }
