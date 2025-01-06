@@ -8,7 +8,8 @@
 import Foundation
 
 protocol DetailRouter {
-    func showTrailerModalView(delegate: TrailersModalDelegate)
+    func showTrailerModalView(movie: SingleMovie, onXMarkPressed: @escaping () -> Void)
+    func dismissModal()
 }
 
 extension CoreRouter: DetailRouter {}

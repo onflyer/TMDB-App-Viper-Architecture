@@ -27,4 +27,11 @@ class DetailPresenter {
         }
     }
     
+    func onWatchTrailerPressed() {
+        guard let movie else { return }
+        router.showTrailerModalView(movie: movie) {
+            self.router.dismissModal()
+        }
+    }
+    
 }
