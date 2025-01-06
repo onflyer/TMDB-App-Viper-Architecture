@@ -16,33 +16,44 @@ struct TrailersModalView: View {
     let delegate: TrailersModalDelegate
     
     var body: some View {
-        ZStack(alignment: .topTrailing) {
-            List {
-                ForEach(delegate.movie.videos?.results ?? [] ) { trailer in
-                    Link(destination: trailer.youtubeURL!, label: {
-                        HStack {
-                            Text(trailer.name ?? "N/A")
-                                
-                                .multilineTextAlignment(.leading)
-                            Spacer()
-                            Image(systemName: "play.circle.fill")
-                        }
-                    })
-                    
-                }
+        VStack(spacing: 0) {
+            ZStack {
+                Image(systemName: "xmark.circle.fill")
+                    .tappableBackground()
+                    .anyButton {
+                        delegate.onDismiss()
+                    }
+                    .padding()
             }
-            Image(systemName: "xmark.circle.fill")
-                .tappableBackground()
-                .anyButton {
-                    delegate.onDismiss()
+            .frame(maxWidth: .infinity, alignment: .trailing)
+            .background(Color(uiColor: .secondarySystemBackground))
+            ScrollView {
+                VStack {
+                    ForEach(delegate.movie.videos?.results ?? [] ) { trailer in
+                        Link(destination: trailer.youtubeURL!, label: {
+                            HStack {
+                                Text(trailer.name ?? "N/A")
+                                
+                                    .multilineTextAlignment(.leading)
+                                Spacer()
+                                Image(systemName: "play.circle.fill")
+                            }
+                        })
+                        .padding(.horizontal)
+                        Divider()
+                        
+                    }
                 }
-                .padding(5)
-            
+                
+            }
+            .background(Color(uiColor: .secondarySystemBackground))
+
         }
         .foregroundColor(.tmdb)
         .clipShape(RoundedRectangle(cornerRadius: 16))
         .padding(.vertical ,150)
         .padding(.horizontal, 50)
+        
         
         
     }
