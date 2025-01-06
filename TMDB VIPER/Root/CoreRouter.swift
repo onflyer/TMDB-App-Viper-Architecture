@@ -19,7 +19,7 @@ struct CoreRouter {
     }
     
     func showTrailerModalView(movie: SingleMovie, onXMarkPressed: @escaping () -> Void) {
-        router.showModal(backgroundColor: .black.opacity(0.3), transition: .scale) {
+        router.showModal(backgroundColor: .black.opacity(0.3), transition: .identity) {
             builder.trailerModalView(movie: movie, onDismiss: onXMarkPressed)
         }
     }

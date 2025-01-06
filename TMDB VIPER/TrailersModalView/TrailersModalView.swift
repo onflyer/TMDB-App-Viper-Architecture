@@ -27,8 +27,8 @@ struct TrailersModalView: View {
             }
             .frame(maxWidth: .infinity, alignment: .trailing)
             .background(Color(uiColor: .secondarySystemBackground))
-            ScrollView {
-                VStack {
+            
+            List {
                     ForEach(delegate.movie.videos?.results ?? [] ) { trailer in
                         Link(destination: trailer.youtubeURL!, label: {
                             HStack {
@@ -39,23 +39,16 @@ struct TrailersModalView: View {
                                 Image(systemName: "play.circle.fill")
                             }
                         })
-                        .padding(.horizontal)
-                        Divider()
+                       
                         
                     }
-                }
                 
             }
             .background(Color(uiColor: .secondarySystemBackground))
-
         }
         .foregroundColor(.tmdb)
         .clipShape(RoundedRectangle(cornerRadius: 16))
-        .padding(.vertical ,150)
-        .padding(.horizontal, 50)
-        
-        
-        
+        .frame(width: 300, height: 400)
     }
 }
 
