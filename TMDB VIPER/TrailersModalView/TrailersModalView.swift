@@ -48,7 +48,8 @@ struct TrailersModalView: View {
         }
         .foregroundColor(.tmdb)
         .clipShape(RoundedRectangle(cornerRadius: 16))
-        .frame(width: 300, height: 400)
+        .padding(.vertical, 150)
+        .padding(.horizontal, 50)
     }
 }
 
