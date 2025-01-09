@@ -75,7 +75,6 @@ class HomePresenter {
     }
     
     func loadSearchedMovies() async {
-        let trimmedQuery = query.trimmingCharacters(in: .whitespacesAndNewlines)
         
         guard !query.isEmpty else {
             searchedMovies.removeAll()
@@ -83,7 +82,7 @@ class HomePresenter {
         }
             
         do {
-            searchedMovies = try await interactor.searchMovies(query: trimmedQuery)
+            searchedMovies = try await interactor.searchMovies(query: query)
         } catch {
             print(error)
         }

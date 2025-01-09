@@ -71,7 +71,7 @@ struct DetailView: View {
             VStack(alignment: .leading) {
                 Text("Release date")
                     .bold()
-                Text(presenter.movie?.releaseDate?.dateFormatter(style: .medium) ?? "No release date")
+                Text(presenter.movie?.releaseDate ?? "No release date")
                     .font(.callout)
                     .foregroundStyle(.secondary)
             }
