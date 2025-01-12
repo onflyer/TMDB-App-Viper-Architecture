@@ -7,11 +7,14 @@
 
 import Foundation
 
+@MainActor
 struct CoreInteractor {
     let movieManager: MovieManager
+    let favoritesManager: FavoritesManager
     
     init(container: DependencyContainer) {
         self.movieManager = container.resolve(MovieManager.self)!
+        self.favoritesManager = container.resolve(FavoritesManager.self)!
     }
     
     func getNowPlayingMovies(page: Int) async throws -> [Movie] {
@@ -38,6 +41,22 @@ struct CoreInteractor {
     
     func searchMovies(query: String) async throws -> [Movie] {
         try await movieManager.searchMovies(query: query)
+    }
+    
+    func getFavorites() throws -> [SingleMovie] {
+        try favoritesManager.getFavorites()
+    }
+    
+    func addToFavorites(movie: SingleMovie) throws {
+        try favoritesManager.addToFavorites(movie: movie)
+    }
+    
+    func isFavorite(movie: SingleMovie) throws -> Bool {
+        try favoritesManager.isFavorite(movie: movie)
+    }
+    
+    func removeFavorite(movie: SingleMovie) throws {
+        try favoritesManager.removeFavorite(movie: movie)
     }
 
 }
