@@ -34,4 +34,13 @@ class DetailPresenter {
         }
     }
     
+    func addToFavorites() {
+        guard let movie else { return }
+        do {
+            try interactor.addToFavorites(movie: movie)
+        } catch {
+            print(error)
+        }
+    }
+    
 }
