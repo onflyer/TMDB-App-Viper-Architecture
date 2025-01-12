@@ -46,7 +46,7 @@ struct TrailersModalView: View {
                 .anyButton {
                     delegate.onDismiss()
                 }
-                .offset(x: -50, y: 110)
+                .offset(x: -50, y: 125)
         }
         
     }
