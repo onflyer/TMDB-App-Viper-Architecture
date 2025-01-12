@@ -9,8 +9,8 @@ import Foundation
 
 @MainActor
 protocol FavoriteMoviesService {
-    func getFavorites() throws -> [Movie]
-    func isFavorite(movie: Movie) throws -> Bool
-    func addToFavorites(movie: Movie) throws
-    func removeFavorite(movie: Movie) throws
+    func getFavorites() throws -> [SingleMovie]
+    func isFavorite(movie: SingleMovie) throws -> Bool
+    func addToFavorites(movie: SingleMovie) throws
+    func removeFavorite(movie: SingleMovie) throws
 }

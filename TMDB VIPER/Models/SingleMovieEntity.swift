@@ -9,14 +9,14 @@ import SwiftData
 import SwiftUI
 
 @Model
-class MovieEntity {
+class SingleMovieEntity {
     var adult: Bool?
     var backdropPath: String?
     var id: Int
     var originalTitle: String?
     var overview: String?
     var popularity: Double?
-    var posterPath: String
+    var posterPath: String?
     var releaseDate: String?
     var title: String?
     var video: Bool?
@@ -24,7 +24,7 @@ class MovieEntity {
     var voteCount: Int?
     var dateAdded: Date
     
-    init (from model: Movie) {
+    init (from model: SingleMovie) {
         self.adult = model.adult
         self.backdropPath = model.backdropPath
         self.id = model.id
@@ -41,22 +41,8 @@ class MovieEntity {
         
     }
     
-    func toModel() -> Movie {
-        Movie(
-            adult: adult,
-            backdropPath: backdropPath,
-            genreIDS: nil,
-            id: id,
-            originalTitle: originalTitle,
-            overview: overview,
-            popularity: popularity,
-            posterPath: posterPath,
-            releaseDate: releaseDate,
-            title: title,
-            video: video,
-            voteAverage: voteAverage,
-            voteCount: voteCount
-        )
+    func toModel() -> SingleMovie {
+        SingleMovie(adult: adult, backdropPath: backdropPath, budget: nil, genres: nil, homepage: nil, id: id, imdbID: nil, originalLanguage: nil, originalTitle: originalTitle, overview: overview, popularity: popularity, posterPath: posterPath, releaseDate: releaseDate, revenue: nil, runtime: nil, status: nil, tagline: nil, title: title, video: nil, voteAverage: voteAverage, voteCount: voteCount, videos: nil, credits: nil)
     }
     
 }

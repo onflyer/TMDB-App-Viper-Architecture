@@ -18,31 +18,31 @@ struct SwiftDataFavoriteMoviesServiceProd: FavoriteMoviesService {
     }
     
     init() {
-        self.container = try! ModelContainer(for: MovieEntity.self)
+        self.container = try! ModelContainer(for: SingleMovieEntity.self)
     }
     
-    func getFavorites() throws -> [Movie] {
-        let descriptor = FetchDescriptor<MovieEntity>(sortBy: [SortDescriptor(\.dateAdded, order: .reverse)])
+    func getFavorites() throws -> [SingleMovie] {
+        let descriptor = FetchDescriptor<SingleMovieEntity>(sortBy: [SortDescriptor(\.dateAdded, order: .reverse)])
         let entities = try mainContext.fetch(descriptor)
         return entities.map({ $0.toModel() })
     }
     
-    func addToFavorites(movie: Movie) throws {
-        let entity = MovieEntity(from: movie)
+    func addToFavorites(movie: SingleMovie) throws {
+        let entity = SingleMovieEntity(from: movie)
         mainContext.insert(entity)
         try mainContext.save()
     }
     
-    func isFavorite(movie: Movie) throws -> Bool {
-        let descriptor = FetchDescriptor<MovieEntity>(predicate: #Predicate { movieEntity in
+    func isFavorite(movie: SingleMovie) throws -> Bool {
+        let descriptor = FetchDescriptor<SingleMovieEntity>(predicate: #Predicate { movieEntity in
             movieEntity.id == movie.id
         })
         let entities = try mainContext.fetch(descriptor)
         return !entities.isEmpty
     }
     
-    func removeFavorite(movie: Movie) throws {
-        let descriptor = FetchDescriptor<MovieEntity>(predicate: #Predicate { movieEntity in
+    func removeFavorite(movie: SingleMovie) throws {
+        let descriptor = FetchDescriptor<SingleMovieEntity>(predicate: #Predicate { movieEntity in
             movieEntity.id == movie.id
         })
         let entities = try mainContext.fetch(descriptor)

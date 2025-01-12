@@ -9,25 +9,25 @@ import Foundation
 
 struct SwiftDataFavoriteMoviesMock: FavoriteMoviesService {
     
-    var movies: [Movie]
+    var movies: [SingleMovie]
     
-    init(movies: [Movie] = Movie.mocks()) {
+    init(movies: [SingleMovie] = SingleMovie.mocks()) {
         self.movies = movies
     }
     
-    func getFavorites() throws -> [Movie] {
+    func getFavorites() throws -> [SingleMovie] {
         movies
     }
     
-    func isFavorite(movie: Movie) throws -> Bool {
+    func isFavorite(movie: SingleMovie) throws -> Bool {
         movies.first?.id == movie.id
     }
     
-    func addToFavorites(movie: Movie) throws {
+    func addToFavorites(movie: SingleMovie) throws {
         
     }
     
-    func removeFavorite(movie: Movie) throws {
+    func removeFavorite(movie: SingleMovie) throws {
         
     }
     

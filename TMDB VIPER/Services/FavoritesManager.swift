@@ -16,19 +16,19 @@ class FavoritesManager {
         self.service = service
     }
     
-    func getFavorites() throws -> [Movie] {
+    func getFavorites() throws -> [SingleMovie] {
         try service.getFavorites()
     }
     
-    func isFavorite(movie: Movie) throws -> Bool {
+    func isFavorite(movie: SingleMovie) throws -> Bool {
         try service.isFavorite(movie: movie)
     }
     
-    func addToFavorites(movie: Movie) throws {
+    func addToFavorites(movie: SingleMovie) throws {
         try service.addToFavorites(movie: movie)
     }
     
-    func removeFavorite(movie: Movie) throws {
+    func removeFavorite(movie: SingleMovie) throws {
         try service.removeFavorite(movie: movie)
     }
     
