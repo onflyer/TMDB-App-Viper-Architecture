@@ -17,32 +17,20 @@ struct TrailersModalView: View {
     
     var body: some View {
         VStack(spacing: 0) {
-//            ZStack {
-//                Image(systemName: "xmark.circle.fill")
-//                    .tappableBackground()
-//                    .anyButton {
-//                        delegate.onDismiss()
-//                    }
-//                    .padding()
-//            }
-//            .frame(maxWidth: .infinity, alignment: .trailing)
-//            .background(.ultraThinMaterial)
-            
             List {
-                
-                    ForEach(delegate.movie.videos?.results ?? [] ) { trailer in
-                        Link(destination: trailer.youtubeURL!, label: {
-                            HStack {
-                                Text(trailer.name ?? "N/A")
-                                
-                                    .multilineTextAlignment(.leading)
-                                Spacer()
-                                Image(systemName: "play.circle.fill")
-                            }
-                        })
-                       
-                        .listRowBackground(Color.clear)
-                    }
+                ForEach(delegate.movie.videos?.results ?? [] ) { trailer in
+                    Link(destination: trailer.youtubeURL!, label: {
+                        HStack {
+                            Text(trailer.name ?? "N/A")
+                            
+                                .multilineTextAlignment(.leading)
+                            Spacer()
+                            Image(systemName: "play.circle.fill")
+                        }
+                        
+                    })
+                    .listRowBackground(Color.clear)
+                }
             }
             .scrollContentBackground(.hidden)
             .background(.ultraThinMaterial)
