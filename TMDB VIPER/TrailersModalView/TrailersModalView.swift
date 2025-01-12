@@ -17,18 +17,19 @@ struct TrailersModalView: View {
     
     var body: some View {
         VStack(spacing: 0) {
-            ZStack {
-                Image(systemName: "xmark.circle.fill")
-                    .tappableBackground()
-                    .anyButton {
-                        delegate.onDismiss()
-                    }
-                    .padding()
-            }
-            .frame(maxWidth: .infinity, alignment: .trailing)
-            .background(Color(uiColor: .secondarySystemBackground))
+//            ZStack {
+//                Image(systemName: "xmark.circle.fill")
+//                    .tappableBackground()
+//                    .anyButton {
+//                        delegate.onDismiss()
+//                    }
+//                    .padding()
+//            }
+//            .frame(maxWidth: .infinity, alignment: .trailing)
+//            .background(.ultraThinMaterial)
             
             List {
+                
                     ForEach(delegate.movie.videos?.results ?? [] ) { trailer in
                         Link(destination: trailer.youtubeURL!, label: {
                             HStack {
@@ -40,16 +41,26 @@ struct TrailersModalView: View {
                             }
                         })
                        
-                        
+                        .listRowBackground(Color.clear)
                     }
-                
             }
-            .background(Color(uiColor: .secondarySystemBackground))
+            .scrollContentBackground(.hidden)
+            .background(.ultraThinMaterial)
         }
-        .foregroundColor(.tmdb)
+        .foregroundColor(.primary)
         .clipShape(RoundedRectangle(cornerRadius: 16))
         .padding(.vertical, 150)
         .padding(.horizontal, 50)
+        
+        .overlay(alignment: .topTrailing) {
+            Image(systemName: "xmark.circle.fill")
+                .tappableBackground()
+                .anyButton {
+                    delegate.onDismiss()
+                }
+                .offset(x: -50, y: 110)
+        }
+        
     }
 }
 
