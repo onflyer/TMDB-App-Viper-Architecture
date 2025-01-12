@@ -7,7 +7,8 @@
 
 import Foundation
 
-protocol LocalFavoriteMoviesDataSourceProtocol {
+@MainActor
+protocol LocalMoviePersistenceProtocol {
     func getFavorites() throws -> [Movie]
     func isFavorite(movie: Movie) throws -> Bool
     func addToFavorites(movie: Movie) async throws

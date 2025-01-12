@@ -6,6 +6,7 @@
 //
 
 import SwiftData
+import SwiftUI
 
 @Model
 class MovieEntity {
@@ -21,6 +22,7 @@ class MovieEntity {
     var video: Bool?
     var voteAverage: Double?
     var voteCount: Int?
+    var dateAdded: Date
     
     init (from model: Movie) {
         self.adult = model.adult
@@ -35,6 +37,7 @@ class MovieEntity {
         self.video = model.video
         self.voteAverage = model.voteAverage
         self.voteCount = model.voteCount
+        self.dateAdded = .now
         
     }
     

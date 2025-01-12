@@ -9,7 +9,7 @@ import Foundation
 
 class MovieManager: MovieService {
 
-    let service: MovieService
+    let service: MovieService 
     
     init(service: MovieService) {
         self.service = service
