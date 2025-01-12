@@ -11,6 +11,6 @@ import Foundation
 protocol FavoriteMoviesService {
     func getFavorites() throws -> [Movie]
     func isFavorite(movie: Movie) throws -> Bool
-    func addToFavorites(movie: Movie) async throws
+    func addToFavorites(movie: Movie) throws
     func removeFavorite(movie: Movie) throws
 }

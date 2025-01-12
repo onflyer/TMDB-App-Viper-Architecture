@@ -23,7 +23,7 @@ struct SwiftDataFavoriteMoviesMock: FavoriteMoviesService {
         true
     }
     
-    func addToFavorites(movie: Movie) async throws {
+    func addToFavorites(movie: Movie) throws {
         
     }
     

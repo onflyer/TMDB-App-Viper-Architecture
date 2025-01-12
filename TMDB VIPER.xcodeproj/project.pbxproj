@@ -73,6 +73,7 @@
 		30FD09BE2D33C6470039A66D /* MovieEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30FD09BD2D33C6470039A66D /* MovieEntity.swift */; };
 		30FD09C02D33CCF80039A66D /* SwiftDataFavoriteMoviesServiceProd.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30FD09BF2D33CCF80039A66D /* SwiftDataFavoriteMoviesServiceProd.swift */; };
 		30FD09C22D33E59E0039A66D /* SwiftDataFavoriteMoviesMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30FD09C12D33E59E0039A66D /* SwiftDataFavoriteMoviesMock.swift */; };
+		30FD09C42D33E70D0039A66D /* FavoritesManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30FD09C32D33E70D0039A66D /* FavoritesManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -142,6 +143,7 @@
 		30FD09BD2D33C6470039A66D /* MovieEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieEntity.swift; sourceTree = "<group>"; };
 		30FD09BF2D33CCF80039A66D /* SwiftDataFavoriteMoviesServiceProd.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftDataFavoriteMoviesServiceProd.swift; sourceTree = "<group>"; };
 		30FD09C12D33E59E0039A66D /* SwiftDataFavoriteMoviesMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftDataFavoriteMoviesMock.swift; sourceTree = "<group>"; };
+		30FD09C32D33E70D0039A66D /* FavoritesManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -315,6 +317,7 @@
 				30C2EAD52D18A2C50058DA88 /* Network */,
 				30C2EAD72D18A2C50058DA88 /* NetworkManager.swift */,
 				30C2EAD62D18A2C50058DA88 /* MovieManager.swift */,
+				30FD09C32D33E70D0039A66D /* FavoritesManager.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -568,6 +571,7 @@
 				30FD09C22D33E59E0039A66D /* SwiftDataFavoriteMoviesMock.swift in Sources */,
 				306F5EF22D19E163002E1583 /* DetailView.swift in Sources */,
 				30C2EDCB2D18B8700058DA88 /* View+EXT.swift in Sources */,
+				30FD09C42D33E70D0039A66D /* FavoritesManager.swift in Sources */,
 				30C2EDCC2D18B8700058DA88 /* AlertType.swift in Sources */,
 				30C2EDD12D18B9270058DA88 /* CoreRouter.swift in Sources */,
 				30C2EDCD2D18B8700058DA88 /* AnyAppAlert.swift in Sources */,
