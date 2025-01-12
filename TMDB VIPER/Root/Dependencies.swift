@@ -7,16 +7,20 @@
 
 import SwiftUI
 
+@MainActor
 struct Dependencies {
     let container: DependencyContainer
     let movieManager: MovieManager
+    let favoritesManager: FavoritesManager
     
     init() {
         let networkManager = NetworkManager()
         movieManager = MovieManager(service: MovieServiceProd(networkService: networkManager))
+        favoritesManager = FavoritesManager(service: SwiftDataFavoriteMoviesServiceProd())
         
         let container = DependencyContainer()
-        container.register(MovieManager.self, service: MovieManager(service: MovieServiceProd(networkService: networkManager)))
+        container.register(MovieManager.self, service: movieManager)
+        container.register(FavoritesManager.self, service: favoritesManager)
         self.container = container
     }
 }
