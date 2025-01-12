@@ -63,8 +63,8 @@ struct DetailView: View {
                     })
                 }
             }
-            .offset(x: 20)
-            .frame(maxWidth: .infinity, maxHeight: 100)
+            .padding(.leading, 160)
+            .frame(maxWidth: .infinity, maxHeight: 100, alignment: .leading)
         }
         Divider()
         ScrollView {
