@@ -7,7 +7,7 @@
 
 import Foundation
 
-protocol MovieService {
+protocol MoviesService {
     func getNowPlayingMovies(page: Int) async throws -> [Movie]
     func getUpcomingMovies(page: Int) async throws -> [Movie]
     func getTopRatedMovies(page: Int) async throws -> [Movie]

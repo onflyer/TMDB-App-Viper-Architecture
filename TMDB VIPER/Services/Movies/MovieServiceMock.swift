@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct MovieServiceMock: MovieService {
+struct MovieServiceMock: MoviesService {
     
     let movies: [Movie]
     let singleMovie: SingleMovie

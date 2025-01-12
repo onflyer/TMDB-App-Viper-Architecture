@@ -7,11 +7,11 @@
 
 import Foundation
 
-class MovieManager: MovieService {
+class MovieManager {
 
-    let service: MovieService 
+    let service: MoviesService
     
-    init(service: MovieService) {
+    init(service: MoviesService) {
         self.service = service
     }
     

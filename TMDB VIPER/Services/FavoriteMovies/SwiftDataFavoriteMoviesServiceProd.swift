@@ -9,7 +9,7 @@ import SwiftData
 import SwiftUI
 
 @MainActor
-struct SwiftDataLocalAvatarPersistence: LocalMoviePersistenceProtocol {
+struct SwiftDataFavoriteMoviesServiceProd: FavoriteMoviesService {
     
     private let container: ModelContainer
     

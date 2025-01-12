@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct MovieServiceProd: MovieService {
+struct MovieServiceProd: MoviesService {
     
     let networkService: NetworkServiceProtocol
     
