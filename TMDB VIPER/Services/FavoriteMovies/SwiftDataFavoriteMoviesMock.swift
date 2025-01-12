@@ -9,7 +9,7 @@ import Foundation
 
 struct SwiftDataFavoriteMoviesMock: FavoriteMoviesService {
     
-    let movies: [Movie]
+    var movies: [Movie]
     
     init(movies: [Movie] = Movie.mocks()) {
         self.movies = movies
@@ -20,7 +20,7 @@ struct SwiftDataFavoriteMoviesMock: FavoriteMoviesService {
     }
     
     func isFavorite(movie: Movie) throws -> Bool {
-        true
+        movies.first?.id == movie.id
     }
     
     func addToFavorites(movie: Movie) throws {

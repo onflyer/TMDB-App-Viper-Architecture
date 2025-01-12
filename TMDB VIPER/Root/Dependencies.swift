@@ -25,19 +25,22 @@ struct Dependencies {
     }
 }
 
-
+@MainActor
 class DevPreview {
     static let shared = DevPreview()
     
     let movieManager: MovieManager
+    let favoritesManager: FavoritesManager
     
     init() {
         self.movieManager = MovieManager(service: MovieServiceMock())
+        self.favoritesManager = FavoritesManager(service: SwiftDataFavoriteMoviesMock())
     }
     
     func container() -> DependencyContainer {
         let container = DependencyContainer()
         container.register(MovieManager.self, service: movieManager)
+        container.register(FavoritesManager.self, service: favoritesManager)
         return container
     }
 }

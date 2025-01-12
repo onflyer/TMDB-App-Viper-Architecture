@@ -18,6 +18,16 @@ struct TMDB_VIPERApp: App {
 //       
 //    }
     
+//    static func main() {
+//        let instance = FavoritesManager(service: SwiftDataFavoriteMoviesServiceProd())
+//        let movie = Movie.mocks().first
+////        try? instance.addToFavorites(movie: movie!)
+////        print("added to favorites")
+//        
+//        let isFavorite = try? instance.isFavorite(movie: movie!)
+//        print(isFavorite?.description)
+//    }
+    
     @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
     
     var body: some Scene {
