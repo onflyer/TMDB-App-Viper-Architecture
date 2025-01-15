@@ -7,6 +7,7 @@
 
 import Foundation
 
+@MainActor
 protocol FavoritesRouter {
     func showDetailView(delegate: DetailViewDelegate)
 }

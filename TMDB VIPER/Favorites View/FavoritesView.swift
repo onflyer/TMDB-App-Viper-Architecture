@@ -9,23 +9,19 @@ import SwiftUI
 
 struct FavoritesView: View {
     @State var presenter: FavoritesPresenter
+   
     var body: some View {
-        Text("SSS")
+       
         ForEach(presenter.favoriteMovies) { movie in
             Text(movie.title ?? "No title")
-            
-                
         }
-//        .listStyle(.plain)
-        .navigationTitle("Favorites")
-        .task {
-            print("APPEARED")
+        .onAppear {
             presenter.loadFavorites()
         }
     }
 }
 
-#Preview ("Dev preview") {
+#Preview ("Dev preview1") {
     let builder = CoreBuilder(interactor: CoreInteractor(container: DevPreview.shared.container()))
     RouterView { router in
         builder.favoritesView(router: router)

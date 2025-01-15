@@ -5,9 +5,10 @@
 //  Created by Aleksandar Milidrag on 15. 1. 2025..
 //
 
-import Foundation
+import SwiftUI
 
 @Observable
+@MainActor
 class FavoritesPresenter {
     
     let interactor: FavoritesInteractor
@@ -16,6 +17,8 @@ class FavoritesPresenter {
     init(interactor: FavoritesInteractor, router: FavoritesRouter) {
         self.interactor = interactor
         self.router = router
+//        loadFavorites()
+//        print(favoriteMovies)
     }
     
     private(set) var favoriteMovies: [SingleMovie] = []

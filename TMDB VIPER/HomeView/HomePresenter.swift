@@ -8,6 +8,7 @@
 import Foundation
 
 @Observable
+@MainActor
 class HomePresenter {
     
     let interactor: HomeInteractor
@@ -28,7 +29,6 @@ class HomePresenter {
         self.router = router
     }
     
-    @MainActor
     func loadNowPlayingMovies() async {
         
         do {
@@ -41,7 +41,6 @@ class HomePresenter {
         }
     }
     
-    @MainActor
     func loadUpcomingMovies() async {
         
         do {
@@ -52,7 +51,6 @@ class HomePresenter {
         }
     }
     
-    @MainActor
     func loadTopRatedMovies() async {
         
         do {
@@ -63,7 +61,6 @@ class HomePresenter {
         }
     }
     
-    @MainActor
     func loadPopularMovies() async {
         
         do {

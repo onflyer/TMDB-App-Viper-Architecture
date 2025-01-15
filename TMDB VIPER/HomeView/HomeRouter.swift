@@ -7,6 +7,7 @@
 
 import Foundation
 
+@MainActor
 protocol HomeRouter {
     func showDetailView(delegate: DetailViewDelegate)
 }

@@ -30,6 +30,17 @@ struct TMDB_VIPERApp: App {
 ////        print(isFavorite?.description)
 //    }
     
+//    static func main() {
+//        let depenenencies = Dependencies()
+//        let interactor = CoreInteractor(container: depenenencies.container)
+//        
+//        let movie = SingleMovie(adult: true, backdropPath: "sss", budget: 2, genres: nil, homepage: nil, id: 321, imdbID: nil, originalLanguage: nil, originalTitle: "TITLEEEEEEEEE 1", overview: "overView", popularity: nil, posterPath: "Poster", releaseDate: nil, revenue: nil, runtime: nil, status: nil, tagline: nil, title: nil, video: nil, voteAverage: nil, voteCount: nil, videos: nil, credits: nil)
+//        try? interactor.removeFavorite(movie: movie)
+//        
+//        let movies = try? interactor.getFavorites()
+//        print(movies)
+//    }
+    
     @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
     
     var body: some Scene {

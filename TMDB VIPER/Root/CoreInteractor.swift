@@ -7,7 +7,7 @@
 
 import Foundation
 
-@MainActor
+@MainActor 
 struct CoreInteractor {
     let movieManager: MovieManager
     let favoritesManager: FavoritesManager

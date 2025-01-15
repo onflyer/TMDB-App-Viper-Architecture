@@ -8,6 +8,7 @@
 import SwiftUI
 
 @Observable
+@MainActor
 class DetailPresenter {
     let interactor: DetailInteractor
     let router: DetailRouter
