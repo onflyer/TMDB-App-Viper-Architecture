@@ -5,7 +5,7 @@
 //  Created by Aleksandar Milidrag on 15. 1. 2025..
 //
 
-import SwiftUI
+import Foundation
 
 @Observable
 class FavoritesPresenter {
@@ -26,7 +26,6 @@ class FavoritesPresenter {
         } catch {
             print(error)
         }
-        print(favoriteMovies)
     }
     
     func onMoviePressed(id: Int) {

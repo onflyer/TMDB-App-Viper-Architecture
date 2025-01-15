@@ -20,9 +20,9 @@ struct TMDB_VIPERApp: App {
     
 //    static func main() {
 //        let instance = FavoritesManager(service: SwiftDataFavoriteMoviesServiceProd())
-////        let movie = SingleMovie.mocks().first
-////        try? instance.addToFavorites(movie: movie!)
-////        print("added to favorites")
+//        let movie = SingleMovie.mocks().first
+//        try? instance.addToFavorites(movie: movie!)
+//        print("added to favorites")
 //        
 //        let movies = try? instance.getFavorites()
 //        print(movies)

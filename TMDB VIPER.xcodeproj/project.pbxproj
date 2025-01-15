@@ -17,6 +17,7 @@
 		305489B62D381D5D005E463E /* FavoritesPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 305489B52D381D5D005E463E /* FavoritesPresenter.swift */; };
 		305489B82D381D95005E463E /* FavoritesInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 305489B72D381D95005E463E /* FavoritesInteractor.swift */; };
 		305489BA2D381E15005E463E /* FavoritesRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 305489B92D381E15005E463E /* FavoritesRouter.swift */; };
+		30548B8F2D38375A005E463E /* FavoritesTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30548B8E2D38375A005E463E /* FavoritesTest.swift */; };
 		306F5EF22D19E163002E1583 /* DetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 306F5EF12D19E163002E1583 /* DetailView.swift */; };
 		306F5EF62D19E1E9002E1583 /* DetailPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 306F5EF52D19E1E9002E1583 /* DetailPresenter.swift */; };
 		306F5EF82D19E276002E1583 /* DetailInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 306F5EF72D19E276002E1583 /* DetailInteractor.swift */; };
@@ -90,6 +91,7 @@
 		305489B52D381D5D005E463E /* FavoritesPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesPresenter.swift; sourceTree = "<group>"; };
 		305489B72D381D95005E463E /* FavoritesInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesInteractor.swift; sourceTree = "<group>"; };
 		305489B92D381E15005E463E /* FavoritesRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesRouter.swift; sourceTree = "<group>"; };
+		30548B8E2D38375A005E463E /* FavoritesTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesTest.swift; sourceTree = "<group>"; };
 		306F5EF12D19E163002E1583 /* DetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailView.swift; sourceTree = "<group>"; };
 		306F5EF52D19E1E9002E1583 /* DetailPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailPresenter.swift; sourceTree = "<group>"; };
 		306F5EF72D19E276002E1583 /* DetailInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailInteractor.swift; sourceTree = "<group>"; };
@@ -208,6 +210,7 @@
 				305489B52D381D5D005E463E /* FavoritesPresenter.swift */,
 				305489B92D381E15005E463E /* FavoritesRouter.swift */,
 				305489B32D381D44005E463E /* FavoritesView.swift */,
+				30548B8E2D38375A005E463E /* FavoritesTest.swift */,
 			);
 			path = "Favorites View";
 			sourceTree = "<group>";
@@ -564,6 +567,7 @@
 				30C2EADF2D18A2C50058DA88 /* MoviesService.swift in Sources */,
 				30C2EAE02D18A2C50058DA88 /* NetworkManager.swift in Sources */,
 				306F5EFA2D19E2DE002E1583 /* DetailRouter.swift in Sources */,
+				30548B8F2D38375A005E463E /* FavoritesTest.swift in Sources */,
 				30C2ECDA2D18B0F60058DA88 /* HomePresenter.swift in Sources */,
 				30C2EAE22D18A2C50058DA88 /* DataParserProtocol.swift in Sources */,
 				30C2ECDF2D18B2460058DA88 /* View+EXT Custom.swift in Sources */,
