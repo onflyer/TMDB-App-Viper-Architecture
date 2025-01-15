@@ -8,7 +8,7 @@
 import Foundation
 
 protocol FavoritesRouter {
-    
+    func showDetailView(delegate: DetailViewDelegate)
 }
 
 extension CoreRouter: FavoritesRouter {}
