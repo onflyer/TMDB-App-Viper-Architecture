@@ -11,7 +11,7 @@ struct FavoritesView: View {
     @State var presenter: FavoritesPresenter
     var body: some View {
         ForEach(presenter.favoriteMovies) { movie in
-            SearchCellView(posterUrlString: movie.posterURLString, title: movie.title ?? "No title", releaseDate: movie.releaseDate ?? "No release date", ratingText: movie.ratingText ?? "No rating")
+            SearchCellView(posterUrlString: movie.posterURLString ?? "No URL", title: movie.title ?? "No title", releaseDate: movie.releaseDate ?? "No release date", ratingText: movie.ratingText ?? "No rating")
                 .anyButton {
                     presenter.onMoviePressed(id: movie.id)
                 }
