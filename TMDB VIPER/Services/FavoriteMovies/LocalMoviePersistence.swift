@@ -7,7 +7,6 @@
 
 import Foundation
 
-@MainActor
 protocol FavoriteMoviesService {
     func getFavorites() throws -> [SingleMovie]
     func isFavorite(movie: SingleMovie) throws -> Bool

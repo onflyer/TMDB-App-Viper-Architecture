@@ -7,7 +7,6 @@
 
 import Foundation
 
-@MainActor
 protocol DetailRouter {
     func showTrailerModalView(movie: SingleMovie, onXMarkPressed: @escaping () -> Void)
     func showFavoritesView()

@@ -8,7 +8,6 @@
 import SwiftUI
 
 @Observable
-@MainActor
 class FavoritesPresenter {
     
     let interactor: FavoritesInteractor
