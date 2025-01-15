@@ -88,6 +88,16 @@ struct DetailView: View {
             .frame(maxWidth: .infinity, alignment: .leading)
             .padding(.horizontal, 20)
         }
+        .toolbar {
+            ToolbarItem(placement: .topBarTrailing) {
+                Text("Favorites")
+                    .bold()
+                    .foregroundStyle(.blue)
+                    .anyButton {
+                        presenter.onFavoritesPressed()
+                    }
+            }
+        }
 
         
        

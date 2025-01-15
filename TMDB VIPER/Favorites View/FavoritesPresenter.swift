@@ -5,7 +5,7 @@
 //  Created by Aleksandar Milidrag on 15. 1. 2025..
 //
 
-import Foundation
+import SwiftUI
 
 @Observable
 class FavoritesPresenter {
@@ -20,13 +20,13 @@ class FavoritesPresenter {
     
     private(set) var favoriteMovies: [SingleMovie] = []
     
-    @MainActor
     func loadFavorites() {
         do {
             favoriteMovies = try interactor.getFavorites()
         } catch {
             print(error)
         }
+        print(favoriteMovies)
     }
     
     func onMoviePressed(id: Int) {

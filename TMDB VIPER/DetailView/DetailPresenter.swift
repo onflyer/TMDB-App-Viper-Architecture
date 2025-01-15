@@ -34,6 +34,10 @@ class DetailPresenter {
         }
     }
     
+    func onFavoritesPressed() {
+        router.showFavoritesView()
+    }
+    
     func addToFavorites() {
         guard let movie else { return }
         do {

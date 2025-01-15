@@ -16,7 +16,7 @@ struct SwiftDataFavoriteMoviesMock: FavoriteMoviesService {
     }
     
     func getFavorites() throws -> [SingleMovie] {
-        movies
+        return SingleMovie.mocks()
     }
     
     func isFavorite(movie: SingleMovie) throws -> Bool {
