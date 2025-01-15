@@ -20,6 +20,13 @@ class FavoritesPresenter {
     
     private(set) var favoriteMovies: [SingleMovie] = []
     
-    
+    @MainActor
+    func loadFavorites() {
+        do {
+            favoriteMovies = try interactor.getFavorites()
+        } catch {
+            print(error)
+        }
+    }
 
 }

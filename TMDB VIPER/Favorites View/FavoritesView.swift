@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct FavoritesView: View {
+    @State var presenter: FavoritesPresenter
     var body: some View {
         Text("Heello")
 //        ForEach(presenter.searchedMovies) { movie in
@@ -21,6 +22,9 @@ struct FavoritesView: View {
     }
 }
 
-#Preview {
-    FavoritesView()
+#Preview ("Dev preview"){
+    let builder = CoreBuilder(interactor: CoreInteractor(container: DevPreview.shared.container()))
+    RouterView { router in
+        builder.favoritesView(router: router)
+    }
 }
