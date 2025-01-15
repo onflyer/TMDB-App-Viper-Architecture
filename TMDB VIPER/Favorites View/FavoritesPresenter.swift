@@ -14,14 +14,14 @@ class FavoritesPresenter {
     let interactor: FavoritesInteractor
     let router: FavoritesRouter
     
+    private(set) var favoriteMovies: [SingleMovie] = []
+    
     init(interactor: FavoritesInteractor, router: FavoritesRouter) {
         self.interactor = interactor
         self.router = router
 //        loadFavorites()
 //        print(favoriteMovies)
     }
-    
-    private(set) var favoriteMovies: [SingleMovie] = []
     
     func loadFavorites() {
         do {

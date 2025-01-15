@@ -12,8 +12,11 @@ struct FavoritesView: View {
    
     var body: some View {
        
-        ForEach(presenter.favoriteMovies) { movie in
-            Text(movie.title ?? "No title")
+        VStack {
+            ForEach(presenter.favoriteMovies) { movie in
+                Text(movie.title ?? "No title")
+            }
+            
         }
         .onAppear {
             presenter.loadFavorites()
