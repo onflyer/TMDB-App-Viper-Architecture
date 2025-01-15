@@ -27,6 +27,6 @@ struct FavoritesView: View {
 #Preview ("Dev preview") {
     let builder = CoreBuilder(interactor: CoreInteractor(container: DevPreview.shared.container()))
     RouterView { router in
-        builder.favoritesView()
+        builder.favoritesView(router: router)
     }
 }

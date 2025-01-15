@@ -19,7 +19,7 @@ struct CoreRouter {
     }
     
     func showFavoritesView() {
-        router.showScreen(.fullScreenCover) { router in
+        router.showScreen(.sheet) { router in
             builder.favoritesView(router: router)
         }
     }
