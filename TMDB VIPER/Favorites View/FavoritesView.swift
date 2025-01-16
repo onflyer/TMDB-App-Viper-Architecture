@@ -19,6 +19,10 @@ struct FavoritesView: View {
                         presenter.onMoviePressed(id: movie.id)
                 }
             }
+            .onDelete { index in
+                presenter.removeFavorite(at: index)
+                
+            }
         }
         .listStyle(.plain)
         .task {

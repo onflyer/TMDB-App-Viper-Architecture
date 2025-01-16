@@ -11,6 +11,7 @@ protocol DetailRouter {
     func showTrailerModalView(movie: SingleMovie, onXMarkPressed: @escaping () -> Void)
     func showFavoritesView()
     func dismissModal()
+    func dismissScreen()
 }
 
 extension CoreRouter: DetailRouter {}

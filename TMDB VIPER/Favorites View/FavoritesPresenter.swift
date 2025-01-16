@@ -30,9 +30,24 @@ class FavoritesPresenter {
         }
     }
     
+    func removeFavorite(movie: SingleMovie) {
+        do {
+            try interactor.removeFavorite(movie: movie)
+        } catch {
+            print(error)
+        }
+    }
+    
     func onMoviePressed(id: Int) {
         let delegate = DetailViewDelegate(movieId: id)
         router.showDetailView(delegate: delegate)
+    }
+    
+    func removeFavorite(at offsets: IndexSet) {
+        offsets.forEach { index in
+            let movie = favoriteMovies[index]
+            removeFavorite(movie: movie)
+        }
     }
 
 }

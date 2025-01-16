@@ -19,7 +19,7 @@ struct CoreRouter {
     }
     
     func showFavoritesView() {
-        router.showScreen(.sheet) { router in
+        router.showScreen(.push) { router in
             builder.favoritesView(router: router)
         }
     }
@@ -32,6 +32,10 @@ struct CoreRouter {
     
     func dismissModal() {
         router.dismissModal()
+    }
+    
+    func dismissScreen() {
+        router.dismissScreen()
     }
     
 
