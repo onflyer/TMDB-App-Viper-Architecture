@@ -22,7 +22,7 @@ struct DetailView: View {
             ZStack {
                 ImageLoaderView(urlString: presenter.movie?.backdropURLString ?? "No image")
                     .aspectRatio(16/9, contentMode: .fit)
-                    .navigationTitle(presenter.movie?.title ?? "No title")
+                    .navigationTitle(presenter.movie?.title ?? "Loading...")
                     .navigationBarTitleDisplayMode(.inline)
             }
             .overlay(alignment: .bottomTrailing) {
