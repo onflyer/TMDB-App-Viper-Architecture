@@ -9,16 +9,19 @@ import SwiftUI
 
 struct FavoritesView: View {
     @State var presenter: FavoritesPresenter
-   
+    
     var body: some View {
-       
-        VStack {
+        
+        List {
             ForEach(presenter.favoriteMovies) { movie in
-                Text(movie.title ?? "No title")
+                SearchCellView(posterUrlString: movie.posterURLString ?? "No image", title: movie.title ?? "No title", releaseDate: movie.releaseDate ?? "No release date", ratingText: movie.ratingText ?? "No rating")
+                    .anyButton {
+                        
+                }
             }
-            
         }
-        .onAppear {
+        .listStyle(.plain)
+        .task {
             presenter.loadFavorites()
         }
     }
