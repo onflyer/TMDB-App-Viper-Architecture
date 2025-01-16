@@ -23,6 +23,7 @@ class DetailPresenter {
     func loadSingleMovie(id: Int) async {
         do {
             movie = try await interactor.getSingleMovie(id: id)
+            checkIsFavorite()
         } catch {
             print(error)
         }
