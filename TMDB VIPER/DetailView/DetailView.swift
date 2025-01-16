@@ -65,11 +65,13 @@ struct DetailView: View {
                     }
                 }
                 Spacer()
-                Image(systemName: presenter.isFavorite ? "heart.fill" : "heart")
-                    .resizable()
+                ZStack {
+                    heartImage(Image(systemName: "heart.fill"), isFavorite: presenter.isFavorite)
+                    heartImage(Image(systemName: "heart"), isFavorite: !presenter.isFavorite)
+                }
                     .frame(width: 30, height: 27)
                     .anyButton {
-                        presenter.isFavorite = true
+                        
                     }
                     
             }
@@ -94,7 +96,7 @@ struct DetailView: View {
             VStack(alignment: .leading) {
                 Text("Overwiew")
                     .bold()
-                Text(presenter.movie?.overview ?? "No desctription")
+                Text(presenter.movie?.overview ?? "No description")
                     .foregroundStyle(.secondary)
             }
             .frame(maxWidth: .infinity, alignment: .leading)
@@ -131,7 +133,8 @@ struct DetailView: View {
 extension DetailView {
     func heartImage(_ image: Image, isFavorite: Bool) -> some View {
         image
-            .tint(isFavorite ? .red : .white)
+            .resizable()
+            .tint(isFavorite ? .red : .black)
             .scaleEffect(isFavorite ? 1 : 0)
             .opacity(isFavorite ? 1 : 0)
             .animation(.interpolatingSpring(stiffness: 170, damping: 15), value: isFavorite)
