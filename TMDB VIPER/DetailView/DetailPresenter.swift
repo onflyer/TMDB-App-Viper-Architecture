@@ -19,6 +19,7 @@ class DetailPresenter {
         self.interactor = interactor
         self.router = router
         checkIsFavorite()
+        print(isFavorite.description)
     }
     
     func loadSingleMovie(id: Int) async {
@@ -67,7 +68,7 @@ class DetailPresenter {
         }
     }
     
-    func handleOnHeartPressed() {
+    func onHeartPressed() {
         if !isFavorite {
             addToFavorites()
         } else {

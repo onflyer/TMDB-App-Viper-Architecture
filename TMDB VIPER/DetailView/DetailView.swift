@@ -74,7 +74,7 @@ struct DetailView: View {
                 }
                 .frame(width: 30, height: 27)
                 .anyButton {
-                    
+                    presenter.onHeartPressed()
                 }
                 
             }
