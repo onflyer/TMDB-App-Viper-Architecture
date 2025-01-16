@@ -52,20 +52,30 @@ struct DetailView: View {
                     .offset(x: 20, y: 90)
             }
             
-            VStack(alignment: .leading) {
-                Text(presenter.movie?.title ?? "No title")
-                    .bold()
-                HStack {
-                    ForEach(presenter.movie?.genres ?? [], content: { genre in
-                        Text(genre.name ?? "No genre")
-                            .font(.caption)
-                            .foregroundStyle(.secondary)
-                    })
+            HStack {
+                VStack(alignment: .leading) {
+                    Text(presenter.movie?.title ?? "No title")
+                        .bold()
+                    HStack {
+                        ForEach(presenter.movie?.genres ?? [], content: { genre in
+                            Text(genre.name ?? "No genre")
+                                .font(.caption)
+                                .foregroundStyle(.secondary)
+                        })
+                    }
                 }
+                Spacer()
+                Image(systemName: presenter.isFavorite ? "heart.fill" : "heart")
+                    .resizable()
+                    .frame(width: 30, height: 27)
+                    .anyButton {
+                        presenter.isFavorite = true
+                    }
+                    
             }
             .lineLimit(1)
             .padding(.leading, 160)
-            .padding(.trailing, 40)
+            .padding(.trailing, 15)
             .frame(maxWidth: .infinity, maxHeight: 100, alignment: .leading)
         }
         Divider()
@@ -94,7 +104,7 @@ struct DetailView: View {
             ToolbarItem(placement: .topBarTrailing) {
                 Text("Favorites")
                     .bold()
-                    .foregroundStyle(.blue)
+                    .foregroundStyle(.tmdb)
                     .anyButton {
                         presenter.onFavoritesPressed()
                     }
@@ -114,5 +124,16 @@ struct DetailView: View {
     let builder = CoreBuilder(interactor: CoreInteractor(container: DevPreview.shared.container()))
     RouterView { router in
         builder.detailView(router: router)
+    }
+}
+
+
+extension DetailView {
+    func heartImage(_ image: Image, isFavorite: Bool) -> some View {
+        image
+            .tint(isFavorite ? .red : .white)
+            .scaleEffect(isFavorite ? 1 : 0)
+            .opacity(isFavorite ? 1 : 0)
+            .animation(.interpolatingSpring(stiffness: 170, damping: 15), value: isFavorite)
     }
 }

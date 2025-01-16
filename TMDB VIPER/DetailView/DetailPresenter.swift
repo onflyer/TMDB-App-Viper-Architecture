@@ -13,6 +13,7 @@ class DetailPresenter {
     let router: DetailRouter
     
     var movie: SingleMovie? = nil
+    var isFavorite: Bool = false
     
     init(interactor: DetailInteractor, router: DetailRouter) {
         self.interactor = interactor
@@ -47,4 +48,22 @@ class DetailPresenter {
         }
     }
     
+    func removeFromFavorites() {
+        
+    }
+    
+    func isFavorite(movie: SingleMovie) {
+        do {
+            isFavorite = try interactor.isFavorite(movie: movie)
+        } catch {
+            print(error)
+        }
+    }
+    
+    func handleOnHeartPressed() {
+        if isFavorite {
+            
+        }
+    }
+
 }
