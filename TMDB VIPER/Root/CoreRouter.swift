@@ -2,7 +2,7 @@
 //  CoreRouter.swift
 //  TMDB VIPER
 //
-//  Created by Aleksandar Milidrag on 22. 12. 2024..
+//  Created by Aleksandar Milidrag on 22. 12. 2024.
 //
 
 import Foundation
@@ -19,7 +19,7 @@ struct CoreRouter {
     }
     
     func showFavoritesView() {
-        router.showScreen(.push) { router in
+        router.showScreen(.sheet) { router in
             builder.favoritesView(router: router)
         }
     }
