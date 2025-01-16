@@ -14,6 +14,7 @@ struct DetailViewDelegate {
 struct DetailView: View {
     
     @State var presenter: DetailPresenter
+    @State var isLiked: Bool = false
     let delegate: DetailViewDelegate
     
     var body: some View {
@@ -27,7 +28,7 @@ struct DetailView: View {
             .overlay(alignment: .bottomTrailing) {
                 HStack {
                     Text("Watch trailer")
-                        
+                    
                     Image(systemName: "play.fill")
                 }
                 .bold()
@@ -67,13 +68,15 @@ struct DetailView: View {
                 Spacer()
                 ZStack {
                     heartImage(Image(systemName: "heart.fill"), isFavorite: presenter.isFavorite)
+                        .foregroundStyle(.red)
                     heartImage(Image(systemName: "heart"), isFavorite: !presenter.isFavorite)
+                        .foregroundStyle(.primary)
                 }
-                    .frame(width: 30, height: 27)
-                    .anyButton {
-                        
-                    }
-                    
+                .frame(width: 30, height: 27)
+                .anyButton {
+                    presenter.isFavorite.toggle()
+                }
+                
             }
             .lineLimit(1)
             .padding(.leading, 160)
@@ -92,7 +95,7 @@ struct DetailView: View {
             .frame(maxWidth: .infinity, alignment: .leading)
             .padding(.horizontal, 20)
             .padding(.bottom)
-           
+            
             VStack(alignment: .leading) {
                 Text("Overwiew")
                     .bold()
@@ -112,10 +115,6 @@ struct DetailView: View {
                     }
             }
         }
-
-        
-       
-        
         .task {
             await presenter.loadSingleMovie(id: delegate.movieId)
         }
@@ -134,7 +133,6 @@ extension DetailView {
     func heartImage(_ image: Image, isFavorite: Bool) -> some View {
         image
             .resizable()
-            .tint(isFavorite ? .red : .black)
             .scaleEffect(isFavorite ? 1 : 0)
             .opacity(isFavorite ? 1 : 0)
             .animation(.interpolatingSpring(stiffness: 170, damping: 15), value: isFavorite)
