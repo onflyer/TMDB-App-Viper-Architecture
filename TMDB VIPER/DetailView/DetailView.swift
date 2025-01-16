@@ -17,6 +17,7 @@ struct DetailView: View {
     let delegate: DetailViewDelegate
     
     var body: some View {
+        
         VStack(spacing: 0) {
             ZStack {
                 ImageLoaderView(urlString: presenter.movie?.backdropURLString ?? "No image")

@@ -14,6 +14,7 @@ class DetailPresenter {
     
     var movie: SingleMovie? = nil
     var isFavorite: Bool = false
+    var isLoading: Bool = false
     
     init(interactor: DetailInteractor, router: DetailRouter) {
         self.interactor = interactor
@@ -21,12 +22,15 @@ class DetailPresenter {
     }
     
     func loadSingleMovie(id: Int) async {
+        isLoading = true
         do {
             movie = try await interactor.getSingleMovie(id: id)
             checkIsFavorite()
         } catch {
             print(error)
         }
+        isLoading = false
+
     }
     
     func onWatchTrailerPressed() {

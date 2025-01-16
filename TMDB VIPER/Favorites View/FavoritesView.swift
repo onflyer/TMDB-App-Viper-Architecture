@@ -25,6 +25,7 @@ struct FavoritesView: View {
             }
         }
         .listStyle(.plain)
+        .navigationTitle("Favorites")
         .task {
             presenter.loadFavorites()
         }
