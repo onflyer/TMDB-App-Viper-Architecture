@@ -14,7 +14,6 @@ struct DetailViewDelegate {
 struct DetailView: View {
     
     @State var presenter: DetailPresenter
-    @State var isLiked: Bool = false
     let delegate: DetailViewDelegate
     
     var body: some View {
