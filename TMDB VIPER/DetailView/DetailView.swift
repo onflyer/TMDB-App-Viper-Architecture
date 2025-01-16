@@ -63,7 +63,9 @@ struct DetailView: View {
                     })
                 }
             }
+            .lineLimit(1)
             .padding(.leading, 160)
+            .padding(.trailing, 40)
             .frame(maxWidth: .infinity, maxHeight: 100, alignment: .leading)
         }
         Divider()
