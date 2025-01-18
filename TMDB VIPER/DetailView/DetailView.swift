@@ -83,6 +83,7 @@ struct DetailView: View {
             .padding(.trailing, 15)
             .frame(maxWidth: .infinity, maxHeight: 100, alignment: .leading)
         }
+        .redacted(reason: presenter.isLoading ? .placeholder : [])
         Divider()
         ScrollView {
             VStack(alignment: .leading) {
@@ -115,6 +116,7 @@ struct DetailView: View {
                     }
             }
         }
+        .redacted(reason: presenter.isLoading ? .placeholder : [])
         .task {
             await presenter.loadSingleMovie(id: delegate.movieId)
         }
