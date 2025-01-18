@@ -11,7 +11,9 @@ struct FavoritesView: View {
     @State var presenter: FavoritesPresenter
     
     var body: some View {
-        
+        if presenter.favoriteMovies.isEmpty {
+            ContentUnavailableView("No favorite movies, add some to the list...", systemImage: "movieclapper.fill")
+        }
         List {
             ForEach(presenter.favoriteMovies) { movie in
                 SearchCellView(posterUrlString: movie.posterURLString ?? "No image", title: movie.title ?? "No title", releaseDate: movie.releaseDate ?? "No release date", ratingText: movie.ratingText ?? "No rating")
