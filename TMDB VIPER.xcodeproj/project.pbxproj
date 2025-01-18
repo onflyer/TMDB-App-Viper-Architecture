@@ -17,6 +17,8 @@
 		305489B62D381D5D005E463E /* FavoritesPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 305489B52D381D5D005E463E /* FavoritesPresenter.swift */; };
 		305489B82D381D95005E463E /* FavoritesInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 305489B72D381D95005E463E /* FavoritesInteractor.swift */; };
 		305489BA2D381E15005E463E /* FavoritesRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 305489B92D381E15005E463E /* FavoritesRouter.swift */; };
+		30548B912D3BF297005E463E /* ShimmerLoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30548B902D3BF297005E463E /* ShimmerLoadingView.swift */; };
+		30548B932D3BF2BA005E463E /* HomePagePlaceholder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30548B922D3BF2BA005E463E /* HomePagePlaceholder.swift */; };
 		306F5EF22D19E163002E1583 /* DetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 306F5EF12D19E163002E1583 /* DetailView.swift */; };
 		306F5EF62D19E1E9002E1583 /* DetailPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 306F5EF52D19E1E9002E1583 /* DetailPresenter.swift */; };
 		306F5EF82D19E276002E1583 /* DetailInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 306F5EF72D19E276002E1583 /* DetailInteractor.swift */; };
@@ -90,6 +92,8 @@
 		305489B52D381D5D005E463E /* FavoritesPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesPresenter.swift; sourceTree = "<group>"; };
 		305489B72D381D95005E463E /* FavoritesInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesInteractor.swift; sourceTree = "<group>"; };
 		305489B92D381E15005E463E /* FavoritesRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesRouter.swift; sourceTree = "<group>"; };
+		30548B902D3BF297005E463E /* ShimmerLoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShimmerLoadingView.swift; sourceTree = "<group>"; };
+		30548B922D3BF2BA005E463E /* HomePagePlaceholder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePagePlaceholder.swift; sourceTree = "<group>"; };
 		306F5EF12D19E163002E1583 /* DetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailView.swift; sourceTree = "<group>"; };
 		306F5EF52D19E1E9002E1583 /* DetailPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailPresenter.swift; sourceTree = "<group>"; };
 		306F5EF72D19E276002E1583 /* DetailInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailInteractor.swift; sourceTree = "<group>"; };
@@ -197,6 +201,8 @@
 				300B97CE2D1975B70073CDF9 /* ImageLoaderView.swift */,
 				300B97D42D1979D90073CDF9 /* MovieCellView.swift */,
 				30A25A052D26B83A00C2C094 /* SearchCellView.swift */,
+				30548B902D3BF297005E463E /* ShimmerLoadingView.swift */,
+				30548B922D3BF2BA005E463E /* HomePagePlaceholder.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -592,6 +598,7 @@
 				306F5EF62D19E1E9002E1583 /* DetailPresenter.swift in Sources */,
 				30FD09C22D33E59E0039A66D /* SwiftDataFavoriteMoviesMock.swift in Sources */,
 				306F5EF22D19E163002E1583 /* DetailView.swift in Sources */,
+				30548B912D3BF297005E463E /* ShimmerLoadingView.swift in Sources */,
 				30C2EDCB2D18B8700058DA88 /* View+EXT.swift in Sources */,
 				30FD09C42D33E70D0039A66D /* FavoritesManager.swift in Sources */,
 				30C2EDCC2D18B8700058DA88 /* AlertType.swift in Sources */,
@@ -600,6 +607,7 @@
 				30C2EDCE2D18B8700058DA88 /* AnyDestination.swift in Sources */,
 				30C2EDCF2D18B8700058DA88 /* SegueOption.swift in Sources */,
 				305489B82D381D95005E463E /* FavoritesInteractor.swift in Sources */,
+				30548B932D3BF2BA005E463E /* HomePagePlaceholder.swift in Sources */,
 				30C2ECD82D18AFC40058DA88 /* AnyNotificationListenerViewModifier.swift in Sources */,
 				300B95F42D1970430073CDF9 /* FeedDelegate.swift in Sources */,
 				30C2ECE12D18B3EB0058DA88 /* HomeRouter.swift in Sources */,
