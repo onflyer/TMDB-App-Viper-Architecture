@@ -17,7 +17,7 @@ struct ImageLoaderView: View {
     
     var body: some View {
         Rectangle()
-            .opacity(0.13)
+            .opacity(0.10)
             .overlay(
                 WebImage(url: URL(string: urlString))
                     .resizable()

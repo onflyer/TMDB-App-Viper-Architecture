@@ -90,7 +90,7 @@ struct DetailView: View {
                 Text("Release date")
                     .bold()
                 Text(presenter.movie?.releaseDate ?? "No release date")
-                    .font(.callout)
+                    .font(.callout) 
                     .foregroundStyle(.secondary)
             }
             .frame(maxWidth: .infinity, alignment: .leading)
@@ -109,8 +109,9 @@ struct DetailView: View {
         .toolbar {
             ToolbarItem(placement: .topBarTrailing) {
                 Text("Favorites")
+                    .font(.footnote)
                     .bold()
-                    .foregroundStyle(.tmdb)
+                    .foregroundStyle(.blue)
                     .anyButton {
                         presenter.onFavoritesPressed()
                     }
