@@ -16,21 +16,20 @@ struct HomePagePlaceholder: View {
         ScrollView(.horizontal, showsIndicators: false) {
             LazyHStack(spacing: 15) {
                 ForEach(0..<4) { placeholder in
-                    
-                    ZStack {
                         ShimmerLoadingView()
-                    }
-                    .frame(width: width, height: height)
-                    .cornerRadius(8)
-                    .shadow(radius: 4)
                 }
+                .frame(width: width, height: height)
+                .clipShape(RoundedRectangle(cornerRadius: 8))
             }
-            .padding(.horizontal)
-            .padding(.vertical, 8)
         }
+        .padding(.horizontal)
+        .padding(.vertical, 5)
+        .background(Color(uiColor: .secondarySystemBackground))
     }
 }
 
 #Preview {
-    HomePagePlaceholder()
+    HomePagePlaceholder(width: 170, height: 240)
+        
+    
 }

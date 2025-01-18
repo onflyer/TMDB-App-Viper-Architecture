@@ -48,6 +48,9 @@ extension HomeView {
     var nowPlayingSection: some View {
         Section {
             ZStack {
+                if presenter.nowPlayingMovies.isEmpty {
+                    HomePagePlaceholder(width: 170, height: 240)
+                }
                 ScrollView(.horizontal) {
                     LazyHStack (spacing: 15) {
                         ForEach(presenter.nowPlayingMovies) { movie in
@@ -79,6 +82,9 @@ extension HomeView {
     var upcomingSection: some View {
         Section {
             ZStack {
+                if presenter.upcomingMovies.isEmpty {
+                    HomePagePlaceholder(width: 300, height: 150)
+                }
                 ScrollView(.horizontal) {
                     LazyHStack (spacing: 15) {
                         ForEach(presenter.upcomingMovies) { movie in
@@ -110,6 +116,9 @@ extension HomeView {
     var topRatedSection: some View {
         Section {
             ZStack {
+                if presenter.nowPlayingMovies.isEmpty {
+                    HomePagePlaceholder(width: 170, height: 240)
+                }
                 ScrollView(.horizontal) {
                     LazyHStack (spacing: 15) {
                         ForEach(presenter.topRatedMovies) { movie in
@@ -142,6 +151,9 @@ extension HomeView {
     var popularSection: some View {
         Section {
             ZStack {
+                if presenter.popularMovies.isEmpty {
+                    HomePagePlaceholder(width: 300, height: 150)
+                }
                 ScrollView(.horizontal) {
                     LazyHStack (spacing: 15) {
                         ForEach(presenter.popularMovies) { movie in
