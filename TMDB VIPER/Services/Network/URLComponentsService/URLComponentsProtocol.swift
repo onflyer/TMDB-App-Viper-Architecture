@@ -46,7 +46,7 @@ public extension URLComponentsProtocol {
         components.host = host
         components.path = path
 
-        let timeStamp = "\(Date().timeIntervalSince1970)"
+//        let timeStamp = "\(Date().timeIntervalSince1970)"
 
         /// Add default query params
         var queryParamsList: [URLQueryItem] = [
@@ -74,7 +74,7 @@ public extension URLComponentsProtocol {
             urlRequest.httpBody = try JSONSerialization.data(withJSONObject: params)
         }
         
-       print("🚀 [REQUEST] [\(httpMethod.rawValue)] \(urlRequest), \(timeStamp)")
+//       print("🚀 [REQUEST] [\(httpMethod.rawValue)] \(urlRequest), \(timeStamp)")
         return urlRequest
     }
 }

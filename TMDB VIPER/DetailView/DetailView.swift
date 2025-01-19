@@ -9,6 +9,10 @@ import SwiftUI
 
 struct DetailViewDelegate {
     var movieId: Int = SingleMovie.mock().id
+    
+    var eventParameters: [String: Any]? {
+        nil
+    }
 }
 
 struct DetailView: View {
@@ -120,6 +124,12 @@ struct DetailView: View {
         .redacted(reason: presenter.isLoading ? .placeholder : [])
         .task {
             await presenter.loadSingleMovie(id: delegate.movieId)
+        }
+        .onAppear {
+            presenter.onViewAppear(delegate: delegate)
+        }
+        .onDisappear {
+            presenter.onViewDisappear(delegate: delegate)
         }
     }
 }

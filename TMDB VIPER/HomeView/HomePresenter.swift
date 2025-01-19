@@ -30,14 +30,15 @@ class HomePresenter {
     }
     
     func loadNowPlayingMovies() async {
-        
+        interactor.trackEvent(event: Event.loadNowPlayingMoviesStart)
         do {
             isLoading = true
             let results = try await interactor.getNowPlayingMovies(page: page)
-            nowPlayingMovies.append(contentsOf: results)
             isLoading = false
+            nowPlayingMovies.append(contentsOf: results)
+            interactor.trackEvent(event: Event.loadNowPlayingMoviesSuccess(count: nowPlayingMovies.count))
         } catch {
-            print(error)
+            interactor.trackEvent(event: Event.loadNowPlayingMoviesFail(error: error))
         }
     }
     
@@ -131,11 +132,23 @@ extension HomePresenter {
     enum Event: LoggableEvent {
         case onAppear(delegate: HomeDelegate)
         case onDisappear(delegate: HomeDelegate)
+        case loadNowPlayingMoviesStart
+        case loadNowPlayingMoviesSuccess(count: Int)
+        case loadNowPlayingMoviesFail(error: Error)
+        case loadUpcomingMoviesStart
+        case loadUpcomingMoviesSuccess(count: Int)
+        case loadUpcomingMoviesFail(error: Error)
 
         var eventName: String {
             switch self {
-            case .onAppear:                 return "HomeView_Appeared"
-            case .onDisappear:              return "HomeView_Disappeared"
+            case .onAppear:                                             return "HomeView_Appeared"
+            case .onDisappear:                                          return "HomeView_Disappeared"
+            case .loadNowPlayingMoviesStart:                            return "HomeView_LoadNowPlayingMovies_Start"
+            case .loadNowPlayingMoviesSuccess:                          return "HomeView_LoadNowPlayingMovies_Success"
+            case .loadNowPlayingMoviesFail:                             return "HomeView_LoadNowPlayingMovies_Fail"
+            case .loadUpcomingMoviesStart:                              return "HomeView_LoadUpcomingMovies_Start"
+            case .loadUpcomingMoviesSuccess:                            return "HomeView_LoadUpcomingMovies_Success"
+            case .loadUpcomingMoviesFail:                               return "HomeView_LoadUpcomingMovies_Fail"
             }
         }
         
@@ -143,13 +156,25 @@ extension HomePresenter {
             switch self {
             case .onAppear(delegate: let delegate), .onDisappear(delegate: let delegate):
                 return delegate.eventParameters
-//            default:
-//                return nil
+                
+            case .loadNowPlayingMoviesSuccess(count: let count), .loadUpcomingMoviesSuccess(count: let count):
+                return [ "now_playing_movies_count": count,
+                         "upcoming_movies_count": count
+                ]
+            case .loadNowPlayingMoviesFail(error: let error), .loadUpcomingMoviesFail(error: let error):
+                return error.eventParameters
+            default:
+                return nil
+
+                
             }
+            
         }
         
         var type: LogType {
             switch self {
+            case .loadNowPlayingMoviesFail:
+                return .severe
             default:
                 return .info
             }
