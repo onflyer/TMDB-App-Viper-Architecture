@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+@MainActor
 @Observable
 class DetailPresenter {
     let interactor: DetailInteractor

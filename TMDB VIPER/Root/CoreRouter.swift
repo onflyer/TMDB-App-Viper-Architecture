@@ -7,6 +7,7 @@
 
 import Foundation
 
+@MainActor
 struct CoreRouter {
     
     let router: Router

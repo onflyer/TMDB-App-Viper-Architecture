@@ -7,6 +7,8 @@
 
 import Foundation
 
+@MainActor
+@Observable
 class FavoritesManager {
     
     let service: FavoriteMoviesService

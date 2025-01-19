@@ -7,6 +7,7 @@
 
 import Foundation
 
+@MainActor
 protocol HomeInteractor {
     func getNowPlayingMovies(page: Int) async throws -> [Movie]
     func getUpcomingMovies(page: Int) async throws -> [Movie]

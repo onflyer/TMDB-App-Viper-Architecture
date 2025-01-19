@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+@MainActor
 @Observable
 class DependencyContainer {
     private var services: [String: Any] = [:]
