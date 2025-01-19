@@ -11,13 +11,14 @@ import SwiftUI
 struct CoreBuilder {
     let interactor: CoreInteractor
     
-    func homeView() -> some View {
+    func homeView(delegate: HomeDelegate = HomeDelegate()) -> some View {
         RouterView { router in
             HomeView(
                 presenter: HomePresenter(
                     interactor: interactor,
                     router: CoreRouter(router: router,builder: self)
-                )
+                ),
+                delegate: delegate
             )
         }
     }

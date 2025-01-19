@@ -9,10 +9,12 @@ import Foundation
 
 @MainActor
 struct CoreInteractor {
+    let logManager: LogManager
     let movieManager: MovieManager
     let favoritesManager: FavoritesManager
     
     init(container: DependencyContainer) {
+        self.logManager = container.resolve(LogManager.self)!
         self.movieManager = container.resolve(MovieManager.self)!
         self.favoritesManager = container.resolve(FavoritesManager.self)!
     }
@@ -59,4 +61,26 @@ struct CoreInteractor {
         try favoritesManager.removeFavorite(movie: movie)
     }
 
+}
+
+
+extension CoreInteractor {
+    
+    //MARK: LOGGING FUNCTIONS
+    
+    func trackEvent(eventName: String, parameters: [String: Any]? = nil, type: LogType = .analytic) {
+        logManager.trackEvent(eventName: eventName, parameters: parameters, type: type)
+    }
+    
+    func trackEvent(event: AnyLoggableEvent) {
+        logManager.trackEvent(event: event)
+    }
+
+    func trackEvent(event: LoggableEvent) {
+        logManager.trackEvent(event: event)
+    }
+    
+    func trackScreenEvent(event: LoggableEvent) {
+        logManager.trackEvent(event: event)
+    }
 }

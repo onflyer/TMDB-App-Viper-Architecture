@@ -19,6 +19,7 @@
 		305489BA2D381E15005E463E /* FavoritesRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 305489B92D381E15005E463E /* FavoritesRouter.swift */; };
 		30548B912D3BF297005E463E /* ShimmerLoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30548B902D3BF297005E463E /* ShimmerLoadingView.swift */; };
 		30548B932D3BF2BA005E463E /* HomePagePlaceholder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30548B922D3BF2BA005E463E /* HomePagePlaceholder.swift */; };
+		30548D6C2D3D1285005E463E /* SwiftfulLogging in Frameworks */ = {isa = PBXBuildFile; productRef = 30548D6B2D3D1285005E463E /* SwiftfulLogging */; };
 		306F5EF22D19E163002E1583 /* DetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 306F5EF12D19E163002E1583 /* DetailView.swift */; };
 		306F5EF62D19E1E9002E1583 /* DetailPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 306F5EF52D19E1E9002E1583 /* DetailPresenter.swift */; };
 		306F5EF82D19E276002E1583 /* DetailInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 306F5EF72D19E276002E1583 /* DetailInteractor.swift */; };
@@ -163,6 +164,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				30548D6C2D3D1285005E463E /* SwiftfulLogging in Frameworks */,
 				300B97CC2D1975680073CDF9 /* SDWebImageSwiftUI in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -507,6 +509,7 @@
 			name = "TMDB VIPER";
 			packageProductDependencies = (
 				300B97CB2D1975680073CDF9 /* SDWebImageSwiftUI */,
+				30548D6B2D3D1285005E463E /* SwiftfulLogging */,
 			);
 			productName = "TMDB MVVM";
 			productReference = 30AF4FA02D16D68600DB54AF /* TMDB VIPER.app */;
@@ -538,6 +541,7 @@
 			minimizedProjectReferenceProxies = 1;
 			packageReferences = (
 				300B97CA2D1975680073CDF9 /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */,
+				30548D6A2D3D1285005E463E /* XCRemoteSwiftPackageReference "SwiftfulLogging" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 30AF4FA12D16D68600DB54AF /* Products */;
@@ -853,6 +857,14 @@
 				minimumVersion = 3.1.3;
 			};
 		};
+		30548D6A2D3D1285005E463E /* XCRemoteSwiftPackageReference "SwiftfulLogging" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SwiftfulThinking/SwiftfulLogging";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.1.2;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -860,6 +872,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 300B97CA2D1975680073CDF9 /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */;
 			productName = SDWebImageSwiftUI;
+		};
+		30548D6B2D3D1285005E463E /* SwiftfulLogging */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 30548D6A2D3D1285005E463E /* XCRemoteSwiftPackageReference "SwiftfulLogging" */;
+			productName = SwiftfulLogging;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

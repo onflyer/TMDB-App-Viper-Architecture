@@ -114,3 +114,45 @@ class HomePresenter {
         await loadPopularMovies()
     }
 }
+
+extension HomePresenter {
+    
+    //MARK: LOGGING FUNCTIONS
+    
+    func onViewAppear(delegate: HomeDelegate) {
+        interactor.trackScreenEvent(event: Event.onAppear(delegate: delegate))
+    }
+    
+    func onViewDisappear(delegate: HomeDelegate) {
+        interactor.trackEvent(event: Event.onDisappear(delegate: delegate))
+    }
+    
+    
+    enum Event: LoggableEvent {
+        case onAppear(delegate: HomeDelegate)
+        case onDisappear(delegate: HomeDelegate)
+
+        var eventName: String {
+            switch self {
+            case .onAppear:                 return "HomeView_Appeared"
+            case .onDisappear:              return "HomeView_Disappeared"
+            }
+        }
+        
+        var parameters: [String: Any]? {
+            switch self {
+            case .onAppear(delegate: let delegate), .onDisappear(delegate: let delegate):
+                return delegate.eventParameters
+//            default:
+//                return nil
+            }
+        }
+        
+        var type: LogType {
+            switch self {
+            default:
+                return .info
+            }
+        }
+    }
+}

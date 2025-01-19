@@ -7,9 +7,16 @@
 
 import SwiftUI
 
+struct HomeDelegate {
+    var eventParameters: [String: Any]? {
+        nil
+    }
+}
+
 struct HomeView: View {
     
     @State var presenter: HomePresenter
+    let delegate: HomeDelegate
     
     var body: some View {
         List {
@@ -39,6 +46,12 @@ struct HomeView: View {
         }
         .task(id: presenter.query) {
             await presenter.loadSearchedMovies()
+        }
+        .onAppear {
+            presenter.onViewAppear(delegate: delegate)
+        }
+        .onDisappear {
+            presenter.onViewDisappear(delegate: delegate)
         }
         
     }
@@ -196,5 +209,6 @@ extension HomeView {
 
 #Preview("Dev preview") {
     let builder = CoreBuilder(interactor: CoreInteractor(container: DevPreview.shared.container()))
-    return builder.homeView()
+    let delegate = HomeDelegate()
+    return builder.homeView(delegate: delegate)
 }
