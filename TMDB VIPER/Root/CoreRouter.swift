@@ -32,8 +32,8 @@ struct CoreRouter {
     }
     
     func showImageModalView(urlString: String, onXMarkPressed: @escaping () -> Void) {
-        router.showModal(backgroundColor: .black.opacity(0.3), transition: .scale) {
-            
+        router.showModal(backgroundColor: .black.opacity(0.7), transition: .identity) {
+            builder.imageModalView(imageString: urlString, onDismiss: onXMarkPressed)
         }
     }
     

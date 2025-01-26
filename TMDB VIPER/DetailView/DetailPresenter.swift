@@ -43,6 +43,13 @@ class DetailPresenter {
         }
     }
     
+    func onMovieImagePressed() {
+        guard let movie else { return }
+        router.showImageModalView(urlString: movie.posterURLString ?? "No image") {
+            self.router.dismissModal()
+        }
+    }
+    
     func onFavoritesPressed() {
         router.showFavoritesView()
     }

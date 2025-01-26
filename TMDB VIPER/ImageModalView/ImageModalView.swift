@@ -17,12 +17,9 @@ struct ImageModalView: View {
     
     var body: some View {
         ZStack {
-            Color.clear
-                .background(.ultraThinMaterial)
             ImageLoaderView(urlString: delegate.urlString)
                 .scaledToFit()
         }
-        
     }
 }
 

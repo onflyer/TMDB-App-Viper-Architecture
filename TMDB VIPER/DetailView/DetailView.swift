@@ -49,6 +49,9 @@ struct DetailView: View {
             .zIndex(1)
             .overlay(alignment: .bottomLeading) {
                 MovieCellView(title: "", imageName: presenter.movie?.posterURLString ?? "No image")
+                    .anyButton(.press) {
+                        presenter.onMovieImagePressed()
+                    }
                     .frame(width: 120, height: 180)
                     .overlay {
                         RoundedRectangle(cornerRadius: 8)
@@ -56,6 +59,7 @@ struct DetailView: View {
                     }
                     .offset(x: 20, y: 90)
             }
+
             
             HStack {
                 VStack(alignment: .leading) {
