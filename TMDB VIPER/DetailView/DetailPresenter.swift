@@ -48,20 +48,24 @@ class DetailPresenter {
     }
     
     func addToFavorites() {
+        interactor.trackEvent(event: Event.addToFavoritesStart)
         guard let movie else { return }
         do {
             try interactor.addToFavorites(movie: movie)
+            interactor.trackEvent(event: Event.addToFavoritesSuccess)
         } catch {
-            print(error)
+            interactor.trackEvent(event: Event.loadSingleMovieFail(error: error))
         }
     }
     
     func removeFromFavorites() {
+        interactor.trackEvent(event: Event.removeFromFavoritesStart)
         guard let movie else { return }
         do {
             try interactor.removeFavorite(movie: movie)
+            interactor.trackEvent(event: Event.removeFromFavoritesSuccess)
         } catch {
-            print(error)
+            interactor.trackEvent(event: Event.removeFromFavoritesFail(error: error))
         }
     }
     
@@ -108,19 +112,28 @@ extension DetailPresenter {
         case addToFavoritesStart
         case addToFavoritesSuccess
         case addToFavoritesFail(error: Error)
+        case removeFromFavoritesStart
+        case removeFromFavoritesSuccess
+        case removeFromFavoritesFail(error: Error)
 
 
         var eventName: String {
             switch self {
-            case .onAppear:                 return "DetailView_Appeared"
-            case .onDisappear:              return "DetailView_Disappeared"
-            case .loadSingleMovieStart:     return "DetailView_LoadSingleMovie_Start"
-            case .loadSingleMovieSuccess:   return "DetailView_LoadSingleMovie_Success"
-            case .loadSingleMovieFail:      return "DetailView_LoadSingleMovie_Fail"
+            case .onAppear:                     return "DetailView_Appeared"
+            case .onDisappear:                  return "DetailView_Disappeared"
+            case .loadSingleMovieStart:         return "DetailView_LoadSingleMovie_Start"
+            case .loadSingleMovieSuccess:       return "DetailView_LoadSingleMovie_Success"
+            case .loadSingleMovieFail:          return "DetailView_LoadSingleMovie_Fail"
 
-            case .addToFavoritesStart:      return "DetailView_AddToFavorites_Start"
-            case .addToFavoritesSuccess:    return "DetailView_AddToFavorites_Success"
-            case .addToFavoritesFail:       return "DetailView_AddToFavorites_Fail"
+            case .addToFavoritesStart:          return "DetailView_AddToFavorites_Start"
+            case .addToFavoritesSuccess:        return "DetailView_AddToFavorites_Success"
+            case .addToFavoritesFail:           return "DetailView_AddToFavorites_Fail"
+            
+            case .removeFromFavoritesStart:     return "DetailView_RemoveFromFavorites_Start"
+            case .removeFromFavoritesSuccess:   return "DetailView_RemoveFromFavorites_Success"
+            case .removeFromFavoritesFail:      return "DetailView_RemoveFromFavorites_Fail"
+                
+                
                 
             }
         }
@@ -139,6 +152,10 @@ extension DetailPresenter {
                 
             case .addToFavoritesFail(error: let error):
                 return error.eventParameters
+                
+            case .removeFromFavoritesFail(error: let error):
+                return error.eventParameters
+                
             default:
                 return nil
             }
