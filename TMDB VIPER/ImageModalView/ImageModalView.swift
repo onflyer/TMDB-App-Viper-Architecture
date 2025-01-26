@@ -9,6 +9,7 @@ import SwiftUI
 
 struct ImageModalViewDelegate {
     var urlString:String = Constants.randomImage
+    var onDismiss: () -> Void = {}
 }
 
 struct ImageModalView: View {

@@ -50,4 +50,13 @@ struct CoreBuilder {
     func trailerModalView(delegate: TrailersModalDelegate) -> some View {
         TrailersModalView(delegate: delegate)
     }
+    
+    func imageModalView(imageString: String, onDismiss: @escaping () -> Void) -> some View {
+        let delegate = ImageModalViewDelegate(urlString: imageString, onDismiss: onDismiss)
+        return imageModalView(delegate: delegate)
+    }
+    
+    func imageModalView(delegate: ImageModalViewDelegate) -> some View {
+        ImageModalView(delegate: delegate)
+    }
 }
