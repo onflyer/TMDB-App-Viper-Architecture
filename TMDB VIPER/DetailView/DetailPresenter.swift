@@ -100,11 +100,18 @@ extension DetailPresenter {
     enum Event: LoggableEvent {
         case onAppear(delegate: DetailViewDelegate)
         case onDisappear(delegate: DetailViewDelegate)
+        case loadSingleMovieStart
+        case loadSingleMovieSuccess
+        case loadSingleMovieFail(error: Error)
 
         var eventName: String {
             switch self {
             case .onAppear:                 return "DetailView_Appeared"
             case .onDisappear:              return "DetailView_Disappeared"
+            case .loadSingleMovieStart:     return "DetailView_LoadSingleMovieStart"
+            case .loadSingleMovieSuccess:   return "DetailView_LoadSingleMovieSuccess"
+            case .loadSingleMovieFail:      return "DetailView_LoadSingleMovieFail"
+
             }
         }
         
@@ -112,8 +119,12 @@ extension DetailPresenter {
             switch self {
             case .onAppear(delegate: let delegate), .onDisappear(delegate: let delegate):
                 return delegate.eventParameters
-//            default:
-//                return nil
+                
+            case .loadSingleMovieSuccess:
+            case .loadSingleMovieFail(error: let error):
+                return error.eventParameters
+            default:
+                return nil
             }
         }
         
