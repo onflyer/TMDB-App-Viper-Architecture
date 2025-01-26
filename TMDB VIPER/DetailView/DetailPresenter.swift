@@ -23,12 +23,14 @@ class DetailPresenter {
     }
     
     func loadSingleMovie(id: Int) async {
+        interactor.trackEvent(event: Event.loadSingleMovieStart)
         isLoading = true
         do {
             movie = try await interactor.getSingleMovie(id: id)
             checkIsFavorite()
+            interactor.trackEvent(event: Event.loadSingleMovieSuccess(isMovieLoaded: (movie != nil)))
         } catch {
-            print(error)
+            interactor.trackEvent(event: Event.loadSingleMovieFail(error: error))
         }
         isLoading = false
 
@@ -101,17 +103,25 @@ extension DetailPresenter {
         case onAppear(delegate: DetailViewDelegate)
         case onDisappear(delegate: DetailViewDelegate)
         case loadSingleMovieStart
-        case loadSingleMovieSuccess
+        case loadSingleMovieSuccess(isMovieLoaded: Bool)
         case loadSingleMovieFail(error: Error)
+        case addToFavoritesStart
+        case addToFavoritesSuccess
+        case addToFavoritesFail(error: Error)
+
 
         var eventName: String {
             switch self {
             case .onAppear:                 return "DetailView_Appeared"
             case .onDisappear:              return "DetailView_Disappeared"
-            case .loadSingleMovieStart:     return "DetailView_LoadSingleMovieStart"
-            case .loadSingleMovieSuccess:   return "DetailView_LoadSingleMovieSuccess"
-            case .loadSingleMovieFail:      return "DetailView_LoadSingleMovieFail"
+            case .loadSingleMovieStart:     return "DetailView_LoadSingleMovie_Start"
+            case .loadSingleMovieSuccess:   return "DetailView_LoadSingleMovie_Success"
+            case .loadSingleMovieFail:      return "DetailView_LoadSingleMovie_Fail"
 
+            case .addToFavoritesStart:      return "DetailView_AddToFavorites_Start"
+            case .addToFavoritesSuccess:    return "DetailView_AddToFavorites_Success"
+            case .addToFavoritesFail:       return "DetailView_AddToFavorites_Fail"
+                
             }
         }
         
@@ -120,8 +130,14 @@ extension DetailPresenter {
             case .onAppear(delegate: let delegate), .onDisappear(delegate: let delegate):
                 return delegate.eventParameters
                 
-            case .loadSingleMovieSuccess:
+            case .loadSingleMovieSuccess(isMovieLoaded: let isMovieLoaded):
+                return [
+                    "single_movie_isMovieLoaded": isMovieLoaded.description,
+                ]
             case .loadSingleMovieFail(error: let error):
+                return error.eventParameters
+                
+            case .addToFavoritesFail(error: let error):
                 return error.eventParameters
             default:
                 return nil
