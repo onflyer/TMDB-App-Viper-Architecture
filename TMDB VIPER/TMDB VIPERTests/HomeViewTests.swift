@@ -20,6 +20,7 @@ struct HomeViewTests {
         }
     }
     
+    @MainActor
     struct AnyHomeInteractor: HomeInteractor {
         let anyGetMovies: (Int) async throws -> [Movie]
         let anyGetSingleMovie: (Int) async throws -> [SingleMovie]
@@ -27,7 +28,19 @@ struct HomeViewTests {
         let anyTrackEvent: (LoggableEvent) -> Void
         let anyTrackScreenEvent: (LoggableEvent) -> Void
         
-        
+        init(
+             getMovies: @escaping (Int) -> [Movie],
+             getSingleMovie: @escaping (Int) -> [SingleMovie],
+             searchMovies: @escaping (String) -> [Movie],
+             trackEvent: @escaping (LoggableEvent) -> Void,
+             trackScreenEvent: @escaping (LoggableEvent) -> Void
+        ) {
+            self.anyGetMovies = getMovies
+            self.anyGetSingleMovie = getSingleMovie
+            self.anySearchMovies = searchMovies
+            self.anyTrackEvent = trackEvent
+            self.anyTrackScreenEvent = trackScreenEvent
+        }
         
         
         func getNowPlayingMovies(page: Int) async throws -> [TMDB_VIPER.Movie] {

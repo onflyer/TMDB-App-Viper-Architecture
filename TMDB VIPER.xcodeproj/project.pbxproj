@@ -22,7 +22,6 @@
 		30548D6C2D3D1285005E463E /* SwiftfulLogging in Frameworks */ = {isa = PBXBuildFile; productRef = 30548D6B2D3D1285005E463E /* SwiftfulLogging */; };
 		30548F442D3D3CC3005E463E /* Error + EXT.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30548F432D3D3CC3005E463E /* Error + EXT.swift */; };
 		30548F492D4661CE005E463E /* ImageModalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30548F482D4661CE005E463E /* ImageModalView.swift */; };
-		30548F5B2D479C92005E463E /* TMDB_VIPERTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30548F592D479C92005E463E /* TMDB_VIPERTests.swift */; };
 		30548F5D2D479CE8005E463E /* HomeViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30548F5C2D479CE8005E463E /* HomeViewTests.swift */; };
 		30548F612D47AB73005E463E /* MockLogService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30548F602D47AB73005E463E /* MockLogService.swift */; };
 		30548F622D47AB73005E463E /* MockLogService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30548F602D47AB73005E463E /* MockLogService.swift */; };
@@ -114,7 +113,6 @@
 		30548F432D3D3CC3005E463E /* Error + EXT.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Error + EXT.swift"; sourceTree = "<group>"; };
 		30548F482D4661CE005E463E /* ImageModalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageModalView.swift; sourceTree = "<group>"; };
 		30548F4E2D479BFC005E463E /* TMDB VIPERTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "TMDB VIPERTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		30548F592D479C92005E463E /* TMDB_VIPERTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TMDB_VIPERTests.swift; sourceTree = "<group>"; };
 		30548F5C2D479CE8005E463E /* HomeViewTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewTests.swift; sourceTree = "<group>"; };
 		30548F602D47AB73005E463E /* MockLogService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockLogService.swift; sourceTree = "<group>"; };
 		306F5EF12D19E163002E1583 /* DetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailView.swift; sourceTree = "<group>"; };
@@ -261,7 +259,6 @@
 			isa = PBXGroup;
 			children = (
 				30548F5E2D47AB54005E463E /* Helpers */,
-				30548F592D479C92005E463E /* TMDB_VIPERTests.swift */,
 				30548F5C2D479CE8005E463E /* HomeViewTests.swift */,
 			);
 			path = "TMDB VIPERTests";
@@ -661,7 +658,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				30548F5B2D479C92005E463E /* TMDB_VIPERTests.swift in Sources */,
 				30548F612D47AB73005E463E /* MockLogService.swift in Sources */,
 				30548F5D2D479CE8005E463E /* HomeViewTests.swift in Sources */,
 			);
