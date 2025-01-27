@@ -101,7 +101,7 @@ extension HomeView {
                 ScrollView(.horizontal) {
                     LazyHStack (spacing: 15) {
                         ForEach(presenter.upcomingMovies) { movie in
-                            MovieCellView(title: movie.title ?? "N/A", imageName: movie.posterURLString)
+                            MovieCellView(title: movie.title ?? "N/A", imageName: movie.backdropURLString ?? "No image")
                                 .anyButton {
                                     presenter.onMoviePressed(id: movie.id)
                                 }
@@ -170,7 +170,7 @@ extension HomeView {
                 ScrollView(.horizontal) {
                     LazyHStack (spacing: 15) {
                         ForEach(presenter.popularMovies) { movie in
-                            MovieCellView(title: movie.title ?? "N/A", imageName: movie.posterURLString)
+                            MovieCellView(title: movie.title ?? "N/A", imageName: movie.backdropURLString ?? "No image")
                                 .anyButton {
                                     presenter.onMoviePressed(id: movie.id)
                                 }
