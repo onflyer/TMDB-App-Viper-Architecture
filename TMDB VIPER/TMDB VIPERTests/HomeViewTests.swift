@@ -29,9 +29,9 @@ struct HomeViewTests {
         let anyTrackScreenEvent: (LoggableEvent) -> Void
         
         init(
-             getMovies: @escaping (Int) -> [Movie],
-             getSingleMovie: @escaping (Int) -> [SingleMovie],
-             searchMovies: @escaping (String) -> [Movie],
+             getMovies: @escaping (Int) async throws -> [Movie],
+             getSingleMovie: @escaping (Int) async throws -> [SingleMovie],
+             searchMovies: @escaping (String) async throws -> [Movie],
              trackEvent: @escaping (LoggableEvent) -> Void,
              trackScreenEvent: @escaping (LoggableEvent) -> Void
         ) {
