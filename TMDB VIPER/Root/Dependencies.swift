@@ -58,9 +58,9 @@ class DevPreview {
     }
 }
 
-extension View {
-    func previewEnvironment() -> some View {
-        self
-            .environment(DevPreview.shared.container())
-    }
-}
+//extension View {
+//    func previewEnvironment() -> some View {
+//        self
+//            .environment(DevPreview.shared.container())
+//    }
+//}

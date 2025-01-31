@@ -23,14 +23,14 @@ struct HomeViewTests {
     @MainActor
     struct AnyHomeInteractor: HomeInteractor {
         let anyGetMovies: (Int) async throws -> [Movie]
-        let anyGetSingleMovie: (Int) async throws -> [SingleMovie]
+        let anyGetSingleMovie: (Int) async throws -> SingleMovie
         let anySearchMovies: (String) async throws -> [Movie]
         let anyTrackEvent: (LoggableEvent) -> Void
         let anyTrackScreenEvent: (LoggableEvent) -> Void
         
         init(
              getMovies: @escaping (Int) async throws -> [Movie],
-             getSingleMovie: @escaping (Int) async throws -> [SingleMovie],
+             getSingleMovie: @escaping (Int) async throws -> SingleMovie,
              searchMovies: @escaping (String) async throws -> [Movie],
              trackEvent: @escaping (LoggableEvent) -> Void,
              trackScreenEvent: @escaping (LoggableEvent) -> Void
@@ -44,37 +44,58 @@ struct HomeViewTests {
         
         
         func getNowPlayingMovies(page: Int) async throws -> [TMDB_VIPER.Movie] {
-            <#code#>
+            try await anyGetMovies(page)
         }
         
         func getUpcomingMovies(page: Int) async throws -> [TMDB_VIPER.Movie] {
-            <#code#>
+            try await anyGetMovies(page)
         }
         
         func getTopRatedMovies(page: Int) async throws -> [TMDB_VIPER.Movie] {
-            <#code#>
+            try await anyGetMovies(page)
         }
         
         func getPopularMovies(page: Int) async throws -> [TMDB_VIPER.Movie] {
-            <#code#>
+            try await anyGetMovies(page)
         }
         
         func getSingleMovie(id: Int) async throws -> TMDB_VIPER.SingleMovie {
-            <#code#>
+            try await anyGetSingleMovie(id)
+
         }
         
         func searchMovies(query: String) async throws -> [TMDB_VIPER.Movie] {
-            <#code#>
+            try await anySearchMovies(query)
         }
         
         func trackEvent(event: any TMDB_VIPER.LoggableEvent) {
-            <#code#>
+            anyTrackEvent(event)
         }
         
         func trackScreenEvent(event: any TMDB_VIPER.LoggableEvent) {
-            <#code#>
+            anyTrackScreenEvent(event)
         }
         
+        
+        @Test("loadMoviesSuccess")
+        func loadMoviesSuccess() async throws {
+            var events: [LoggableEvent] = []
+            let movies = Movie.mocks()
+            let movie = SingleMovie.mock()
+            
+            let interactor = AnyHomeInteractor { page in
+                movies
+            } getSingleMovie: { page in
+                movie
+            } searchMovies: { query in
+                movies
+            } trackEvent: { event in
+                events.append(event)
+            } trackScreenEvent: { screenEvent in
+                events.append(screenEvent)
+            }
+
+        }
         
     }
 }
