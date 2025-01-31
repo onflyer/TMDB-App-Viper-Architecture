@@ -95,7 +95,11 @@ struct HomeViewTests {
         
         await presenter.loadNowPlayingMovies()
         
+        print(presenter.nowPlayingMovies.count)
+        
         #expect(presenter.nowPlayingMovies.count == movies.count)
+        #expect(presenter.isLoading == false)
+        #expect(events.contains { $0.eventName == HomePresenter.Event.loadNowPlayingMoviesSuccess(count: 0).eventName })
 
     }
 }
