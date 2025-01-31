@@ -83,17 +83,13 @@ struct HomeViewTests {
             let movies = Movie.mocks()
             let movie = SingleMovie.mock()
             
-            let interactor = AnyHomeInteractor { page in
-                movies
-            } getSingleMovie: { page in
-                movie
-            } searchMovies: { query in
-                movies
-            } trackEvent: { event in
-                events.append(event)
-            } trackScreenEvent: { screenEvent in
-                events.append(screenEvent)
-            }
+            let interactor = AnyHomeInteractor(
+                        getMovies: { _ in movies },
+                        getSingleMovie: { _ in movie },
+                        searchMovies: { _ in movies },
+                        trackEvent: { events.append($0) },
+                        trackScreenEvent: { events.append($0) }
+                    )
 
         }
         

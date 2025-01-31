@@ -23,8 +23,6 @@
 		30548F442D3D3CC3005E463E /* Error + EXT.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30548F432D3D3CC3005E463E /* Error + EXT.swift */; };
 		30548F492D4661CE005E463E /* ImageModalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30548F482D4661CE005E463E /* ImageModalView.swift */; };
 		30548F5D2D479CE8005E463E /* HomeViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30548F5C2D479CE8005E463E /* HomeViewTests.swift */; };
-		30548F612D47AB73005E463E /* MockLogService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30548F602D47AB73005E463E /* MockLogService.swift */; };
-		30548F622D47AB73005E463E /* MockLogService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30548F602D47AB73005E463E /* MockLogService.swift */; };
 		306F5EF22D19E163002E1583 /* DetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 306F5EF12D19E163002E1583 /* DetailView.swift */; };
 		306F5EF62D19E1E9002E1583 /* DetailPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 306F5EF52D19E1E9002E1583 /* DetailPresenter.swift */; };
 		306F5EF82D19E276002E1583 /* DetailInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 306F5EF72D19E276002E1583 /* DetailInteractor.swift */; };
@@ -114,7 +112,6 @@
 		30548F482D4661CE005E463E /* ImageModalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageModalView.swift; sourceTree = "<group>"; };
 		30548F4E2D479BFC005E463E /* TMDB VIPERTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "TMDB VIPERTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		30548F5C2D479CE8005E463E /* HomeViewTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewTests.swift; sourceTree = "<group>"; };
-		30548F602D47AB73005E463E /* MockLogService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockLogService.swift; sourceTree = "<group>"; };
 		306F5EF12D19E163002E1583 /* DetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailView.swift; sourceTree = "<group>"; };
 		306F5EF52D19E1E9002E1583 /* DetailPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailPresenter.swift; sourceTree = "<group>"; };
 		306F5EF72D19E276002E1583 /* DetailInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailInteractor.swift; sourceTree = "<group>"; };
@@ -267,7 +264,6 @@
 		30548F5E2D47AB54005E463E /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
-				30548F602D47AB73005E463E /* MockLogService.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -658,7 +654,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				30548F612D47AB73005E463E /* MockLogService.swift in Sources */,
 				30548F5D2D479CE8005E463E /* HomeViewTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -703,7 +698,6 @@
 				30C2EDCB2D18B8700058DA88 /* View+EXT.swift in Sources */,
 				30FD09C42D33E70D0039A66D /* FavoritesManager.swift in Sources */,
 				30C2EDCC2D18B8700058DA88 /* AlertType.swift in Sources */,
-				30548F622D47AB73005E463E /* MockLogService.swift in Sources */,
 				30548F442D3D3CC3005E463E /* Error + EXT.swift in Sources */,
 				30C2EDD12D18B9270058DA88 /* CoreRouter.swift in Sources */,
 				30C2EDCD2D18B8700058DA88 /* AnyAppAlert.swift in Sources */,
