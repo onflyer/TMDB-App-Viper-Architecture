@@ -76,27 +76,26 @@ struct HomeViewTests {
             anyTrackScreenEvent(event)
         }
         
+    }
+    
+    @Test("load Movies Success")
+    func loadMoviesSuccess() async throws {
+        var events: [LoggableEvent] = []
+        let movies = Movie.mocks()
+        let movie = SingleMovie.mock()
         
-        @Test("load Movies Success")
-        func loadMoviesSuccess() async throws {
-            var events: [LoggableEvent] = []
-            let movies = Movie.mocks()
-            let movie = SingleMovie.mock()
-            
-            let interactor = AnyHomeInteractor(
-                        getMovies: { _ in movies },
-                        getSingleMovie: { _ in movie },
-                        searchMovies: { _ in movies },
-                        trackEvent: { events.append($0) },
-                        trackScreenEvent: { events.append($0) }
-                    )
-            let presenter = HomePresenter(interactor: interactor, router: MockHomeRouter())
-            
-            await presenter.loadNowPlayingMovies()
-            
-            #expect(presenter.nowPlayingMovies.count == movies.count)
+        let interactor = AnyHomeInteractor(
+                    getMovies: { _ in movies },
+                    getSingleMovie: { _ in movie },
+                    searchMovies: { _ in movies },
+                    trackEvent: { events.append($0) },
+                    trackScreenEvent: { events.append($0) }
+                )
+        let presenter = HomePresenter(interactor: interactor, router: MockHomeRouter())
+        
+        await presenter.loadNowPlayingMovies()
+        
+        #expect(presenter.nowPlayingMovies.count == movies.count)
 
-        }
-        
     }
 }
