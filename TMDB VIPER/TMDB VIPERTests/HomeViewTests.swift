@@ -77,7 +77,7 @@ struct HomeViewTests {
         }
         
         
-        @Test("loadMoviesSuccess")
+        @Test("load Movies Success")
         func loadMoviesSuccess() async throws {
             var events: [LoggableEvent] = []
             let movies = Movie.mocks()
@@ -90,6 +90,11 @@ struct HomeViewTests {
                         trackEvent: { events.append($0) },
                         trackScreenEvent: { events.append($0) }
                     )
+            let presenter = HomePresenter(interactor: interactor, router: MockHomeRouter())
+            
+            await presenter.loadNowPlayingMovies()
+            
+            #expect(presenter.nowPlayingMovies.count == movies.count)
 
         }
         
