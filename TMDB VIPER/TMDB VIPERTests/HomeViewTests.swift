@@ -78,6 +78,7 @@ struct HomeViewTests {
         
     }
     
+    //MARK: TYPE ERASED INTERACTOR
     @Test("load Movies Success")
     func loadMoviesSuccess() async throws {
         var events: [LoggableEvent] = []
@@ -94,9 +95,7 @@ struct HomeViewTests {
         let presenter = HomePresenter(interactor: interactor, router: MockHomeRouter())
         
         await presenter.loadNowPlayingMovies()
-        
-        print(presenter.nowPlayingMovies.count)
-        
+                
         #expect(presenter.nowPlayingMovies.count == movies.count)
         #expect(presenter.isLoading == false)
         #expect(events.contains { $0.eventName == HomePresenter.Event.loadNowPlayingMoviesSuccess(count: 0).eventName })

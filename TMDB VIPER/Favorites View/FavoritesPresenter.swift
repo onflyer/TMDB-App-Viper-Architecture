@@ -19,8 +19,6 @@ class FavoritesPresenter {
     init(interactor: FavoritesInteractor, router: FavoritesRouter) {
         self.interactor = interactor
         self.router = router
-//        loadFavorites()
-//        print(favoriteMovies)
     }
     
     func loadFavorites() {
