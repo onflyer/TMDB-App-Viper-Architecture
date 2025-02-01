@@ -80,7 +80,7 @@ extension CoreInteractor {
         logManager.trackEvent(event: event)
     }
     
-    func trackScreenEvent(event: LoggableEvent) {
+    func trackScreenView(event: LoggableEvent) {
         logManager.trackEvent(event: event)
     }
 }

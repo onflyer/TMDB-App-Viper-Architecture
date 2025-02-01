@@ -18,7 +18,7 @@ protocol HomeInteractor {
     
     //MARK: LOGGING FUNCTIONS
     func trackEvent(event: LoggableEvent)
-    func trackScreenEvent(event: LoggableEvent)
+    func trackScreenView(event: LoggableEvent)
 }
 
 extension CoreInteractor: HomeInteractor { }

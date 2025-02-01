@@ -48,7 +48,7 @@ class HomePresenter {
             let results = try await interactor.getUpcomingMovies(page: page)
             upcomingMovies.append(contentsOf: results)
         } catch {
-            print(error)
+            interactor.trackEvent(event: Event.loadUpcomingMoviesFail(error: error))
         }
     }
     
@@ -121,7 +121,7 @@ extension HomePresenter {
     //MARK: LOGGING FUNCTIONS
     
     func onViewAppear(delegate: HomeDelegate) {
-        interactor.trackScreenEvent(event: Event.onAppear(delegate: delegate))
+        interactor.trackScreenView(event: Event.onAppear(delegate: delegate))
     }
     
     func onViewDisappear(delegate: HomeDelegate) {

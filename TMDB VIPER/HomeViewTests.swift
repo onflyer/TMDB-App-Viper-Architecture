@@ -6,6 +6,7 @@
 //
 
 import Testing
+import SwiftUI
 @testable import TMDB_VIPER
 
 @MainActor
@@ -64,7 +65,7 @@ struct HomeViewTests {
 
         }
         
-        func searchMovies(query: String) async throws -> [TMDB_VIPER.Movie] {
+        func searchMovies(query: String = "Test") async throws -> [TMDB_VIPER.Movie] {
             try await anySearchMovies(query)
         }
         
@@ -72,7 +73,7 @@ struct HomeViewTests {
             anyTrackEvent(event)
         }
         
-        func trackScreenEvent(event: any TMDB_VIPER.LoggableEvent) {
+        func trackScreenView(event: any TMDB_VIPER.LoggableEvent) {
             anyTrackScreenEvent(event)
         }
         
@@ -86,7 +87,7 @@ struct HomeViewTests {
         let movie = SingleMovie.mock()
         
         let interactor = AnyHomeInteractor(
-                    getMovies: { _ in movies },
+                    getMovies: { _ in movies},
                     getSingleMovie: { _ in movie },
                     searchMovies: { _ in movies },
                     trackEvent: { events.append($0) },
@@ -95,10 +96,46 @@ struct HomeViewTests {
         let presenter = HomePresenter(interactor: interactor, router: MockHomeRouter())
         
         await presenter.loadNowPlayingMovies()
+        await presenter.loadUpcomingMovies()
+        await presenter.loadTopRatedMovies()
+        await presenter.loadPopularMovies()
+        await presenter.loadSearchedMovies()
                 
-        #expect(presenter.nowPlayingMovies.count == movies.count)
+        #expect(presenter.nowPlayingMovies == movies)
+        #expect(presenter.upcomingMovies == movies)
+        #expect(presenter.topRatedMovies == movies)
+        #expect(presenter.popularMovies == movies)
         #expect(presenter.isLoading == false)
         #expect(events.contains { $0.eventName == HomePresenter.Event.loadNowPlayingMoviesSuccess(count: 0).eventName })
+
+    }
+    
+    @Test("load Movies Failure")
+    func loadMoviesFailure() async throws {
+        let error: Error = URLError(.badURL)
+        var events: [LoggableEvent] = []
+        
+        let interactor = AnyHomeInteractor(
+            getMovies: { _ in
+                throw error
+            },
+            getSingleMovie: { _ in
+                throw error
+            },
+            searchMovies: { _ in
+                throw error
+            },
+            trackEvent: { events.append($0) },
+            trackScreenEvent: { events.append($0) }
+        )
+    
+        let presenter = HomePresenter(interactor: interactor, router: MockHomeRouter())
+        
+        await presenter.loadNowPlayingMovies()
+        await presenter.loadUpcomingMovies()
+        
+        #expect(events.contains { $0.eventName == HomePresenter.Event.loadNowPlayingMoviesFail(error: error).eventName })
+        #expect(events.contains { $0.eventName == HomePresenter.Event.loadUpcomingMoviesFail(error: error).eventName })
 
     }
 }
