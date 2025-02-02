@@ -14,6 +14,7 @@
 		300B97D22D1975F40073CDF9 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 300B97D12D1975F40073CDF9 /* Constants.swift */; };
 		300B97D52D1979D90073CDF9 /* MovieCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 300B97D42D1979D90073CDF9 /* MovieCellView.swift */; };
 		3036F6552D4E43B90063616B /* MockLogService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3036F6542D4E43B90063616B /* MockLogService.swift */; };
+		3036F6582D4F9A080063616B /* AnyHomeInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3036F6572D4F9A080063616B /* AnyHomeInteractor.swift */; };
 		305489B42D381D44005E463E /* FavoritesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 305489B32D381D44005E463E /* FavoritesView.swift */; };
 		305489B62D381D5D005E463E /* FavoritesPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 305489B52D381D5D005E463E /* FavoritesPresenter.swift */; };
 		305489B82D381D95005E463E /* FavoritesInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 305489B72D381D95005E463E /* FavoritesInteractor.swift */; };
@@ -104,6 +105,7 @@
 		300B97D12D1975F40073CDF9 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		300B97D42D1979D90073CDF9 /* MovieCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieCellView.swift; sourceTree = "<group>"; };
 		3036F6542D4E43B90063616B /* MockLogService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockLogService.swift; sourceTree = "<group>"; };
+		3036F6572D4F9A080063616B /* AnyHomeInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnyHomeInteractor.swift; sourceTree = "<group>"; };
 		305489B32D381D44005E463E /* FavoritesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesView.swift; sourceTree = "<group>"; };
 		305489B52D381D5D005E463E /* FavoritesPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesPresenter.swift; sourceTree = "<group>"; };
 		305489B72D381D95005E463E /* FavoritesInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesInteractor.swift; sourceTree = "<group>"; };
@@ -235,6 +237,14 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
+		3036F6562D4F99F60063616B /* Type erased testing example */ = {
+			isa = PBXGroup;
+			children = (
+				3036F6572D4F9A080063616B /* AnyHomeInteractor.swift */,
+			);
+			path = "Type erased testing example";
+			sourceTree = "<group>";
+		};
 		305489B22D381D16005E463E /* Favorites View */ = {
 			isa = PBXGroup;
 			children = (
@@ -257,6 +267,7 @@
 		30548F5A2D479C92005E463E /* TMDB VIPERTests */ = {
 			isa = PBXGroup;
 			children = (
+				3036F6562D4F99F60063616B /* Type erased testing example */,
 				30548F5E2D47AB54005E463E /* Helpers */,
 			);
 			path = "TMDB VIPERTests";
@@ -667,6 +678,7 @@
 			files = (
 				30FD05EA2D2947650039A66D /* TrailersModalView.swift in Sources */,
 				30C2EADF2D18A2C50058DA88 /* MoviesService.swift in Sources */,
+				3036F6582D4F9A080063616B /* AnyHomeInteractor.swift in Sources */,
 				30C2EAE02D18A2C50058DA88 /* NetworkManager.swift in Sources */,
 				306F5EFA2D19E2DE002E1583 /* DetailRouter.swift in Sources */,
 				30C2ECDA2D18B0F60058DA88 /* HomePresenter.swift in Sources */,

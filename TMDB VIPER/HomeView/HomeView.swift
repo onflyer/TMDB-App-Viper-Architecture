@@ -45,7 +45,7 @@ struct HomeView: View {
             await presenter.loadPopularMovies()
         }
         .task(id: presenter.query) {
-            await presenter.loadSearchedMovies()
+            await presenter.loadSearchedMovies(query: presenter.query)
         }
         .onAppear {
             presenter.onViewAppear(delegate: delegate)

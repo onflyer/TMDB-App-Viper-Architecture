@@ -102,7 +102,7 @@ extension DetailPresenter {
     //MARK: LOGGING FUNCTIONS
     
     func onViewAppear(delegate: DetailViewDelegate) {
-        interactor.trackScreenEvent(event: Event.onAppear(delegate: delegate))
+        interactor.trackScreenView(event: Event.onAppear(delegate: delegate))
     }
     
     func onViewDisappear(delegate: DetailViewDelegate) {

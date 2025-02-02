@@ -72,7 +72,7 @@ class HomePresenter {
         }
     }
     
-    func loadSearchedMovies() async {
+    func loadSearchedMovies(query: String) async {
         
         guard !query.isEmpty else {
             searchedMovies.removeAll()

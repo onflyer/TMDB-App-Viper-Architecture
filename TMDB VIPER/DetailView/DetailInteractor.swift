@@ -18,7 +18,7 @@ protocol DetailInteractor {
     func trackEvent(eventName: String, parameters: [String: Any]?, type: LogType)
     func trackEvent(event: AnyLoggableEvent)
     func trackEvent(event: LoggableEvent)
-    func trackScreenEvent(event: LoggableEvent)
+    func trackScreenView(event: LoggableEvent)
 }
 
 extension CoreInteractor: DetailInteractor {}

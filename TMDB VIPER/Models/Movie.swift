@@ -156,7 +156,7 @@ extension Movie {
                 popularity: 87.65,
                 posterPath: "\(path)t5zCBSB5xMDKcDqe91qahCOUYVV.jpg",
                 releaseDate: "2022-05-20",
-                title: "Mock Movie 3",
+                title: "Mock Movie 4",
                 video: false,
                 voteAverage: 6.9,
                 voteCount: 560
