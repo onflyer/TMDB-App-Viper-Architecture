@@ -56,20 +56,20 @@ class DetailPresenter {
     
     func addToFavorites() {
         interactor.trackEvent(event: Event.addToFavoritesStart)
-        guard let movie else { return }
+//        guard let movie else { return }
         do {
-            try interactor.addToFavorites(movie: movie)
+            try interactor.addToFavorites(movie: movie ?? SingleMovie.mock())
             interactor.trackEvent(event: Event.addToFavoritesSuccess)
         } catch {
-            interactor.trackEvent(event: Event.loadSingleMovieFail(error: error))
+            interactor.trackEvent(event: Event.addToFavoritesFail(error: error))
         }
     }
     
     func removeFromFavorites() {
         interactor.trackEvent(event: Event.removeFromFavoritesStart)
-        guard let movie else { return }
+//        guard let movie else { return }
         do {
-            try interactor.removeFavorite(movie: movie)
+            try interactor.removeFavorite(movie: movie ?? SingleMovie.mock())
             interactor.trackEvent(event: Event.removeFromFavoritesSuccess)
         } catch {
             interactor.trackEvent(event: Event.removeFromFavoritesFail(error: error))
@@ -170,6 +170,8 @@ extension DetailPresenter {
         
         var type: LogType {
             switch self {
+            case .loadSingleMovieFail, .addToFavoritesFail, .removeFromFavoritesFail:
+                return .severe
             default:
                 return .info
             }

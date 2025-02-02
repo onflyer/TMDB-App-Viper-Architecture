@@ -133,15 +133,16 @@ struct DetailPresenterTests {
     }
     
     @Test("presenter failure path")
-    func presenterFailurePath() {
+    func presenterFailurePath() async {
         var events: [LoggableEvent] = []
-        let movie = SingleMovie.mock()
-        let error: Error = NetworkError.invalidResponse
+        let error: Error = URLError(.badServerResponse)
 
         
         
         let interactor = AnyDetailInteractor(
-            getSingleMovie: { _ in movie },
+            getSingleMovie: { _ in
+                throw error
+            },
             addToFavorites: { movie in
                 throw error
             },
@@ -151,12 +152,21 @@ struct DetailPresenterTests {
             isFavorite: { movie in
                 throw error
             },
-            trackEvent: {event in
-                events.append(event)
-            },
-            trackScreenEvent: { screenEvent in
-                events.append(screenEvent)
-            }
+            trackEvent: { events.append($0) },
+            trackScreenEvent: { events.append($0) }
         )
+        
+        let presenter = DetailPresenter(interactor: interactor, router: MockDetailRouter())
+        
+        await presenter.loadSingleMovie(id: 1)
+        presenter.addToFavorites()
+        presenter.removeFromFavorites()
+        
+        #expect(events.contains { $0.eventName == DetailPresenter.Event.loadSingleMovieFail(error: error).eventName })
+        #expect(events.contains { $0.eventName == DetailPresenter.Event.addToFavoritesFail(error: error).eventName })
+        #expect(events.contains { $0.eventName == DetailPresenter.Event.removeFromFavoritesFail(error: error).eventName })
+
+
+        
     }
 }
