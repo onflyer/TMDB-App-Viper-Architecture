@@ -34,7 +34,7 @@ struct ModelsTests {
         #expect(movie.genreIDS != nil)
     }
     
-    @Test func testMovieDecodingFromJSON() throws {
+    @Test func testMoviesCodableConformance() throws {
         let movie = Movie(
             adult: false,
             backdropPath: "/backdrop.jpg",

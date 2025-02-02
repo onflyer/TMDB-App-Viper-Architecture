@@ -15,8 +15,6 @@ protocol DetailInteractor {
     func isFavorite(movie: SingleMovie) throws -> Bool
     
     //MARK: LOGGING FUNCTIONS
-    func trackEvent(eventName: String, parameters: [String: Any]?, type: LogType)
-    func trackEvent(event: AnyLoggableEvent)
     func trackEvent(event: LoggableEvent)
     func trackScreenView(event: LoggableEvent)
 }

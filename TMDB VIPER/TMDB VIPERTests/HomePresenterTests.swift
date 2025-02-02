@@ -10,11 +10,10 @@ import SwiftUI
 @testable import TMDB_VIPER
 
 @MainActor
-struct HomeViewTests {
+struct HomePresenterTests {
     
     @MainActor
-    class MockHomeRouter: HomeRouter {
-        
+    struct MockHomeRouter: HomeRouter {
         
         func showDetailView(delegate: DetailViewDelegate) {
             
