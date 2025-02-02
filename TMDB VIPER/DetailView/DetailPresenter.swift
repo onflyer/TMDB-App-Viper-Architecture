@@ -77,11 +77,13 @@ class DetailPresenter {
     }
     
     func checkIsFavorite() {
-        guard let movie else { return }
+        interactor.trackEvent(event: Event.checkIsFavoriteStart)
+//        guard let movie else { return }
         do {
-            isFavorite = try interactor.isFavorite(movie: movie)
+            isFavorite = try interactor.isFavorite(movie: movie ?? SingleMovie.mock())
+            interactor.trackEvent(event: Event.checkIsFavoriteSuccess)
         } catch {
-            print(error)
+            interactor.trackEvent(event: Event.checkIsFavoriteFail(error: error))
         }
     }
     
@@ -122,6 +124,9 @@ extension DetailPresenter {
         case removeFromFavoritesStart
         case removeFromFavoritesSuccess
         case removeFromFavoritesFail(error: Error)
+        case checkIsFavoriteStart
+        case checkIsFavoriteSuccess
+        case checkIsFavoriteFail (error: Error)
 
 
         var eventName: String {
@@ -142,6 +147,9 @@ extension DetailPresenter {
                 
                 
                 
+            case .checkIsFavoriteStart:         return "DetailView_CheckIsFavorite_Start"
+            case .checkIsFavoriteSuccess:       return "DetailView_CheckIsFavorite_Success"
+            case .checkIsFavoriteFail:          return "DetailView_CheckIsFavorite_Fail"
             }
         }
         
@@ -163,6 +171,8 @@ extension DetailPresenter {
             case .removeFromFavoritesFail(error: let error):
                 return error.eventParameters
                 
+            case .checkIsFavoriteFail(error: let error):
+                return error.eventParameters
             default:
                 return nil
             }

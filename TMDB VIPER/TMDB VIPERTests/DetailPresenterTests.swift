@@ -161,10 +161,14 @@ struct DetailPresenterTests {
         await presenter.loadSingleMovie(id: 1)
         presenter.addToFavorites()
         presenter.removeFromFavorites()
+        presenter.checkIsFavorite()
         
         #expect(events.contains { $0.eventName == DetailPresenter.Event.loadSingleMovieFail(error: error).eventName })
         #expect(events.contains { $0.eventName == DetailPresenter.Event.addToFavoritesFail(error: error).eventName })
         #expect(events.contains { $0.eventName == DetailPresenter.Event.removeFromFavoritesFail(error: error).eventName })
+        #expect(events.contains { $0.eventName == DetailPresenter.Event.checkIsFavoriteFail(error: error).eventName })
+
+        
 
 
         
