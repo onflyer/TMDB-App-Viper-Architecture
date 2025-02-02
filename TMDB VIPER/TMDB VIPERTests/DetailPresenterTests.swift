@@ -6,6 +6,7 @@
 //
 
 import Testing
+import SwiftUI
 @testable import TMDB_VIPER
 
 @MainActor
@@ -89,16 +90,23 @@ struct DetailPresenterTests {
     }
     
     
-    @Test("Load Movie Success")
+    @Test("presenter happy path")
     func loadMovieSuccess() async {
         var events: [LoggableEvent] = []
         let movie = SingleMovie.mock()
+        var favoriteMovies: [SingleMovie] = SingleMovie.mocks()
         
         let interactor = AnyDetailInteractor(
             getSingleMovie: { _ in movie },
-            addToFavorites: { movie in },
-            removeFavorite: { movie in },
-            isFavorite: { movie in true },
+            addToFavorites: { movie in
+                favoriteMovies.append(movie)
+            },
+            removeFavorite: { movie in
+                favoriteMovies.removeAll {  $0.id == 1 }
+            },
+            isFavorite: { movie in
+                favoriteMovies.contains(where: {$0.id == 2 })
+            },
             trackEvent: {event in
                 events.append(event)
             },
@@ -110,5 +118,45 @@ struct DetailPresenterTests {
         let presenter = DetailPresenter(interactor: interactor, router: MockDetailRouter())
         
         await presenter.loadSingleMovie(id: movie.id)
+        presenter.addToFavorites()
+        presenter.removeFromFavorites()
+        presenter.checkIsFavorite()
+        
+        #expect(presenter.movie?.title == movie.title)
+        #expect(favoriteMovies.contains(where: { movie in
+            movie.id == movie.id
+        }))
+        #expect(!favoriteMovies.contains(where: { movie in
+            movie.id == 1
+        }))
+        #expect(favoriteMovies.contains(where: {$0.id == 2}))
+    }
+    
+    @Test("presenter failure path")
+    func presenterFailurePath() {
+        var events: [LoggableEvent] = []
+        let movie = SingleMovie.mock()
+        let error: Error = NetworkError.invalidResponse
+
+        
+        
+        let interactor = AnyDetailInteractor(
+            getSingleMovie: { _ in movie },
+            addToFavorites: { movie in
+                throw error
+            },
+            removeFavorite: { movie in
+                throw error
+            },
+            isFavorite: { movie in
+                throw error
+            },
+            trackEvent: {event in
+                events.append(event)
+            },
+            trackScreenEvent: { screenEvent in
+                events.append(screenEvent)
+            }
+        )
     }
 }
