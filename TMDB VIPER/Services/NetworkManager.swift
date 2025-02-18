@@ -9,6 +9,7 @@ import Foundation
 
 // MARK: - Default Request Manager
 public class NetworkManager: NetworkServiceProtocol {
+    
     public let urlSession: URLSessionProtocol
 
     init(urlSession: URLSessionProtocol = DefaultURLSessionService()) {
