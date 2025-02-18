@@ -12,7 +12,7 @@ struct TheatreLocationsView: View {
     
     @State private var position: MapCameraPosition = .userLocation(followsHeading: false, fallback: .automatic)
     @State private var visibleRegion: MKCoordinateRegion?
-    @State private var bounds: MapCameraBounds = .init(minimumDistance: 0.1, maximumDistance: 50000)
+    @State private var bounds: MapCameraBounds = .init(minimumDistance: 50000, maximumDistance: 80000)
     @State private var mapItems: [MKMapItem] = []
     @Namespace private var mapScope
 
@@ -39,6 +39,10 @@ struct TheatreLocationsView: View {
             print(mapItems)
         }
         .task {
+            Task {
+                try await Task.sleep(for: .seconds(1))
+                bounds = .init(minimumDistance: 0.1, maximumDistance: 50000)
+            }
             service.requestWhenInUseAuthorization()
             print(mapItems)
         }
