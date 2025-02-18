@@ -12,6 +12,7 @@ struct TheatreLocationsView: View {
     
     @State private var position: MapCameraPosition = .userLocation(followsHeading: false, fallback: .automatic)
     @State private var visibleRegion: MKCoordinateRegion?
+    @State private var bounds: MapCameraBounds = .init(minimumDistance: 0.1, maximumDistance: 50000)
     @State private var mapItems: [MKMapItem] = []
     @Namespace private var mapScope
 
@@ -19,9 +20,10 @@ struct TheatreLocationsView: View {
     
     
     var body: some View {
-        Map(position: $position, bounds: .init(minimumDistance: 50000, maximumDistance: 50000)) {
+        
+        Map(position: $position, bounds: bounds) {
             ForEach(mapItems, id: \.self) { place in
-                Marker(place.placemark.description ?? "no title", coordinate: place.placemark.coordinate)
+                Marker(place.placemark.description, coordinate: place.placemark.coordinate)
             }
             UserAnnotation()
         }
@@ -38,7 +40,6 @@ struct TheatreLocationsView: View {
         }
         .task {
             service.requestWhenInUseAuthorization()
-//            try? await searchLocations()
             print(mapItems)
         }
     }
@@ -46,7 +47,7 @@ struct TheatreLocationsView: View {
     func searchLocations() async throws {
         
         let request = MKLocalSearch.Request()
-        request.region = visibleRegion ?? MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 48.884134, longitude: 2.332196), latitudinalMeters: 5000, longitudinalMeters: 5000)
+        request.region = visibleRegion ?? MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 48.884134, longitude: 2.332196), latitudinalMeters: 50000, longitudinalMeters: 50000)
         request.naturalLanguageQuery = "movie theater"
         let response = MKLocalSearch(request: request)
         let results = try await response.start()
