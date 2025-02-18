@@ -25,6 +25,7 @@ struct TheatreLocationsView: View {
             ForEach(mapItems, id: \.self) { place in
                 Marker(place.placemark.description, coordinate: place.placemark.coordinate)
             }
+            
             UserAnnotation()
         }
        
