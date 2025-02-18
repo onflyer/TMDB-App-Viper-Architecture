@@ -19,7 +19,6 @@ struct MapKitLocationService {
     }
     
     func searchLocations(query: String) async throws -> MKLocalSearch.Response {
-        
         let request = MKLocalSearch.Request()
         request.naturalLanguageQuery = query
         let response = MKLocalSearch(request: request)
