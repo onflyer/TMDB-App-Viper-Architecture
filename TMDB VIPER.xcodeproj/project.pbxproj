@@ -13,6 +13,7 @@
 		300B97CF2D1975B70073CDF9 /* ImageLoaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 300B97CE2D1975B70073CDF9 /* ImageLoaderView.swift */; };
 		300B97D22D1975F40073CDF9 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 300B97D12D1975F40073CDF9 /* Constants.swift */; };
 		300B97D52D1979D90073CDF9 /* MovieCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 300B97D42D1979D90073CDF9 /* MovieCellView.swift */; };
+		3020D5E72D64B60D00C7E151 /* MapKitLocationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3020D5E62D64B60D00C7E151 /* MapKitLocationService.swift */; };
 		3036F6632D4FB3F70063616B /* ModelsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3036F6622D4FB3F70063616B /* ModelsTests.swift */; };
 		3036F6652D4FB7F60063616B /* DetailPresenterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3036F6642D4FB7F60063616B /* DetailPresenterTests.swift */; };
 		3036F66E2D500D630063616B /* NetworkServiceMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3036F6672D500D630063616B /* NetworkServiceMock.swift */; };
@@ -109,6 +110,7 @@
 		300B97CE2D1975B70073CDF9 /* ImageLoaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageLoaderView.swift; sourceTree = "<group>"; };
 		300B97D12D1975F40073CDF9 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		300B97D42D1979D90073CDF9 /* MovieCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieCellView.swift; sourceTree = "<group>"; };
+		3020D5E62D64B60D00C7E151 /* MapKitLocationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapKitLocationService.swift; sourceTree = "<group>"; };
 		3036F6622D4FB3F70063616B /* ModelsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelsTests.swift; sourceTree = "<group>"; };
 		3036F6642D4FB7F60063616B /* DetailPresenterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailPresenterTests.swift; sourceTree = "<group>"; };
 		3036F6662D500D630063616B /* DataParserMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataParserMock.swift; sourceTree = "<group>"; };
@@ -245,6 +247,14 @@
 				30548B922D3BF2BA005E463E /* HomePagePlaceholder.swift */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		3020D5E32D64B4A400C7E151 /* MapKitLocationService */ = {
+			isa = PBXGroup;
+			children = (
+				3020D5E62D64B60D00C7E151 /* MapKitLocationService.swift */,
+			);
+			path = MapKitLocationService;
 			sourceTree = "<group>";
 		};
 		3036F66B2D500D630063616B /* Mocks */ = {
@@ -417,6 +427,7 @@
 		30C2EAD82D18A2C50058DA88 /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				3020D5E32D64B4A400C7E151 /* MapKitLocationService */,
 				30FD09982D33C4600039A66D /* FavoriteMovies */,
 				30C2EAC52D18A2C50058DA88 /* Movies */,
 				30C2EAD52D18A2C50058DA88 /* Network */,
@@ -710,6 +721,7 @@
 				30C2EAE42D18A2C50058DA88 /* URLSessionProtocol.swift in Sources */,
 				30C2EDC42D18B8700058DA88 /* AlertViewModifer.swift in Sources */,
 				30C2EDC52D18B8700058DA88 /* ModalViewModifier.swift in Sources */,
+				3020D5E72D64B60D00C7E151 /* MapKitLocationService.swift in Sources */,
 				300B95F62D19707F0073CDF9 /* FeedPresenter.swift in Sources */,
 				30FD09BE2D33C6470039A66D /* SingleMovieEntity.swift in Sources */,
 				305489B62D381D5D005E463E /* FavoritesPresenter.swift in Sources */,
@@ -792,6 +804,8 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = FQWAP959Y3;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_LSApplicationCategoryType = "";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "We need location to show theathers on a map";
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "onflyer.com.TMDB-VIPERTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -810,6 +824,8 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = FQWAP959Y3;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_LSApplicationCategoryType = "";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "We need location to show theathers on a map";
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "onflyer.com.TMDB-VIPERTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
