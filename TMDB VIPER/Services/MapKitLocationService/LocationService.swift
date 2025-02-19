@@ -5,54 +5,53 @@
 //  Created by Aleksandar Milidrag on 18. 2. 2025..
 //
 
-import Foundation
 import MapKit
 
-class LocationService: NSObject, CLLocationManagerDelegate {
+final class LocationManager: NSObject, ObservableObject {
+    private let locationManager = CLLocationManager()
     
-    let service: CLLocationManager = CLLocationManager()
+    var region = MKCoordinateRegion()
     
     override init() {
         super.init()
-        self.service.delegate = self
-        self.service.desiredAccuracy = kCLLocationAccuracyBest
-        self.setupPermissions()
+        
+        self.locationManager.delegate = self
+        self.locationManager.desiredAccuracy = kCLLocationAccuracyBest
+        self.setup()
     }
     
-    func searchLocations(query: String, region: MKCoordinateRegion) async throws -> MKLocalSearch.Response {
-        let request = MKLocalSearch.Request()
-        request.region = region
-        request.naturalLanguageQuery = query
-        let response = MKLocalSearch(request: request)
-        let results = try await response.start()
-        return results
-    }
-    
-    func getLastKnownUserLocation(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) async throws -> CLLocation? {
-        service.startUpdatingLocation()
-        return locations.last
-    }
-    
-    func setupPermissions() {
-        switch service.authorizationStatus {
-            //If we are authorized then we request location just once,
-            // to center the map
+    func setup() {
+        switch locationManager.authorizationStatus {
+        //If we are authorized then we request location just once, to center the map
         case .authorizedWhenInUse:
-            service.requestLocation()
-            //If we don´t, we request authorization
+            locationManager.requestLocation()
+        //If we don´t, we request authorization
         case .notDetermined:
-            service.requestWhenInUseAuthorization()
+            locationManager.startUpdatingLocation()
+            locationManager.requestWhenInUseAuthorization()
         default:
             break
         }
     }
-    
+}
+
+extension LocationManager: CLLocationManagerDelegate {
     func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
         guard .authorizedWhenInUse == manager.authorizationStatus || manager.authorizationStatus == .authorizedAlways else { return }
-        service.requestLocation()
+        locationManager.requestLocation()
     }
     
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
         print("Something went wrong: \(error)")
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        locationManager.stopUpdatingLocation()
+        locations.last.map {
+            region = MKCoordinateRegion(
+                center: $0.coordinate,
+                span: .init(latitudeDelta: 0.01, longitudeDelta: 0.01)
+            )
+        }
     }
 }
