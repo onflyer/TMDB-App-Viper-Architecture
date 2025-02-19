@@ -28,7 +28,7 @@ class LocationService: NSObject, CLLocationManagerDelegate {
         return results
     }
     
-    func getLastKnownUserLocation(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) throws -> CLLocation? {
+    func getLastKnownUserLocation(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) async throws -> CLLocation? {
         service.startUpdatingLocation()
         return locations.last
     }
