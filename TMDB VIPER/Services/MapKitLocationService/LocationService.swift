@@ -8,18 +8,20 @@
 import Foundation
 import MapKit
 
-struct MapKitLocationService {
+class LocationService: NSObject, CLLocationManagerDelegate {
     
-    let service: CLLocationManager
+    let service: CLLocationManager = CLLocationManager()
     
-    init(service: CLLocationManager = CLLocationManager()) {
-        self.service = service
+    override init() {
+        super.init()
+        self.service.delegate = self
+        self.service.desiredAccuracy = kCLLocationAccuracyBest
         self.setupPermissions()
-        service.desiredAccuracy = kCLLocationAccuracyBest
     }
     
-    func searchLocations(query: String) async throws -> MKLocalSearch.Response {
+    func searchLocations(query: String, region: MKCoordinateRegion) async throws -> MKLocalSearch.Response {
         let request = MKLocalSearch.Request()
+        request.region = region
         request.naturalLanguageQuery = query
         let response = MKLocalSearch(request: request)
         let results = try await response.start()
@@ -39,7 +41,6 @@ struct MapKitLocationService {
             service.requestLocation()
             //If we don´t, we request authorization
         case .notDetermined:
-            service.startUpdatingLocation()
             service.requestWhenInUseAuthorization()
         default:
             break
