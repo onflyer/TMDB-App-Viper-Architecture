@@ -33,6 +33,17 @@ final class LocationManager: NSObject, ObservableObject {
             break
         }
     }
+    
+    func searchLocations(query: String) async throws -> MKLocalSearch.Response {
+            let request = MKLocalSearch.Request()
+            request.region = region
+            request.naturalLanguageQuery = query
+            let response = MKLocalSearch(request: request)
+            let results = try await response.start()
+            return results
+    }
+    
+    
 }
 
 extension LocationManager: CLLocationManagerDelegate {

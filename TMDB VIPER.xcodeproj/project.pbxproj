@@ -253,12 +253,12 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
-		3020D5E32D64B4A400C7E151 /* MapKitLocationService */ = {
+		3020D5E32D64B4A400C7E151 /* LocationService */ = {
 			isa = PBXGroup;
 			children = (
 				3020D5E62D64B60D00C7E151 /* LocationService.swift */,
 			);
-			path = MapKitLocationService;
+			path = LocationService;
 			sourceTree = "<group>";
 		};
 		3020D5E92D64D47500C7E151 /* TheatreLocationsView */ = {
@@ -440,7 +440,7 @@
 		30C2EAD82D18A2C50058DA88 /* Services */ = {
 			isa = PBXGroup;
 			children = (
-				3020D5E32D64B4A400C7E151 /* MapKitLocationService */,
+				3020D5E32D64B4A400C7E151 /* LocationService */,
 				30FD09982D33C4600039A66D /* FavoriteMovies */,
 				30C2EAC52D18A2C50058DA88 /* Movies */,
 				30C2EAD52D18A2C50058DA88 /* Network */,
