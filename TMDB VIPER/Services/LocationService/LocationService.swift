@@ -11,6 +11,7 @@ final class LocationManager: NSObject, ObservableObject {
     private let locationManager = CLLocationManager()
     
     var region = MKCoordinateRegion()
+    var userLocation: CLLocation? = nil
     
     override init() {
         super.init()
@@ -44,6 +45,8 @@ final class LocationManager: NSObject, ObservableObject {
     }
     
     
+    
+    
 }
 
 extension LocationManager: CLLocationManagerDelegate {
@@ -58,6 +61,7 @@ extension LocationManager: CLLocationManagerDelegate {
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         locationManager.stopUpdatingLocation()
+        userLocation = locations.last
         locations.last.map {
             region = MKCoordinateRegion(
                 center: $0.coordinate,
