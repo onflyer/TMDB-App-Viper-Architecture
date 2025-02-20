@@ -8,6 +8,7 @@
 import MapKit
 
 final class LocationServiceProd: NSObject, LocationService {
+    
     private let locationManager = CLLocationManager()
     
     var region = MKCoordinateRegion()
@@ -24,7 +25,7 @@ final class LocationServiceProd: NSObject, LocationService {
     func setup() {
         switch locationManager.authorizationStatus {
         //If we are authorized then we request location just once, to center the map
-        case .authorizedWhenInUse:
+        case .authorizedWhenInUse, .authorizedAlways:
             locationManager.requestLocation()
         //If we don´t, we request authorization
         case .notDetermined:
@@ -72,3 +73,7 @@ extension LocationServiceProd: CLLocationManagerDelegate {
         }
     }
 }
+
+
+
+

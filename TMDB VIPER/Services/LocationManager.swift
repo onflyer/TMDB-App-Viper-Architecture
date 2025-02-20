@@ -15,6 +15,5 @@ class LocationManager {
     init(service: LocationService) {
         self.service = service
     }
-    
-    
+
 }

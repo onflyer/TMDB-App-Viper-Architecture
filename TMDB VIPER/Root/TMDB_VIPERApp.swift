@@ -11,6 +11,12 @@ import SwiftUI
 struct TMDB_VIPERApp: App {
     
 //    static func main() async {
+//        let manager = LocationManager(service: LocationServiceProd())
+//        let location = try? await manager.service.getUserLocation()
+//        print(location)
+//    }
+    
+//    static func main() async {
 //        let instance = MovieManager(service: MovieServiceProd(networkService: NetworkManager()))
 //        let movies = try? await instance.searchMovies(query: "lord")
 //        print(movies)
@@ -46,6 +52,7 @@ struct TMDB_VIPERApp: App {
     var body: some Scene {
         WindowGroup {
 //            TheatreLocationsView()
+//            Test323()
             delegate.builder.homeView()
         }
         
