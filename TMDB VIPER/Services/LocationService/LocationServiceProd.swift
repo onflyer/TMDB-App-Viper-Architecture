@@ -29,7 +29,7 @@ final class LocationServiceProd: NSObject, LocationService {
             locationManager.requestLocation()
         //If we don´t, we request authorization
         case .notDetermined:
-            locationManager.startUpdatingLocation()
+//            locationManager.startUpdatingLocation()
             locationManager.requestWhenInUseAuthorization()
         default:
             break

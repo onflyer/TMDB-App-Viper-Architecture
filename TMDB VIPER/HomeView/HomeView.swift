@@ -199,9 +199,13 @@ extension HomeView {
     var searchableSection: some View {
         ForEach(presenter.searchedMovies) { movie in
             SearchCellView(posterUrlString: movie.posterURLString, title: movie.title ?? "No title", releaseDate: movie.releaseDate ?? "No release date", ratingText: movie.ratingText ?? "No rating")
-                .anyButton {
+                
+                .anyButton(.plain) {
                     presenter.onMoviePressed(id: movie.id)
                 }
+                
+                
+                
         }
         .listStyle(.plain)
     }
@@ -212,3 +216,4 @@ extension HomeView {
     let delegate = HomeDelegate()
     return builder.homeView(delegate: delegate)
 }
+

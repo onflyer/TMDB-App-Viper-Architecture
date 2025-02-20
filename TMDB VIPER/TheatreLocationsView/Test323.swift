@@ -11,6 +11,7 @@ import MapKit
 struct Test323: View {
     var manager = LocationServiceProd()
     @State private var cameraPosition: MapCameraPosition = .userLocation(fallback: .automatic)
+    
 
     var body: some View {
         ZStack {
@@ -19,8 +20,8 @@ struct Test323: View {
             }
         }
         .task {
-//            updateCameraPosition()
-            print(manager.region)
+           let location = try? await manager.getUserLocation()
+            print(location)
         }
     }
     

@@ -14,24 +14,25 @@ struct SearchCellView: View {
     var ratingText: String
     
     var body: some View {
-        HStack(alignment: .center, spacing: 16) {
-            ImageLoaderView(urlString: posterUrlString, resizingMode: .fit, forceTransitionAnimation: false)
-                .frame(width: 60, height: 90)
-                .cornerRadius(8)
-                .shadow(radius: 3)
-            
-            VStack(alignment: .leading) {
-                Text(title)
-                .font(.headline)
+            HStack(alignment: .center, spacing: 16) {
+                ImageLoaderView(urlString: posterUrlString, resizingMode: .fit, forceTransitionAnimation: false)
+                    .frame(width: 60, height: 90)
+                    .cornerRadius(8)
+                    .shadow(radius: 3)
                 
-                Text(releaseDate)
-                .font(.subheadline)
-                
-                Text(ratingText)
-                .foregroundColor(.yellow)
+                VStack(alignment: .leading) {
+                    Text(title)
+                        .font(.headline)
+                    
+                    Text(releaseDate)
+                        .font(.subheadline)
+                    
+                    Text(ratingText)
+                        .foregroundColor(.yellow)
+                }
             }
-        }
-        
+            .frame(maxWidth: .infinity, alignment: .leading)
+            .tappableBackground()
     }
 }
 
