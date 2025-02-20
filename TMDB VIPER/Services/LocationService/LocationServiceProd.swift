@@ -7,7 +7,7 @@
 
 import MapKit
 
-final class LocationServiceProd: NSObject {
+final class LocationServiceProd: NSObject, LocationService {
     private let locationManager = CLLocationManager()
     
     var region = MKCoordinateRegion()
