@@ -8,12 +8,6 @@
 import Foundation
 import MapKit
 
-enum DelegateEvent {
-    case didChangeAuthorization(CLAuthorizationStatus)
-    case didFail(Error)
-    case didUpdateLocations([CLLocation])
-}
-
 final class LocationServiceProd2: NSObject, LocationService2 {
     let service = CLLocationManager()
     let delegateEvents: AsyncStream<DelegateEvent>
@@ -29,8 +23,8 @@ final class LocationServiceProd2: NSObject, LocationService2 {
         self.service.delegate = self
     }
     
-    func getAuthorizationStatus() -> CLAuthorizationStatus {
-        return service.authorizationStatus
+    var authorizationStatus: CLAuthorizationStatus {
+        service.authorizationStatus
     }
     
     func requestWhenInUseAuthorization() {
@@ -60,4 +54,10 @@ extension LocationServiceProd2: CLLocationManagerDelegate {
     func locationManager(_ service: CLLocationManager, didFailWithError error: Error) {
         self.delegateEventsContinuation.yield(.didFail(error))
     }
+}
+
+enum DelegateEvent {
+    case didChangeAuthorization(CLAuthorizationStatus)
+    case didFail(Error)
+    case didUpdateLocations([CLLocation])
 }

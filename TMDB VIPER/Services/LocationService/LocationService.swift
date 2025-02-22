@@ -14,7 +14,7 @@ protocol LocationService {
 }
 
 protocol LocationService2 {
-    func getAuthorizationStatus() -> CLAuthorizationStatus
+    var authorizationStatus: CLAuthorizationStatus { get }
     var delegateEvents: AsyncStream<DelegateEvent> { get }
     func requestWhenInUseAuthorization()
     func requestLocation()
