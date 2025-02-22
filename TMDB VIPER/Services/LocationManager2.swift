@@ -29,5 +29,9 @@ class LocationManager2 {
         service.requestWhenInUseAuthorization()
     }
     
+    func searchLocations(query: String, region: MKCoordinateRegion) async throws -> [MKMapItem] {
+        try await service.searchLocations(query: query, region: region)
+    }
+    
     
 }
