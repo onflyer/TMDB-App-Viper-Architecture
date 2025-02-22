@@ -34,6 +34,15 @@ final class LocationServiceProd2: NSObject, LocationService2 {
     func requestLocation() {
         service.requestLocation()
     }
+    
+    func searchLocations(query: String, region: MKCoordinateRegion) async throws -> [MKMapItem] {
+        let request = MKLocalSearch.Request()
+        request.region = region
+        request.naturalLanguageQuery = query
+        let response = MKLocalSearch(request: request)
+        let results = try await response.start()
+        return results.mapItems
+    }
 }
 
 //MARK: Delegate functions

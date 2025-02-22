@@ -8,7 +8,7 @@
 import Foundation
 
 @MainActor
-struct SwiftDataFavoriteMoviesMock: FavoriteMoviesService {
+struct SwiftDataFavoriteMoviesServiceMock: FavoriteMoviesService {
     
     var movies: [SingleMovie]
     

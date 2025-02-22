@@ -18,6 +18,7 @@ protocol LocationService2 {
     var delegateEvents: AsyncStream<DelegateEvent> { get }
     func requestWhenInUseAuthorization()
     func requestLocation()
+    func searchLocations(query: String, region: MKCoordinateRegion) async throws -> [MKMapItem]
 }
 
 

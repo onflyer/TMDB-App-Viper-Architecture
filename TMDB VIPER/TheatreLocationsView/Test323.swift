@@ -22,6 +22,7 @@ struct Test323: View {
         .task {
            let location = try? await manager.getUserLocation()
             print(location)
+            
         }
     }
     

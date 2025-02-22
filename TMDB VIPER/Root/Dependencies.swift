@@ -46,7 +46,7 @@ class DevPreview {
     init() {
         self.logManager = LogManager(services: [])
         self.movieManager = MovieManager(service: MovieServiceMock())
-        self.favoritesManager = FavoritesManager(service: SwiftDataFavoriteMoviesMock())
+        self.favoritesManager = FavoritesManager(service: SwiftDataFavoriteMoviesServiceMock())
     }
     
     func container() -> DependencyContainer {
