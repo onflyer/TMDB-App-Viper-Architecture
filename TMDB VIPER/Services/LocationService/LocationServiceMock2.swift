@@ -17,7 +17,7 @@ struct LocationServiceMock2: LocationService2 {
     let delegateContinuation: AsyncStream<DelegateEvent>.Continuation
 
     init(authorizationStatus: CLAuthorizationStatus = .authorizedWhenInUse, location: CLLocationCoordinate2D = CLLocationCoordinate2D (
-        latitude: 34.0522300, longitude: -118.2436800)) {
+        latitude: 37.37409110, longitude: -122.03100050)) {
             self.authorizationStatus = authorizationStatus
             self.location = location
             var continuation: AsyncStream<DelegateEvent>.Continuation!
