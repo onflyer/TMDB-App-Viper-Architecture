@@ -18,6 +18,7 @@
 		3020D7C22D6787C000C7E151 /* LocationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3020D7C12D6787C000C7E151 /* LocationService.swift */; };
 		3020D7C42D67899E00C7E151 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3020D7C32D67899E00C7E151 /* LocationManager.swift */; };
 		3020D7C82D67D66800C7E151 /* Test323.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3020D7C72D67D66800C7E151 /* Test323.swift */; };
+		3020D7CA2D6A2BE100C7E151 /* LocationServiceProd2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3020D7C92D6A2BE100C7E151 /* LocationServiceProd2.swift */; };
 		3036F6632D4FB3F70063616B /* ModelsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3036F6622D4FB3F70063616B /* ModelsTests.swift */; };
 		3036F6652D4FB7F60063616B /* DetailPresenterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3036F6642D4FB7F60063616B /* DetailPresenterTests.swift */; };
 		3036F66E2D500D630063616B /* NetworkServiceMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3036F6672D500D630063616B /* NetworkServiceMock.swift */; };
@@ -119,6 +120,7 @@
 		3020D7C12D6787C000C7E151 /* LocationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationService.swift; sourceTree = "<group>"; };
 		3020D7C32D67899E00C7E151 /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		3020D7C72D67D66800C7E151 /* Test323.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Test323.swift; sourceTree = "<group>"; };
+		3020D7C92D6A2BE100C7E151 /* LocationServiceProd2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationServiceProd2.swift; sourceTree = "<group>"; };
 		3036F6622D4FB3F70063616B /* ModelsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelsTests.swift; sourceTree = "<group>"; };
 		3036F6642D4FB7F60063616B /* DetailPresenterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailPresenterTests.swift; sourceTree = "<group>"; };
 		3036F6662D500D630063616B /* DataParserMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataParserMock.swift; sourceTree = "<group>"; };
@@ -262,6 +264,7 @@
 			children = (
 				3020D7C12D6787C000C7E151 /* LocationService.swift */,
 				3020D5E62D64B60D00C7E151 /* LocationServiceProd.swift */,
+				3020D7C92D6A2BE100C7E151 /* LocationServiceProd2.swift */,
 			);
 			path = LocationService;
 			sourceTree = "<group>";
@@ -743,6 +746,7 @@
 				30C2EAE42D18A2C50058DA88 /* URLSessionProtocol.swift in Sources */,
 				30C2EDC42D18B8700058DA88 /* AlertViewModifer.swift in Sources */,
 				30C2EDC52D18B8700058DA88 /* ModalViewModifier.swift in Sources */,
+				3020D7CA2D6A2BE100C7E151 /* LocationServiceProd2.swift in Sources */,
 				3020D5E72D64B60D00C7E151 /* LocationServiceProd.swift in Sources */,
 				300B95F62D19707F0073CDF9 /* FeedPresenter.swift in Sources */,
 				30FD09BE2D33C6470039A66D /* SingleMovieEntity.swift in Sources */,

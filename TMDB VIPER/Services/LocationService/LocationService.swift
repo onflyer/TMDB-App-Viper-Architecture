@@ -12,3 +12,12 @@ protocol LocationService {
     func getUserLocation() async throws -> CLLocation?
 
 }
+
+protocol LocationService2 {
+    func getAuthorizationStatus() -> CLAuthorizationStatus
+    var delegateEvents: AsyncStream<DelegateEvent> { get }
+    func requestWhenInUseAuthorization()
+    func requestLocation()
+}
+
+
