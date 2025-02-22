@@ -6,17 +6,20 @@
 //
 
 import Foundation
+import MapKit
 
 @MainActor
 struct CoreInteractor {
     let logManager: LogManager
     let movieManager: MovieManager
     let favoritesManager: FavoritesManager
+    let locationManager: LocationManager2
     
     init(container: DependencyContainer) {
         self.logManager = container.resolve(LogManager.self)!
         self.movieManager = container.resolve(MovieManager.self)!
         self.favoritesManager = container.resolve(FavoritesManager.self)!
+        self.locationManager = container.resolve(LocationManager2.self)!
     }
     
     func getNowPlayingMovies(page: Int) async throws -> [Movie] {
@@ -60,6 +63,23 @@ struct CoreInteractor {
     func removeFavorite(movie: SingleMovie) throws {
         try favoritesManager.removeFavorite(movie: movie)
     }
+    
+    func getAuthorizationStatus() -> CLAuthorizationStatus {
+        locationManager.getAuthorizationStatus()
+    }
+    
+    func requestLocation() {
+        locationManager.requestLocation()
+    }
+    
+    func requestWhenInUseAuthorization() {
+        locationManager.requestWhenInUseAuthorization()
+    }
+    
+    func searchLocations(query: String, region: MKCoordinateRegion) async throws -> [MKMapItem] {
+        try await locationManager.searchLocations(query: query, region: region)
+    }
+
 
 }
 
