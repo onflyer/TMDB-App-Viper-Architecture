@@ -10,7 +10,7 @@ import MapKit
 protocol LocationService {
     func searchLocations(query: String) async throws -> MKLocalSearch.Response
     func getUserLocation() async throws -> CLLocation?
-
+    
 }
 
 protocol LocationService2 {

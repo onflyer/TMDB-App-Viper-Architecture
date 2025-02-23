@@ -8,7 +8,7 @@
 import SwiftUI
 import MapKit
 
-struct TheatreLocationsView: View {
+struct TheatreLocationsView1: View {
     
     @State private var position: MapCameraPosition = .userLocation(followsHeading: false, fallback: .automatic)
     @State private var visibleRegion: MKCoordinateRegion?
@@ -63,5 +63,5 @@ struct TheatreLocationsView: View {
 }
 
 #Preview {
-    TheatreLocationsView()
+    TheatreLocationsView1()
 }
