@@ -18,6 +18,9 @@ struct TheatreLocationsView: View {
         }
         .task {
             await presenter.getAuthorizationStatus()
+            await presenter.requestLocation()
+            print(presenter.authorizationStatus.rawValue)
+            print(presenter.location)
         }
         .navigationTitle("Theaters near you")
     }

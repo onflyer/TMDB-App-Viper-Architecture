@@ -19,7 +19,7 @@ class TheatreLocationsPresenter {
     var location: CLLocation?
     var query: String = "movie theater"
     var region = MKCoordinateRegion()
-    var authorizationStatus: CLAuthorizationStatus = .authorizedWhenInUse
+    var authorizationStatus: CLAuthorizationStatus = .notDetermined
     var searchedLocations: [MKMapItem] = []
     
     init(interactor: TheatreLocationsInteractor, router: TheatreLocationsRouter) {
@@ -31,7 +31,7 @@ class TheatreLocationsPresenter {
         authorizationStatus = await interactor.getAuthorizationStatus()
     }
     
-    func requestLocation() async throws {
+    func requestLocation() async {
         do {
             location = try await interactor.requestLocation()
         } catch {
