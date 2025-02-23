@@ -9,12 +9,11 @@ import Foundation
 import MapKit
 
 protocol TheatreLocationsInteractor {
-    func getAuthorizationStatus() -> CLAuthorizationStatus
-    func requestLocation()
-    func requestWhenInUseAuthorization()
+    func getAuthorizationStatus() async -> CLAuthorizationStatus
+    func requestLocation() async throws -> CLLocation
     func searchLocations(query: String, region: MKCoordinateRegion) async throws -> [MKMapItem]
+
 }
 
-extension CoreInteractor: TheatreLocationsInteractor {
-}
+extension CoreInteractor: TheatreLocationsInteractor {}
 

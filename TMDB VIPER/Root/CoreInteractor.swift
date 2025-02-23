@@ -13,13 +13,13 @@ struct CoreInteractor {
     let logManager: LogManager
     let movieManager: MovieManager
     let favoritesManager: FavoritesManager
-    let locationManager: LocationManager2
+    let locationManager: LocationManager3
     
     init(container: DependencyContainer) {
         self.logManager = container.resolve(LogManager.self)!
         self.movieManager = container.resolve(MovieManager.self)!
         self.favoritesManager = container.resolve(FavoritesManager.self)!
-        self.locationManager = container.resolve(LocationManager2.self)!
+        self.locationManager = container.resolve(LocationManager3.self)!
     }
     
     func getNowPlayingMovies(page: Int) async throws -> [Movie] {
@@ -64,16 +64,12 @@ struct CoreInteractor {
         try favoritesManager.removeFavorite(movie: movie)
     }
     
-    func getAuthorizationStatus() -> CLAuthorizationStatus {
-        locationManager.getAuthorizationStatus()
+    func getAuthorizationStatus() async -> CLAuthorizationStatus {
+        await locationManager.getAuthorizationStatus()
     }
     
-    func requestLocation() {
-        locationManager.requestLocation()
-    }
-    
-    func requestWhenInUseAuthorization() {
-        locationManager.requestWhenInUseAuthorization()
+    func requestLocation() async throws -> CLLocation {
+        try await locationManager.requestLocation()
     }
     
     func searchLocations(query: String, region: MKCoordinateRegion) async throws -> [MKMapItem] {

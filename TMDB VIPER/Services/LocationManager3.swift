@@ -9,29 +9,23 @@ import Foundation
 import MapKit
 
 @Observable
-class LocationManager2 {
+class LocationManager3 {
     
-    let service: LocationService2
+    let service: LocationService3
     
-    init(service: LocationService2) {
+    init(service: LocationService3) {
         self.service = service
     }
     
-    func getAuthorizationStatus() -> CLAuthorizationStatus {
-        service.authorizationStatus
+    func getAuthorizationStatus() async -> CLAuthorizationStatus {
+        await service.getAuthorizationStatus()
     }
     
-    func requestLocation() {
-        service.requestLocation()
-    }
-    
-    func requestWhenInUseAuthorization() {
-        service.requestWhenInUseAuthorization()
+    func requestLocation() async throws -> CLLocation {
+        try await service.requestLocation()
     }
     
     func searchLocations(query: String, region: MKCoordinateRegion) async throws -> [MKMapItem] {
         try await service.searchLocations(query: query, region: region)
     }
-    
-    
 }

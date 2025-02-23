@@ -20,21 +20,21 @@ struct Dependencies {
     let logManager: LogManager
     let movieManager: MovieManager
     let favoritesManager: FavoritesManager
-    let locationManager: LocationManager2
+    let locationManager: LocationManager3
     
     init() {
         logManager = LogManager(services: [ConsoleService(printParameters: true)])
         let networkManager = NetworkManager()
         movieManager = MovieManager(service: MovieServiceProd(networkService: networkManager))
         favoritesManager = FavoritesManager(service: SwiftDataFavoriteMoviesServiceProd())
-        locationManager = LocationManager2(service: LocationServiceProd2())
+        locationManager = LocationManager3(service: LocationServiceProd3())
         
         
         let container = DependencyContainer()
         container.register(LogManager.self, service: logManager)
         container.register(MovieManager.self, service: movieManager)
         container.register(FavoritesManager.self, service: favoritesManager)
-        container.register(LocationManager2.self, service: locationManager)
+        container.register(LocationManager3.self, service: locationManager)
         self.container = container
     }
 }
@@ -46,13 +46,13 @@ class DevPreview {
     let logManager: LogManager
     let movieManager: MovieManager
     let favoritesManager: FavoritesManager
-    let locationManager: LocationManager2
+    let locationManager: LocationManager3
     
     init() {
         self.logManager = LogManager(services: [])
         self.movieManager = MovieManager(service: MovieServiceMock())
         self.favoritesManager = FavoritesManager(service: SwiftDataFavoriteMoviesServiceMock())
-        self.locationManager = LocationManager2(service: LocationServiceMock2())
+        self.locationManager = LocationManager3(service: LocationServiceMock3())
     }
     
     func container() -> DependencyContainer {
@@ -60,7 +60,7 @@ class DevPreview {
         container.register(LogManager.self, service: logManager)
         container.register(MovieManager.self, service: movieManager)
         container.register(FavoritesManager.self, service: favoritesManager)
-        container.register(LocationManager2.self, service: locationManager)
+        container.register(LocationManager3.self, service: locationManager)
         return container
     }
 }

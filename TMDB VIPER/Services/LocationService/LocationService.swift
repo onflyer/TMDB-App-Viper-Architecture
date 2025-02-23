@@ -21,4 +21,10 @@ protocol LocationService2 {
     func searchLocations(query: String, region: MKCoordinateRegion) async throws -> [MKMapItem]
 }
 
+protocol LocationService3 {
+    func getAuthorizationStatus() async -> CLAuthorizationStatus
+    func requestLocation() async throws -> CLLocation
+    func searchLocations(query: String, region: MKCoordinateRegion) async throws -> [MKMapItem]
+}
+
 
