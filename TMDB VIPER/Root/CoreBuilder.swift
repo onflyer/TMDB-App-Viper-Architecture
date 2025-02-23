@@ -42,6 +42,15 @@ struct CoreBuilder {
         )
     }
     
+    func theatreLocationsView(router: Router) -> some View {
+        TheatreLocationsView(
+            presenter: TheatreLocationsPresenter(
+                interactor: interactor,
+                router: CoreRouter(router: router, builder: self)
+            )
+        )
+    }
+    
     func trailerModalView(movie: SingleMovie, onDismiss: @escaping () -> Void) -> some View {
         let delegate = TrailersModalDelegate(movie: movie, onDismiss: onDismiss)
         return trailerModalView(delegate: delegate)

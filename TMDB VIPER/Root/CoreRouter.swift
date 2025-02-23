@@ -25,6 +25,12 @@ struct CoreRouter {
         }
     }
     
+    func showTheatreLocationsView() {
+        router.showScreen(.fullScreenCover) { router in
+            builder.theatreLocationsView(router: router)
+        }
+    }
+    
     func showTrailerModalView(movie: SingleMovie, onXMarkPressed: @escaping () -> Void) {
         router.showModal(backgroundColor: .black.opacity(0.3), transition: .identity) {
             builder.trailerModalView(movie: movie, onDismiss: onXMarkPressed)
