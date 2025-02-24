@@ -34,6 +34,7 @@ struct DetailView: View {
                     Text("Watch trailer")
                     
                     Image(systemName: "play.fill")
+                        
                 }
                 .bold()
                 .foregroundStyle(.secondary)
@@ -59,6 +60,7 @@ struct DetailView: View {
                     }
                     .offset(x: 20, y: 90)
             }
+            
 
             
             HStack {
@@ -90,6 +92,23 @@ struct DetailView: View {
             .padding(.leading, 160)
             .padding(.trailing, 15)
             .frame(maxWidth: .infinity, maxHeight: 100, alignment: .leading)
+            
+            HStack {
+                Text("Local theaters")
+                
+                Image(systemName: "location.fill")
+                    .foregroundStyle(.orange)
+            }
+            .bold()
+            .foregroundStyle(.primary)
+            .tappableBackground()
+            .padding(.trailing)
+            .clipShape(RoundedRectangle(cornerRadius: 14))
+            .frame(maxWidth: .infinity, alignment: .trailing)
+            .anyButton {
+                presenter.onLocalTheatersPressed()
+            }
+            
         }
         .redacted(reason: presenter.isLoading ? .placeholder : [])
         Divider()

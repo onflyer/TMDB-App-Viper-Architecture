@@ -16,7 +16,7 @@ class TheatreLocationsPresenter {
     let router: TheatreLocationsRouter
     
     var cameraPosition: MapCameraPosition = .userLocation(fallback: .automatic)
-    var location: CLLocation?
+    var location: CLLocation = CLLocation()
     var query: String = "movie theater"
     var region = MKCoordinateRegion()
     var authorizationStatus: CLAuthorizationStatus = .notDetermined
@@ -25,6 +25,10 @@ class TheatreLocationsPresenter {
     init(interactor: TheatreLocationsInteractor, router: TheatreLocationsRouter) {
         self.interactor = interactor
         self.router = router
+    }
+    
+    func onXmarkPressed() {
+        router.dismissScreen()
     }
     
     func getAuthorizationStatus() async {
@@ -40,12 +44,15 @@ class TheatreLocationsPresenter {
     }
     
     func requestRegion() async {
-        guard let location else { return }
-        region = MKCoordinateRegion(center: location.coordinate, span: .init(latitudeDelta: 0.01, longitudeDelta: 0.01))
+        region = MKCoordinateRegion(center: location.coordinate, span: .init(latitudeDelta: 50000, longitudeDelta: 50000))
     }
     
-    func searchLocations(query: String, region: MKCoordinateRegion) async throws {
-        searchedLocations = try await interactor.searchLocations(query: query, region: region)
+    func searchLocations(query: String, region: MKCoordinateRegion) async {
+        do {
+            searchedLocations = try await interactor.searchLocations(query: query, region: region)
+        } catch {
+            print(error)
+        }
     }
     
 }

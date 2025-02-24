@@ -9,7 +9,7 @@ import Foundation
 
 @MainActor
 protocol TheatreLocationsRouter {
-    
+    func dismissScreen() 
 }
 
 extension CoreRouter: TheatreLocationsRouter {}

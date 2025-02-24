@@ -12,6 +12,7 @@ protocol DetailRouter {
     func showTrailerModalView(movie: SingleMovie, onXMarkPressed: @escaping () -> Void)
     func showImageModalView(urlString: String, onXMarkPressed: @escaping () -> Void)
     func showFavoritesView()
+    func showTheatreLocationsView()
     func dismissModal()
     func dismissScreen()
 }

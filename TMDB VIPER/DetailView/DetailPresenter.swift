@@ -54,6 +54,10 @@ class DetailPresenter {
         router.showFavoritesView()
     }
     
+    func onLocalTheatersPressed() {
+        router.showTheatreLocationsView()
+    }
+    
     func addToFavorites() {
         interactor.trackEvent(event: Event.addToFavoritesStart)
 //        guard let movie else { return }
