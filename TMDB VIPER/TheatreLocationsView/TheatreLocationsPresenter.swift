@@ -49,7 +49,7 @@ class TheatreLocationsPresenter {
     
     func searchLocations(query: String, region: MKCoordinateRegion) async {
         do {
-            searchedLocations = try await interactor.searchLocations(query: query, region: region)
+            searchedLocations = try await interactor.searchLocations(query: query, region: MKCoordinateRegion(center: location.coordinate, span: .init(latitudeDelta: 0.1, longitudeDelta: 0.1)))
         } catch {
             print(error)
         }

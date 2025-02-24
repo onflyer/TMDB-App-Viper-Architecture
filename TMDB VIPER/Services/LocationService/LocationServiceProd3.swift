@@ -29,13 +29,15 @@ final class LocationServiceProd3: NSObject, CLLocationManagerDelegate, LocationS
         return await withCheckedContinuation { continuation in
             permissionContinuation = continuation
             coreLocation.requestWhenInUseAuthorization()
+            
         }
     }
     
     func requestLocation() async throws -> CLLocation {
+        
         try await withCheckedThrowingContinuation { continuation in
             locationContinuation = continuation
-            coreLocation.requestLocation()
+            coreLocation.startUpdatingLocation()
         }
     }
     
@@ -61,6 +63,7 @@ final class LocationServiceProd3: NSObject, CLLocationManagerDelegate, LocationS
     }
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        coreLocation.stopUpdatingLocation()
         guard let location = locations.last else { return }
         locationContinuation?.resume(returning: location)
         locationContinuation = nil

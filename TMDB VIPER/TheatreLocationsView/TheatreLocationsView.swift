@@ -34,6 +34,7 @@ struct TheatreLocationsView: View {
             await presenter.requestLocation()
             await presenter.requestRegion()
             await presenter.searchLocations(query: presenter.query, region: presenter.region)
+            print(presenter.searchedLocations)
         }
         .navigationTitle("Theaters near you")
     }
