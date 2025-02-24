@@ -13,13 +13,7 @@
 		300B97CF2D1975B70073CDF9 /* ImageLoaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 300B97CE2D1975B70073CDF9 /* ImageLoaderView.swift */; };
 		300B97D22D1975F40073CDF9 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 300B97D12D1975F40073CDF9 /* Constants.swift */; };
 		300B97D52D1979D90073CDF9 /* MovieCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 300B97D42D1979D90073CDF9 /* MovieCellView.swift */; };
-		3020D5E72D64B60D00C7E151 /* LocationServiceProd.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3020D5E62D64B60D00C7E151 /* LocationServiceProd.swift */; };
-		3020D5EB2D64D4A300C7E151 /* TheatreLocationsView1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3020D5EA2D64D4A300C7E151 /* TheatreLocationsView1.swift */; };
 		3020D7C22D6787C000C7E151 /* LocationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3020D7C12D6787C000C7E151 /* LocationService.swift */; };
-		3020D7C42D67899E00C7E151 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3020D7C32D67899E00C7E151 /* LocationManager.swift */; };
-		3020D7C82D67D66800C7E151 /* Test323.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3020D7C72D67D66800C7E151 /* Test323.swift */; };
-		3020D7CA2D6A2BE100C7E151 /* LocationServiceProd2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3020D7C92D6A2BE100C7E151 /* LocationServiceProd2.swift */; };
-		3020D7CC2D6A3A0800C7E151 /* LocationServiceMock2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3020D7CB2D6A3A0800C7E151 /* LocationServiceMock2.swift */; };
 		3020D7CE2D6A3CB900C7E151 /* LocationManager3.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3020D7CD2D6A3CB900C7E151 /* LocationManager3.swift */; };
 		3020D7D02D6B5C7500C7E151 /* TheatreLocationsInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3020D7CF2D6B5C7500C7E151 /* TheatreLocationsInteractor.swift */; };
 		3020D7D22D6B67E200C7E151 /* TheatreLocationsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3020D7D12D6B67E200C7E151 /* TheatreLocationsPresenter.swift */; };
@@ -123,13 +117,7 @@
 		300B97CE2D1975B70073CDF9 /* ImageLoaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageLoaderView.swift; sourceTree = "<group>"; };
 		300B97D12D1975F40073CDF9 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		300B97D42D1979D90073CDF9 /* MovieCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieCellView.swift; sourceTree = "<group>"; };
-		3020D5E62D64B60D00C7E151 /* LocationServiceProd.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationServiceProd.swift; sourceTree = "<group>"; };
-		3020D5EA2D64D4A300C7E151 /* TheatreLocationsView1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TheatreLocationsView1.swift; sourceTree = "<group>"; };
 		3020D7C12D6787C000C7E151 /* LocationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationService.swift; sourceTree = "<group>"; };
-		3020D7C32D67899E00C7E151 /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
-		3020D7C72D67D66800C7E151 /* Test323.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Test323.swift; sourceTree = "<group>"; };
-		3020D7C92D6A2BE100C7E151 /* LocationServiceProd2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationServiceProd2.swift; sourceTree = "<group>"; };
-		3020D7CB2D6A3A0800C7E151 /* LocationServiceMock2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationServiceMock2.swift; sourceTree = "<group>"; };
 		3020D7CD2D6A3CB900C7E151 /* LocationManager3.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager3.swift; sourceTree = "<group>"; };
 		3020D7CF2D6B5C7500C7E151 /* TheatreLocationsInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TheatreLocationsInteractor.swift; sourceTree = "<group>"; };
 		3020D7D12D6B67E200C7E151 /* TheatreLocationsPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TheatreLocationsPresenter.swift; sourceTree = "<group>"; };
@@ -279,10 +267,7 @@
 			isa = PBXGroup;
 			children = (
 				3020D7C12D6787C000C7E151 /* LocationService.swift */,
-				3020D5E62D64B60D00C7E151 /* LocationServiceProd.swift */,
-				3020D7C92D6A2BE100C7E151 /* LocationServiceProd2.swift */,
 				3020D7D52D6B9A0200C7E151 /* LocationServiceProd3.swift */,
-				3020D7CB2D6A3A0800C7E151 /* LocationServiceMock2.swift */,
 				3020D7D72D6BAAC700C7E151 /* LocationServiceMock3.swift */,
 			);
 			path = LocationService;
@@ -294,8 +279,6 @@
 				3020D7CF2D6B5C7500C7E151 /* TheatreLocationsInteractor.swift */,
 				3020D7D12D6B67E200C7E151 /* TheatreLocationsPresenter.swift */,
 				3020D7D32D6B680B00C7E151 /* TheatreLocationsRouter.swift */,
-				3020D7C72D67D66800C7E151 /* Test323.swift */,
-				3020D5EA2D64D4A300C7E151 /* TheatreLocationsView1.swift */,
 				3020D85D2D6BB94500C7E151 /* TheatreLocationsView.swift */,
 			);
 			path = TheatreLocationsView;
@@ -478,7 +461,6 @@
 				30C2EAD72D18A2C50058DA88 /* NetworkManager.swift */,
 				30C2EAD62D18A2C50058DA88 /* MovieManager.swift */,
 				30FD09C32D33E70D0039A66D /* FavoritesManager.swift */,
-				3020D7C32D67899E00C7E151 /* LocationManager.swift */,
 				3020D7CD2D6A3CB900C7E151 /* LocationManager3.swift */,
 			);
 			path = Services;
@@ -758,7 +740,6 @@
 			files = (
 				30FD05EA2D2947650039A66D /* TrailersModalView.swift in Sources */,
 				30C2EADF2D18A2C50058DA88 /* MoviesService.swift in Sources */,
-				3020D7C42D67899E00C7E151 /* LocationManager.swift in Sources */,
 				30C2EAE02D18A2C50058DA88 /* NetworkManager.swift in Sources */,
 				306F5EFA2D19E2DE002E1583 /* DetailRouter.swift in Sources */,
 				3020D7D02D6B5C7500C7E151 /* TheatreLocationsInteractor.swift in Sources */,
@@ -772,8 +753,6 @@
 				30C2EAE42D18A2C50058DA88 /* URLSessionProtocol.swift in Sources */,
 				30C2EDC42D18B8700058DA88 /* AlertViewModifer.swift in Sources */,
 				30C2EDC52D18B8700058DA88 /* ModalViewModifier.swift in Sources */,
-				3020D7CA2D6A2BE100C7E151 /* LocationServiceProd2.swift in Sources */,
-				3020D5E72D64B60D00C7E151 /* LocationServiceProd.swift in Sources */,
 				300B95F62D19707F0073CDF9 /* FeedPresenter.swift in Sources */,
 				30FD09BE2D33C6470039A66D /* SingleMovieEntity.swift in Sources */,
 				305489B62D381D5D005E463E /* FavoritesPresenter.swift in Sources */,
@@ -784,7 +763,6 @@
 				30FD09BB2D33C62F0039A66D /* PostMovieToFavoritesResponse.swift in Sources */,
 				30FD09BC2D33C62F0039A66D /* SingleMovie.swift in Sources */,
 				30C2EDC62D18B8700058DA88 /* NavigationStackIfNeeded.swift in Sources */,
-				3020D7C82D67D66800C7E151 /* Test323.swift in Sources */,
 				30C2EDC72D18B8700058DA88 /* SheetViewModifier.swift in Sources */,
 				30C2EDD32D18BCD00058DA88 /* AppDelegate.swift in Sources */,
 				3020D7D62D6B9A0200C7E151 /* LocationServiceProd3.swift in Sources */,
@@ -796,7 +774,6 @@
 				306F5EF62D19E1E9002E1583 /* DetailPresenter.swift in Sources */,
 				30FD09C22D33E59E0039A66D /* SwiftDataFavoriteMoviesServiceMock.swift in Sources */,
 				306F5EF22D19E163002E1583 /* DetailView.swift in Sources */,
-				3020D5EB2D64D4A300C7E151 /* TheatreLocationsView1.swift in Sources */,
 				30548B912D3BF297005E463E /* ShimmerLoadingView.swift in Sources */,
 				30C2EDCB2D18B8700058DA88 /* View+EXT.swift in Sources */,
 				30FD09C42D33E70D0039A66D /* FavoritesManager.swift in Sources */,
@@ -810,7 +787,6 @@
 				3020D7D82D6BAAC700C7E151 /* LocationServiceMock3.swift in Sources */,
 				305489B82D381D95005E463E /* FavoritesInteractor.swift in Sources */,
 				3020D85E2D6BB94500C7E151 /* TheatreLocationsView.swift in Sources */,
-				3020D7CC2D6A3A0800C7E151 /* LocationServiceMock2.swift in Sources */,
 				30548B932D3BF2BA005E463E /* HomePagePlaceholder.swift in Sources */,
 				30C2ECD82D18AFC40058DA88 /* AnyNotificationListenerViewModifier.swift in Sources */,
 				300B95F42D1970430073CDF9 /* FeedDelegate.swift in Sources */,
