@@ -35,7 +35,7 @@ final class LocationServiceProd3: NSObject, CLLocationManagerDelegate, LocationS
     func requestLocation() async throws -> CLLocation {
         try await withCheckedThrowingContinuation { continuation in
             locationContinuation = continuation
-            coreLocation.startUpdatingLocation()
+            coreLocation.requestLocation()
         }
     }
     
