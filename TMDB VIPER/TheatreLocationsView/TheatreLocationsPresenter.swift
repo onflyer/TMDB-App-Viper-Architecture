@@ -44,7 +44,7 @@ class TheatreLocationsPresenter {
     }
     
     func requestRegion() async {
-        region = MKCoordinateRegion(center: location.coordinate, span: .init(latitudeDelta: 50000, longitudeDelta: 50000))
+        region = MKCoordinateRegion(center: location.coordinate, span: .init(latitudeDelta: 10000, longitudeDelta: 10000))
     }
     
     func searchLocations(query: String, region: MKCoordinateRegion) async {
