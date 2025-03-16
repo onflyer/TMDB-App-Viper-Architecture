@@ -18,12 +18,12 @@ struct TMDB_VIPERApp: App {
     
 //    static func main() async {
 //        let instance = MovieManager(service: MovieServiceProd(networkService: NetworkManager()))
-//        let movies = try? await instance.searchMovies(query: "lord")
+//        let movies = try? await instance.getNowPlayingMovies(page: 1)
 //        print(movies)
 //        
 //       
 //    }
-    
+//    
 //    static func main() {
 //        let instance = FavoritesManager(service: SwiftDataFavoriteMoviesServiceProd())
 //        let movie = SingleMovie.mocks().first
