@@ -18,8 +18,12 @@ struct TMDB_VIPERApp: App {
     
 //    static func main() async {
 //        let instance = MovieManager(service: MovieServiceProd(networkService: NetworkManager()))
-//        let movies = try? await instance.getNowPlayingMovies(page: 1)
-//        print(movies)
+//        do {
+//            let movies = try await instance.getNowPlayingMovies(page: 2)
+//            print(movies)
+//        } catch {
+//            print(error)
+//        }
 //        
 //       
 //    }

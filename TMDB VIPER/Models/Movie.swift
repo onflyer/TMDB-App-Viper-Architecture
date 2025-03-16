@@ -15,7 +15,7 @@ struct Movie: Identifiable, Codable {
     let id: Int
     let originalTitle, overview: String?
     let popularity: Double?
-    let posterPath: String
+    let posterPath: String?
     let releaseDate: String?
     let title: String?
     let video: Bool?
@@ -39,8 +39,9 @@ struct Movie: Identifiable, Codable {
     }
     
     
-    var posterURLString: String {
-        return "https://image.tmdb.org/t/p/w500\(posterPath)"
+    var posterURLString: String? {
+        guard let unwrappedUrl = posterPath else { return nil }
+        return "https://image.tmdb.org/t/p/w500\(unwrappedUrl)"
     }
     var backdropURLString: String? {
         guard let unwrappedUrl = backdropPath else { return nil }

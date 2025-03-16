@@ -67,7 +67,7 @@ extension HomeView {
                 ScrollView(.horizontal) {
                     LazyHStack (spacing: 15) {
                         ForEach(presenter.nowPlayingMovies) { movie in
-                            MovieCellView(title: "", imageName: movie.posterURLString)
+                            MovieCellView(title: "", imageName: movie.posterURLString ?? "No image")
                                 .anyButton {
                                     presenter.onMoviePressed(id: movie.id)
                                 }
@@ -135,7 +135,7 @@ extension HomeView {
                 ScrollView(.horizontal) {
                     LazyHStack (spacing: 15) {
                         ForEach(presenter.topRatedMovies) { movie in
-                            MovieCellView(title: "", imageName: movie.posterURLString)
+                            MovieCellView(title: "", imageName: movie.posterURLString ?? "No image")
                                 .anyButton {
                                     presenter.onMoviePressed(id: movie.id)
                                 }
@@ -198,7 +198,7 @@ extension HomeView {
     
     var searchableSection: some View {
         ForEach(presenter.searchedMovies) { movie in
-            SearchCellView(posterUrlString: movie.posterURLString, title: movie.title ?? "No title", releaseDate: movie.releaseDate ?? "No release date", ratingText: movie.ratingText ?? "No rating")
+            SearchCellView(posterUrlString: movie.posterURLString ?? "No image", title: movie.title ?? "No title", releaseDate: movie.releaseDate ?? "No release date", ratingText: movie.ratingText ?? "No rating")
                 
                 .anyButton(.plain) {
                     presenter.onMoviePressed(id: movie.id)
