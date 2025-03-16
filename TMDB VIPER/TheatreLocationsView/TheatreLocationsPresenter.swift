@@ -17,7 +17,7 @@ class TheatreLocationsPresenter {
     
     var cameraPosition: MapCameraPosition = .userLocation(fallback: .automatic)
     var location: CLLocation = CLLocation()
-    var query: String = "movie theater"
+    var query: String = "movie"
     var region = MKCoordinateRegion()
     var authorizationStatus: CLAuthorizationStatus = .notDetermined
     var searchedLocations: [MKMapItem] = []

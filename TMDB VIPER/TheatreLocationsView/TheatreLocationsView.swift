@@ -13,7 +13,7 @@ struct TheatreLocationsView: View {
     @State var presenter: TheatreLocationsPresenter
         
     var body: some View {
-        Map(position: $presenter.cameraPosition, bounds: MapCameraBounds(minimumDistance: 50000, maximumDistance: 100000)) {
+        Map(position: $presenter.cameraPosition, bounds: MapCameraBounds(minimumDistance: 50000, maximumDistance: .infinity)) {
             ForEach(presenter.searchedLocations, id: \.self) { place in
                 Marker(place.placemark.description, coordinate: place.placemark.coordinate)
             }
@@ -34,6 +34,9 @@ struct TheatreLocationsView: View {
             await presenter.requestLocation()
             await presenter.requestRegion()
             await presenter.searchLocations(query: presenter.query, region: presenter.region)
+            print(presenter.authorizationStatus.rawValue)
+            print(presenter.location)
+            print(presenter.region)
             print(presenter.searchedLocations)
         }
         .navigationTitle("Theaters near you")
