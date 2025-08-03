@@ -46,7 +46,7 @@
 		30C2EADD2D18A2C50058DA88 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 30C2EABC2D18A2C50058DA88 /* Preview Assets.xcassets */; };
 		30C2EADE2D18A2C50058DA88 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 30C2EAD92D18A2C50058DA88 /* Assets.xcassets */; };
 		30C2EADF2D18A2C50058DA88 /* MoviesService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30C2EAC22D18A2C50058DA88 /* MoviesService.swift */; };
-		30C2EAE02D18A2C50058DA88 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30C2EAD72D18A2C50058DA88 /* NetworkManager.swift */; };
+		30C2EAE02D18A2C50058DA88 /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30C2EAD72D18A2C50058DA88 /* NetworkService.swift */; };
 		30C2EAE62D18A2C50058DA88 /* GetMoviesRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30C2EAC72D18A2C50058DA88 /* GetMoviesRequest.swift */; };
 		30C2EAEA2D18A2C50058DA88 /* TMDB_VIPERApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30C2EADB2D18A2C50058DA88 /* TMDB_VIPERApp.swift */; };
 		30C2EAEB2D18A2C50058DA88 /* MovieServiceMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30C2EAC32D18A2C50058DA88 /* MovieServiceMock.swift */; };
@@ -56,7 +56,7 @@
 		30C2EAF12D18A2C50058DA88 /* CoreInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30C2EABE2D18A2C50058DA88 /* CoreInteractor.swift */; };
 		30C2EAF22D18A2C50058DA88 /* MovieManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30C2EAD62D18A2C50058DA88 /* MovieManager.swift */; };
 		30C2EAF32D18A2C50058DA88 /* MovieServiceProd.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30C2EAC42D18A2C50058DA88 /* MovieServiceProd.swift */; };
-		30C2EAF42D18A2C50058DA88 /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30C2EACB2D18A2C50058DA88 /* NetworkService.swift */; };
+		30C2EAF42D18A2C50058DA88 /* NetworkServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30C2EACB2D18A2C50058DA88 /* NetworkServiceProtocol.swift */; };
 		30C2EAF52D18A2C50058DA88 /* DependancyContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30C2EABF2D18A2C50058DA88 /* DependancyContainer.swift */; };
 		30C2EAF62D18A2C50058DA88 /* SearchMoviesRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30C2EAC82D18A2C50058DA88 /* SearchMoviesRequest.swift */; };
 		30C2EAF72D18A2C50058DA88 /* FavouriteMoviesRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30C2EAC62D18A2C50058DA88 /* FavouriteMoviesRequest.swift */; };
@@ -155,10 +155,10 @@
 		30C2EAC72D18A2C50058DA88 /* GetMoviesRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetMoviesRequest.swift; sourceTree = "<group>"; };
 		30C2EAC82D18A2C50058DA88 /* SearchMoviesRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchMoviesRequest.swift; sourceTree = "<group>"; };
 		30C2EACA2D18A2C50058DA88 /* NetworkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
-		30C2EACB2D18A2C50058DA88 /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
+		30C2EACB2D18A2C50058DA88 /* NetworkServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkServiceProtocol.swift; sourceTree = "<group>"; };
 		30C2EAD12D18A2C50058DA88 /* URLComponentsProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLComponentsProtocol.swift; sourceTree = "<group>"; };
 		30C2EAD62D18A2C50058DA88 /* MovieManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieManager.swift; sourceTree = "<group>"; };
-		30C2EAD72D18A2C50058DA88 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
+		30C2EAD72D18A2C50058DA88 /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
 		30C2EAD92D18A2C50058DA88 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		30C2EADB2D18A2C50058DA88 /* TMDB_VIPERApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TMDB_VIPERApp.swift; sourceTree = "<group>"; };
 		30C2ECCC2D18AD910058DA88 /* CoreBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreBuilder.swift; sourceTree = "<group>"; };
@@ -401,7 +401,8 @@
 			children = (
 				30C2EACA2D18A2C50058DA88 /* NetworkError.swift */,
 				30C2EAD12D18A2C50058DA88 /* URLComponentsProtocol.swift */,
-				30C2EACB2D18A2C50058DA88 /* NetworkService.swift */,
+				30C2EACB2D18A2C50058DA88 /* NetworkServiceProtocol.swift */,
+				30C2EAD72D18A2C50058DA88 /* NetworkService.swift */,
 			);
 			path = NetworkService;
 			sourceTree = "<group>";
@@ -422,7 +423,6 @@
 				30FD09982D33C4600039A66D /* FavoriteMovies */,
 				30C2EAC52D18A2C50058DA88 /* Movies */,
 				30C2EAD52D18A2C50058DA88 /* Network */,
-				30C2EAD72D18A2C50058DA88 /* NetworkManager.swift */,
 				30C2EAD62D18A2C50058DA88 /* MovieManager.swift */,
 				30FD09C32D33E70D0039A66D /* FavoritesManager.swift */,
 				3020D7CD2D6A3CB900C7E151 /* LocationManager3.swift */,
@@ -704,7 +704,7 @@
 			files = (
 				30FD05EA2D2947650039A66D /* TrailersModalView.swift in Sources */,
 				30C2EADF2D18A2C50058DA88 /* MoviesService.swift in Sources */,
-				30C2EAE02D18A2C50058DA88 /* NetworkManager.swift in Sources */,
+				30C2EAE02D18A2C50058DA88 /* NetworkService.swift in Sources */,
 				306F5EFA2D19E2DE002E1583 /* DetailRouter.swift in Sources */,
 				3020D7D02D6B5C7500C7E151 /* TheatreLocationsInteractor.swift in Sources */,
 				30C2ECDA2D18B0F60058DA88 /* HomePresenter.swift in Sources */,
@@ -774,7 +774,7 @@
 				3020D7D22D6B67E200C7E151 /* TheatreLocationsPresenter.swift in Sources */,
 				30C2EDD52D18C1E50058DA88 /* ButtonViewModifiers.swift in Sources */,
 				30C2EAF32D18A2C50058DA88 /* MovieServiceProd.swift in Sources */,
-				30C2EAF42D18A2C50058DA88 /* NetworkService.swift in Sources */,
+				30C2EAF42D18A2C50058DA88 /* NetworkServiceProtocol.swift in Sources */,
 				30C2EAF52D18A2C50058DA88 /* DependancyContainer.swift in Sources */,
 				30C2EAF62D18A2C50058DA88 /* SearchMoviesRequest.swift in Sources */,
 				30C2EAF72D18A2C50058DA88 /* FavouriteMoviesRequest.swift in Sources */,
