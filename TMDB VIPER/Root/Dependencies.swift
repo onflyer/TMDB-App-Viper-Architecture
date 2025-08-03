@@ -24,7 +24,7 @@ struct Dependencies {
     
     init() {
         logManager = LogManager(services: [ConsoleService(printParameters: true)])
-        let networkManager = NetworkManager()
+        let networkManager = NetworkService()
         movieManager = MovieManager(service: MovieServiceProd(networkService: networkManager))
         favoritesManager = FavoritesManager(service: SwiftDataFavoriteMoviesServiceProd())
         locationManager = LocationManager3(service: LocationServiceProd3())

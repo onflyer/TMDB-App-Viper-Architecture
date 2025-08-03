@@ -8,26 +8,41 @@
 import Foundation
 
 // MARK: - Default Request Manager
-public class NetworkManager: NetworkServiceProtocol {
-    
-    public let urlSession: URLSessionProtocol
 
-    init(urlSession: URLSessionProtocol = DefaultURLSessionService()) {
-        self.urlSession = urlSession
+//
+//  NetworkService.swift
+//  TMDB App
+//
+//  Created by Aleksandar Milidrag on [date].
+//
+
+// MARK: - NetworkService
+
+ final class NetworkService: NetworkServiceProtocol {
+    
+    private let session: URLSession
+    private let decoder: JSONDecoder
+
+    public init(session: URLSession = .shared, decoder: JSONDecoder = JSONDecoder()) {
+        self.session = session
+        self.decoder = decoder
     }
 
-    /// Makes a network request.
-    ///
-    /// - Parameter requestData: The request data to be sent.
-    /// - Returns: The response data decoded to the specified type.
-    /// - Throws: An error if the request fails.
-    /// - Note: This method is asynchronous.
-    /// - Important: The request data should conform to `RequestProtocol`.
-    /// - SeeAlso: `RequestProtocol`
-    /// - SeeAlso: `NetworkError`
-    public func makeRequest<T: Decodable>(with urlComponents: URLComponentsProtocol) async throws -> T {
-        let data = try await urlSession.makeRequest(with: urlComponents)
-        let decoded: T = try parser.parse(data: data)
-        return decoded
+    /// Sends a request built from URLComponentsProtocol, returns raw Data
+     func makeRequest(request: URLComponentsProtocol) async throws -> Data {
+        let urlRequest = try request.request()
+        let (data, response) = try await session.data(for: urlRequest)
+
+        guard let httpResponse = response as? HTTPURLResponse,
+              (200...299).contains(httpResponse.statusCode) else {
+            throw NetworkError.invalidResponse
+        }
+        return data
+    }
+
+    /// Sends a request and decodes response into a Decodable model
+     func makeRequest<T: Decodable>(request: URLComponentsProtocol, responseType: T.Type) async throws -> T {
+        let data = try await makeRequest(request: request)
+        return try decoder.decode(T.self, from: data)
     }
 }

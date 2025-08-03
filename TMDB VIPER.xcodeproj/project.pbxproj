@@ -47,14 +47,10 @@
 		30C2EADE2D18A2C50058DA88 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 30C2EAD92D18A2C50058DA88 /* Assets.xcassets */; };
 		30C2EADF2D18A2C50058DA88 /* MoviesService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30C2EAC22D18A2C50058DA88 /* MoviesService.swift */; };
 		30C2EAE02D18A2C50058DA88 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30C2EAD72D18A2C50058DA88 /* NetworkManager.swift */; };
-		30C2EAE22D18A2C50058DA88 /* DataParserProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30C2EACE2D18A2C50058DA88 /* DataParserProtocol.swift */; };
-		30C2EAE42D18A2C50058DA88 /* URLSessionProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30C2EAD32D18A2C50058DA88 /* URLSessionProtocol.swift */; };
 		30C2EAE62D18A2C50058DA88 /* GetMoviesRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30C2EAC72D18A2C50058DA88 /* GetMoviesRequest.swift */; };
-		30C2EAE82D18A2C50058DA88 /* DataEncoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30C2EACD2D18A2C50058DA88 /* DataEncoder.swift */; };
 		30C2EAEA2D18A2C50058DA88 /* TMDB_VIPERApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30C2EADB2D18A2C50058DA88 /* TMDB_VIPERApp.swift */; };
 		30C2EAEB2D18A2C50058DA88 /* MovieServiceMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30C2EAC32D18A2C50058DA88 /* MovieServiceMock.swift */; };
 		30C2EAEC2D18A2C50058DA88 /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30C2EACA2D18A2C50058DA88 /* NetworkError.swift */; };
-		30C2EAED2D18A2C50058DA88 /* HTTPMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30C2EAD02D18A2C50058DA88 /* HTTPMethod.swift */; };
 		30C2EAEE2D18A2C50058DA88 /* URLComponentsProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30C2EAD12D18A2C50058DA88 /* URLComponentsProtocol.swift */; };
 		30C2EAF02D18A2C50058DA88 /* Dependencies.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30C2EAC02D18A2C50058DA88 /* Dependencies.swift */; };
 		30C2EAF12D18A2C50058DA88 /* CoreInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30C2EABE2D18A2C50058DA88 /* CoreInteractor.swift */; };
@@ -160,11 +156,7 @@
 		30C2EAC82D18A2C50058DA88 /* SearchMoviesRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchMoviesRequest.swift; sourceTree = "<group>"; };
 		30C2EACA2D18A2C50058DA88 /* NetworkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
 		30C2EACB2D18A2C50058DA88 /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
-		30C2EACD2D18A2C50058DA88 /* DataEncoder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataEncoder.swift; sourceTree = "<group>"; };
-		30C2EACE2D18A2C50058DA88 /* DataParserProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataParserProtocol.swift; sourceTree = "<group>"; };
-		30C2EAD02D18A2C50058DA88 /* HTTPMethod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPMethod.swift; sourceTree = "<group>"; };
 		30C2EAD12D18A2C50058DA88 /* URLComponentsProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLComponentsProtocol.swift; sourceTree = "<group>"; };
-		30C2EAD32D18A2C50058DA88 /* URLSessionProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSessionProtocol.swift; sourceTree = "<group>"; };
 		30C2EAD62D18A2C50058DA88 /* MovieManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieManager.swift; sourceTree = "<group>"; };
 		30C2EAD72D18A2C50058DA88 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		30C2EAD92D18A2C50058DA88 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -408,35 +400,10 @@
 			isa = PBXGroup;
 			children = (
 				30C2EACA2D18A2C50058DA88 /* NetworkError.swift */,
+				30C2EAD12D18A2C50058DA88 /* URLComponentsProtocol.swift */,
 				30C2EACB2D18A2C50058DA88 /* NetworkService.swift */,
 			);
 			path = NetworkService;
-			sourceTree = "<group>";
-		};
-		30C2EACF2D18A2C50058DA88 /* Parsing Helpers */ = {
-			isa = PBXGroup;
-			children = (
-				30C2EACD2D18A2C50058DA88 /* DataEncoder.swift */,
-				30C2EACE2D18A2C50058DA88 /* DataParserProtocol.swift */,
-			);
-			path = "Parsing Helpers";
-			sourceTree = "<group>";
-		};
-		30C2EAD22D18A2C50058DA88 /* URLComponentsService */ = {
-			isa = PBXGroup;
-			children = (
-				30C2EAD02D18A2C50058DA88 /* HTTPMethod.swift */,
-				30C2EAD12D18A2C50058DA88 /* URLComponentsProtocol.swift */,
-			);
-			path = URLComponentsService;
-			sourceTree = "<group>";
-		};
-		30C2EAD42D18A2C50058DA88 /* URLSessionService */ = {
-			isa = PBXGroup;
-			children = (
-				30C2EAD32D18A2C50058DA88 /* URLSessionProtocol.swift */,
-			);
-			path = URLSessionService;
 			sourceTree = "<group>";
 		};
 		30C2EAD52D18A2C50058DA88 /* Network */ = {
@@ -444,9 +411,6 @@
 			children = (
 				30C2EAC92D18A2C50058DA88 /* Individual HTTP Requests */,
 				30C2EACC2D18A2C50058DA88 /* NetworkService */,
-				30C2EACF2D18A2C50058DA88 /* Parsing Helpers */,
-				30C2EAD22D18A2C50058DA88 /* URLComponentsService */,
-				30C2EAD42D18A2C50058DA88 /* URLSessionService */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -746,11 +710,9 @@
 				30C2ECDA2D18B0F60058DA88 /* HomePresenter.swift in Sources */,
 				3020D7C22D6787C000C7E151 /* LocationService.swift in Sources */,
 				3020D7CE2D6A3CB900C7E151 /* LocationManager3.swift in Sources */,
-				30C2EAE22D18A2C50058DA88 /* DataParserProtocol.swift in Sources */,
 				30C2ECDF2D18B2460058DA88 /* View+EXT Custom.swift in Sources */,
 				30A25A062D26B83A00C2C094 /* SearchCellView.swift in Sources */,
 				300B97D22D1975F40073CDF9 /* Constants.swift in Sources */,
-				30C2EAE42D18A2C50058DA88 /* URLSessionProtocol.swift in Sources */,
 				30C2EDC42D18B8700058DA88 /* AlertViewModifer.swift in Sources */,
 				30C2EDC52D18B8700058DA88 /* ModalViewModifier.swift in Sources */,
 				300B95F62D19707F0073CDF9 /* FeedPresenter.swift in Sources */,
@@ -793,7 +755,6 @@
 				30C2ECE12D18B3EB0058DA88 /* HomeRouter.swift in Sources */,
 				30C2EAE62D18A2C50058DA88 /* GetMoviesRequest.swift in Sources */,
 				30C2ECDC2D18B1350058DA88 /* HomeInteractor.swift in Sources */,
-				30C2EAE82D18A2C50058DA88 /* DataEncoder.swift in Sources */,
 				30C2EAEA2D18A2C50058DA88 /* TMDB_VIPERApp.swift in Sources */,
 				30548F492D4661CE005E463E /* ImageModalView.swift in Sources */,
 				30C2ECCD2D18AD910058DA88 /* CoreBuilder.swift in Sources */,
@@ -803,7 +764,6 @@
 				30C2EAEC2D18A2C50058DA88 /* NetworkError.swift in Sources */,
 				306F5EF82D19E276002E1583 /* DetailInteractor.swift in Sources */,
 				30C2ECD32D18AF3C0058DA88 /* RootView.swift in Sources */,
-				30C2EAED2D18A2C50058DA88 /* HTTPMethod.swift in Sources */,
 				30C2ECD02D18AE150058DA88 /* HomeView.swift in Sources */,
 				30C2EAEE2D18A2C50058DA88 /* URLComponentsProtocol.swift in Sources */,
 				30C2EAF02D18A2C50058DA88 /* Dependencies.swift in Sources */,

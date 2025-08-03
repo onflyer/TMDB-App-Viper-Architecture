@@ -10,16 +10,7 @@ import Foundation
 // MARK: - Request Manager Protocol -
 
 public protocol NetworkServiceProtocol {
-    var urlSession: URLSessionProtocol { get }
-    var parser: DataParserProtocol { get }
-    func makeRequest<T: Decodable>(with urlComponents: URLComponentsProtocol) async throws -> T
+    func makeRequest(request: URLComponentsProtocol) async throws -> Data
+    func makeRequest<T: Decodable>(request: URLComponentsProtocol, responseType: T.Type) async throws -> T
 }
 
-
-// MARK: - Returns Data Parser -
-
-public extension NetworkServiceProtocol {
-    var parser: DataParserProtocol {
-        return DefaultDataParser()
-    }
-}
