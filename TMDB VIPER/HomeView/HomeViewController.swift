@@ -45,6 +45,7 @@ class HomeViewController: UIViewController {
     private let presenter: HomePresenter
     var builder: CoreBuilder?
     private var hasLoadedInitialData = false  // Prevent reloading on every viewDidAppear
+    private var isSearching = false  // Track search state
     
     // MARK: - UI Elements
     
@@ -64,11 +65,25 @@ class HomeViewController: UIViewController {
         return cv
     }()
     
+    /// Table view for search results.
+    /// SwiftUI equivalent: The searchable suggestions section
+    private lazy var searchResultsTableView: UITableView = {
+        let tv = UITableView(frame: .zero, style: .plain)
+        tv.translatesAutoresizingMaskIntoConstraints = false
+        tv.delegate = self
+        tv.dataSource = self
+        tv.register(SearchResultCell.self, forCellReuseIdentifier: SearchResultCell.reuseIdentifier)
+        tv.isHidden = true  // Hidden by default
+        tv.keyboardDismissMode = .onDrag
+        return tv
+    }()
+    
     /// Search controller for movie search.
     /// SwiftUI equivalent: .searchable(text: $presenter.query)
     private lazy var searchController: UISearchController = {
         let sc = UISearchController(searchResultsController: nil)
         sc.searchResultsUpdater = self
+        sc.delegate = self
         sc.obscuresBackgroundDuringPresentation = false
         sc.searchBar.placeholder = "Search movies"
         return sc
@@ -109,12 +124,19 @@ class HomeViewController: UIViewController {
         view.backgroundColor = .systemBackground
         
         view.addSubview(collectionView)
+        view.addSubview(searchResultsTableView)
         
         NSLayoutConstraint.activate([
             collectionView.topAnchor.constraint(equalTo: view.topAnchor),
             collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             collectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            
+            // Search results table overlays the collection view
+            searchResultsTableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            searchResultsTableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            searchResultsTableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            searchResultsTableView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
         ])
     }
     
@@ -390,27 +412,91 @@ extension HomeViewController: UICollectionViewDelegate {
 extension HomeViewController: UISearchResultsUpdating {
     
     func updateSearchResults(for searchController: UISearchController) {
-        guard let query = searchController.searchBar.text, !query.isEmpty else {
-            // Clear search results when query is empty
-            // In a full implementation, you'd show the regular sections again
+        guard let query = searchController.searchBar.text else { return }
+        
+        if query.isEmpty {
+            // Clear search results and hide table
+            Task {
+                await presenter.loadSearchedMovies(query: "")
+                await MainActor.run {
+                    isSearching = false
+                    searchResultsTableView.isHidden = true
+                    collectionView.isHidden = false
+                }
+            }
             return
         }
+        
+        // Show search results table
+        isSearching = true
+        searchResultsTableView.isHidden = false
+        collectionView.isHidden = true
         
         // Debounce search - wait for user to stop typing
         // SwiftUI does this automatically with .task(id:)
         NSObject.cancelPreviousPerformRequests(withTarget: self, selector: #selector(performSearch), object: nil)
-        perform(#selector(performSearch), with: nil, afterDelay: 0.5)
+        perform(#selector(performSearch), with: nil, afterDelay: 0.3)
     }
     
     @objc private func performSearch() {
-        guard let query = searchController.searchBar.text else { return }
+        guard let query = searchController.searchBar.text, !query.isEmpty else { return }
         
         Task {
             await presenter.loadSearchedMovies(query: query)
-            // In a full implementation, you'd show search results
-            // For now, just log
-            print("🔍 Search results: \(presenter.searchedMovies.count) movies")
+            await MainActor.run {
+                searchResultsTableView.reloadData()
+            }
         }
+    }
+}
+
+// MARK: - UISearchControllerDelegate
+extension HomeViewController: UISearchControllerDelegate {
+    
+    func willDismissSearchController(_ searchController: UISearchController) {
+        // When search is cancelled, show collection view again
+        isSearching = false
+        searchResultsTableView.isHidden = true
+        collectionView.isHidden = false
+    }
+}
+
+// MARK: - UITableViewDataSource (Search Results)
+extension HomeViewController: UITableViewDataSource {
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return presenter.searchedMovies.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard let cell = tableView.dequeueReusableCell(
+            withIdentifier: SearchResultCell.reuseIdentifier,
+            for: indexPath
+        ) as? SearchResultCell else {
+            return UITableViewCell()
+        }
+        
+        let movie = presenter.searchedMovies[indexPath.row]
+        cell.configure(with: movie)
+        return cell
+    }
+}
+
+// MARK: - UITableViewDelegate (Search Results)
+extension HomeViewController: UITableViewDelegate {
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+        
+        let movie = presenter.searchedMovies[indexPath.row]
+        presenter.onMoviePressed(id: movie.id)
+        
+        // Dismiss search when selecting a result
+        searchController.isActive = false
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 100
     }
 }
 
