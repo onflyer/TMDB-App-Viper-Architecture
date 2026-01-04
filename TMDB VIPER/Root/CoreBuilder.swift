@@ -54,9 +54,7 @@ struct CoreBuilder {
             interactor: interactor,
             router: router
         )
-        // TODO: Create actual DetailViewController
-        // For now, return placeholder
-        return PlaceholderViewController(title: "Movie Details", subtitle: "DetailViewController coming soon!\n\nMovie ID: \(delegate.movieId)")
+        return DetailViewController(presenter: presenter, delegate: delegate)
     }
     
     /// Creates the FavoritesViewController for showing saved movies.
