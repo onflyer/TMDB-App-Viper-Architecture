@@ -16,21 +16,20 @@ import SDWebImage
 /// - Automatic UI updates via @Observable
 ///
 /// UIKit uses:
+/// - Delegate pattern for presenter -> VC communication
 /// - Manual UI updates after async operations
 /// - IBAction-style button handlers
 
-class DetailViewController: UIViewController {
+final class DetailViewController: UIViewController {
     
     // MARK: - Properties
     
     private let presenter: DetailPresenter
     private let delegate: DetailViewDelegate
-    private var hasLoadedData = false  // Prevent reloading on navigation back
+    private var hasLoadedData = false
     
     // MARK: - UI Elements
     
-    /// Main scroll view for content
-    /// SwiftUI equivalent: ScrollView wrapping the content
     private lazy var scrollView: UIScrollView = {
         let sv = UIScrollView()
         sv.translatesAutoresizingMaskIntoConstraints = false
@@ -38,14 +37,12 @@ class DetailViewController: UIViewController {
         return sv
     }()
     
-    /// Content view inside scroll view
     private lazy var contentView: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
     
-    /// Backdrop image at top
     private lazy var backdropImageView: UIImageView = {
         let iv = UIImageView()
         iv.contentMode = .scaleAspectFill
@@ -55,38 +52,34 @@ class DetailViewController: UIViewController {
         return iv
     }()
     
-    /// Poster image (overlapping backdrop)
     private lazy var posterImageView: UIImageView = {
         let iv = UIImageView()
         iv.contentMode = .scaleAspectFill
         iv.clipsToBounds = true
-        iv.layer.cornerRadius = 8
+        iv.layer.cornerRadius = LayoutConstants.CornerRadius.medium
         iv.layer.borderWidth = 2
         iv.layer.borderColor = UIColor.white.cgColor
         iv.backgroundColor = .systemGray5
-        iv.translatesAutoresizingMaskIntoConstraints = false
         iv.isUserInteractionEnabled = true
+        iv.translatesAutoresizingMaskIntoConstraints = false
         return iv
     }()
     
-    /// "Watch trailer" button
     private lazy var watchTrailerButton: UIButton = {
-        var config = UIButton.Configuration.filled()
-        config.title = "Watch trailer"
-        config.image = UIImage(systemName: "play.fill")
-        config.imagePlacement = .trailing
-        config.imagePadding = 8
-        config.baseBackgroundColor = .systemBackground
-        config.baseForegroundColor = .secondaryLabel
-        config.cornerStyle = .large
-        
-        let button = UIButton(configuration: config)
+        let button = UIButton(type: .system)
+        button.setTitle("Watch trailer ", for: .normal)
+        button.setImage(UIImage(systemName: "play.fill"), for: .normal)
+        button.semanticContentAttribute = .forceRightToLeft
+        button.titleLabel?.font = .systemFont(ofSize: 14, weight: .bold)
+        button.tintColor = .secondaryLabel
+        button.backgroundColor = .systemBackground.withAlphaComponent(0.9)
+        button.layer.cornerRadius = LayoutConstants.CornerRadius.large
+        button.contentEdgeInsets = UIEdgeInsets(top: 10, left: 16, bottom: 10, right: 16)
         button.translatesAutoresizingMaskIntoConstraints = false
         button.addTarget(self, action: #selector(watchTrailerTapped), for: .touchUpInside)
         return button
     }()
     
-    /// Movie title label
     private lazy var titleLabel: UILabel = {
         let label = UILabel()
         label.font = .systemFont(ofSize: 18, weight: .bold)
@@ -96,17 +89,15 @@ class DetailViewController: UIViewController {
         return label
     }()
     
-    /// Genres label
     private lazy var genresLabel: UILabel = {
         let label = UILabel()
-        label.font = .systemFont(ofSize: 14)
+        label.font = .systemFont(ofSize: 12)
         label.textColor = .secondaryLabel
         label.numberOfLines = 1
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
     
-    /// Favorite heart button
     private lazy var favoriteButton: UIButton = {
         let button = UIButton(type: .system)
         button.setImage(UIImage(systemName: "heart"), for: .normal)
@@ -116,22 +107,25 @@ class DetailViewController: UIViewController {
         return button
     }()
     
-    /// "Local theaters" button
     private lazy var localTheatersButton: UIButton = {
-        var config = UIButton.Configuration.plain()
-        config.title = "Local theaters"
-        config.image = UIImage(systemName: "location.fill")
-        config.imagePlacement = .trailing
-        config.imagePadding = 4
-        config.baseForegroundColor = .label
-        
-        let button = UIButton(configuration: config)
+        let button = UIButton(type: .system)
+        button.setTitle("Local theaters ", for: .normal)
+        button.setImage(UIImage(systemName: "location.fill"), for: .normal)
+        button.semanticContentAttribute = .forceRightToLeft
+        button.titleLabel?.font = .systemFont(ofSize: 14, weight: .bold)
+        button.tintColor = .systemOrange
         button.translatesAutoresizingMaskIntoConstraints = false
         button.addTarget(self, action: #selector(localTheatersTapped), for: .touchUpInside)
         return button
     }()
     
-    /// Release date section
+    private lazy var dividerView: UIView = {
+        let view = UIView()
+        view.backgroundColor = .separator
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+    
     private lazy var releaseDateTitleLabel: UILabel = {
         let label = UILabel()
         label.text = "Release date"
@@ -149,7 +143,6 @@ class DetailViewController: UIViewController {
         return label
     }()
     
-    /// Overview section
     private lazy var overviewTitleLabel: UILabel = {
         let label = UILabel()
         label.text = "Overview"
@@ -163,20 +156,11 @@ class DetailViewController: UIViewController {
         let label = UILabel()
         label.font = .systemFont(ofSize: 14)
         label.textColor = .secondaryLabel
-        label.numberOfLines = 0  // Unlimited lines
+        label.numberOfLines = 0
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
     
-    /// Divider line
-    private lazy var dividerView: UIView = {
-        let view = UIView()
-        view.backgroundColor = .separator
-        view.translatesAutoresizingMaskIntoConstraints = false
-        return view
-    }()
-    
-    /// Loading indicator
     private lazy var loadingIndicator: UIActivityIndicatorView = {
         let indicator = UIActivityIndicatorView(style: .large)
         indicator.translatesAutoresizingMaskIntoConstraints = false
@@ -190,6 +174,9 @@ class DetailViewController: UIViewController {
         self.presenter = presenter
         self.delegate = delegate
         super.init(nibName: nil, bundle: nil)
+        
+        // Wire up the delegate - KEY for UIKit
+        presenter.delegate = self
     }
     
     required init?(coder: NSCoder) {
@@ -219,11 +206,9 @@ class DetailViewController: UIViewController {
     private func setupUI() {
         view.backgroundColor = .systemBackground
         
-        // Add scroll view
         view.addSubview(scrollView)
         scrollView.addSubview(contentView)
         
-        // Add subviews to content view
         contentView.addSubview(backdropImageView)
         contentView.addSubview(posterImageView)
         contentView.addSubview(watchTrailerButton)
@@ -237,96 +222,95 @@ class DetailViewController: UIViewController {
         contentView.addSubview(overviewTitleLabel)
         contentView.addSubview(overviewLabel)
         
-        // Add loading indicator
         view.addSubview(loadingIndicator)
         
         setupConstraints()
     }
     
     private func setupConstraints() {
-        let backdropHeight: CGFloat = 220
-        let posterWidth: CGFloat = 120
-        let posterHeight: CGFloat = 180
-        let posterOverlap: CGFloat = 90  // How much poster overlaps below backdrop
+        let backdropHeight = LayoutConstants.Backdrop.Detail.height
+        let posterWidth = LayoutConstants.Poster.Detail.width
+        let posterHeight = LayoutConstants.Poster.Detail.height
+        let posterOverlap: CGFloat = 90
         
         NSLayoutConstraint.activate([
-            // Scroll view fills the screen
+            // Scroll view
             scrollView.topAnchor.constraint(equalTo: view.topAnchor),
             scrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             scrollView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             scrollView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
             
-            // Content view inside scroll view
+            // Content view
             contentView.topAnchor.constraint(equalTo: scrollView.topAnchor),
             contentView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor),
             contentView.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor),
             contentView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor),
             contentView.widthAnchor.constraint(equalTo: scrollView.widthAnchor),
             
-            // Backdrop image
+            // Backdrop
             backdropImageView.topAnchor.constraint(equalTo: contentView.topAnchor),
             backdropImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
             backdropImageView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
             backdropImageView.heightAnchor.constraint(equalToConstant: backdropHeight),
             
-            // Poster image (overlapping)
-            posterImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
+            // Poster
+            posterImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: LayoutConstants.Spacing.large),
             posterImageView.topAnchor.constraint(equalTo: backdropImageView.bottomAnchor, constant: -posterOverlap),
             posterImageView.widthAnchor.constraint(equalToConstant: posterWidth),
             posterImageView.heightAnchor.constraint(equalToConstant: posterHeight),
             
-            // Watch trailer button (bottom right of backdrop)
-            watchTrailerButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
-            watchTrailerButton.bottomAnchor.constraint(equalTo: backdropImageView.bottomAnchor, constant: -16),
+            // Watch trailer button
+            watchTrailerButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -LayoutConstants.Spacing.standard),
+            watchTrailerButton.bottomAnchor.constraint(equalTo: backdropImageView.bottomAnchor, constant: -LayoutConstants.Spacing.standard),
             
-            // Title (right of poster)
-            titleLabel.leadingAnchor.constraint(equalTo: posterImageView.trailingAnchor, constant: 16),
-            titleLabel.trailingAnchor.constraint(equalTo: favoriteButton.leadingAnchor, constant: -8),
-            titleLabel.topAnchor.constraint(equalTo: backdropImageView.bottomAnchor, constant: 12),
+            // Title
+            titleLabel.leadingAnchor.constraint(equalTo: posterImageView.trailingAnchor, constant: LayoutConstants.Spacing.standard),
+            titleLabel.trailingAnchor.constraint(equalTo: favoriteButton.leadingAnchor, constant: -LayoutConstants.Spacing.medium),
+            titleLabel.topAnchor.constraint(equalTo: backdropImageView.bottomAnchor, constant: LayoutConstants.Spacing.medium),
             
-            // Genres (below title)
+            // Genres
             genresLabel.leadingAnchor.constraint(equalTo: titleLabel.leadingAnchor),
             genresLabel.trailingAnchor.constraint(equalTo: titleLabel.trailingAnchor),
-            genresLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 4),
+            genresLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: LayoutConstants.Spacing.small),
             
-            // Favorite button (right side)
-            favoriteButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
+            // Favorite button
+            favoriteButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -LayoutConstants.Spacing.standard),
             favoriteButton.centerYAnchor.constraint(equalTo: titleLabel.centerYAnchor),
-            favoriteButton.widthAnchor.constraint(equalToConstant: 44),
-            favoriteButton.heightAnchor.constraint(equalToConstant: 44),
+            favoriteButton.widthAnchor.constraint(equalToConstant: LayoutConstants.Button.standard),
+            favoriteButton.heightAnchor.constraint(equalToConstant: LayoutConstants.Button.standard),
             
-            // Local theaters button (right aligned, below poster area)
-            localTheatersButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
-            localTheatersButton.topAnchor.constraint(equalTo: posterImageView.bottomAnchor, constant: 8),
+            // Local theaters button
+            localTheatersButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -LayoutConstants.Spacing.standard),
+            localTheatersButton.topAnchor.constraint(equalTo: posterImageView.bottomAnchor, constant: LayoutConstants.Spacing.medium),
             
             // Divider
             dividerView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
             dividerView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
-            dividerView.topAnchor.constraint(equalTo: localTheatersButton.bottomAnchor, constant: 16),
+            dividerView.topAnchor.constraint(equalTo: localTheatersButton.bottomAnchor, constant: LayoutConstants.Spacing.standard),
             dividerView.heightAnchor.constraint(equalToConstant: 1),
             
             // Release date title
-            releaseDateTitleLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
-            releaseDateTitleLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20),
-            releaseDateTitleLabel.topAnchor.constraint(equalTo: dividerView.bottomAnchor, constant: 16),
+            releaseDateTitleLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: LayoutConstants.Spacing.large),
+            releaseDateTitleLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -LayoutConstants.Spacing.large),
+            releaseDateTitleLabel.topAnchor.constraint(equalTo: dividerView.bottomAnchor, constant: LayoutConstants.Spacing.standard),
             
             // Release date value
             releaseDateLabel.leadingAnchor.constraint(equalTo: releaseDateTitleLabel.leadingAnchor),
             releaseDateLabel.trailingAnchor.constraint(equalTo: releaseDateTitleLabel.trailingAnchor),
-            releaseDateLabel.topAnchor.constraint(equalTo: releaseDateTitleLabel.bottomAnchor, constant: 4),
+            releaseDateLabel.topAnchor.constraint(equalTo: releaseDateTitleLabel.bottomAnchor, constant: LayoutConstants.Spacing.small),
             
             // Overview title
-            overviewTitleLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
-            overviewTitleLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20),
-            overviewTitleLabel.topAnchor.constraint(equalTo: releaseDateLabel.bottomAnchor, constant: 20),
+            overviewTitleLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: LayoutConstants.Spacing.large),
+            overviewTitleLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -LayoutConstants.Spacing.large),
+            overviewTitleLabel.topAnchor.constraint(equalTo: releaseDateLabel.bottomAnchor, constant: LayoutConstants.Spacing.large),
             
             // Overview text
             overviewLabel.leadingAnchor.constraint(equalTo: overviewTitleLabel.leadingAnchor),
             overviewLabel.trailingAnchor.constraint(equalTo: overviewTitleLabel.trailingAnchor),
-            overviewLabel.topAnchor.constraint(equalTo: overviewTitleLabel.bottomAnchor, constant: 4),
-            overviewLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -32),
+            overviewLabel.topAnchor.constraint(equalTo: overviewTitleLabel.bottomAnchor, constant: LayoutConstants.Spacing.small),
+            overviewLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -LayoutConstants.Spacing.extraLarge),
             
-            // Loading indicator (centered)
+            // Loading indicator
             loadingIndicator.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             loadingIndicator.centerYAnchor.constraint(equalTo: view.centerYAnchor),
         ])
@@ -336,7 +320,6 @@ class DetailViewController: UIViewController {
         title = "Movie Details"
         navigationItem.largeTitleDisplayMode = .never
         
-        // Favorites button in nav bar
         let favoritesButton = UIBarButtonItem(
             title: "Favorites",
             style: .plain,
@@ -347,7 +330,6 @@ class DetailViewController: UIViewController {
     }
     
     private func setupGestures() {
-        // Tap on poster to show full image
         let posterTap = UITapGestureRecognizer(target: self, action: #selector(posterTapped))
         posterImageView.addGestureRecognizer(posterTap)
     }
@@ -356,27 +338,20 @@ class DetailViewController: UIViewController {
     
     private func loadMovie() {
         loadingIndicator.startAnimating()
+        scrollView.isHidden = true
         
         Task {
             await presenter.loadSingleMovie(id: delegate.movieId)
-            
-            await MainActor.run {
-                loadingIndicator.stopAnimating()
-                updateUI()
-            }
         }
     }
     
-    /// Manual UI update - the KEY difference from SwiftUI!
-    /// In SwiftUI, @Observable triggers automatic re-render.
-    /// In UIKit, we must manually set each UI element.
+    // MARK: - UI Updates
+    
     private func updateUI() {
         guard let movie = presenter.movie else { return }
         
-        // Update title in nav bar
         title = movie.title ?? "Movie Details"
         
-        // Update images
         if let backdropURL = movie.backdropURLString, let url = URL(string: backdropURL) {
             backdropImageView.sd_setImage(with: url)
         }
@@ -384,13 +359,11 @@ class DetailViewController: UIViewController {
             posterImageView.sd_setImage(with: url)
         }
         
-        // Update text
         titleLabel.text = movie.title ?? "No title"
         genresLabel.text = movie.genres?.compactMap { $0.name }.joined(separator: ", ") ?? ""
         releaseDateLabel.text = movie.releaseDate ?? "No release date"
         overviewLabel.text = movie.overview ?? "No description"
         
-        // Update favorite button
         updateFavoriteButton()
     }
     
@@ -398,7 +371,6 @@ class DetailViewController: UIViewController {
         let imageName = presenter.isFavorite ? "heart.fill" : "heart"
         favoriteButton.setImage(UIImage(systemName: imageName), for: .normal)
         
-        // Animate the change
         UIView.animate(withDuration: 0.2, animations: {
             self.favoriteButton.transform = CGAffineTransform(scaleX: 1.2, y: 1.2)
         }) { _ in
@@ -406,6 +378,26 @@ class DetailViewController: UIViewController {
                 self.favoriteButton.transform = .identity
             }
         }
+    }
+    
+    // MARK: - Error Handling
+    
+    private func showErrorAlert(message: String, retryAction: (() -> Void)? = nil) {
+        let alert = UIAlertController(
+            title: "Error",
+            message: message,
+            preferredStyle: .alert
+        )
+        
+        alert.addAction(UIAlertAction(title: "OK", style: .default))
+        
+        if let retryAction = retryAction {
+            alert.addAction(UIAlertAction(title: "Retry", style: .default) { _ in
+                retryAction()
+            })
+        }
+        
+        present(alert, animated: true)
     }
     
     // MARK: - Actions
@@ -424,11 +416,35 @@ class DetailViewController: UIViewController {
     
     @objc private func favoriteTapped() {
         presenter.onHeartPressed()
-        updateFavoriteButton()
     }
     
     @objc private func localTheatersTapped() {
         presenter.onLocalTheatersPressed()
+    }
+}
+
+// MARK: - DetailPresenterDelegate
+extension DetailViewController: DetailPresenterDelegate {
+    
+    func didLoadMovie() {
+        loadingIndicator.stopAnimating()
+        scrollView.isHidden = false
+        updateUI()
+    }
+    
+    func didFailToLoadMovie(with error: Error) {
+        loadingIndicator.stopAnimating()
+        showErrorAlert(message: "Failed to load movie details. Please try again.") { [weak self] in
+            self?.loadMovie()
+        }
+    }
+    
+    func didUpdateFavoriteStatus() {
+        updateFavoriteButton()
+    }
+    
+    func didFailToUpdateFavorite(with error: Error) {
+        showErrorAlert(message: "Failed to update favorites. Please try again.")
     }
 }
 
@@ -452,32 +468,25 @@ class DetailViewController: UIViewController {
  │  // When presenter.movie changes, body rebuilds automatically   │
  │                                                                 │
  │                                                                 │
- │  UIKIT:                                                         │
- │  ──────                                                         │
+ │  UIKIT (with Delegate):                                         │
+ │  ──────────────────────                                         │
  │  class DetailViewController: UIViewController {                 │
  │      let presenter: DetailPresenter                             │
  │      let titleLabel = UILabel()                                 │
  │                                                                 │
- │      func loadMovie() {                                         │
- │          await presenter.loadSingleMovie(id: movieId)           │
- │          updateUI()  // MANUAL call required!                   │
+ │      init(presenter: DetailPresenter) {                        │
+ │          presenter.delegate = self  // Wire up delegate        │
  │      }                                                          │
  │                                                                 │
- │      func updateUI() {                                          │
- │          titleLabel.text = presenter.movie?.title  // Manual!  │
+ │      func didLoadMovie() {  // Called by presenter             │
+ │          titleLabel.text = presenter.movie?.title              │
  │      }                                                          │
  │  }                                                              │
  │                                                                 │
  ├─────────────────────────────────────────────────────────────────┤
  │                                                                 │
- │  BUTTON ACTIONS:                                                │
- │                                                                 │
- │  SwiftUI:                                                       │
- │  Button("Tap") { presenter.doSomething() }                     │
- │                                                                 │
- │  UIKit:                                                         │
- │  button.addTarget(self, action: #selector(tapped), ...)        │
- │  @objc func tapped() { presenter.doSomething() }               │
+ │  THE KEY INSIGHT:                                               │
+ │  Delegate pattern replaces @Observable automatic updates        │
  │                                                                 │
  └─────────────────────────────────────────────────────────────────┘
  

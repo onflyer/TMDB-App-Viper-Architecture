@@ -9,74 +9,67 @@ import UIKit
 import SDWebImage
 
 // MARK: - SearchResultCell
-/// UIKit equivalent of your SearchCellView.
-///
-/// COMPARISON:
-/// ┌─────────────────────────────────────────────────────────────┐
-/// │  SwiftUI SearchCellView         │  UIKit SearchResultCell   │
-/// ├─────────────────────────────────────────────────────────────┤
-/// │  HStack { }                     │  UIStackView horizontal   │
-/// │  ImageLoaderView(url)           │  UIImageView + SDWebImage │
-/// │    .frame(width: 60, height: 90)│  widthAnchor/heightAnchor │
-/// │  VStack(alignment: .leading)    │  UIStackView vertical     │
-/// │    Text(title).font(.headline)  │  UILabel with .headline   │
-/// │    Text(date).font(.subheadline)│  UILabel with .subheadline│
-/// │    Text(rating).foregroundColor │  UILabel with .systemYellow│
-/// └─────────────────────────────────────────────────────────────┘
+/// Table view cell for search results.
+/// UIKit equivalent of SearchCellView in SwiftUI.
 
-class SearchResultCell: UITableViewCell {
+final class SearchResultCell: UITableViewCell {
     
+    // MARK: - Reuse Identifier
     static let reuseIdentifier = "SearchResultCell"
     
     // MARK: - UI Elements
     
     private let posterImageView: UIImageView = {
         let iv = UIImageView()
-        iv.translatesAutoresizingMaskIntoConstraints = false
         iv.contentMode = .scaleAspectFill
         iv.clipsToBounds = true
-        iv.layer.cornerRadius = 8
+        iv.layer.cornerRadius = LayoutConstants.CornerRadius.medium
         iv.backgroundColor = .systemGray5
+        iv.translatesAutoresizingMaskIntoConstraints = false
         return iv
     }()
     
     private let titleLabel: UILabel = {
         let label = UILabel()
-        label.font = .preferredFont(forTextStyle: .headline)
+        label.font = .systemFont(ofSize: 16, weight: .semibold)
         label.textColor = .label
         label.numberOfLines = 2
+        label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
     
     private let releaseDateLabel: UILabel = {
         let label = UILabel()
-        label.font = .preferredFont(forTextStyle: .subheadline)
+        label.font = .systemFont(ofSize: 14)
         label.textColor = .secondaryLabel
+        label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
     
     private let ratingLabel: UILabel = {
         let label = UILabel()
-        label.font = .preferredFont(forTextStyle: .subheadline)
+        label.font = .systemFont(ofSize: 14)
         label.textColor = .systemYellow
+        label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
     
     private lazy var textStackView: UIStackView = {
-        let sv = UIStackView(arrangedSubviews: [titleLabel, releaseDateLabel, ratingLabel])
-        sv.axis = .vertical
-        sv.spacing = 4
-        sv.alignment = .leading
-        return sv
+        let stack = UIStackView(arrangedSubviews: [titleLabel, releaseDateLabel, ratingLabel])
+        stack.axis = .vertical
+        stack.spacing = LayoutConstants.Spacing.small
+        stack.alignment = .leading
+        stack.translatesAutoresizingMaskIntoConstraints = false
+        return stack
     }()
     
     private lazy var mainStackView: UIStackView = {
-        let sv = UIStackView(arrangedSubviews: [posterImageView, textStackView])
-        sv.translatesAutoresizingMaskIntoConstraints = false
-        sv.axis = .horizontal
-        sv.spacing = 16
-        sv.alignment = .center
-        return sv
+        let stack = UIStackView(arrangedSubviews: [posterImageView, textStackView])
+        stack.axis = .horizontal
+        stack.spacing = LayoutConstants.Spacing.standard
+        stack.alignment = .center
+        stack.translatesAutoresizingMaskIntoConstraints = false
+        return stack
     }()
     
     // MARK: - Initialization
@@ -96,15 +89,13 @@ class SearchResultCell: UITableViewCell {
         contentView.addSubview(mainStackView)
         
         NSLayoutConstraint.activate([
-            // Poster image size (60x90 like SwiftUI version)
-            posterImageView.widthAnchor.constraint(equalToConstant: 60),
-            posterImageView.heightAnchor.constraint(equalToConstant: 90),
+            posterImageView.widthAnchor.constraint(equalToConstant: LayoutConstants.Poster.Small.width),
+            posterImageView.heightAnchor.constraint(equalToConstant: LayoutConstants.Poster.Small.height),
             
-            // Main stack fills the cell with padding
-            mainStackView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 8),
-            mainStackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
-            mainStackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
-            mainStackView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -8),
+            mainStackView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: LayoutConstants.Spacing.medium),
+            mainStackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: LayoutConstants.Spacing.standard),
+            mainStackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -LayoutConstants.Spacing.standard),
+            mainStackView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -LayoutConstants.Spacing.medium),
         ])
     }
     
@@ -115,7 +106,6 @@ class SearchResultCell: UITableViewCell {
         releaseDateLabel.text = movie.releaseDateForrmated ?? movie.releaseDate ?? "Unknown Date"
         ratingLabel.text = movie.ratingText ?? "No Rating"
         
-        // Load poster image
         if let urlString = movie.posterURLString,
            let url = URL(string: urlString) {
             posterImageView.sd_setImage(with: url, placeholderImage: nil)

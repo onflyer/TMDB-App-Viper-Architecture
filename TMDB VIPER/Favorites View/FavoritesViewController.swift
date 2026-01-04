@@ -12,19 +12,8 @@ import SDWebImage
 /// The UIKit equivalent of your FavoritesView.
 ///
 /// Uses UITableView instead of List - same concept, different API.
-///
-/// SwiftUI FavoritesView:
-/// ```
-/// List {
-///     ForEach(presenter.favoriteMovies) { movie in
-///         SearchCellView(...)
-///             .onTapGesture { presenter.onMoviePressed(id: movie.id) }
-///     }
-///     .onDelete { presenter.removeFavorite(at: $0) }
-/// }
-/// ```
 
-class FavoritesViewController: UIViewController {
+final class FavoritesViewController: UIViewController {
     
     // MARK: - Properties
     
@@ -33,20 +22,18 @@ class FavoritesViewController: UIViewController {
     // MARK: - UI Elements
     
     /// Table view displaying favorite movies.
-    /// SwiftUI equivalent: List { ForEach(...) }
     private lazy var tableView: UITableView = {
         let tv = UITableView(frame: .zero, style: .plain)
         tv.translatesAutoresizingMaskIntoConstraints = false
         tv.delegate = self
         tv.dataSource = self
         tv.register(FavoriteMovieCell.self, forCellReuseIdentifier: FavoriteMovieCell.reuseIdentifier)
-        tv.rowHeight = 100
+        tv.rowHeight = LayoutConstants.CellHeight.favorite
         tv.separatorStyle = .singleLine
         return tv
     }()
     
     /// Empty state view when no favorites.
-    /// SwiftUI equivalent: ContentUnavailableView
     private lazy var emptyStateView: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
@@ -73,9 +60,9 @@ class FavoritesViewController: UIViewController {
             imageView.widthAnchor.constraint(equalToConstant: 60),
             imageView.heightAnchor.constraint(equalToConstant: 60),
             
-            label.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: 16),
-            label.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 32),
-            label.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -32),
+            label.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: LayoutConstants.Spacing.standard),
+            label.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: LayoutConstants.Spacing.extraLarge),
+            label.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -LayoutConstants.Spacing.extraLarge),
         ])
         
         return view
@@ -86,6 +73,9 @@ class FavoritesViewController: UIViewController {
     init(presenter: FavoritesPresenter) {
         self.presenter = presenter
         super.init(nibName: nil, bundle: nil)
+        
+        // Wire up the delegate
+        presenter.delegate = self
     }
     
     required init?(coder: NSCoder) {
@@ -102,7 +92,7 @@ class FavoritesViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        loadFavorites()
+        presenter.loadFavorites()
     }
     
     // MARK: - Setup
@@ -131,12 +121,7 @@ class FavoritesViewController: UIViewController {
         navigationController?.navigationBar.prefersLargeTitles = true
     }
     
-    // MARK: - Data Loading
-    
-    private func loadFavorites() {
-        presenter.loadFavorites()
-        updateUI()
-    }
+    // MARK: - UI Updates
     
     private func updateUI() {
         let isEmpty = presenter.favoriteMovies.isEmpty
@@ -146,6 +131,49 @@ class FavoritesViewController: UIViewController {
         if !isEmpty {
             tableView.reloadData()
         }
+    }
+    
+    // MARK: - Error Handling
+    
+    private func showErrorAlert(message: String, retryAction: (() -> Void)? = nil) {
+        let alert = UIAlertController(
+            title: "Error",
+            message: message,
+            preferredStyle: .alert
+        )
+        
+        alert.addAction(UIAlertAction(title: "OK", style: .default))
+        
+        if let retryAction = retryAction {
+            alert.addAction(UIAlertAction(title: "Retry", style: .default) { _ in
+                retryAction()
+            })
+        }
+        
+        present(alert, animated: true)
+    }
+}
+
+// MARK: - FavoritesPresenterDelegate
+extension FavoritesViewController: FavoritesPresenterDelegate {
+    
+    func didLoadFavorites() {
+        updateUI()
+    }
+    
+    func didFailToLoadFavorites(with error: Error) {
+        showErrorAlert(message: "Failed to load favorites. Please try again.") { [weak self] in
+            self?.presenter.loadFavorites()
+        }
+    }
+    
+    func didRemoveFavorite(at index: Int) {
+        // Reload after removal to sync with data
+        presenter.loadFavorites()
+    }
+    
+    func didFailToRemoveFavorite(with error: Error) {
+        showErrorAlert(message: "Failed to remove favorite. Please try again.")
     }
 }
 
@@ -161,6 +189,7 @@ extension FavoritesViewController: UITableViewDataSource {
             withIdentifier: FavoriteMovieCell.reuseIdentifier,
             for: indexPath
         ) as? FavoriteMovieCell else {
+            assertionFailure("Failed to dequeue FavoriteMovieCell - check registration")
             return UITableViewCell()
         }
         
@@ -173,8 +202,6 @@ extension FavoritesViewController: UITableViewDataSource {
 // MARK: - UITableViewDelegate
 extension FavoritesViewController: UITableViewDelegate {
     
-    /// Handle row tap - navigate to detail.
-    /// SwiftUI equivalent: .onTapGesture { presenter.onMoviePressed(id:) }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         
@@ -182,31 +209,16 @@ extension FavoritesViewController: UITableViewDelegate {
         presenter.onMoviePressed(id: movie.id)
     }
     
-    /// Enable swipe-to-delete.
-    /// SwiftUI equivalent: .onDelete { presenter.removeFavorite(at: $0) }
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            // Remove from presenter (persistent storage)
             presenter.removeFavorite(at: IndexSet(integer: indexPath.row))
-            
-            // Reload favorites from storage to sync the array
-            presenter.loadFavorites()
-            
-            // Reload table (safer than animated deleteRows)
-            tableView.reloadData()
-            
-            // Check if empty
-            if presenter.favoriteMovies.isEmpty {
-                updateUI()
-            }
         }
     }
 }
 
 // MARK: - FavoriteMovieCell
 /// Custom table view cell for displaying favorite movies.
-/// SwiftUI equivalent: SearchCellView
-class FavoriteMovieCell: UITableViewCell {
+final class FavoriteMovieCell: UITableViewCell {
     
     static let reuseIdentifier = "FavoriteMovieCell"
     
@@ -216,7 +228,7 @@ class FavoriteMovieCell: UITableViewCell {
         let iv = UIImageView()
         iv.contentMode = .scaleAspectFill
         iv.clipsToBounds = true
-        iv.layer.cornerRadius = 8
+        iv.layer.cornerRadius = LayoutConstants.CornerRadius.medium
         iv.backgroundColor = .systemGray5
         iv.translatesAutoresizingMaskIntoConstraints = false
         return iv
@@ -267,20 +279,20 @@ class FavoriteMovieCell: UITableViewCell {
         contentView.addSubview(ratingLabel)
         
         NSLayoutConstraint.activate([
-            posterImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
+            posterImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: LayoutConstants.Spacing.standard),
             posterImageView.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
-            posterImageView.widthAnchor.constraint(equalToConstant: 60),
-            posterImageView.heightAnchor.constraint(equalToConstant: 90),
+            posterImageView.widthAnchor.constraint(equalToConstant: LayoutConstants.Poster.Small.width),
+            posterImageView.heightAnchor.constraint(equalToConstant: LayoutConstants.Poster.Small.height),
             
-            titleLabel.leadingAnchor.constraint(equalTo: posterImageView.trailingAnchor, constant: 16),
-            titleLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
+            titleLabel.leadingAnchor.constraint(equalTo: posterImageView.trailingAnchor, constant: LayoutConstants.Spacing.standard),
+            titleLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -LayoutConstants.Spacing.standard),
             titleLabel.topAnchor.constraint(equalTo: posterImageView.topAnchor),
             
             releaseDateLabel.leadingAnchor.constraint(equalTo: titleLabel.leadingAnchor),
-            releaseDateLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 4),
+            releaseDateLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: LayoutConstants.Spacing.small),
             
             ratingLabel.leadingAnchor.constraint(equalTo: titleLabel.leadingAnchor),
-            ratingLabel.topAnchor.constraint(equalTo: releaseDateLabel.bottomAnchor, constant: 4),
+            ratingLabel.topAnchor.constraint(equalTo: releaseDateLabel.bottomAnchor, constant: LayoutConstants.Spacing.small),
         ])
     }
     
@@ -298,62 +310,10 @@ class FavoriteMovieCell: UITableViewCell {
     
     override func prepareForReuse() {
         super.prepareForReuse()
+        posterImageView.sd_cancelCurrentImageLoad()
         posterImageView.image = nil
         titleLabel.text = nil
         releaseDateLabel.text = nil
         ratingLabel.text = nil
-        posterImageView.sd_cancelCurrentImageLoad()
     }
 }
-
-// MARK: - SwiftUI vs UIKit Comparison
-/*
- 
- ┌─────────────────────────────────────────────────────────────────┐
- │              LIST vs TABLEVIEW                                  │
- ├─────────────────────────────────────────────────────────────────┤
- │                                                                 │
- │  SWIFTUI List:                                                  │
- │  ─────────────                                                  │
- │  List {                                                         │
- │      ForEach(movies) { movie in                                │
- │          SearchCellView(movie: movie)                          │
- │      }                                                          │
- │      .onDelete { indices in                                    │
- │          presenter.removeFavorite(at: indices)                 │
- │      }                                                          │
- │  }                                                              │
- │                                                                 │
- │                                                                 │
- │  UIKIT UITableView:                                            │
- │  ──────────────────                                            │
- │  // DataSource                                                  │
- │  func numberOfRowsInSection -> Int {                           │
- │      return movies.count                                       │
- │  }                                                              │
- │                                                                 │
- │  func cellForRowAt -> UITableViewCell {                        │
- │      let cell = dequeue...                                     │
- │      cell.configure(with: movie)                               │
- │      return cell                                               │
- │  }                                                              │
- │                                                                 │
- │  // Delegate                                                    │
- │  func commit editingStyle {                                    │
- │      if editingStyle == .delete {                              │
- │          presenter.removeFavorite(...)                         │
- │          tableView.deleteRows(...)                             │
- │      }                                                          │
- │  }                                                              │
- │                                                                 │
- ├─────────────────────────────────────────────────────────────────┤
- │                                                                 │
- │  KEY DIFFERENCES:                                               │
- │  - SwiftUI: Declarative, automatic                             │
- │  - UIKit: Delegate/DataSource pattern, manual animations       │
- │  - SwiftUI: .onDelete modifier                                 │
- │  - UIKit: commit editingStyle delegate method                  │
- │                                                                 │
- └─────────────────────────────────────────────────────────────────┘
- 
- */

@@ -7,46 +7,76 @@
 
 import SwiftUI
 
+// MARK: - DetailPresenterDelegate
+/// Protocol for presenter to communicate UI updates back to the view controller.
+@MainActor
+protocol DetailPresenterDelegate: AnyObject {
+    func didLoadMovie()
+    func didFailToLoadMovie(with error: Error)
+    func didUpdateFavoriteStatus()
+    func didFailToUpdateFavorite(with error: Error)
+}
+
 @MainActor
 @Observable
-class DetailPresenter {
+final class DetailPresenter {
+    
+    // MARK: - Dependencies
+    
     let interactor: DetailInteractor
     let router: DetailRouter
+    
+    // MARK: - Delegate
+    
+    weak var delegate: DetailPresenterDelegate?
+    
+    // MARK: - State
     
     var movie: SingleMovie? = nil
     var isFavorite: Bool = false
     var isLoading: Bool = false
+    
+    // MARK: - Initialization
     
     init(interactor: DetailInteractor, router: DetailRouter) {
         self.interactor = interactor
         self.router = router
     }
     
+    // MARK: - Data Loading
+    
     func loadSingleMovie(id: Int) async {
         interactor.trackEvent(event: Event.loadSingleMovieStart)
         isLoading = true
+        
         do {
             movie = try await interactor.getSingleMovie(id: id)
             checkIsFavorite()
             interactor.trackEvent(event: Event.loadSingleMovieSuccess(isMovieLoaded: (movie != nil)))
+            delegate?.didLoadMovie()
         } catch {
             interactor.trackEvent(event: Event.loadSingleMovieFail(error: error))
+            delegate?.didFailToLoadMovie(with: error)
         }
+        
         isLoading = false
-
     }
+    
+    // MARK: - Navigation
     
     func onWatchTrailerPressed() {
         guard let movie else { return }
-        router.showTrailerModalView(movie: movie) {
-            self.router.dismissModal()
+        // IMPORTANT: Use [weak self] to prevent retain cycles
+        router.showTrailerModalView(movie: movie) { [weak self] in
+            self?.router.dismissModal()
         }
     }
     
     func onMovieImagePressed() {
         guard let movie else { return }
-        router.showImageModalView(urlString: movie.posterURLString ?? "No image") {
-            self.router.dismissModal()
+        // IMPORTANT: Use [weak self] to prevent retain cycles
+        router.showImageModalView(urlString: movie.posterURLString ?? "No image") { [weak self] in
+            self?.router.dismissModal()
         }
     }
     
@@ -58,33 +88,42 @@ class DetailPresenter {
         router.showTheatreLocationsView()
     }
     
+    // MARK: - Favorites Management
+    
     func addToFavorites() {
         interactor.trackEvent(event: Event.addToFavoritesStart)
-//        guard let movie else { return }
+        guard let movie else { return }
+        
         do {
-            try interactor.addToFavorites(movie: movie ?? SingleMovie.mock())
+            try interactor.addToFavorites(movie: movie)
             interactor.trackEvent(event: Event.addToFavoritesSuccess)
+            delegate?.didUpdateFavoriteStatus()
         } catch {
             interactor.trackEvent(event: Event.addToFavoritesFail(error: error))
+            delegate?.didFailToUpdateFavorite(with: error)
         }
     }
     
     func removeFromFavorites() {
         interactor.trackEvent(event: Event.removeFromFavoritesStart)
-//        guard let movie else { return }
+        guard let movie else { return }
+        
         do {
-            try interactor.removeFavorite(movie: movie ?? SingleMovie.mock())
+            try interactor.removeFavorite(movie: movie)
             interactor.trackEvent(event: Event.removeFromFavoritesSuccess)
+            delegate?.didUpdateFavoriteStatus()
         } catch {
             interactor.trackEvent(event: Event.removeFromFavoritesFail(error: error))
+            delegate?.didFailToUpdateFavorite(with: error)
         }
     }
     
     func checkIsFavorite() {
         interactor.trackEvent(event: Event.checkIsFavoriteStart)
-//        guard let movie else { return }
+        guard let movie else { return }
+        
         do {
-            isFavorite = try interactor.isFavorite(movie: movie ?? SingleMovie.mock())
+            isFavorite = try interactor.isFavorite(movie: movie)
             interactor.trackEvent(event: Event.checkIsFavoriteSuccess)
         } catch {
             interactor.trackEvent(event: Event.checkIsFavoriteFail(error: error))
@@ -100,12 +139,11 @@ class DetailPresenter {
             isFavorite = false
         }
     }
-
 }
 
+// MARK: - Logging
+
 extension DetailPresenter {
-    
-    //MARK: LOGGING FUNCTIONS
     
     func onViewAppear(delegate: DetailViewDelegate) {
         interactor.trackScreenView(event: Event.onAppear(delegate: delegate))
@@ -114,7 +152,6 @@ extension DetailPresenter {
     func onViewDisappear(delegate: DetailViewDelegate) {
         interactor.trackEvent(event: Event.onDisappear(delegate: delegate))
     }
-    
     
     enum Event: LoggableEvent {
         case onAppear(delegate: DetailViewDelegate)
@@ -130,8 +167,7 @@ extension DetailPresenter {
         case removeFromFavoritesFail(error: Error)
         case checkIsFavoriteStart
         case checkIsFavoriteSuccess
-        case checkIsFavoriteFail (error: Error)
-
+        case checkIsFavoriteFail(error: Error)
 
         var eventName: String {
             switch self {
@@ -140,17 +176,12 @@ extension DetailPresenter {
             case .loadSingleMovieStart:         return "DetailView_LoadSingleMovie_Start"
             case .loadSingleMovieSuccess:       return "DetailView_LoadSingleMovie_Success"
             case .loadSingleMovieFail:          return "DetailView_LoadSingleMovie_Fail"
-
             case .addToFavoritesStart:          return "DetailView_AddToFavorites_Start"
             case .addToFavoritesSuccess:        return "DetailView_AddToFavorites_Success"
             case .addToFavoritesFail:           return "DetailView_AddToFavorites_Fail"
-            
             case .removeFromFavoritesStart:     return "DetailView_RemoveFromFavorites_Start"
             case .removeFromFavoritesSuccess:   return "DetailView_RemoveFromFavorites_Success"
             case .removeFromFavoritesFail:      return "DetailView_RemoveFromFavorites_Fail"
-                
-                
-                
             case .checkIsFavoriteStart:         return "DetailView_CheckIsFavorite_Start"
             case .checkIsFavoriteSuccess:       return "DetailView_CheckIsFavorite_Success"
             case .checkIsFavoriteFail:          return "DetailView_CheckIsFavorite_Fail"
@@ -166,16 +197,10 @@ extension DetailPresenter {
                 return [
                     "single_movie_isMovieLoaded": isMovieLoaded.description,
                 ]
-            case .loadSingleMovieFail(error: let error):
-                return error.eventParameters
-                
-            case .addToFavoritesFail(error: let error):
-                return error.eventParameters
-                
-            case .removeFromFavoritesFail(error: let error):
-                return error.eventParameters
-                
-            case .checkIsFavoriteFail(error: let error):
+            case .loadSingleMovieFail(error: let error),
+                 .addToFavoritesFail(error: let error),
+                 .removeFromFavoritesFail(error: let error),
+                 .checkIsFavoriteFail(error: let error):
                 return error.eventParameters
             default:
                 return nil

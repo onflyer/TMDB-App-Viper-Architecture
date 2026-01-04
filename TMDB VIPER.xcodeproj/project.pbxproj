@@ -53,6 +53,7 @@
 		309C9BCB2F0B04170055A8BF /* TrailerModalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 309C9BCA2F0B04170055A8BF /* TrailerModalViewController.swift */; };
 		309C9BCD2F0B042B0055A8BF /* ImageModalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 309C9BCC2F0B042B0055A8BF /* ImageModalViewController.swift */; };
 		309C9BCF2F0B05320055A8BF /* SearchResultCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 309C9BCE2F0B05320055A8BF /* SearchResultCell.swift */; };
+		309C9BD12F0B14330055A8BF /* LayoutConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 309C9BD02F0B14330055A8BF /* LayoutConstants.swift */; };
 		30A25A062D26B83A00C2C094 /* SearchCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30A25A052D26B83A00C2C094 /* SearchCellView.swift */; };
 		30C2EADD2D18A2C50058DA88 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 30C2EABC2D18A2C50058DA88 /* Preview Assets.xcassets */; };
 		30C2EADE2D18A2C50058DA88 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 30C2EAD92D18A2C50058DA88 /* Assets.xcassets */; };
@@ -165,6 +166,7 @@
 		309C9BCA2F0B04170055A8BF /* TrailerModalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrailerModalViewController.swift; sourceTree = "<group>"; };
 		309C9BCC2F0B042B0055A8BF /* ImageModalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageModalViewController.swift; sourceTree = "<group>"; };
 		309C9BCE2F0B05320055A8BF /* SearchResultCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultCell.swift; sourceTree = "<group>"; };
+		309C9BD02F0B14330055A8BF /* LayoutConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LayoutConstants.swift; sourceTree = "<group>"; };
 		30A25A052D26B83A00C2C094 /* SearchCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchCellView.swift; sourceTree = "<group>"; };
 		30AF4FA02D16D68600DB54AF /* TMDB VIPER.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "TMDB VIPER.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		30C2EABC2D18A2C50058DA88 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
@@ -401,6 +403,7 @@
 				30C2EABF2D18A2C50058DA88 /* DependancyContainer.swift */,
 				309C9BB92F0A99290055A8BF /* SceneDelegate.swift */,
 				309C9BBE2F0A9C0D0055A8BF /* UIKitRouter.swift */,
+				309C9BD02F0B14330055A8BF /* LayoutConstants.swift */,
 			);
 			path = Root;
 			sourceTree = "<group>";
@@ -796,6 +799,7 @@
 				30C2ECD82D18AFC40058DA88 /* AnyNotificationListenerViewModifier.swift in Sources */,
 				309C9BC92F0AA3790055A8BF /* TheatreLocationsViewController.swift in Sources */,
 				300B95F42D1970430073CDF9 /* FeedDelegate.swift in Sources */,
+				309C9BD12F0B14330055A8BF /* LayoutConstants.swift in Sources */,
 				30C2ECE12D18B3EB0058DA88 /* HomeRouter.swift in Sources */,
 				30C2EAE62D18A2C50058DA88 /* GetMoviesRequest.swift in Sources */,
 				309C9BCB2F0B04170055A8BF /* TrailerModalViewController.swift in Sources */,

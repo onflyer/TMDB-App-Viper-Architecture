@@ -26,26 +26,14 @@ enum HomeSection: Int, CaseIterable {
     }
 }
 
-// MARK: - HomePresenterDelegate
-/// Protocol for presenter to communicate UI updates back to the view controller.
-///
-/// This is the KEY DIFFERENCE from SwiftUI:
-/// - SwiftUI: @Observable automatically triggers body recomputation
-/// - UIKit: Presenter calls these delegate methods, VC manually updates UI
-protocol HomePresenterDelegate: AnyObject {
-    func didLoadMovies(for section: HomeSection)
-    func didFailToLoadMovies(with error: Error)
-}
-
 // MARK: - HomeViewController
-class HomeViewController: UIViewController {
+final class HomeViewController: UIViewController {
     
     // MARK: - Properties
     
     private let presenter: HomePresenter
-    var builder: CoreBuilder?
-    private var hasLoadedInitialData = false  // Prevent reloading on every viewDidAppear
-    private var isSearching = false  // Track search state
+    private var hasLoadedInitialData = false
+    private var isSearching = false
     
     // MARK: - UI Elements
     
@@ -73,7 +61,7 @@ class HomeViewController: UIViewController {
         tv.delegate = self
         tv.dataSource = self
         tv.register(SearchResultCell.self, forCellReuseIdentifier: SearchResultCell.reuseIdentifier)
-        tv.isHidden = true  // Hidden by default
+        tv.isHidden = true
         tv.keyboardDismissMode = .onDrag
         return tv
     }()
@@ -89,11 +77,22 @@ class HomeViewController: UIViewController {
         return sc
     }()
     
+    /// Loading indicator shown during initial data load.
+    private lazy var loadingIndicator: UIActivityIndicatorView = {
+        let indicator = UIActivityIndicatorView(style: .large)
+        indicator.translatesAutoresizingMaskIntoConstraints = false
+        indicator.hidesWhenStopped = true
+        return indicator
+    }()
+    
     // MARK: - Initialization
     
     init(presenter: HomePresenter) {
         self.presenter = presenter
         super.init(nibName: nil, bundle: nil)
+        
+        // Wire up the delegate - this is KEY for UIKit
+        presenter.delegate = self
     }
     
     required init?(coder: NSCoder) {
@@ -125,6 +124,7 @@ class HomeViewController: UIViewController {
         
         view.addSubview(collectionView)
         view.addSubview(searchResultsTableView)
+        view.addSubview(loadingIndicator)
         
         NSLayoutConstraint.activate([
             collectionView.topAnchor.constraint(equalTo: view.topAnchor),
@@ -137,6 +137,10 @@ class HomeViewController: UIViewController {
             searchResultsTableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             searchResultsTableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             searchResultsTableView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            
+            // Loading indicator centered
+            loadingIndicator.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            loadingIndicator.centerYAnchor.constraint(equalTo: view.centerYAnchor),
         ])
     }
     
@@ -151,20 +155,30 @@ class HomeViewController: UIViewController {
     
     private func loadAllMovies() {
         Task {
-            // Load all sections concurrently
-            async let nowPlaying: () = presenter.loadNowPlayingMovies()
-            async let upcoming: () = presenter.loadUpcomingMovies()
-            async let topRated: () = presenter.loadTopRatedMovies()
-            async let popular: () = presenter.loadPopularMovies()
-            
-            // Wait for all to complete
-            _ = await (nowPlaying, upcoming, topRated, popular)
-            
-            // Single reload after all data is loaded
-            await MainActor.run {
-                collectionView.reloadData()
-            }
+            await presenter.loadAllMovies()
         }
+    }
+    
+    // MARK: - Error Handling
+    
+    /// Shows an error alert to the user.
+    /// Production apps should inform users when something goes wrong.
+    private func showErrorAlert(message: String, retryAction: (() -> Void)? = nil) {
+        let alert = UIAlertController(
+            title: "Error",
+            message: message,
+            preferredStyle: .alert
+        )
+        
+        alert.addAction(UIAlertAction(title: "OK", style: .default))
+        
+        if let retryAction = retryAction {
+            alert.addAction(UIAlertAction(title: "Retry", style: .default) { _ in
+                retryAction()
+            })
+        }
+        
+        present(alert, animated: true)
     }
     
     // MARK: - Layout Creation
@@ -187,34 +201,31 @@ class HomeViewController: UIViewController {
     }
     
     /// Creates a section with poster-style cells (taller, narrower).
-    /// SwiftUI equivalent:
-    /// ```
-    /// ScrollView(.horizontal) {
-    ///     LazyHStack {
-    ///         ForEach(movies) { MovieCellView(...).frame(width: 150, height: 225) }
-    ///     }
-    /// }
-    /// ```
     private func createPosterSection() -> NSCollectionLayoutSection {
         // Item
         let itemSize = NSCollectionLayoutSize(
-            widthDimension: .absolute(150),
-            heightDimension: .absolute(225)
+            widthDimension: .absolute(LayoutConstants.Poster.width),
+            heightDimension: .absolute(LayoutConstants.Poster.height)
         )
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
-        item.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 8)
+        item.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 0, bottom: 0, trailing: LayoutConstants.Spacing.medium)
         
         // Group (horizontal)
         let groupSize = NSCollectionLayoutSize(
-            widthDimension: .absolute(150),
-            heightDimension: .absolute(225)
+            widthDimension: .absolute(LayoutConstants.Poster.width),
+            heightDimension: .absolute(LayoutConstants.Poster.height)
         )
         let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
         
         // Section
         let section = NSCollectionLayoutSection(group: group)
-        section.orthogonalScrollingBehavior = .continuous  // Horizontal scroll!
-        section.contentInsets = NSDirectionalEdgeInsets(top: 8, leading: 16, bottom: 16, trailing: 16)
+        section.orthogonalScrollingBehavior = .continuous
+        section.contentInsets = NSDirectionalEdgeInsets(
+            top: LayoutConstants.Spacing.medium,
+            leading: LayoutConstants.Spacing.standard,
+            bottom: LayoutConstants.Spacing.standard,
+            trailing: LayoutConstants.Spacing.standard
+        )
         
         // Header
         section.boundarySupplementaryItems = [createSectionHeader()]
@@ -223,27 +234,31 @@ class HomeViewController: UIViewController {
     }
     
     /// Creates a section with backdrop-style cells (wider, shorter).
-    /// SwiftUI equivalent: Your upcoming/popular sections with .frame(width: 300, height: 170)
     private func createBackdropSection() -> NSCollectionLayoutSection {
         // Item
         let itemSize = NSCollectionLayoutSize(
-            widthDimension: .absolute(300),
-            heightDimension: .absolute(170)
+            widthDimension: .absolute(LayoutConstants.Backdrop.width),
+            heightDimension: .absolute(LayoutConstants.Backdrop.height)
         )
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
-        item.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 8)
+        item.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 0, bottom: 0, trailing: LayoutConstants.Spacing.medium)
         
         // Group (horizontal)
         let groupSize = NSCollectionLayoutSize(
-            widthDimension: .absolute(300),
-            heightDimension: .absolute(170)
+            widthDimension: .absolute(LayoutConstants.Backdrop.width),
+            heightDimension: .absolute(LayoutConstants.Backdrop.height)
         )
         let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
         
         // Section
         let section = NSCollectionLayoutSection(group: group)
         section.orthogonalScrollingBehavior = .continuous
-        section.contentInsets = NSDirectionalEdgeInsets(top: 8, leading: 16, bottom: 16, trailing: 16)
+        section.contentInsets = NSDirectionalEdgeInsets(
+            top: LayoutConstants.Spacing.medium,
+            leading: LayoutConstants.Spacing.standard,
+            bottom: LayoutConstants.Spacing.standard,
+            trailing: LayoutConstants.Spacing.standard
+        )
         
         // Header
         section.boundarySupplementaryItems = [createSectionHeader()]
@@ -254,7 +269,7 @@ class HomeViewController: UIViewController {
     private func createSectionHeader() -> NSCollectionLayoutBoundarySupplementaryItem {
         let headerSize = NSCollectionLayoutSize(
             widthDimension: .fractionalWidth(1.0),
-            heightDimension: .absolute(44)
+            heightDimension: .absolute(LayoutConstants.SectionHeader.height)
         )
         return NSCollectionLayoutBoundarySupplementaryItem(
             layoutSize: headerSize,
@@ -264,19 +279,49 @@ class HomeViewController: UIViewController {
     }
 }
 
+// MARK: - HomePresenterDelegate
+/// The presenter notifies the ViewController of data changes via this delegate.
+/// This is the UIKit equivalent of SwiftUI's automatic @Observable updates.
+extension HomeViewController: HomePresenterDelegate {
+    
+    func didLoadMovies(for section: HomeSection) {
+        // Reload only the affected section for better performance
+        collectionView.reloadSections(IndexSet(integer: section.rawValue))
+    }
+    
+    func didFailToLoadMovies(with error: Error) {
+        showErrorAlert(message: "Failed to load movies. Please try again.") { [weak self] in
+            self?.loadAllMovies()
+        }
+    }
+    
+    func didStartLoading() {
+        loadingIndicator.startAnimating()
+        collectionView.isHidden = true
+    }
+    
+    func didFinishLoading() {
+        loadingIndicator.stopAnimating()
+        collectionView.isHidden = false
+        collectionView.reloadData()
+    }
+    
+    func didLoadSearchResults() {
+        searchResultsTableView.reloadData()
+    }
+    
+    func didFailToSearch(with error: Error) {
+        showErrorAlert(message: "Search failed. Please try again.")
+    }
+}
+
 // MARK: - UICollectionViewDataSource
-/// Provides data to the collection view.
-/// SwiftUI equivalent: ForEach(presenter.nowPlayingMovies) { movie in ... }
 extension HomeViewController: UICollectionViewDataSource {
     
-    /// Number of sections
-    /// SwiftUI equivalent: Number of Section blocks in List
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return HomeSection.allCases.count
     }
     
-    /// Number of items in each section
-    /// SwiftUI equivalent: movies.count in ForEach
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         guard let homeSection = HomeSection(rawValue: section) else { return 0 }
         
@@ -288,13 +333,13 @@ extension HomeViewController: UICollectionViewDataSource {
         }
     }
     
-    /// Creates/configures a cell for each item.
-    /// SwiftUI equivalent: The view returned inside ForEach { movie in MovieCellView(...) }
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(
             withReuseIdentifier: MovieCollectionViewCell.reuseIdentifier,
             for: indexPath
         ) as? MovieCollectionViewCell else {
+            // This should never happen if cell is registered correctly
+            assertionFailure("Failed to dequeue MovieCollectionViewCell - check cell registration")
             return UICollectionViewCell()
         }
         
@@ -317,14 +362,11 @@ extension HomeViewController: UICollectionViewDataSource {
         }
         
         // Pagination: Load more when reaching end
-        // SwiftUI equivalent: .task { await presenter.loadMoreNowPlayingMovies(currentItem: movie) }
         checkForPagination(section: section, index: indexPath.item)
         
         return cell
     }
     
-    /// Creates/configures section headers.
-    /// SwiftUI equivalent: Section { } header: { Text("Now Playing") }
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         guard kind == UICollectionView.elementKindSectionHeader,
               let header = collectionView.dequeueReusableSupplementaryView(
@@ -332,6 +374,7 @@ extension HomeViewController: UICollectionViewDataSource {
                 withReuseIdentifier: SectionHeaderView.reuseIdentifier,
                 for: indexPath
               ) as? SectionHeaderView else {
+            assertionFailure("Failed to dequeue SectionHeaderView - check registration")
             return UICollectionReusableView()
         }
         
@@ -351,33 +394,21 @@ extension HomeViewController: UICollectionViewDataSource {
                 let movies = presenter.nowPlayingMovies
                 if index == movies.count - 1, let lastMovie = movies.last {
                     await presenter.loadMoreNowPlayingMovies(currentItem: lastMovie)
-                    await MainActor.run {
-                        collectionView.reloadData()
-                    }
                 }
             case .upcoming:
                 let movies = presenter.upcomingMovies
                 if index == movies.count - 1, let lastMovie = movies.last {
                     await presenter.loadMoreUpcomingMovies(currentItem: lastMovie)
-                    await MainActor.run {
-                        collectionView.reloadData()
-                    }
                 }
             case .topRated:
                 let movies = presenter.topRatedMovies
                 if index == movies.count - 1, let lastMovie = movies.last {
                     await presenter.loadMoreTopRatedMovies(currentItem: lastMovie)
-                    await MainActor.run {
-                        collectionView.reloadData()
-                    }
                 }
             case .popular:
                 let movies = presenter.popularMovies
                 if index == movies.count - 1, let lastMovie = movies.last {
                     await presenter.loadMorePopularMovies(currentItem: lastMovie)
-                    await MainActor.run {
-                        collectionView.reloadData()
-                    }
                 }
             }
         }
@@ -385,11 +416,8 @@ extension HomeViewController: UICollectionViewDataSource {
 }
 
 // MARK: - UICollectionViewDelegate
-/// Handles user interactions with the collection view.
 extension HomeViewController: UICollectionViewDelegate {
     
-    /// Called when user taps a cell.
-    /// SwiftUI equivalent: .onTapGesture { } or Button action
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         guard let section = HomeSection(rawValue: indexPath.section) else { return }
         
@@ -401,21 +429,17 @@ extension HomeViewController: UICollectionViewDelegate {
         case .popular: movie = presenter.popularMovies[indexPath.item]
         }
         
-        // Navigate using presenter (same as SwiftUI!)
         presenter.onMoviePressed(id: movie.id)
     }
 }
 
 // MARK: - UISearchResultsUpdating
-/// Handles search text changes.
-/// SwiftUI equivalent: .searchable(text: $presenter.query) + .task(id: presenter.query)
 extension HomeViewController: UISearchResultsUpdating {
     
     func updateSearchResults(for searchController: UISearchController) {
         guard let query = searchController.searchBar.text else { return }
         
         if query.isEmpty {
-            // Clear search results and hide table
             Task {
                 await presenter.loadSearchedMovies(query: "")
                 await MainActor.run {
@@ -432,8 +456,7 @@ extension HomeViewController: UISearchResultsUpdating {
         searchResultsTableView.isHidden = false
         collectionView.isHidden = true
         
-        // Debounce search - wait for user to stop typing
-        // SwiftUI does this automatically with .task(id:)
+        // Debounce search
         NSObject.cancelPreviousPerformRequests(withTarget: self, selector: #selector(performSearch), object: nil)
         perform(#selector(performSearch), with: nil, afterDelay: 0.3)
     }
@@ -443,9 +466,6 @@ extension HomeViewController: UISearchResultsUpdating {
         
         Task {
             await presenter.loadSearchedMovies(query: query)
-            await MainActor.run {
-                searchResultsTableView.reloadData()
-            }
         }
     }
 }
@@ -454,7 +474,6 @@ extension HomeViewController: UISearchResultsUpdating {
 extension HomeViewController: UISearchControllerDelegate {
     
     func willDismissSearchController(_ searchController: UISearchController) {
-        // When search is cancelled, show collection view again
         isSearching = false
         searchResultsTableView.isHidden = true
         collectionView.isHidden = false
@@ -473,6 +492,7 @@ extension HomeViewController: UITableViewDataSource {
             withIdentifier: SearchResultCell.reuseIdentifier,
             for: indexPath
         ) as? SearchResultCell else {
+            assertionFailure("Failed to dequeue SearchResultCell - check registration")
             return UITableViewCell()
         }
         
@@ -496,7 +516,7 @@ extension HomeViewController: UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 100
+        return LayoutConstants.CellHeight.searchResult
     }
 }
 
@@ -519,16 +539,16 @@ extension HomeViewController: UITableViewDelegate {
  │   ForEach sees new data → new cells appear                     │
  │                                                                 │
  │                                                                 │
- │   UIKIT:                                                        │
- │   ──────                                                        │
+ │   UIKIT (with Delegate Pattern):                               │
+ │   ──────────────────────────────                               │
  │                                                                 │
- │   User taps "Load" → Task { await presenter.load() }           │
+ │   User taps "Load" → Task { await presenter.loadAllMovies() }  │
  │                              ↓                                  │
  │   Presenter updates nowPlayingMovies                           │
  │                              ↓                                  │
- │   ⚠️ NOTHING HAPPENS AUTOMATICALLY ⚠️                          │
+ │   Presenter calls delegate?.didLoadMovies(for: .nowPlaying)    │
  │                              ↓                                  │
- │   YOU must call: collectionView.reloadData()                   │
+ │   ViewController receives callback, calls reloadData()         │
  │                              ↓                                  │
  │   DataSource methods called → cells created/updated            │
  │                                                                 │
@@ -536,7 +556,7 @@ extension HomeViewController: UITableViewDelegate {
  │                                                                 │
  │   THE KEY INSIGHT:                                              │
  │   SwiftUI = Automatic UI updates (reactive)                    │
- │   UIKit = Manual UI updates (imperative)                       │
+ │   UIKit = Manual UI updates via delegate (imperative)          │
  │                                                                 │
  │   Both use the SAME presenter with the SAME data!              │
  │                                                                 │

@@ -15,37 +15,19 @@ struct CoreBuilder {
     // MARK: - UIKit Builders
     // These return UIViewController for UIKit navigation
     
-    /// Creates the HomeViewController - the main entry point.
-    /// Called from SceneDelegate to set up the initial screen.
-    ///
-    /// Note: This method creates the router internally since it's the root.
-    /// Child view controllers receive the router as a parameter.
-    func makeHomeViewController(navigationController: UINavigationController? = nil) -> UIViewController {
-        // We'll set the router after we have the navigation controller
-        // For now, create with a temporary router - SceneDelegate will set the real one
-        let presenter = HomePresenter(
-            interactor: interactor,
-            router: PlaceholderRouter()
-        )
-        let viewController = HomeViewController(presenter: presenter)
-        
-        // Store builder reference so we can create router later
-        viewController.builder = self
-        
-        return viewController
-    }
-    
     /// Creates HomeViewController with a proper router.
-    /// Used when we have access to the navigation controller.
+    /// The ViewController wires up its presenter's delegate internally.
     func makeHomeViewController(router: UIKitRouter) -> UIViewController {
         let presenter = HomePresenter(
             interactor: interactor,
             router: router
         )
+        // HomeViewController sets presenter.delegate = self in its init
         return HomeViewController(presenter: presenter)
     }
     
     /// Creates the DetailViewController for showing movie details.
+    /// The ViewController wires up its presenter's delegate internally.
     func makeDetailViewController(
         delegate: DetailViewDelegate = DetailViewDelegate(),
         router: UIKitRouter
@@ -54,15 +36,18 @@ struct CoreBuilder {
             interactor: interactor,
             router: router
         )
+        // DetailViewController sets presenter.delegate = self in its init
         return DetailViewController(presenter: presenter, delegate: delegate)
     }
     
     /// Creates the FavoritesViewController for showing saved movies.
+    /// The ViewController wires up its presenter's delegate internally.
     func makeFavoritesViewController(router: UIKitRouter) -> UIViewController {
         let presenter = FavoritesPresenter(
             interactor: interactor,
             router: router
         )
+        // FavoritesViewController sets presenter.delegate = self in its init
         return FavoritesViewController(presenter: presenter)
     }
     
@@ -139,56 +124,27 @@ struct CoreBuilder {
 // MARK: - Placeholder Router
 /// Temporary router used during initialization.
 /// Will be replaced with real UIKitRouter once navigation controller exists.
-private struct PlaceholderRouter: HomeRouter, DetailRouter, FavoritesRouter, TheatreLocationsRouter {
+@MainActor
+struct PlaceholderRouter: HomeRouter, DetailRouter, FavoritesRouter, TheatreLocationsRouter {
     func showDetailView(delegate: DetailViewDelegate) {
-        print("⚠️ PlaceholderRouter: showDetailView - router not yet configured")
+        assertionFailure("PlaceholderRouter should not be used - wire up real router")
     }
-    func showTrailerModalView(movie: SingleMovie, onXMarkPressed: @escaping () -> Void) {}
-    func showImageModalView(urlString: String, onXMarkPressed: @escaping () -> Void) {}
-    func showFavoritesView() {}
-    func showTheatreLocationsView() {}
-    func dismissModal() {}
-    func dismissScreen() {}
-}
-
-// MARK: - Placeholder ViewController
-/// Simple placeholder VC for screens we haven't built yet.
-/// Makes it easy to test navigation without implementing every screen.
-class PlaceholderViewController: UIViewController {
-    
-    private let titleText: String
-    private let subtitleText: String
-    
-    init(title: String, subtitle: String) {
-        self.titleText = title
-        self.subtitleText = subtitle
-        super.init(nibName: nil, bundle: nil)
+    func showFavoritesView() {
+        assertionFailure("PlaceholderRouter should not be used - wire up real router")
     }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+    func showTheatreLocationsView() {
+        assertionFailure("PlaceholderRouter should not be used - wire up real router")
     }
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        view.backgroundColor = .systemBackground
-        self.title = titleText
-        
-        let label = UILabel()
-        label.text = "🚧\n\n\(subtitleText)"
-        label.textAlignment = .center
-        label.numberOfLines = 0
-        label.font = .systemFont(ofSize: 18)
-        label.textColor = .secondaryLabel
-        label.translatesAutoresizingMaskIntoConstraints = false
-        
-        view.addSubview(label)
-        
-        NSLayoutConstraint.activate([
-            label.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            label.centerYAnchor.constraint(equalTo: view.centerYAnchor),
-            label.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
-            label.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20)
-        ])
+    func showTrailerModalView(movie: SingleMovie, onXMarkPressed: @escaping () -> Void) {
+        assertionFailure("PlaceholderRouter should not be used - wire up real router")
+    }
+    func showImageModalView(urlString: String, onXMarkPressed: @escaping () -> Void) {
+        assertionFailure("PlaceholderRouter should not be used - wire up real router")
+    }
+    func dismissModal() {
+        assertionFailure("PlaceholderRouter should not be used - wire up real router")
+    }
+    func dismissScreen() {
+        assertionFailure("PlaceholderRouter should not be used - wire up real router")
     }
 }

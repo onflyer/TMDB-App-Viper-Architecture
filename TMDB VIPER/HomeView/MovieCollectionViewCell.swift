@@ -14,42 +14,23 @@ import SDWebImage
 /// Key Differences from SwiftUI:
 /// - SwiftUI: View struct recreated each time, stateless
 /// - UIKit: Cell class is REUSED, must reset state in prepareForReuse()
-///
-/// SwiftUI MovieCellView:
-/// ```
-/// struct MovieCellView: View {
-///     var title: String
-///     var imageName: String
-///     var body: some View {
-///         ImageLoaderView(urlString: imageName)
-///             .overlay(alignment: .bottomLeading) {
-///                 Text(title)
-///             }
-///             .cornerRadius(8)
-///     }
-/// }
-/// ```
 
-class MovieCollectionViewCell: UICollectionViewCell {
+final class MovieCollectionViewCell: UICollectionViewCell {
     
     // MARK: - Reuse Identifier
-    /// Used by UICollectionView to recycle cells
-    /// SwiftUI doesn't have this concept - it creates new views as needed
     static let reuseIdentifier = "MovieCollectionViewCell"
     
     // MARK: - UI Elements
     
-    /// The movie poster image
     private let imageView: UIImageView = {
         let iv = UIImageView()
         iv.contentMode = .scaleAspectFill
         iv.clipsToBounds = true
-        iv.backgroundColor = .systemGray5  // Placeholder color while loading
+        iv.backgroundColor = .systemGray5
         iv.translatesAutoresizingMaskIntoConstraints = false
         return iv
     }()
     
-    /// The movie title label (shown at bottom)
     private let titleLabel: UILabel = {
         let label = UILabel()
         label.font = .systemFont(ofSize: 14, weight: .semibold)
@@ -59,8 +40,6 @@ class MovieCollectionViewCell: UICollectionViewCell {
         return label
     }()
     
-    /// Gradient view behind title for readability
-    /// SwiftUI equivalent: .addingGradientBackgroundForText()
     private let gradientView: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
@@ -83,94 +62,63 @@ class MovieCollectionViewCell: UICollectionViewCell {
     // MARK: - Setup
     
     private func setupUI() {
-        // Round corners like SwiftUI's .cornerRadius(8)
-        contentView.layer.cornerRadius = 8
+        contentView.layer.cornerRadius = LayoutConstants.CornerRadius.medium
         contentView.clipsToBounds = true
         
-        // Add shadow (on the cell itself, not contentView)
-        layer.shadowColor = UIColor.black.cgColor
-        layer.shadowOpacity = 0.2
-        layer.shadowOffset = CGSize(width: 0, height: 2)
-        layer.shadowRadius = 4
-        layer.masksToBounds = false
-        
-        // Add subviews
         contentView.addSubview(imageView)
         contentView.addSubview(gradientView)
         contentView.addSubview(titleLabel)
         
-        // Layout constraints
         NSLayoutConstraint.activate([
-            // Image fills the entire cell
             imageView.topAnchor.constraint(equalTo: contentView.topAnchor),
             imageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
             imageView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
             imageView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
             
-            // Gradient at bottom
             gradientView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
             gradientView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
             gradientView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
             gradientView.heightAnchor.constraint(equalToConstant: 50),
             
-            // Title at bottom with padding
-            titleLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 8),
-            titleLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -8),
-            titleLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -8),
+            titleLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: LayoutConstants.Spacing.medium),
+            titleLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -LayoutConstants.Spacing.medium),
+            titleLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -LayoutConstants.Spacing.medium),
         ])
     }
     
     override func layoutSubviews() {
         super.layoutSubviews()
-        setupGradient()
-    }
-    
-    private func setupGradient() {
-        // Remove existing gradient
-        gradientLayer?.removeFromSuperlayer()
         
-        // Create gradient layer
-        let gradient = CAGradientLayer()
-        gradient.frame = gradientView.bounds
-        gradient.colors = [
-            UIColor.clear.cgColor,
-            UIColor.black.withAlphaComponent(0.7).cgColor
-        ]
-        gradient.locations = [0.0, 1.0]
-        gradientView.layer.insertSublayer(gradient, at: 0)
-        gradientLayer = gradient
+        if gradientLayer == nil {
+            let gradient = CAGradientLayer()
+            gradient.colors = [UIColor.clear.cgColor, UIColor.black.withAlphaComponent(0.7).cgColor]
+            gradient.locations = [0, 1]
+            gradient.frame = gradientView.bounds
+            gradientView.layer.insertSublayer(gradient, at: 0)
+            gradientLayer = gradient
+        } else {
+            gradientLayer?.frame = gradientView.bounds
+        }
     }
     
     // MARK: - Reuse
     
-    /// Called when cell is about to be reused.
     /// CRITICAL in UIKit - must reset all state!
     /// SwiftUI doesn't need this because views are recreated.
     override func prepareForReuse() {
         super.prepareForReuse()
+        imageView.sd_cancelCurrentImageLoad()
         imageView.image = nil
         titleLabel.text = nil
-        // Cancel any pending image download
-        imageView.sd_cancelCurrentImageLoad()
     }
     
     // MARK: - Configuration
     
-    /// Configure the cell with movie data.
-    /// This is called from cellForItemAt in the data source.
-    ///
-    /// SwiftUI equivalent: Just passing properties to the view initializer
-    /// ```
-    /// MovieCellView(title: movie.title, imageName: movie.posterURLString)
-    /// ```
     func configure(with movie: Movie, showTitle: Bool = false) {
-        // Set title
         titleLabel.text = showTitle ? movie.title : nil
         titleLabel.isHidden = !showTitle
         gradientView.isHidden = !showTitle
         
-        // Load image using SDWebImage
-        // SwiftUI equivalent: ImageLoaderView (which uses SDWebImageSwiftUI internally)
         if let urlString = movie.posterURLString, let url = URL(string: urlString) {
             imageView.sd_setImage(
                 with: url,
@@ -183,7 +131,6 @@ class MovieCollectionViewCell: UICollectionViewCell {
         }
     }
     
-    /// Configure with backdrop image (for wider cells like Upcoming)
     func configureWithBackdrop(with movie: Movie) {
         titleLabel.text = movie.title
         titleLabel.isHidden = false
@@ -225,7 +172,8 @@ class MovieCollectionViewCell: UICollectionViewCell {
  │                                                                 │
  ├─────────────────────────────────────────────────────────────────┤
  │                                                                 │
- │   WHY REUSE?                                                    │
+ │   WHY REUSE?                                                   │
+ │                                                                 │
  │   UIKit reuses cells for memory efficiency.                    │
  │   With 1000 movies, only ~10 cells exist (visible ones).       │
  │   SwiftUI does similar optimization internally with LazyHStack │
