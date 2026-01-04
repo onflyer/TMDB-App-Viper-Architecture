@@ -48,6 +48,8 @@
 		309C9BC12F0A9E280055A8BF /* MovieCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 309C9BC02F0A9E280055A8BF /* MovieCollectionViewCell.swift */; };
 		309C9BC32F0A9E3D0055A8BF /* SectionHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 309C9BC22F0A9E3D0055A8BF /* SectionHeaderView.swift */; };
 		309C9BC52F0AA1C70055A8BF /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 309C9BC42F0AA1C70055A8BF /* DetailViewController.swift */; };
+		309C9BC72F0AA3580055A8BF /* FavoritesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 309C9BC62F0AA3580055A8BF /* FavoritesViewController.swift */; };
+		309C9BC92F0AA3790055A8BF /* TheatreLocationsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 309C9BC82F0AA3790055A8BF /* TheatreLocationsViewController.swift */; };
 		30A25A062D26B83A00C2C094 /* SearchCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30A25A052D26B83A00C2C094 /* SearchCellView.swift */; };
 		30C2EADD2D18A2C50058DA88 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 30C2EABC2D18A2C50058DA88 /* Preview Assets.xcassets */; };
 		30C2EADE2D18A2C50058DA88 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 30C2EAD92D18A2C50058DA88 /* Assets.xcassets */; };
@@ -155,6 +157,8 @@
 		309C9BC02F0A9E280055A8BF /* MovieCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieCollectionViewCell.swift; sourceTree = "<group>"; };
 		309C9BC22F0A9E3D0055A8BF /* SectionHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionHeaderView.swift; sourceTree = "<group>"; };
 		309C9BC42F0AA1C70055A8BF /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
+		309C9BC62F0AA3580055A8BF /* FavoritesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesViewController.swift; sourceTree = "<group>"; };
+		309C9BC82F0AA3790055A8BF /* TheatreLocationsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TheatreLocationsViewController.swift; sourceTree = "<group>"; };
 		30A25A052D26B83A00C2C094 /* SearchCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchCellView.swift; sourceTree = "<group>"; };
 		30AF4FA02D16D68600DB54AF /* TMDB VIPER.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "TMDB VIPER.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		30C2EABC2D18A2C50058DA88 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
@@ -285,6 +289,7 @@
 				3020D7D12D6B67E200C7E151 /* TheatreLocationsPresenter.swift */,
 				3020D7D32D6B680B00C7E151 /* TheatreLocationsRouter.swift */,
 				3020D85D2D6BB94500C7E151 /* TheatreLocationsView.swift */,
+				309C9BC82F0AA3790055A8BF /* TheatreLocationsViewController.swift */,
 			);
 			path = TheatreLocationsView;
 			sourceTree = "<group>";
@@ -316,6 +321,7 @@
 				305489B52D381D5D005E463E /* FavoritesPresenter.swift */,
 				305489B92D381E15005E463E /* FavoritesRouter.swift */,
 				305489B32D381D44005E463E /* FavoritesView.swift */,
+				309C9BC62F0AA3580055A8BF /* FavoritesViewController.swift */,
 			);
 			path = "Favorites View";
 			sourceTree = "<group>";
@@ -777,6 +783,7 @@
 				3020D85E2D6BB94500C7E151 /* TheatreLocationsView.swift in Sources */,
 				30548B932D3BF2BA005E463E /* HomePagePlaceholder.swift in Sources */,
 				30C2ECD82D18AFC40058DA88 /* AnyNotificationListenerViewModifier.swift in Sources */,
+				309C9BC92F0AA3790055A8BF /* TheatreLocationsViewController.swift in Sources */,
 				300B95F42D1970430073CDF9 /* FeedDelegate.swift in Sources */,
 				30C2ECE12D18B3EB0058DA88 /* HomeRouter.swift in Sources */,
 				30C2EAE62D18A2C50058DA88 /* GetMoviesRequest.swift in Sources */,
@@ -797,6 +804,7 @@
 				30C2EAF22D18A2C50058DA88 /* MovieManager.swift in Sources */,
 				30C2ECD62D18AF980058DA88 /* OnFirstAppearViewModifier.swift in Sources */,
 				300B97D52D1979D90073CDF9 /* MovieCellView.swift in Sources */,
+				309C9BC72F0AA3580055A8BF /* FavoritesViewController.swift in Sources */,
 				3020D7D22D6B67E200C7E151 /* TheatreLocationsPresenter.swift in Sources */,
 				30C2EDD52D18C1E50058DA88 /* ButtonViewModifiers.swift in Sources */,
 				30C2EAF32D18A2C50058DA88 /* MovieServiceProd.swift in Sources */,

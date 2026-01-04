@@ -63,8 +63,7 @@ struct CoreBuilder {
             interactor: interactor,
             router: router
         )
-        // TODO: Create actual FavoritesViewController
-        return PlaceholderViewController(title: "Favorites", subtitle: "FavoritesViewController coming soon!")
+        return FavoritesViewController(presenter: presenter)
     }
     
     /// Creates the TheatreLocationsViewController for showing nearby theaters.
@@ -73,8 +72,7 @@ struct CoreBuilder {
             interactor: interactor,
             router: router
         )
-        // TODO: Create actual TheatreLocationsViewController
-        return PlaceholderViewController(title: "Nearby Theaters", subtitle: "TheatreLocationsViewController coming soon!")
+        return TheatreLocationsViewController(presenter: presenter)
     }
     
     // MARK: - SwiftUI Builders (Keep for reference/previews)
