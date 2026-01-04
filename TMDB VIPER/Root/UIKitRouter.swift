@@ -92,30 +92,23 @@ extension UIKitRouter: HomeRouter {
 extension UIKitRouter: DetailRouter {
     
     func showTrailerModalView(movie: SingleMovie, onXMarkPressed: @escaping () -> Void) {
-        // TODO: Create TrailerModalViewController
-        // For now, we'll use a simple alert as placeholder
-        let alert = UIAlertController(
-            title: "Trailers",
-            message: "Trailer modal coming soon!\n\nMovie: \(movie.title ?? "Unknown")",
-            preferredStyle: .alert
-        )
-        alert.addAction(UIAlertAction(title: "OK", style: .default) { _ in
-            onXMarkPressed()
-        })
-        navigationController?.present(alert, animated: true)
+        let trailerVC = TrailerModalViewController(movie: movie, onDismiss: onXMarkPressed)
+        let navController = UINavigationController(rootViewController: trailerVC)
+        navController.modalPresentationStyle = .pageSheet
+        
+        // Configure sheet to be medium height (half screen)
+        if let sheet = navController.sheetPresentationController {
+            sheet.detents = [.medium(), .large()]
+            sheet.prefersGrabberVisible = true
+        }
+        
+        navigationController?.present(navController, animated: true)
     }
     
     func showImageModalView(urlString: String, onXMarkPressed: @escaping () -> Void) {
-        // TODO: Create ImageModalViewController
-        let alert = UIAlertController(
-            title: "Image Preview",
-            message: "Image modal coming soon!",
-            preferredStyle: .alert
-        )
-        alert.addAction(UIAlertAction(title: "OK", style: .default) { _ in
-            onXMarkPressed()
-        })
-        navigationController?.present(alert, animated: true)
+        let imageVC = ImageModalViewController(imageURLString: urlString, onDismiss: onXMarkPressed)
+        // Present without navigation controller for true overlay effect
+        navigationController?.present(imageVC, animated: true)
     }
     
     func showFavoritesView() {

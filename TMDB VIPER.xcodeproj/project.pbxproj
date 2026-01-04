@@ -50,6 +50,8 @@
 		309C9BC52F0AA1C70055A8BF /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 309C9BC42F0AA1C70055A8BF /* DetailViewController.swift */; };
 		309C9BC72F0AA3580055A8BF /* FavoritesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 309C9BC62F0AA3580055A8BF /* FavoritesViewController.swift */; };
 		309C9BC92F0AA3790055A8BF /* TheatreLocationsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 309C9BC82F0AA3790055A8BF /* TheatreLocationsViewController.swift */; };
+		309C9BCB2F0B04170055A8BF /* TrailerModalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 309C9BCA2F0B04170055A8BF /* TrailerModalViewController.swift */; };
+		309C9BCD2F0B042B0055A8BF /* ImageModalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 309C9BCC2F0B042B0055A8BF /* ImageModalViewController.swift */; };
 		30A25A062D26B83A00C2C094 /* SearchCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30A25A052D26B83A00C2C094 /* SearchCellView.swift */; };
 		30C2EADD2D18A2C50058DA88 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 30C2EABC2D18A2C50058DA88 /* Preview Assets.xcassets */; };
 		30C2EADE2D18A2C50058DA88 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 30C2EAD92D18A2C50058DA88 /* Assets.xcassets */; };
@@ -159,6 +161,8 @@
 		309C9BC42F0AA1C70055A8BF /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		309C9BC62F0AA3580055A8BF /* FavoritesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesViewController.swift; sourceTree = "<group>"; };
 		309C9BC82F0AA3790055A8BF /* TheatreLocationsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TheatreLocationsViewController.swift; sourceTree = "<group>"; };
+		309C9BCA2F0B04170055A8BF /* TrailerModalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrailerModalViewController.swift; sourceTree = "<group>"; };
+		309C9BCC2F0B042B0055A8BF /* ImageModalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageModalViewController.swift; sourceTree = "<group>"; };
 		30A25A052D26B83A00C2C094 /* SearchCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchCellView.swift; sourceTree = "<group>"; };
 		30AF4FA02D16D68600DB54AF /* TMDB VIPER.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "TMDB VIPER.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		30C2EABC2D18A2C50058DA88 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
@@ -330,6 +334,7 @@
 			isa = PBXGroup;
 			children = (
 				30548F482D4661CE005E463E /* ImageModalView.swift */,
+				309C9BCC2F0B042B0055A8BF /* ImageModalViewController.swift */,
 			);
 			path = ImageModalView;
 			sourceTree = "<group>";
@@ -575,6 +580,7 @@
 			isa = PBXGroup;
 			children = (
 				30FD05E92D2947650039A66D /* TrailersModalView.swift */,
+				309C9BCA2F0B04170055A8BF /* TrailerModalViewController.swift */,
 			);
 			path = TrailersModalView;
 			sourceTree = "<group>";
@@ -752,6 +758,7 @@
 				30FD09BA2D33C62F0039A66D /* PostMovieToFavoritesRequest.swift in Sources */,
 				30FD09BB2D33C62F0039A66D /* PostMovieToFavoritesResponse.swift in Sources */,
 				30FD09BC2D33C62F0039A66D /* SingleMovie.swift in Sources */,
+				309C9BCD2F0B042B0055A8BF /* ImageModalViewController.swift in Sources */,
 				30C2EDC62D18B8700058DA88 /* NavigationStackIfNeeded.swift in Sources */,
 				30C2EDC72D18B8700058DA88 /* SheetViewModifier.swift in Sources */,
 				30C2EDD32D18BCD00058DA88 /* AppDelegate.swift in Sources */,
@@ -787,6 +794,7 @@
 				300B95F42D1970430073CDF9 /* FeedDelegate.swift in Sources */,
 				30C2ECE12D18B3EB0058DA88 /* HomeRouter.swift in Sources */,
 				30C2EAE62D18A2C50058DA88 /* GetMoviesRequest.swift in Sources */,
+				309C9BCB2F0B04170055A8BF /* TrailerModalViewController.swift in Sources */,
 				30C2ECDC2D18B1350058DA88 /* HomeInteractor.swift in Sources */,
 				30C2EAEA2D18A2C50058DA88 /* TMDB_VIPERApp.swift in Sources */,
 				30548F492D4661CE005E463E /* ImageModalView.swift in Sources */,
