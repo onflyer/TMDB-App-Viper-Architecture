@@ -12,34 +12,74 @@ import UIKit
 struct CoreBuilder {
     let interactor: CoreInteractor
     
-    // MARK: - UIKit Builders (NEW)
-    // These return UIViewController instead of SwiftUI Views
+    // MARK: - UIKit Builders
+    // These return UIViewController for UIKit navigation
     
-    /// Creates the HomeViewController for UIKit
+    /// Creates the HomeViewController - the main entry point.
+    /// Called from SceneDelegate to set up the initial screen.
     ///
-    /// SwiftUI equivalent: homeView() -> some View
-    func makeHomeViewController() -> UIViewController {
-        // For now, we still use the SwiftUI router as placeholder
-        // We'll update this when we create the UIKit router
+    /// Note: This method creates the router internally since it's the root.
+    /// Child view controllers receive the router as a parameter.
+    func makeHomeViewController(navigationController: UINavigationController? = nil) -> UIViewController {
+        // We'll set the router after we have the navigation controller
+        // For now, create with a temporary router - SceneDelegate will set the real one
         let presenter = HomePresenter(
             interactor: interactor,
-            router: MockHomeRouter()
+            router: PlaceholderRouter()
+        )
+        let viewController = HomeViewController(presenter: presenter)
+        
+        // Store builder reference so we can create router later
+        viewController.builder = self
+        
+        return viewController
+    }
+    
+    /// Creates HomeViewController with a proper router.
+    /// Used when we have access to the navigation controller.
+    func makeHomeViewController(router: UIKitRouter) -> UIViewController {
+        let presenter = HomePresenter(
+            interactor: interactor,
+            router: router
         )
         return HomeViewController(presenter: presenter)
     }
     
-    /// Creates the DetailViewController for UIKit
-    func makeDetailViewController(delegate: DetailViewDelegate = DetailViewDelegate()) -> UIViewController {
+    /// Creates the DetailViewController for showing movie details.
+    func makeDetailViewController(
+        delegate: DetailViewDelegate = DetailViewDelegate(),
+        router: UIKitRouter
+    ) -> UIViewController {
         let presenter = DetailPresenter(
             interactor: interactor,
-            router: MockDetailRouter()
+            router: router
         )
-        // TODO: Create DetailViewController
-        return UIViewController() // Placeholder
+        // TODO: Create actual DetailViewController
+        // For now, return placeholder
+        return PlaceholderViewController(title: "Movie Details", subtitle: "DetailViewController coming soon!\n\nMovie ID: \(delegate.movieId)")
     }
     
-    // MARK: - SwiftUI Builders (EXISTING - keep for reference)
-    // You can remove these once fully migrated to UIKit
+    /// Creates the FavoritesViewController for showing saved movies.
+    func makeFavoritesViewController(router: UIKitRouter) -> UIViewController {
+        let presenter = FavoritesPresenter(
+            interactor: interactor,
+            router: router
+        )
+        // TODO: Create actual FavoritesViewController
+        return PlaceholderViewController(title: "Favorites", subtitle: "FavoritesViewController coming soon!")
+    }
+    
+    /// Creates the TheatreLocationsViewController for showing nearby theaters.
+    func makeTheatreLocationsViewController(router: UIKitRouter) -> UIViewController {
+        let presenter = TheatreLocationsPresenter(
+            interactor: interactor,
+            router: router
+        )
+        // TODO: Create actual TheatreLocationsViewController
+        return PlaceholderViewController(title: "Nearby Theaters", subtitle: "TheatreLocationsViewController coming soon!")
+    }
+    
+    // MARK: - SwiftUI Builders (Keep for reference/previews)
     
     func homeView(delegate: HomeDelegate = HomeDelegate()) -> some View {
         RouterView { router in
@@ -100,69 +140,59 @@ struct CoreBuilder {
     }
 }
 
-// MARK: - Temporary Mock Routers
-// These are placeholders until we build the real UIKit router
-
-private struct MockHomeRouter: HomeRouter {
+// MARK: - Placeholder Router
+/// Temporary router used during initialization.
+/// Will be replaced with real UIKitRouter once navigation controller exists.
+private struct PlaceholderRouter: HomeRouter, DetailRouter, FavoritesRouter, TheatreLocationsRouter {
     func showDetailView(delegate: DetailViewDelegate) {
-        print("MockHomeRouter: showDetailView called - implement UIKit navigation")
+        print("⚠️ PlaceholderRouter: showDetailView - router not yet configured")
     }
+    func showTrailerModalView(movie: SingleMovie, onXMarkPressed: @escaping () -> Void) {}
+    func showImageModalView(urlString: String, onXMarkPressed: @escaping () -> Void) {}
+    func showFavoritesView() {}
+    func showTheatreLocationsView() {}
+    func dismissModal() {}
+    func dismissScreen() {}
 }
 
-private struct MockDetailRouter: DetailRouter {
-    func showTrailerModalView(movie: SingleMovie, onXMarkPressed: @escaping () -> Void) {
-        print("MockDetailRouter: showTrailerModalView called")
+// MARK: - Placeholder ViewController
+/// Simple placeholder VC for screens we haven't built yet.
+/// Makes it easy to test navigation without implementing every screen.
+class PlaceholderViewController: UIViewController {
+    
+    private let titleText: String
+    private let subtitleText: String
+    
+    init(title: String, subtitle: String) {
+        self.titleText = title
+        self.subtitleText = subtitle
+        super.init(nibName: nil, bundle: nil)
     }
     
-    func showImageModalView(urlString: String, onXMarkPressed: @escaping () -> Void) {
-        print("MockDetailRouter: showImageModalView called")
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
     
-    func showFavoritesView() {
-        print("MockDetailRouter: showFavoritesView called")
-    }
-    
-    func showTheatreLocationsView() {
-        print("MockDetailRouter: showTheatreLocationsView called")
-    }
-    
-    func dismissModal() {
-        print("MockDetailRouter: dismissModal called")
-    }
-    
-    func dismissScreen() {
-        print("MockDetailRouter: dismissScreen called")
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        view.backgroundColor = .systemBackground
+        self.title = titleText
+        
+        let label = UILabel()
+        label.text = "🚧\n\n\(subtitleText)"
+        label.textAlignment = .center
+        label.numberOfLines = 0
+        label.font = .systemFont(ofSize: 18)
+        label.textColor = .secondaryLabel
+        label.translatesAutoresizingMaskIntoConstraints = false
+        
+        view.addSubview(label)
+        
+        NSLayoutConstraint.activate([
+            label.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            label.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+            label.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
+            label.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20)
+        ])
     }
 }
-
-// MARK: - Builder Pattern Explanation
-/*
- 
- ┌─────────────────────────────────────────────────────────────────┐
- │                    BUILDER PATTERN                              │
- ├─────────────────────────────────────────────────────────────────┤
- │                                                                 │
- │   The Builder creates fully-configured view controllers.       │
- │   It hides the complexity of dependency injection.             │
- │                                                                 │
- │   WITHOUT Builder:                                              │
- │   ────────────────                                              │
- │   let networkService = NetworkService()                        │
- │   let movieManager = MovieManager(service: ...)                │
- │   let container = DependencyContainer()                        │
- │   container.register(...)                                      │
- │   let interactor = CoreInteractor(container: container)        │
- │   let router = CoreRouter(navigationController: navController) │
- │   let presenter = HomePresenter(interactor: interactor,        │
- │                                  router: router)               │
- │   let viewController = HomeViewController(presenter: presenter)│
- │                                                                 │
- │   WITH Builder:                                                 │
- │   ────────────                                                  │
- │   let viewController = builder.makeHomeViewController()        │
- │                                                                 │
- │   Much cleaner! 🎉                                              │
- │                                                                 │
- └─────────────────────────────────────────────────────────────────┘
- 
- */

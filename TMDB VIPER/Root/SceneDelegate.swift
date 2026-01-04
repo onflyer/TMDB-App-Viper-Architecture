@@ -11,146 +11,113 @@ import UIKit
 /// Manages the app's UI lifecycle for a single "scene" (window).
 ///
 /// SwiftUI equivalent: This is like WindowGroup + the implicit navigation setup
-///
-/// Key responsibility: Create the UIWindow and set its rootViewController
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     
     // MARK: - Properties
     
-    /// The window that displays your app's content.
-    /// In SwiftUI, you never see this - it's created automatically.
-    /// In UIKit, YOU own it and must set it up.
     var window: UIWindow?
+    
+    /// Keep a reference to the router so it doesn't get deallocated
+    var router: UIKitRouter?
     
     // MARK: - Scene Lifecycle
     
-    /// Called when a new scene is being created.
-    /// THIS IS WHERE YOUR UI STARTS.
-    ///
-    /// SwiftUI equivalent:
-    /// ```
-    /// WindowGroup {
-    ///     NavigationStack {
-    ///         HomeView()
-    ///     }
-    /// }
-    /// ```
     func scene(
         _ scene: UIScene,
         willConnectTo session: UISceneSession,
         options connectionOptions: UIScene.ConnectionOptions
     ) {
-        // 1. Make sure we have a window scene
         guard let windowScene = (scene as? UIWindowScene) else { return }
-        
-        // 2. Get the builder from AppDelegate
-        //    This is how we access app-wide dependencies from SceneDelegate
         guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return }
+        
         let builder = appDelegate.builder!
         
-        // 3. Create the window
-        //    SwiftUI does this automatically with WindowGroup
+        // 1. Create the window
         let window = UIWindow(windowScene: windowScene)
         
-        // 4. Create the root view controller using the builder
-        //    We'll update CoreBuilder to return UIViewController soon
-        let homeViewController = builder.makeHomeViewController()
+        // 2. Create an empty navigation controller first
+        let navigationController = UINavigationController()
         
-        // 5. Wrap in UINavigationController
-        //    SwiftUI equivalent: NavigationStack { ... }
-        let navigationController = UINavigationController(rootViewController: homeViewController)
+        // 3. Create the router with the navigation controller
+        //    This is the KEY STEP - router needs nav controller to push/present
+        let router = UIKitRouter(navigationController: navigationController, builder: builder)
+        self.router = router  // Keep strong reference
         
-        // 6. Set as root and display
+        // 4. Now create HomeViewController with the real router
+        let homeVC = builder.makeHomeViewController(router: router)
+        
+        // 5. Set the home VC as root of the navigation controller
+        navigationController.viewControllers = [homeVC]
+        
+        // 6. Set navigation controller as window's root
         window.rootViewController = navigationController
         window.makeKeyAndVisible()
         
-        // 7. Keep a reference to the window
         self.window = window
+        
+        print("✅ App started with UIKit navigation")
     }
     
-    // MARK: - Additional Scene Lifecycle Methods
+    // MARK: - Scene Lifecycle Events
     
-    /// Called when the scene moves from background to foreground
-    /// SwiftUI equivalent: .onReceive(NotificationCenter.default.publisher(for: UIApplication.willEnterForegroundNotification))
     func sceneWillEnterForeground(_ scene: UIScene) {
-        // Refresh data, restart animations, etc.
+        // App will come to foreground
     }
     
-    /// Called when the scene becomes active (ready for user interaction)
-    /// SwiftUI equivalent: .onReceive(NotificationCenter.default.publisher(for: UIApplication.didBecomeActiveNotification))
     func sceneDidBecomeActive(_ scene: UIScene) {
-        // Resume paused tasks, start timers, etc.
+        // App became active
     }
     
-    /// Called when the scene is about to move to background
-    /// SwiftUI equivalent: .onReceive(NotificationCenter.default.publisher(for: UIApplication.willResignActiveNotification))
     func sceneWillResignActive(_ scene: UIScene) {
-        // Pause ongoing tasks, save state, etc.
+        // App will become inactive
     }
     
-    /// Called when the scene enters background
-    /// SwiftUI equivalent: .onReceive(NotificationCenter.default.publisher(for: UIApplication.didEnterBackgroundNotification))
     func sceneDidEnterBackground(_ scene: UIScene) {
-        // Save data, release shared resources, etc.
+        // App entered background
     }
     
-    /// Called when the scene is being destroyed
     func sceneDidDisconnect(_ scene: UIScene) {
-        // Release any resources specific to this scene
+        // Scene was disconnected
     }
 }
 
-// MARK: - Visual Explanation
+// MARK: - Setup Flow Diagram
 /*
  
  ┌─────────────────────────────────────────────────────────────────┐
- │                    UIKIT APP STRUCTURE                          │
+ │                    SETUP FLOW                                   │
  ├─────────────────────────────────────────────────────────────────┤
  │                                                                 │
- │   ┌─────────────┐                                              │
- │   │ AppDelegate │ ← App launches here (@main)                  │
- │   └──────┬──────┘                                              │
- │          │                                                      │
- │          │ creates                                              │
- │          ▼                                                      │
- │   ┌───────────────┐                                            │
- │   │ SceneDelegate │ ← Manages UI for one window                │
- │   └───────┬───────┘                                            │
- │           │                                                     │
- │           │ creates                                             │
- │           ▼                                                     │
- │   ┌──────────────┐                                             │
- │   │   UIWindow   │ ← The actual window on screen               │
- │   └───────┬──────┘                                             │
- │           │                                                     │
- │           │ rootViewController                                  │
- │           ▼                                                     │
- │   ┌────────────────────────┐                                   │
- │   │ UINavigationController │ ← Manages navigation stack        │
- │   └───────────┬────────────┘   (like NavigationStack)          │
- │               │                                                 │
- │               │ root                                            │
- │               ▼                                                 │
- │   ┌────────────────────┐                                       │
- │   │ HomeViewController │ ← Your first screen                   │
- │   └────────────────────┘                                       │
+ │   1. UIWindow                                                   │
+ │         │                                                       │
+ │         ▼                                                       │
+ │   2. UINavigationController (empty)                            │
+ │         │                                                       │
+ │         ▼                                                       │
+ │   3. UIKitRouter(navController, builder)                       │
+ │         │                                                       │
+ │         ▼                                                       │
+ │   4. HomeViewController(presenter with router)                 │
+ │         │                                                       │
+ │         ▼                                                       │
+ │   5. navController.viewControllers = [homeVC]                  │
+ │         │                                                       │
+ │         ▼                                                       │
+ │   6. window.rootViewController = navController                 │
+ │         │                                                       │
+ │         ▼                                                       │
+ │   7. window.makeKeyAndVisible() ← App appears!                 │
  │                                                                 │
  └─────────────────────────────────────────────────────────────────┘
  
- COMPARISON TO YOUR SWIFTUI CODE:
+ WHY THIS ORDER?
  
- // SwiftUI (TMDB_VIPERApp.swift)
- @main
- struct TMDB_VIPERApp: App {
-     var body: some Scene {
-         WindowGroup {                          ← SceneDelegate.scene()
-             delegate.builder.homeView()        ← builder.makeHomeViewController()
-         }
-     }
- }
+ The router needs the navigation controller to push/present views.
+ The presenter needs the router to handle navigation actions.
+ The view controller needs the presenter.
  
- // Your homeView() wraps in RouterView which has NavigationStack
- // In UIKit, we explicitly create UINavigationController
+ So we create them in this order:
+ NavigationController → Router → Presenter → ViewController
  
  */
