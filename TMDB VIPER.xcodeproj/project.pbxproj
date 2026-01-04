@@ -146,6 +146,7 @@
 		306F5EF92D19E2DE002E1583 /* DetailRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailRouter.swift; sourceTree = "<group>"; };
 		309C9BB92F0A99290055A8BF /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		309C9BBB2F0A99550055A8BF /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
+		309C9BBD2F0A9A2D0055A8BF /* TMDB-VIPER-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "TMDB-VIPER-Info.plist"; sourceTree = SOURCE_ROOT; };
 		30A25A052D26B83A00C2C094 /* SearchCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchCellView.swift; sourceTree = "<group>"; };
 		30AF4FA02D16D68600DB54AF /* TMDB VIPER.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "TMDB VIPER.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		30C2EABC2D18A2C50058DA88 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
@@ -438,6 +439,7 @@
 		30C2EADC2D18A2C50058DA88 /* TMDB VIPER */ = {
 			isa = PBXGroup;
 			children = (
+				309C9BBD2F0A9A2D0055A8BF /* TMDB-VIPER-Info.plist */,
 				300B97D02D1975F00073CDF9 /* Utilities */,
 				300B97CD2D1975B00073CDF9 /* Components */,
 				300B95F22D19703B0073CDF9 /* Analytics example */,
@@ -968,8 +970,8 @@
 				DEVELOPMENT_TEAM = FQWAP959Y3;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "TMDB-VIPER-Info.plist";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "We need to provice location for the functionality of the app";
-				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
@@ -999,8 +1001,8 @@
 				DEVELOPMENT_TEAM = FQWAP959Y3;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "TMDB-VIPER-Info.plist";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "We need to provice location for the functionality of the app";
-				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
