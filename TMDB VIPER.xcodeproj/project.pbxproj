@@ -42,6 +42,8 @@
 		306F5EF62D19E1E9002E1583 /* DetailPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 306F5EF52D19E1E9002E1583 /* DetailPresenter.swift */; };
 		306F5EF82D19E276002E1583 /* DetailInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 306F5EF72D19E276002E1583 /* DetailInteractor.swift */; };
 		306F5EFA2D19E2DE002E1583 /* DetailRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 306F5EF92D19E2DE002E1583 /* DetailRouter.swift */; };
+		309C9BBA2F0A99290055A8BF /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 309C9BB92F0A99290055A8BF /* SceneDelegate.swift */; };
+		309C9BBC2F0A99550055A8BF /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 309C9BBB2F0A99550055A8BF /* HomeViewController.swift */; };
 		30A25A062D26B83A00C2C094 /* SearchCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30A25A052D26B83A00C2C094 /* SearchCellView.swift */; };
 		30C2EADD2D18A2C50058DA88 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 30C2EABC2D18A2C50058DA88 /* Preview Assets.xcassets */; };
 		30C2EADE2D18A2C50058DA88 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 30C2EAD92D18A2C50058DA88 /* Assets.xcassets */; };
@@ -142,6 +144,8 @@
 		306F5EF52D19E1E9002E1583 /* DetailPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailPresenter.swift; sourceTree = "<group>"; };
 		306F5EF72D19E276002E1583 /* DetailInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailInteractor.swift; sourceTree = "<group>"; };
 		306F5EF92D19E2DE002E1583 /* DetailRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailRouter.swift; sourceTree = "<group>"; };
+		309C9BB92F0A99290055A8BF /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
+		309C9BBB2F0A99550055A8BF /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		30A25A052D26B83A00C2C094 /* SearchCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchCellView.swift; sourceTree = "<group>"; };
 		30AF4FA02D16D68600DB54AF /* TMDB VIPER.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "TMDB VIPER.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		30C2EABC2D18A2C50058DA88 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
@@ -372,6 +376,7 @@
 				30C2EABE2D18A2C50058DA88 /* CoreInteractor.swift */,
 				30C2EAC02D18A2C50058DA88 /* Dependencies.swift */,
 				30C2EABF2D18A2C50058DA88 /* DependancyContainer.swift */,
+				309C9BB92F0A99290055A8BF /* SceneDelegate.swift */,
 			);
 			path = Root;
 			sourceTree = "<group>";
@@ -463,6 +468,7 @@
 				30C2ECD92D18B0F60058DA88 /* HomePresenter.swift */,
 				30C2ECE02D18B3EB0058DA88 /* HomeRouter.swift */,
 				30C2ECCF2D18AE150058DA88 /* HomeView.swift */,
+				309C9BBB2F0A99550055A8BF /* HomeViewController.swift */,
 			);
 			path = HomeView;
 			sourceTree = "<group>";
@@ -713,6 +719,7 @@
 				30C2ECDF2D18B2460058DA88 /* View+EXT Custom.swift in Sources */,
 				30A25A062D26B83A00C2C094 /* SearchCellView.swift in Sources */,
 				300B97D22D1975F40073CDF9 /* Constants.swift in Sources */,
+				309C9BBC2F0A99550055A8BF /* HomeViewController.swift in Sources */,
 				30C2EDC42D18B8700058DA88 /* AlertViewModifer.swift in Sources */,
 				30C2EDC52D18B8700058DA88 /* ModalViewModifier.swift in Sources */,
 				300B95F62D19707F0073CDF9 /* FeedPresenter.swift in Sources */,
@@ -731,6 +738,7 @@
 				30C2EDC82D18B8700058DA88 /* Router.swift in Sources */,
 				300B97CF2D1975B70073CDF9 /* ImageLoaderView.swift in Sources */,
 				30C2EDC92D18B8700058DA88 /* RouterView.swift in Sources */,
+				309C9BBA2F0A99290055A8BF /* SceneDelegate.swift in Sources */,
 				30C2EDCA2D18B8700058DA88 /* Binding+EXT.swift in Sources */,
 				30FD099A2D33C4A80039A66D /* LocalMoviePersistence.swift in Sources */,
 				306F5EF62D19E1E9002E1583 /* DetailPresenter.swift in Sources */,

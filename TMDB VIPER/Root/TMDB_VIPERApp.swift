@@ -7,7 +7,6 @@
 
 import SwiftUI
 
-@main
 struct TMDB_VIPERApp: App {
     
 //    static func main() async {
