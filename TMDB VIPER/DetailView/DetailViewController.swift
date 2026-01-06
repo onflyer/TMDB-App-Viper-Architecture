@@ -189,7 +189,7 @@ final class DetailViewController: UIViewController {
         super.viewDidLoad()
         setupUI()
         setupNavigationBar()
-        setupGestures()
+        setupImageTapGestures()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -491,3 +491,66 @@ extension DetailViewController: DetailPresenterDelegate {
  └─────────────────────────────────────────────────────────────────┘
  
  */
+
+//
+//  DetailViewController+ImageModal.swift
+//  TMDB VIPER
+//
+//  Extension for presenting image modal with iOS 18+ zoom transition.
+//  Add this to your DetailViewController or merge into existing file.
+//
+
+
+extension DetailViewController {
+    
+    // MARK: - Setup
+    
+    /// Call this in your setupGestures() method
+    func setupImageTapGestures() {
+        // Poster image tap
+        posterImageView.isUserInteractionEnabled = true
+        let posterTap = UITapGestureRecognizer(target: self, action: #selector(posterImageTapped))
+        posterImageView.addGestureRecognizer(posterTap)
+        
+        // Backdrop image tap (optional)
+        backdropImageView.isUserInteractionEnabled = true
+        let backdropTap = UITapGestureRecognizer(target: self, action: #selector(backdropImageTapped))
+        backdropImageView.addGestureRecognizer(backdropTap)
+    }
+    
+    // MARK: - Actions
+    
+    @objc private func posterImageTapped() {
+        presentImageModal(
+            urlString: presenter.movie?.posterURLString ?? "",
+            sourceView: posterImageView
+        )
+    }
+    
+    @objc private func backdropImageTapped() {
+        presentImageModal(
+            urlString: presenter.movie?.backdropURLString ?? "",
+            sourceView: backdropImageView
+        )
+    }
+    
+    // MARK: - Present with Zoom
+    
+    /// Presents the image modal with iOS 18+ zoom transition.
+    /// - Parameters:
+    ///   - urlString: URL for the full-size image
+    ///   - sourceView: The view to zoom from/to
+    private func presentImageModal(urlString: String, sourceView: UIView) {
+        let modalVC = ImageModalViewController(
+            imageURLString: urlString,
+            onDismiss: { }
+        )
+        
+        modalVC.modalPresentationStyle = .automatic
+        modalVC.preferredTransition = .zoom { _ in
+            return sourceView
+        }
+        
+        present(modalVC, animated: true)
+    }
+}
