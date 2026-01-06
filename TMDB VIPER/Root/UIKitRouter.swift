@@ -44,8 +44,10 @@ final class UIKitRouter {
     }
     
     /// Dismiss the current screen.
+    /// Dismiss the current screen.
     private func dismiss(animated: Bool = true) {
-        if navigationController?.presentedViewController != nil {
+        // Check if THIS navigation controller was presented modally
+        if navigationController?.presentingViewController != nil {
             navigationController?.dismiss(animated: animated)
         } else {
             navigationController?.popViewController(animated: animated)
