@@ -18,7 +18,7 @@ struct ModalSupportView<Content: View>: View {
             if showModal {
                 backgroundColor
                     .ignoresSafeArea()
-                    .transition(AnyTransition.opacity.animation(.smooth))
+                    .transition(AnyTransition.opacity.animation(.easeOut(duration: 0.25)))
                     .onTapGesture {
                         showModal = false
                     }
@@ -26,13 +26,13 @@ struct ModalSupportView<Content: View>: View {
 
                 content
                     .frame(maxWidth: .infinity, maxHeight: .infinity)
-                    .ignoresSafeArea()
+                    .geometryGroup()
                     .transition(transition)
                     .zIndex(2)
             }
         }
         .zIndex(9999)
-        .animation(.bouncy, value: showModal)
+        .animation(.easeOut(duration: 0.25), value: showModal)
     }
 }
 

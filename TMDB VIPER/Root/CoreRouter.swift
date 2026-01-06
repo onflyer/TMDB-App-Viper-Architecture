@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import SwiftUI
 
 @MainActor
 struct CoreRouter {
@@ -38,7 +39,7 @@ struct CoreRouter {
     }
     
     func showImageModalView(urlString: String, onXMarkPressed: @escaping () -> Void) {
-        router.showModal(backgroundColor: .black.opacity(0.7), transition: .identity) {
+        router.showModal(backgroundColor: .black.opacity(0.7), transition: .scale.combined(with: .opacity)) {
             builder.imageModalView(imageString: urlString, onDismiss: onXMarkPressed)
         }
     }
