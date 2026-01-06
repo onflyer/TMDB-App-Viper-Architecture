@@ -22,12 +22,41 @@ class TrailerModalViewController: UIViewController {
     
     // MARK: - UI Elements
     
+    private lazy var containerView: UIView = {
+        let view = UIView()
+        view.backgroundColor = .systemBackground
+        view.layer.cornerRadius = 16
+        view.clipsToBounds = true
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+    
+    private lazy var titleLabel: UILabel = {
+        let label = UILabel()
+        label.text = "Trailers"
+        label.font = .systemFont(ofSize: 18, weight: .bold)
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
+    private lazy var closeButton: UIButton = {
+        let button = UIButton(type: .system)
+        let config = UIImage.SymbolConfiguration(pointSize: 24, weight: .medium)
+        button.setImage(UIImage(systemName: "xmark.circle.fill", withConfiguration: config), for: .normal)
+        button.tintColor = .secondaryLabel
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.addTarget(self, action: #selector(closeTapped), for: .touchUpInside)
+        return button
+    }()
+    
     private lazy var tableView: UITableView = {
-        let tv = UITableView(frame: .zero, style: .insetGrouped)
+        let tv = UITableView(frame: .zero, style: .plain)
         tv.translatesAutoresizingMaskIntoConstraints = false
         tv.delegate = self
         tv.dataSource = self
         tv.register(UITableViewCell.self, forCellReuseIdentifier: "TrailerCell")
+        tv.backgroundColor = .clear
+        tv.separatorInset = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 16)
         return tv
     }()
     
@@ -58,40 +87,58 @@ class TrailerModalViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
-        setupNavigationBar()
+        setupGestures()
         checkEmptyState()
     }
     
     // MARK: - Setup
     
     private func setupUI() {
-        view.backgroundColor = .systemBackground
+        // Semi-transparent background
+        view.backgroundColor = UIColor.black.withAlphaComponent(0.6)
         
-        view.addSubview(tableView)
-        view.addSubview(emptyLabel)
+        view.addSubview(containerView)
+        containerView.addSubview(titleLabel)
+        containerView.addSubview(closeButton)
+        containerView.addSubview(tableView)
+        containerView.addSubview(emptyLabel)
         
         NSLayoutConstraint.activate([
-            tableView.topAnchor.constraint(equalTo: view.topAnchor),
-            tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            // Container - centered card
+            containerView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            containerView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+            containerView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 40),
+            containerView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -40),
+            containerView.heightAnchor.constraint(lessThanOrEqualTo: view.heightAnchor, multiplier: 0.6),
             
-            emptyLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            emptyLabel.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+            // Title
+            titleLabel.topAnchor.constraint(equalTo: containerView.topAnchor, constant: 16),
+            titleLabel.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 16),
+            
+            // Close button
+            closeButton.centerYAnchor.constraint(equalTo: titleLabel.centerYAnchor),
+            closeButton.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -12),
+            closeButton.widthAnchor.constraint(equalToConstant: 44),
+            closeButton.heightAnchor.constraint(equalToConstant: 44),
+            
+            // Table view
+            tableView.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 12),
+            tableView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor),
+            tableView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor),
+            tableView.bottomAnchor.constraint(equalTo: containerView.bottomAnchor),
+            tableView.heightAnchor.constraint(greaterThanOrEqualToConstant: 200),
+            
+            // Empty label
+            emptyLabel.centerXAnchor.constraint(equalTo: containerView.centerXAnchor),
+            emptyLabel.centerYAnchor.constraint(equalTo: tableView.centerYAnchor),
         ])
     }
     
-    private func setupNavigationBar() {
-        title = "Trailers"
-        
-        let closeButton = UIBarButtonItem(
-            image: UIImage(systemName: "xmark.circle.fill"),
-            style: .plain,
-            target: self,
-            action: #selector(closeTapped)
-        )
-        closeButton.tintColor = .secondaryLabel
-        navigationItem.rightBarButtonItem = closeButton
+    private func setupGestures() {
+        // Tap background to dismiss
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(backgroundTapped))
+        tapGesture.delegate = self
+        view.addGestureRecognizer(tapGesture)
     }
     
     private func checkEmptyState() {
@@ -106,6 +153,18 @@ class TrailerModalViewController: UIViewController {
         dismiss(animated: true) {
             self.onDismiss()
         }
+    }
+    
+    @objc private func backgroundTapped() {
+        closeTapped()
+    }
+}
+
+// MARK: - UIGestureRecognizerDelegate
+extension TrailerModalViewController: UIGestureRecognizerDelegate {
+    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive touch: UITouch) -> Bool {
+        // Only dismiss if tapping outside the container
+        return !containerView.frame.contains(touch.location(in: view))
     }
 }
 
@@ -126,6 +185,7 @@ extension TrailerModalViewController: UITableViewDataSource {
             content.imageProperties.tintColor = .systemBlue
             cell.contentConfiguration = content
             cell.accessoryType = .disclosureIndicator
+            cell.backgroundColor = .clear
         }
         
         return cell
@@ -138,7 +198,6 @@ extension TrailerModalViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         
-        // Open YouTube URL
         if let trailer = movie.videos?.results?[indexPath.row],
            let url = trailer.youtubeURL {
             UIApplication.shared.open(url)

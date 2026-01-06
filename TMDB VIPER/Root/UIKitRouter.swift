@@ -67,15 +67,9 @@ extension UIKitRouter: DetailRouter {
     
     func showTrailerModalView(movie: SingleMovie, onXMarkPressed: @escaping () -> Void) {
         let trailerVC = TrailerModalViewController(movie: movie, onDismiss: onXMarkPressed)
-        let navController = UINavigationController(rootViewController: trailerVC)
-        navController.modalPresentationStyle = .pageSheet
-        
-        if let sheet = navController.sheetPresentationController {
-            sheet.detents = [.medium(), .large()]
-            sheet.prefersGrabberVisible = true
-        }
-        
-        navigationController?.present(navController, animated: true)
+        trailerVC.modalPresentationStyle = .overFullScreen
+        trailerVC.modalTransitionStyle = .crossDissolve
+        navigationController?.present(trailerVC, animated: true)
     }
     
     func showImageModalView(urlString: String, onXMarkPressed: @escaping () -> Void) {
