@@ -14,8 +14,9 @@ import UIKit
 /// - SwiftUI Router: Uses @State path array + NavigationStack
 /// - UIKit Router: Holds reference to UINavigationController + calls push/present directly
 ///
-/// This class implements all the router protocols (HomeRouter, DetailRouter, etc.)
-/// so it can be used throughout the app.
+/// IMPORTANT: When presenting sheets/modals that need their own navigation,
+/// we create a NEW router for that presented navigation controller.
+/// This ensures pushes happen within the sheet, not behind it.
 
 @MainActor
 final class UIKitRouter {
@@ -23,11 +24,9 @@ final class UIKitRouter {
     // MARK: - Properties
     
     /// The navigation controller that manages the navigation stack.
-    /// SwiftUI equivalent: NavigationStack's internal path
     private weak var navigationController: UINavigationController?
     
     /// The builder used to create view controllers.
-    /// We need this to create new screens when navigating.
     private let builder: CoreBuilder
     
     // MARK: - Initialization
@@ -40,32 +39,12 @@ final class UIKitRouter {
     // MARK: - Navigation Helpers
     
     /// Push a view controller onto the navigation stack.
-    /// SwiftUI equivalent: router.showScreen(.push) { ... }
     private func push(_ viewController: UIViewController, animated: Bool = true) {
         navigationController?.pushViewController(viewController, animated: animated)
     }
     
-    /// Present a view controller modally (sheet).
-    /// SwiftUI equivalent: router.showScreen(.sheet) { ... }
-    private func presentSheet(_ viewController: UIViewController, animated: Bool = true) {
-        // Wrap in navigation controller for sheets so they have their own nav bar
-        let navController = UINavigationController(rootViewController: viewController)
-        navController.modalPresentationStyle = .pageSheet
-        navigationController?.present(navController, animated: animated)
-    }
-    
-    /// Present a view controller as full screen cover.
-    /// SwiftUI equivalent: router.showScreen(.fullScreenCover) { ... }
-    private func presentFullScreen(_ viewController: UIViewController, animated: Bool = true) {
-        let navController = UINavigationController(rootViewController: viewController)
-        navController.modalPresentationStyle = .fullScreen
-        navigationController?.present(navController, animated: animated)
-    }
-    
     /// Dismiss the current screen.
-    /// SwiftUI equivalent: router.dismissScreen()
     private func dismiss(animated: Bool = true) {
-        // Check if we're presented modally or pushed
         if navigationController?.presentedViewController != nil {
             navigationController?.dismiss(animated: animated)
         } else {
@@ -78,12 +57,7 @@ final class UIKitRouter {
 extension UIKitRouter: HomeRouter {
     
     func showDetailView(delegate: DetailViewDelegate) {
-        // Create the detail view controller using the builder
-        // Pass self as the router so DetailVC can navigate too
-        let detailVC = builder.makeDetailViewController(
-            delegate: delegate,
-            router: self
-        )
+        let detailVC = builder.makeDetailViewController(delegate: delegate, router: self)
         push(detailVC)
     }
 }
@@ -96,7 +70,6 @@ extension UIKitRouter: DetailRouter {
         let navController = UINavigationController(rootViewController: trailerVC)
         navController.modalPresentationStyle = .pageSheet
         
-        // Configure sheet to be medium height (half screen)
         if let sheet = navController.sheetPresentationController {
             sheet.detents = [.medium(), .large()]
             sheet.prefersGrabberVisible = true
@@ -107,18 +80,42 @@ extension UIKitRouter: DetailRouter {
     
     func showImageModalView(urlString: String, onXMarkPressed: @escaping () -> Void) {
         let imageVC = ImageModalViewController(imageURLString: urlString, onDismiss: onXMarkPressed)
-        // Present without navigation controller for true overlay effect
         navigationController?.present(imageVC, animated: true)
     }
     
     func showFavoritesView() {
-        let favoritesVC = builder.makeFavoritesViewController(router: self)
-        presentSheet(favoritesVC)
+        // KEY FIX: Create the sheet's nav controller FIRST
+        let sheetNavController = UINavigationController()
+        sheetNavController.modalPresentationStyle = .pageSheet
+        
+        // Create a NEW router that points to the sheet's nav controller
+        // This ensures any navigation from FavoritesVC happens WITHIN the sheet
+        let sheetRouter = UIKitRouter(navigationController: sheetNavController, builder: builder)
+        
+        // Create FavoritesVC with the sheet's router
+        let favoritesVC = builder.makeFavoritesViewController(router: sheetRouter)
+        
+        // Set as root of sheet's nav controller
+        sheetNavController.viewControllers = [favoritesVC]
+        
+        // Present the sheet
+        navigationController?.present(sheetNavController, animated: true)
     }
     
     func showTheatreLocationsView() {
-        let locationsVC = builder.makeTheatreLocationsViewController(router: self)
-        presentFullScreen(locationsVC)
+        // Same pattern for full screen presentation
+        let fullScreenNavController = UINavigationController()
+        fullScreenNavController.modalPresentationStyle = .fullScreen
+        
+        // Create router for the full screen nav controller
+        let fullScreenRouter = UIKitRouter(navigationController: fullScreenNavController, builder: builder)
+        
+        // Create VC with that router
+        let locationsVC = builder.makeTheatreLocationsViewController(router: fullScreenRouter)
+        
+        // Set as root and present
+        fullScreenNavController.viewControllers = [locationsVC]
+        navigationController?.present(fullScreenNavController, animated: true)
     }
     
     func dismissModal() {
@@ -132,7 +129,9 @@ extension UIKitRouter: DetailRouter {
 
 // MARK: - FavoritesRouter Conformance
 extension UIKitRouter: FavoritesRouter {
-    // showDetailView is already implemented above
+    // showDetailView is already implemented in HomeRouter
+    // When called from FavoritesVC, it will use the sheet's router (sheetRouter)
+    // which points to sheetNavController, so DetailVC pushes WITHIN the sheet ✅
 }
 
 // MARK: - TheatreLocationsRouter Conformance
@@ -140,39 +139,41 @@ extension UIKitRouter: TheatreLocationsRouter {
     // dismissScreen is already implemented above
 }
 
-// MARK: - SwiftUI vs UIKit Router Comparison
+// MARK: - Navigation Flow Diagram
 /*
  
  ┌─────────────────────────────────────────────────────────────────┐
- │                    NAVIGATION COMPARISON                        │
+ │              SHEET NAVIGATION FIX                               │
  ├─────────────────────────────────────────────────────────────────┤
  │                                                                 │
- │   SwiftUI (RouterView):              UIKit (UIKitRouter):      │
- │   ─────────────────────              ────────────────────      │
+ │   BEFORE (Bug):                                                │
+ │   ─────────────                                                │
  │                                                                 │
- │   // Push                            // Push                   │
- │   router.showScreen(.push) {         let vc = builder.make()   │
- │       DetailView()                   navController.push(vc)    │
- │   }                                                            │
+ │   MainNavController ←── mainRouter                             │
+ │       └── HomeVC                                               │
+ │       └── DetailVC (pushed here incorrectly!)                  │
  │                                                                 │
- │   // Sheet                           // Sheet                  │
- │   router.showScreen(.sheet) {        let vc = builder.make()   │
- │       FavoritesView()                let nav = UINavigation..  │
- │   }                                  navController.present(nav)│
+ │   SheetNavController (presented)                               │
+ │       └── FavoritesVC (uses mainRouter) ← WRONG!              │
  │                                                                 │
- │   // Dismiss                         // Dismiss                │
- │   router.dismissScreen()             navController.dismiss()   │
- │                                      // or .popViewController  │
+ │   When FavoritesVC called router.showDetailView():            │
+ │   → mainRouter.push(DetailVC)                                  │
+ │   → Pushed to MainNavController (behind sheet!)               │
  │                                                                 │
- ├─────────────────────────────────────────────────────────────────┤
  │                                                                 │
- │   KEY INSIGHT:                                                  │
+ │   AFTER (Fixed):                                               │
+ │   ──────────────                                               │
  │                                                                 │
- │   SwiftUI hides navigation details behind protocols.           │
- │   UIKit requires you to explicitly manage the nav controller.  │
+ │   MainNavController ←── mainRouter                             │
+ │       └── HomeVC                                               │
  │                                                                 │
- │   But the VIPER architecture means our Presenters don't care!  │
- │   They just call router.showDetailView() - same API.           │
+ │   SheetNavController ←── sheetRouter (NEW!)                   │
+ │       └── FavoritesVC (uses sheetRouter) ← CORRECT!           │
+ │       └── DetailVC (pushed here correctly!)                   │
+ │                                                                 │
+ │   When FavoritesVC calls router.showDetailView():             │
+ │   → sheetRouter.push(DetailVC)                                │
+ │   → Pushed to SheetNavController (inside sheet!) ✅           │
  │                                                                 │
  └─────────────────────────────────────────────────────────────────┘
  
