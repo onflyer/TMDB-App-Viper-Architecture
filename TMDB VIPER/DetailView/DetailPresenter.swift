@@ -131,12 +131,12 @@ final class DetailPresenter {
     }
     
     func onHeartPressed() {
-        if !isFavorite {
+        isFavorite.toggle()
+        
+        if isFavorite {
             addToFavorites()
-            isFavorite = true
         } else {
             removeFromFavorites()
-            isFavorite = false
         }
     }
 }

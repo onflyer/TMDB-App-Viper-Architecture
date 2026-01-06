@@ -368,14 +368,33 @@ final class DetailViewController: UIViewController {
     }
     
     private func updateFavoriteButton() {
-        let imageName = presenter.isFavorite ? "heart.fill" : "heart"
-        favoriteButton.setImage(UIImage(systemName: imageName), for: .normal)
+        let isFavorite = presenter.isFavorite
+        let newImage = UIImage(systemName: isFavorite ? "heart.fill" : "heart")
         
-        UIView.animate(withDuration: 0.2, animations: {
-            self.favoriteButton.transform = CGAffineTransform(scaleX: 1.2, y: 1.2)
-        }) { _ in
-            UIView.animate(withDuration: 0.1) {
-                self.favoriteButton.transform = .identity
+        if isFavorite {
+            // Adding to favorites - bounce animation
+            UIView.animate(withDuration: 0.15, animations: {
+                self.favoriteButton.transform = CGAffineTransform(scaleX: 1.3, y: 1.3)
+            }) { _ in
+                self.favoriteButton.setImage(newImage, for: .normal)
+                UIView.animate(
+                    withDuration: 0.4,
+                    delay: 0,
+                    usingSpringWithDamping: 0.5,
+                    initialSpringVelocity: 0.5
+                ) {
+                    self.favoriteButton.transform = .identity
+                }
+            }
+        } else {
+            // Removing from favorites - shrink animation
+            UIView.animate(withDuration: 0.15, animations: {
+                self.favoriteButton.transform = CGAffineTransform(scaleX: 0.8, y: 0.8)
+            }) { _ in
+                self.favoriteButton.setImage(newImage, for: .normal)
+                UIView.animate(withDuration: 0.2) {
+                    self.favoriteButton.transform = .identity
+                }
             }
         }
     }
