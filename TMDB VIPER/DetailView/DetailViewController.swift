@@ -26,7 +26,6 @@ final class DetailViewController: UIViewController {
     
     private let presenter: DetailPresenter
     private let delegate: DetailViewDelegate
-    private var hasLoadedData = false
     
     // MARK: - UI Elements
     
@@ -190,14 +189,10 @@ final class DetailViewController: UIViewController {
         setupUI()
         setupNavigationBar()
         setupImageTapGestures()
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
         
-        guard !hasLoadedData else { return }
-        hasLoadedData = true
-        
+        // Start hidden, show loading immediately
+        scrollView.alpha = 0
+        loadingIndicator.startAnimating()
         loadMovie()
     }
     
@@ -337,9 +332,6 @@ final class DetailViewController: UIViewController {
     // MARK: - Data Loading
     
     private func loadMovie() {
-        loadingIndicator.startAnimating()
-        scrollView.isHidden = true
-        
         Task {
             await presenter.loadSingleMovie(id: delegate.movieId)
         }
@@ -447,13 +439,18 @@ extension DetailViewController: DetailPresenterDelegate {
     
     func didLoadMovie() {
         loadingIndicator.stopAnimating()
-        scrollView.isHidden = false
         updateUI()
+        
+        UIView.animate(withDuration: 0.3) {
+            self.scrollView.alpha = 1
+        }
     }
     
     func didFailToLoadMovie(with error: Error) {
         loadingIndicator.stopAnimating()
         showErrorAlert(message: "Failed to load movie details. Please try again.") { [weak self] in
+            self?.scrollView.alpha = 0
+            self?.loadingIndicator.startAnimating()
             self?.loadMovie()
         }
     }
