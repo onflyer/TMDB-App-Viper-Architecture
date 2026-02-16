@@ -11,6 +11,11 @@ protocol LocationService3 {
     func getAuthorizationStatus() async -> CLAuthorizationStatus
     func requestLocation() async throws -> CLLocation
     func searchLocations(query: String, region: MKCoordinateRegion) async throws -> [MKMapItem]
+
+    /// Continuous location updates via AsyncStream (event-driven pattern).
+    /// Use for live tracking (maps, navigation). Stops when the stream is cancelled.
+    func streamLocations() -> AsyncStream<CLLocation>
+    func stopStreamingLocations()
 }
 
 
