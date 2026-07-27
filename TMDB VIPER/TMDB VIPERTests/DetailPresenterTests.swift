@@ -27,6 +27,10 @@ struct DetailPresenterTests {
             
         }
         
+        func showTheatreLocationsView() {
+            
+        }
+        
         func dismissModal() {
             
         }
@@ -118,18 +122,16 @@ struct DetailPresenterTests {
         let presenter = DetailPresenter(interactor: interactor, router: MockDetailRouter())
         
         await presenter.loadSingleMovie(id: movie.id)
-        presenter.addToFavorites()
-        presenter.removeFromFavorites()
-        presenter.checkIsFavorite()
-        
         #expect(presenter.movie?.title == movie.title)
-        #expect(favoriteMovies.contains(where: { movie in
-            movie.id == movie.id
-        }))
-        #expect(!favoriteMovies.contains(where: { movie in
-            movie.id == 1
-        }))
-        #expect(favoriteMovies.contains(where: {$0.id == 2}))
+
+        presenter.addToFavorites()
+        #expect(favoriteMovies.contains(where: { $0.id == movie.id }))
+
+        presenter.removeFromFavorites()
+        #expect(!favoriteMovies.contains(where: { $0.id == 1 }))
+
+        presenter.checkIsFavorite()
+        #expect(favoriteMovies.contains(where: { $0.id == 2 }))
     }
     
     @Test("presenter failure path")
@@ -137,40 +139,38 @@ struct DetailPresenterTests {
         var events: [LoggableEvent] = []
         let error: Error = URLError(.badServerResponse)
 
-        
-        
-        let interactor = AnyDetailInteractor(
-            getSingleMovie: { _ in
-                throw error
-            },
-            addToFavorites: { movie in
-                throw error
-            },
-            removeFavorite: { movie in
-                throw error
-            },
-            isFavorite: { movie in
-                throw error
-            },
+        // Phase 1: load fails -> load-fail event, movie stays nil.
+        let failingLoadInteractor = AnyDetailInteractor(
+            getSingleMovie: { _ in throw error },
+            addToFavorites: { _ in },
+            removeFavorite: { _ in },
+            isFavorite: { _ in false },
             trackEvent: { events.append($0) },
             trackScreenEvent: { events.append($0) }
         )
-        
-        let presenter = DetailPresenter(interactor: interactor, router: MockDetailRouter())
-        
+        let failedLoadPresenter = DetailPresenter(interactor: failingLoadInteractor, router: MockDetailRouter())
+        await failedLoadPresenter.loadSingleMovie(id: 1)
+        #expect(events.contains { $0.eventName == DetailPresenter.Event.loadSingleMovieFail(error: error).eventName })
+
+        // Phase 2: load succeeds so `movie` is set, favorites operations throw.
+        // (With a nil movie the favorite methods guard-return and the failure
+        // paths would never execute — which is exactly what this test verifies.)
+        let failingFavoritesInteractor = AnyDetailInteractor(
+            getSingleMovie: { _ in SingleMovie.mock() },
+            addToFavorites: { _ in throw error },
+            removeFavorite: { _ in throw error },
+            isFavorite: { _ in throw error },
+            trackEvent: { events.append($0) },
+            trackScreenEvent: { events.append($0) }
+        )
+        let presenter = DetailPresenter(interactor: failingFavoritesInteractor, router: MockDetailRouter())
         await presenter.loadSingleMovie(id: 1)
         presenter.addToFavorites()
         presenter.removeFromFavorites()
         presenter.checkIsFavorite()
-        
-        #expect(events.contains { $0.eventName == DetailPresenter.Event.loadSingleMovieFail(error: error).eventName })
+
         #expect(events.contains { $0.eventName == DetailPresenter.Event.addToFavoritesFail(error: error).eventName })
         #expect(events.contains { $0.eventName == DetailPresenter.Event.removeFromFavoritesFail(error: error).eventName })
         #expect(events.contains { $0.eventName == DetailPresenter.Event.checkIsFavoriteFail(error: error).eventName })
-
-        
-
-
-        
     }
 }

@@ -31,7 +31,7 @@ class MovieManager {
     }
     
     func getPopularMovies(page: Int) async throws -> [Movie] {
-        try await service.getTopRatedMovies(page: page)
+        try await service.getPopularMovies(page: page)
     }
     
     func getSingleMovie(id: Int) async throws -> SingleMovie {
