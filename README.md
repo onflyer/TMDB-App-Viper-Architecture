@@ -43,9 +43,9 @@ paths, and emitted analytics events.
 
 ## Setup
 
-1. Get a free TMDB API key: https://www.themoviedb.org/settings/api
-2. Paste it into `Utilities/Constants.swift` → `tmdbAPIKey` (do not commit it)
-3. Build the `TMDB VIPER` scheme (iOS 18+)
+Clone and build the `TMDB VIPER` scheme (iOS 18+) — a free-tier TMDB demo key
+is included so it runs out of the box. To use your own, replace
+`Utilities/Constants.swift` → `tmdbAPIKey`.
 
 ## Attribution
 
