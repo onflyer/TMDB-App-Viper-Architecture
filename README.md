@@ -1,11 +1,55 @@
-TMDB App with VIPER Architecture
+# TMDB VIPER — one architecture, two UI frameworks
 
-This app is made with VIPER architecture approach, with ROUTER INTERACTOR and BUILDER components creating the app. It has online data source using network manager.It uses core location for showing nearby theaters. It is using SwiftData to save favorite movies offline.It is a showcase for iOS app with modern VIPER arcitecture in SwiftUI framework.
+A movie-browsing app (TMDB API) built to demonstrate one thing concretely:
+**a properly decoupled architecture can drive SwiftUI and UIKit with the same
+code.** This repo has two branches that prove it:
 
-<img src="https://github.com/user-attachments/assets/092accf2-ab58-43a6-a3f3-643208bb5d06" width="100%" height="30%">
-<img src="https://github.com/user-attachments/assets/7baf96d8-8027-4b89-9a3e-b59e1a9c3e9a" width="30%" height="30%">
-<img src="https://github.com/user-attachments/assets/0fd890a7-a599-4389-82f7-139a4b9b1643" width="30%" height="30%">
-<img src="https://github.com/user-attachments/assets/07bf06c0-4d2f-49e4-82ed-b7b7e66f8cd7" width="30%" height="30%">
-<img src="https://github.com/user-attachments/assets/ec9acba4-34f3-4aad-9353-1fcaa9865696" width="30%" height="30%">
-<img src="https://github.com/user-attachments/assets/9f55789a-e398-4a82-a54b-aef1930208ce" width="30%" height="30%">
+| Branch | UI | What's identical |
+|---|---|---|
+| `main` | SwiftUI (`@Observable`, `.task`, NavigationStack-based router, MapKit content builders) | every Model, Service, Manager, Interactor protocol, Router protocol, and **all tests** |
+| `UIKit-branch` | UIKit (programmatic, compositional layout with orthogonal scrolling, iOS 18 zoom transition) | same presenters — the branch diff adds only a delegate protocol per screen |
 
+The presenters (`HomePresenter`, `DetailPresenter`, `FavoritesPresenter`) are
+shared byte-for-byte apart from a `weak var delegate`. SwiftUI observes them;
+UIKit receives delegate callbacks from them. Same interactors, same routers,
+same passing tests.
+
+## Architecture
+
+VIPER with a single composition root:
+
+```
+AppDelegate → Dependencies → CoreBuilder(CoreInteractor) → Router → screens
+```
+
+- **Per-screen protocol surfaces** (`HomeInteractor`, `HomeRouter`, …) are
+  satisfied by empty conformances on shared implementations — each screen
+  sees only the API it needs, checked by the compiler.
+- **Builder creates, Router navigates.** On the UIKit branch the router
+  spawns child routers bound to presented navigation controllers, so pushes
+  from a sheet stay inside the sheet.
+- **Persistence behind a protocol seam** — `FavoriteMoviesService` with a
+  SwiftData production implementation and an in-memory mock; entity ↔ domain
+  mapping keeps `@Model` types out of the app.
+- **Networking**: URLSession + async/await, typed endpoint enums, zero
+  third-party HTTP dependencies. No `DispatchQueue` and no completion
+  handlers anywhere in the repo.
+
+## Tests
+
+Swift Testing (`@Test` / `#expect`) presenter tests using closure-injected,
+type-erased fakes — no mocking library. They cover happy paths, failure
+paths, and emitted analytics events.
+
+## Setup
+
+1. Get a free TMDB API key: https://www.themoviedb.org/settings/api
+2. Paste it into `Utilities/Constants.swift` → `tmdbAPIKey` (do not commit it)
+3. Build the `TMDB VIPER` scheme (iOS 18+)
+
+## Attribution
+
+The `Routing/` abstraction on `main` builds on Nick Sarno's
+[SwiftfulThinking Architecture Bootcamp](https://www.swiftful-thinking.com)
+routing pattern. The rest of the codebase — VIPER modules, services,
+persistence, UIKit branch, and tests — is my own work on top of it.

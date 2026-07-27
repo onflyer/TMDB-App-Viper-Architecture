@@ -67,36 +67,3 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 }
 
-// MARK: - Key Differences from SwiftUI
-/*
- 
- ┌─────────────────────────────────────────────────────────────────┐
- │                        APP LIFECYCLE                            │
- ├─────────────────────────────────────────────────────────────────┤
- │                                                                 │
- │   SwiftUI:                     UIKit:                          │
- │   ─────────                    ──────                          │
- │   @main                        @main                           │
- │   struct App: App {            class AppDelegate {             │
- │       var body: some Scene {       didFinishLaunching() {      │
- │           WindowGroup {                // setup                │
- │               ContentView()        }                           │
- │           }                    }                               │
- │       }                                                        │
- │   }                            + SceneDelegate (manages UI)    │
- │                                                                 │
- ├─────────────────────────────────────────────────────────────────┤
- │                                                                 │
- │   WHY TWO CLASSES?                                             │
- │                                                                 │
- │   AppDelegate  → App-wide concerns (push notifications,        │
- │                  background tasks, app lifecycle)              │
- │                                                                 │
- │   SceneDelegate → UI concerns (windows, view controllers,      │
- │                   foreground/background for each window)       │
- │                                                                 │
- │   This split allows iPad to have multiple windows of your app! │
- │                                                                 │
- └─────────────────────────────────────────────────────────────────┘
- 
- */

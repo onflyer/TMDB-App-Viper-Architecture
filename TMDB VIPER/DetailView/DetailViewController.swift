@@ -464,58 +464,8 @@ extension DetailViewController: DetailPresenterDelegate {
     }
 }
 
-// MARK: - SwiftUI vs UIKit Comparison
-/*
- 
- ┌─────────────────────────────────────────────────────────────────┐
- │              DETAIL VIEW COMPARISON                             │
- ├─────────────────────────────────────────────────────────────────┤
- │                                                                 │
- │  SWIFTUI:                                                       │
- │  ────────                                                       │
- │  struct DetailView: View {                                      │
- │      @State var presenter: DetailPresenter                      │
- │                                                                 │
- │      var body: some View {                                      │
- │          Text(presenter.movie?.title ?? "")  // Auto-updates!  │
- │      }                                                          │
- │  }                                                              │
- │                                                                 │
- │  // When presenter.movie changes, body rebuilds automatically   │
- │                                                                 │
- │                                                                 │
- │  UIKIT (with Delegate):                                         │
- │  ──────────────────────                                         │
- │  class DetailViewController: UIViewController {                 │
- │      let presenter: DetailPresenter                             │
- │      let titleLabel = UILabel()                                 │
- │                                                                 │
- │      init(presenter: DetailPresenter) {                        │
- │          presenter.delegate = self  // Wire up delegate        │
- │      }                                                          │
- │                                                                 │
- │      func didLoadMovie() {  // Called by presenter             │
- │          titleLabel.text = presenter.movie?.title              │
- │      }                                                          │
- │  }                                                              │
- │                                                                 │
- ├─────────────────────────────────────────────────────────────────┤
- │                                                                 │
- │  THE KEY INSIGHT:                                               │
- │  Delegate pattern replaces @Observable automatic updates        │
- │                                                                 │
- └─────────────────────────────────────────────────────────────────┘
- 
- */
 
-//
-//  DetailViewController+ImageModal.swift
-//  TMDB VIPER
-//
-//  Extension for presenting image modal with iOS 18+ zoom transition.
-//  Add this to your DetailViewController or merge into existing file.
-//
-
+// MARK: - Image Modal (iOS 18+ zoom transition)
 
 extension DetailViewController {
     
