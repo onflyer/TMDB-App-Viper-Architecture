@@ -47,7 +47,7 @@ public extension URLComponentsProtocol {
         
         // Default query param (API key)
         var queryParamsList: [URLQueryItem] = [
-            URLQueryItem(name: "api_key", value: "89e4bae37305d94ef67db0a32d6e79ef")
+            URLQueryItem(name: "api_key", value: Constants.tmdbAPIKey)
         ]
         
         // Add custom query params
