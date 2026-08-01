@@ -94,7 +94,7 @@ final class HomeViewController: UIViewController {
 
     /// Loading indicator shown during initial data load.
     private lazy var loadingIndicator: UIActivityIndicatorView = {
-        let indicator = UIActivityIndicatorView(style: .large)
+        let indicator = UIActivityIndicatorView(style: .medium)
         indicator.translatesAutoresizingMaskIntoConstraints = false
         indicator.hidesWhenStopped = true
         return indicator
@@ -514,3 +514,18 @@ extension HomeViewController: UITableViewDelegate {
         return LayoutConstants.CellHeight.searchResult
     }
 }
+
+// MARK: - Preview
+/// Mirrors the SceneDelegate wiring with DevPreview mocks — same objects,
+/// mock services. The presenter retains the router, so no extra references
+/// are needed here.
+#Preview("Home — mock data") {
+    let builder = CoreBuilder(interactor: CoreInteractor(container: DevPreview.shared.container()))
+    let navigationController = UINavigationController()
+    let router = UIKitRouter(navigationController: navigationController, builder: builder)
+    navigationController.viewControllers = [builder.makeHomeViewController(router: router)]
+    return navigationController
+}
+
+
+
