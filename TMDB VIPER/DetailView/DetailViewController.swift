@@ -73,7 +73,7 @@ final class DetailViewController: UIViewController {
         button.tintColor = .secondaryLabel
         button.backgroundColor = .systemBackground.withAlphaComponent(0.9)
         button.layer.cornerRadius = LayoutConstants.CornerRadius.large
-        button.contentEdgeInsets = UIEdgeInsets(top: 10, left: 16, bottom: 10, right: 16)
+//        button.contentEdgeInsets = UIEdgeInsets(top: 10, left: 16, bottom: 10, right: 16)
         button.translatesAutoresizingMaskIntoConstraints = false
         button.addTarget(self, action: #selector(watchTrailerTapped), for: .touchUpInside)
         return button
