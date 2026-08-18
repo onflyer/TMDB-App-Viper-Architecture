@@ -46,10 +46,3 @@ paths, and emitted analytics events.
 Clone and build the `TMDB VIPER` scheme (iOS 18+) — a free-tier TMDB demo key
 is included so it runs out of the box. To use your own, replace
 `Utilities/Constants.swift` → `tmdbAPIKey`.
-
-## Attribution
-
-The `Routing/` abstraction on `main` builds on Nick Sarno's
-[SwiftfulThinking Architecture Bootcamp](https://www.swiftful-thinking.com)
-routing pattern. The rest of the codebase — VIPER modules, services,
-persistence, UIKit branch, and tests — is my own work on top of it.
